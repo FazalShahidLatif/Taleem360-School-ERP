@@ -1,11 +1,23 @@
-<div align="center">
+# Taleem360 School ERP
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+## Live Deployment
+Check out the live deployment at [taleem360.online](http://taleem360.online).
 
-  <h1>Built with AI Studio</h2>
+## Current Features
+- Feature 1: Description
+- Feature 2: Description
+- Feature 3: Description
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Tech Stack
+- Frontend: React, HTML, CSS
+- Backend: Node.js, Express
+- Database: MongoDB
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Setup Instructions
+1. Clone the repository: `git clone https://github.com/FazalShahidLatif/Taleem360-School-ERP`
+2. Navigate to the project directory: `cd Taleem360-School-ERP`
+3. Install dependencies: `npm install`
+4. Start the application: `npm start`
 
-</div>
+## Phase One Implementation Details
+- Phase One includes the initial setup of the frontend and backend architectures, along with basic feature implementations. The focus was on ensuring a responsive design and a solid database schema to handle school-related data efficiently.
