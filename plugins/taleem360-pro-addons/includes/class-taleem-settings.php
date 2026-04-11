@@ -70,6 +70,50 @@ class Taleem_Settings {
 
 				<?php submit_button( 'Save Ecosystem Settings' ); ?>
 			</form>
+
+            <!-- Comparison Table -->
+            <div class="taleem-comparison-wrap" style="margin-top: 50px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); max-width: 800px;">
+                <h2 style="margin-top:0;">Ecosystem Tiers (SaaSSkul Standard)</h2>
+                <p>Unlock the full power of Taleem360 with a SaaSSkul license.</p>
+
+                <table class="wp-list-table widefat fixed striped" style="margin-top:20px;">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Free Edition</th>
+                            <th>Pro Edition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Customizer Access</strong></td>
+                            <td>Partial (Colors Only)</td>
+                            <td>Full (Images & Content)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Curriculum Modules</strong></td>
+                            <td>1 Module (NotebookLM)</td>
+                            <td>Unlimited AI Modules</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Community Earning Tools</strong></td>
+                            <td><span class="dashicons dashicons-no"></span></td>
+                            <td><span class="dashicons dashicons-yes" style="color:green;"></span> Enabled</td>
+                        </tr>
+                        <tr>
+                            <td><strong>White Label Branding</strong></td>
+                            <td><span class="dashicons dashicons-no"></span></td>
+                            <td><span class="dashicons dashicons-yes" style="color:green;"></span> Enabled</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <?php if ( ! Taleem_Licensing::get_instance()->check_pro_status() ) : ?>
+                    <div style="margin-top:20px; background: #fff8e5; padding: 15px; border-left: 4px solid #ffcc00;">
+                        <p><strong>Heads up!</strong> You are currently on the Free Edition. <a href="https://saasskul.com" target="_blank">Upgrade to SaaSSkul Pro</a> to unlock all modules.</p>
+                    </div>
+                <?php endif; ?>
+            </div>
             
             <div class="taleem-admin-footer" style="margin-top: 40px; border-top: 1px solid #ddd; padding-top: 20px;">
                 <img src="https://saasskul.com/wp-content/uploads/2026/01/saasskul-logo-dark.png" alt="SaaSSkul Logo" style="height: 30px; opacity: 0.5;">

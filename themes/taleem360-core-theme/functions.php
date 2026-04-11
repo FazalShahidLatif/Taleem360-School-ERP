@@ -87,6 +87,36 @@ function taleem360_customize_register( $wp_customize ) {
         'section'  => 'taleem_footer_section',
         'type'     => 'text',
     ) );
+
+    // Hero & Features Content Section
+    $wp_customize->add_section( 'taleem_content_section', array(
+        'title'    => __( 'Front Page Content', 'taleem360-core' ),
+        'priority' => 40,
+    ) );
+
+    // Hero Image
+    $wp_customize->add_setting( 'taleem_hero_img' );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'taleem_hero_img', array(
+        'label'    => __( 'Hero Background Image', 'taleem360-core' ),
+        'section'  => 'taleem_content_section',
+        'settings' => 'taleem_hero_img',
+    ) ) );
+
+    // Feature 1
+    $wp_customize->add_setting( 'taleem_feat1_title', array( 'default' => 'Next-Gen AI Curriculum' ) );
+    $wp_customize->add_control( 'taleem_feat1_title', array( 'label' => 'Feature 1 Title', 'section' => 'taleem_content_section' ) );
+    $wp_customize->add_setting( 'taleem_feat1_img' );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'taleem_feat1_img', array(
+        'label' => 'Feature 1 Image', 'section' => 'taleem_content_section'
+    ) ) );
+
+    // Feature 2
+    $wp_customize->add_setting( 'taleem_feat2_title', array( 'default' => 'Earning Through AI' ) );
+    $wp_customize->add_control( 'taleem_feat2_title', array( 'label' => 'Feature 2 Title', 'section' => 'taleem_content_section' ) );
+    $wp_customize->add_setting( 'taleem_feat2_img' );
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'taleem_feat2_img', array(
+        'label' => 'Feature 2 Image', 'section' => 'taleem_content_section'
+    ) ) );
 }
 add_action( 'customize_register', 'taleem360_customize_register' );
 

@@ -25,6 +25,7 @@ define( 'TALEEM_PRO_URL', plugin_dir_url( __FILE__ ) );
 require_once TALEEM_PRO_PATH . 'includes/class-taleem-licensing.php';
 require_once TALEEM_PRO_PATH . 'includes/class-taleem-settings.php';
 require_once TALEEM_PRO_PATH . 'includes/class-taleem-content.php';
+require_once TALEEM_PRO_PATH . 'includes/class-taleem-course.php';
 
 class Taleem360_Pro {
 
@@ -37,6 +38,7 @@ class Taleem360_Pro {
         Taleem_Licensing::get_instance();
         Taleem_Settings::get_instance();
         Taleem_Content::get_instance();
+        Taleem_Course::get_instance();
     }
 
     /**
