@@ -78,6 +78,56 @@ get_header(); ?>
 
     </div>
 
+    <!-- Pricing Section -->
+    <section class="pricing-section" style="padding: 100px 0; background: var(--bg-dark); color: white;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">Choose Your Journey</h2>
+            <p style="margin-bottom: 50px; opacity: 0.8;">Fuel your AI passion and choose the tier that fits your goals.</p>
+            
+            <div class="pricing-grid" style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+                
+                <!-- Free Tier -->
+                <div class="pricing-card" style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h3>Student Starter</h3>
+                    <div class="price" style="font-size: 2.5rem; font-weight: 800; color: var(--accent-color); margin: 20px 0;"><?php echo esc_html( get_theme_mod( 'taleem_price1_val', 'Free' ) ); ?></div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px; line-height: 2;">
+                        <li>Basic AI Curriculum</li>
+                        <li>NotebookLM Workshops</li>
+                        <li>Progress Tracking</li>
+                    </ul>
+                    <a href="#" style="display: block; background: rgba(255,255,255,0.1); color: white; padding: 12px; border-radius: 5px; text-decoration: none; font-weight: 700;">Join for Free</a>
+                </div>
+
+                <!-- Pro Tier (Featured) -->
+                <div class="pricing-card" style="flex: 1; min-width: 300px; background: var(--primary-color); padding: 50px 40px; border-radius: 20px; border: 2px solid var(--accent-color); position: relative; transform: scale(1.05);">
+                    <span style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent-color); color: var(--primary-color); padding: 5px 20px; border-radius: 20px; font-weight: 800; font-size: 0.8rem;">MOST POPULAR</span>
+                    <h3>AI Pro individual</h3>
+                    <div class="price" style="font-size: 2.5rem; font-weight: 800; color: var(--gold-accent); margin: 20px 0;"><?php echo esc_html( get_theme_mod( 'taleem_price2_val', '$49/yr' ) ); ?></div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px; line-height: 2;">
+                        <li>Complete AI Roadmap</li>
+                        <li>Earning & Freelancing Pack</li>
+                        <li>Priority Support</li>
+                        <li>SaaSSkul Masterclass Access</li>
+                    </ul>
+                    <a href="https://saasskul.com" style="display: block; background: var(--accent-color); color: var(--primary-color); padding: 12px; border-radius: 5px; text-decoration: none; font-weight: 800;">Get Pro Access</a>
+                </div>
+
+                <!-- Leader Tier -->
+                <div class="pricing-card" style="flex: 1; min-width: 300px; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
+                    <h3>Community Leader</h3>
+                    <div class="price" style="font-size: 2.5rem; font-weight: 800; color: white; margin: 20px 0;"><?php echo esc_html( get_theme_mod( 'taleem_price3_val', '$199/yr' ) ); ?></div>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 30px; line-height: 2;">
+                        <li>White Label Licenses</li>
+                        <li>Community Uplift Toolkit</li>
+                        <li>Local Branch Support</li>
+                    </ul>
+                    <a href="#" style="display: block; background: rgba(255,255,255,0.1); color: white; padding: 12px; border-radius: 5px; text-decoration: none; font-weight: 700;">Contact Us</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 </main><!-- #primary -->
 
 <?php get_footer(); ?>

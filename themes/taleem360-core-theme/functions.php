@@ -117,6 +117,24 @@ function taleem360_customize_register( $wp_customize ) {
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'taleem_feat2_img', array(
         'label' => 'Feature 2 Image', 'section' => 'taleem_content_section'
     ) ) );
+
+    // Pricing Table Section
+    $wp_customize->add_section( 'taleem_pricing_section', array(
+        'title'    => __( 'Pricing Table', 'taleem360-core' ),
+        'priority' => 45,
+    ) );
+
+    // Tier 1 (Free)
+    $wp_customize->add_setting( 'taleem_price1_val', array( 'default' => 'Free' ) );
+    $wp_customize->add_control( 'taleem_price1_val', array( 'label' => 'Tier 1 Price', 'section' => 'taleem_pricing_section' ) );
+
+    // Tier 2 (Pro)
+    $wp_customize->add_setting( 'taleem_price2_val', array( 'default' => '$49/yr' ) );
+    $wp_customize->add_control( 'taleem_price2_val', array( 'label' => 'Tier 2 Price', 'section' => 'taleem_pricing_section' ) );
+
+    // Tier 3 (Leader)
+    $wp_customize->add_setting( 'taleem_price3_val', array( 'default' => '$199/yr' ) );
+    $wp_customize->add_control( 'taleem_price3_val', array( 'label' => 'Tier 3 Price', 'section' => 'taleem_pricing_section' ) );
 }
 add_action( 'customize_register', 'taleem360_customize_register' );
 

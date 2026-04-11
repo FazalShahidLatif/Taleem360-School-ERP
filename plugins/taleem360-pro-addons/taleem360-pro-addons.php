@@ -26,6 +26,7 @@ require_once TALEEM_PRO_PATH . 'includes/class-taleem-licensing.php';
 require_once TALEEM_PRO_PATH . 'includes/class-taleem-settings.php';
 require_once TALEEM_PRO_PATH . 'includes/class-taleem-content.php';
 require_once TALEEM_PRO_PATH . 'includes/class-taleem-course.php';
+require_once TALEEM_PRO_PATH . 'includes/class-taleem-progress.php';
 
 class Taleem360_Pro {
 
@@ -39,6 +40,7 @@ class Taleem360_Pro {
         Taleem_Settings::get_instance();
         Taleem_Content::get_instance();
         Taleem_Course::get_instance();
+        Taleem_Progress::get_instance();
     }
 
     /**
