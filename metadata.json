@@ -1,0 +1,5 @@
+{
+  "name": "Taleem360-School ERP",
+  "description": "A comprehensive School ERP system by Taleem360 with Admin, Teacher, and Parent portals. Features include Attendance, Fees, Exams, Library Management, LMS (Homework & Assignments), and Transport & Fleet Management.",
+  "requestFramePermissions": []
+}
