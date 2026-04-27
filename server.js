@@ -28,7 +28,87 @@ async function startServer() {
 
   app.use(express.json());
 
+  // Blog Data (Keep in sync with mock storage for SEO)
+  const blogPosts = [
+    {
+      id: '1',
+      title: 'How AI is Transforming School Administration in Pakistan',
+      slug: 'ai-transforming-school-admin-pakistan',
+      published_at: '2026-04-20',
+    },
+    {
+      id: '2',
+      title: 'Mastering NotebookLM: A Guide for Pakistani Educators',
+      slug: 'notebooklm-guide-pakistani-educators',
+      published_at: '2026-04-22',
+    },
+    {
+      id: '3',
+      title: 'Top 5 AI Freelancing Skills for Students in 2026',
+      slug: 'top-5-ai-freelancing-skills-2026',
+      published_at: '2026-04-25',
+    },
+    {
+      id: '4',
+      title: 'Building a Community: AI for Social Good in Pakistan',
+      slug: 'ai-social-good-pakistan',
+      published_at: '2026-04-27',
+    }
+  ];
+
   // API Routes
+  app.get('/api/blog/posts/', (req, res) => {
+    // In production, we return the data from our static list
+    res.json(blogPosts);
+  });
+
+  // Sitemap Route for SEO
+  app.get('/sitemap.xml', (req, res) => {
+    const baseUrl = 'https://taleem360.online';
+    let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url>
+        <loc>${baseUrl}/</loc>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+      </url>
+      <url>
+        <loc>${baseUrl}/blog</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+      </url>
+      <url>
+        <loc>${baseUrl}/pricing</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+      </url>
+      <url>
+        <loc>${baseUrl}/about</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+      </url>`;
+
+    blogPosts.forEach(post => {
+      sitemap += `
+      <url>
+        <loc>${baseUrl}/blog/${post.slug}</loc>
+        <lastmod>${post.published_at}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+      </url>`;
+    });
+
+    sitemap += '\n    </urlset>';
+    res.header('Content-Type', 'application/xml');
+    res.send(sitemap);
+  });
+
+  // Robots.txt Route
+  app.get('/robots.txt', (req, res) => {
+    res.type('text/plain');
+    res.send('User-agent: *\nAllow: /\nSitemap: https://taleem360.online/sitemap.xml');
+  });
+
   app.get('/api/auth/google/url', (req, res) => {
     const redirectUri = getRedirectUri(req);
     
