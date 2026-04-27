@@ -192,14 +192,83 @@ const INITIAL_TICKETS: SupportTicket[] = [
 const INITIAL_BLOG_POSTS: BlogPost[] = [
   {
     id: '1',
-    title: 'How AI is Transforming School Administration',
-    slug: 'ai-transforming-school-admin',
-    excerpt: 'Discover how artificial intelligence is streamlining workflows and providing deeper insights for school leaders.',
-    content: 'Full content here...',
-    author: 'Dr. Sarah Ahmed',
+    title: 'How AI is Transforming School Administration in Pakistan',
+    slug: 'ai-transforming-school-admin-pakistan',
+    excerpt: 'Discover how artificial intelligence is streamlining workflows, automating attendance, and providing deeper insights for school leaders across Pakistan.',
+    content: `
+      <h2>The Future of School Management</h2>
+      <p>In the rapidly evolving educational landscape of Pakistan, Artificial Intelligence (AI) is no longer a luxury—it's becoming a necessity. School administrators are facing increasing pressure to manage larger student bodies with limited resources. This is where Taleem360's AI-driven ERP comes into play.</p>
+      <h3>Automating Mundane Tasks</h3>
+      <p>From automated attendance tracking using facial recognition to AI-generated progress reports, technology is freeing up teachers to focus on what they do best: teaching. Administrators can now see real-time analytics on school performance, teacher efficiency, and financial health with a single click.</p>
+      <h3>Data-Driven Decision Making</h3>
+      <p>By leveraging machine learning, schools can now predict student performance trends and intervene before a student falls behind. This proactive approach is revolutionizing the quality of education in private and public sectors alike.</p>
+    `,
+    author: 'Fazal Shahid Latif',
     category: 'Technology',
-    image_url: 'https://picsum.photos/seed/ai-school/800/400',
-    published_at: '2026-03-05',
+    image_url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&h=400&auto=format&fit=crop',
+    published_at: '2026-04-20',
+    is_published: true
+  },
+  {
+    id: '2',
+    title: 'Mastering NotebookLM: A Guide for Pakistani Educators',
+    slug: 'notebooklm-guide-pakistani-educators',
+    excerpt: 'Learn how to leverage Google\'s NotebookLM to create structured lesson plans, interactive study guides, and personalized learning paths for your students.',
+    content: `
+      <h2>Revolutionizing Lesson Planning</h2>
+      <p>Google\'s NotebookLM is a game-changer for educators in Pakistan. By simply uploading your existing curriculum documents, textbooks, or lecture notes, you can create an intelligent assistant that understands your specific teaching style and content.</p>
+      <h3>Key Features for Teachers</h3>
+      <ul>
+        <li><strong>Automatic Summarization:</strong> Quickly condense long chapters into key points.</li>
+        <li><strong>Q&A Assistant:</strong> Generate practice questions and answers instantly.</li>
+        <li><strong>Structured Study Guides:</strong> Create beautiful, easy-to-follow guides for students.</li>
+      </ul>
+      <p>At Taleem360, we integrate these AI tools to help you scale your teaching impact without increasing your workload.</p>
+    `,
+    author: 'AI Expert',
+    category: 'Education',
+    image_url: 'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?q=80&w=800&h=400&auto=format&fit=crop',
+    published_at: '2026-04-22',
+    is_published: true
+  },
+  {
+    id: '3',
+    title: 'Top 5 AI Freelancing Skills for Students in 2026',
+    slug: 'top-5-ai-freelancing-skills-2026',
+    excerpt: 'Empower your students with future-proof skills. Explore the most in-demand AI freelancing opportunities that can help students become self-funded.',
+    content: `
+      <h2>Financial Independence through AI</h2>
+      <p>The global gig economy is shifting towards AI. Pakistani students have a unique opportunity to tap into this market and become financially independent early in their careers. Here are the top 5 skills we recommend:</p>
+      <ol>
+        <li><strong>Prompt Engineering:</strong> Designing effective prompts for LLMs.</li>
+        <li><strong>AI Content Strategy:</strong> Using AI to optimize SEO and engagement.</li>
+        <li><strong>Custom GPT Development:</strong> Building specialized AI agents for businesses.</li>
+        <li><strong>AI Video Generation:</strong> Creating marketing assets using tools like VidFlow.</li>
+        <li><strong>AI-Enhanced Coding:</strong> Speeding up development with Copilot and Cursor.</li>
+      </ol>
+      <p>Taleem360 provides the curriculum and mentorship needed to master these skills alongside traditional education.</p>
+    `,
+    author: 'SaaSSkul Team',
+    category: 'Freelancing',
+    image_url: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&h=400&auto=format&fit=crop',
+    published_at: '2026-04-25',
+    is_published: true
+  },
+  {
+    id: '4',
+    title: 'Building a Community: AI for Social Good in Pakistan',
+    slug: 'ai-social-good-pakistan',
+    excerpt: 'How Taleem360 is using AI to bridge the educational gap and provide quality resources to underserved communities across the country.',
+    content: `
+      <h2>Beyond the Classroom</h2>
+      <p>Our mission at Taleem360 goes beyond just school management. We are committed to using technology for social uplift in Pakistan. AI allows us to localize content into regional languages and adapt to different learning paces automatically.</p>
+      <h3>Impact Highlights</h3>
+      <p>Through our AI modules, we\'ve seen a 40% increase in student engagement in remote areas. By providing teachers with AI assistants, we are ensuring that every child, regardless of location, has access to world-class educational guidance.</p>
+    `,
+    author: 'Fazal Shahid Latif',
+    category: 'Community',
+    image_url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&h=400&auto=format&fit=crop',
+    published_at: '2026-04-27',
     is_published: true
   }
 ];
