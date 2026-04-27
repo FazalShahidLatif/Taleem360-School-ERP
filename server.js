@@ -36,13 +36,28 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Session
+// Database connection string
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/taleem360';
+
+// Session configuration with MongoDB fallback
+let sessionStore;
+try {
+  sessionStore = MongoStore.create({ 
+    mongoUrl: MONGODB_URI,
+    collectionName: 'sessions',
+    ttl: 14 * 24 * 60 * 60 // 14 days
+  });
+  console.log('✓ MongoStore initialized');
+} catch (err) {
+  console.log('⚠ MongoStore failed, falling back to MemoryStore');
+  sessionStore = null; // MemoryStore is the default when store is not provided
+}
+
 app.use(session({
   secret: process.env.SESSION_SECRET || 'taleem360-ai-secret-2026',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: MONGODB_URI }),
+  store: sessionStore || undefined, // Fallback to memory store
   cookie: { maxAge: 1000 * 60 * 60 * 24 } // 24 hours
 }));
 
