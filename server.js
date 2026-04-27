@@ -17,6 +17,9 @@ const blogPosts = require('./data/blog');
 
 const app = express();
 
+// Trust proxy for Hostinger/Load Balancers
+app.set('trust proxy', 1);
+
 // Security & Optimization
 app.use(helmet({
   contentSecurityPolicy: {
