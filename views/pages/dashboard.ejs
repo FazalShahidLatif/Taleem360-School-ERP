@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="bg-white rounded-[3rem] shadow-xl border border-slate-100 overflow-hidden">
+        <div class="p-12 border-b border-slate-100 flex flex-col md:flex-row items-center gap-8">
+            <img src="<%= user.avatar %>" alt="<%= user.displayName %>" class="w-24 h-24 rounded-3xl shadow-lg ring-4 ring-indigo-50">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl font-black tracking-tight text-slate-900 mb-1">Welcome, <%= user.displayName.split(' ')[0] %>!</h1>
+                <p class="text-indigo-600 font-bold uppercase tracking-widest text-xs">AI Student ID: <%= user._id.toString().slice(-8).toUpperCase() %></p>
+            </div>
+            <div class="md:ml-auto">
+                <span class="inline-flex items-center px-6 py-2 rounded-full text-sm font-black bg-emerald-100 text-emerald-800">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span>
+                    Learning Active
+                </span>
+            </div>
+        </div>
+        
+        <div class="p-12">
+            <h3 class="text-2xl font-bold text-slate-900 mb-8">My AI Curriculum</h3>
+            <div class="bg-slate-50 rounded-[2rem] border border-slate-100 p-12 text-center">
+                <div class="w-16 h-16 bg-white rounded-2xl mx-auto flex items-center justify-center text-slate-300 mb-6 shadow-sm">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">No active courses yet</h3>
+                <p class="text-slate-500 mb-8 max-w-sm mx-auto">You haven't started any AI modules. Visit the curriculum library to begin your journey.</p>
+                <a href="/" class="inline-flex bg-indigo-600 text-white px-8 py-3 rounded-full font-bold hover:bg-indigo-700 transition">Browse Curriculum</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,35 @@
+<%- include('../partials/header') %>
+
+<section class="course-hero">
+    <div class="container">
+        <div class="hero-badge"><span class="dot"></span> <%= course.category %></div>
+        <h1><%= course.title %></h1>
+        <div class="meta">
+            <span>Level: <strong><%= course.level %></strong></span> | 
+            <span>Duration: <strong><%= course.duration %></strong></span> | 
+            <span>Lessons: <strong><%= course.lessons %></strong></span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="course-content-wrap">
+            <%- course.content %>
+            
+            <div style="margin-top: 48px; padding: 32px; background: #fff; border-radius: 20px; border: 1px solid var(--border); text-align: center;">
+                <% if (user) { %>
+                    <h3>Ready to start?</h3>
+                    <p style="margin-bottom: 24px;">Click the button below to launch the interactive module and track your progress.</p>
+                    <a href="/dashboard" class="btn-hero btn-hero-primary">Start Learning Now</a>
+                <% } else { %>
+                    <h3>Locked Module</h3>
+                    <p style="margin-bottom: 24px;">This module requires a student account to track progress and unlock certificates.</p>
+                    <a href="/login" class="btn-hero btn-hero-primary">Sign In to Unlock</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

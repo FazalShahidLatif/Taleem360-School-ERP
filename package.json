@@ -1,0 +1,37 @@
+{
+  "name": "taleem360-ai-learning",
+  "version": "1.0.0",
+  "description": "[![Branded with SaaSSkul](https://img.shields.io/badge/Branded%20with-SaaSSkul-blue?style=for-the-badge)](https://saasskul.com)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FazalShahidLatif/taleem360-ai-learning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FazalShahidLatif/taleem360-ai-learning/issues"
+  },
+  "homepage": "https://github.com/FazalShahidLatif/taleem360-ai-learning#readme",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "connect-mongo": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "helmet": "^8.1.0",
+    "mongoose": "^9.5.0",
+    "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}
