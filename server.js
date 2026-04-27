@@ -4,7 +4,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const { MongoStore } = require('connect-mongo');
 const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
@@ -13,6 +13,7 @@ const morgan = require('morgan');
 require('./config/passport');
 
 const courses = require('./data/courses');
+const blogPosts = require('./data/blog');
 
 const app = express();
 
@@ -103,6 +104,60 @@ app.get('/about', (req, res) => {
     title: 'About Us | Taleem360',
     currentPage: 'about'
   });
+});
+
+// Blog Routes
+app.get('/blog', (req, res) => {
+  res.render('pages/blog', {
+    title: 'Blog | Taleem360 AI Learning',
+    metaDesc: 'Stay updated with the latest in AI education, tool mastery, and freelancing skills tailored for the Pakistani market.',
+    currentPage: 'blog',
+    posts: blogPosts
+  });
+});
+
+app.get('/blog/:slug', (req, res) => {
+  const post = blogPosts.find(p => p.slug === req.params.slug);
+  if (!post) return res.status(404).render('pages/404', { title: '404 - Post Not Found' });
+  
+  const related = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
+  
+  res.render('pages/blog-detail', {
+    title: post.metaTitle,
+    metaDesc: post.metaDesc,
+    currentPage: 'blog',
+    post,
+    related
+  });
+});
+
+// Sitemap Route
+app.get('/sitemap.xml', (req, res) => {
+  const baseUrl = 'https://taleem360.online';
+  const staticPages = ['', '/courses', '/about', '/blog', '/login'];
+  
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+  
+  // Add static pages
+  staticPages.forEach(page => {
+    xml += `<url><loc>${baseUrl}${page}</loc><changefreq>weekly</changefreq><priority>${page === '' ? '1.0' : '0.8'}</priority></url>`;
+  });
+  
+  // Add courses
+  courses.forEach(course => {
+    xml += `<url><loc>${baseUrl}/courses/${course.slug}</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>`;
+  });
+  
+  // Add blog posts
+  blogPosts.forEach(post => {
+    xml += `<url><loc>${baseUrl}/blog/${post.slug}</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>`;
+  });
+  
+  xml += '</urlset>';
+  
+  res.header('Content-Type', 'application/xml');
+  res.send(xml);
 });
 
 app.get('/dashboard', (req, res) => {
