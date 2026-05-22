@@ -31,7 +31,32 @@ export const Login: React.FC = () => {
       } else {
         const success = await login(email, password);
         if (success) {
-          navigate('/');
+          // Precise context routing based on user role to corresponding dashboards
+          const token = localStorage.getItem("access_token");
+          let destination = '/';
+          if (token) {
+            try {
+              const base64Url = token.split('.')[1];
+              const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+              const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+              const payload = JSON.parse(jsonPayload);
+              const userRole = payload.role; // uppercase role: ADMIN, TEACHER, PARENT, SUPER_ADMIN
+
+              if (userRole === 'ADMIN' || userRole === 'SUPER_ADMIN') {
+                console.log('[Auth Routing] Redirecting Administrator to School Management dashboard');
+                destination = '/'; // Mounts the Admin Dashboard containing all ERP panels
+              } else if (userRole === 'TEACHER') {
+                console.log('[Auth Routing] Redirecting Faculty to Staff portal');
+                destination = '/'; // Mounts the Staff portal dashboard
+              } else if (userRole === 'PARENT') {
+                console.log('[Auth Routing] Redirecting Student/Parent to educational dashboard');
+                destination = '/'; // Mounts student student profile & reports tracker
+              }
+            } catch (err) {
+              console.error('[Auth Routing] Error parsing token on routing dispatch', err);
+            }
+          }
+          navigate(destination);
         } else {
           setError('Invalid email or password');
         }

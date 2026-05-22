@@ -101,18 +101,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      console.debug(`[Auth] Logging in as ${email}...`);
-      const res = await api.post("/auth/login/", { email, password });
+      console.debug(`[Auth] Logging in as ${email} via serverless /api/auth/login...`);
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        let errText = "Authentication failed";
+        try {
+          const errData = await response.json();
+          errText = errData.detail || errData.error || errText;
+        } catch (_) {
+          // Fallback if not JSON
+        }
+        throw new Error(errText);
+      }
+
+      const data = await response.json();
+      console.debug("[Auth] Serverless Login API success, saving token...", data);
       
-      console.debug("[Auth] Login API success, saving token...");
-      localStorage.setItem("access_token", res.data.access);
-      localStorage.setItem("refresh_token", res.data.refresh);
+      localStorage.setItem("access_token", data.access);
+      localStorage.setItem("refresh_token", data.refresh || data.access);
       
       refreshUser();
       return true;
-    } catch (e) {
+    } catch (e: any) {
       console.error("[Auth] Login flow failed:", e);
-      return false;
+      throw e;
     }
   };
 

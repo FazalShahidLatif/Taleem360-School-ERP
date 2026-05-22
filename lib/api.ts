@@ -2,7 +2,7 @@ import axios from "axios";
 import { db } from "./storage";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "/api",
 });
 
 api.interceptors.request.use((config) => {
@@ -16,6 +16,25 @@ api.interceptors.request.use((config) => {
   }
   return config;
 });
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    const detail = error.response?.data?.detail;
+    if (detail === "Invalid token" || detail === "Token expired" || detail === "No token provided") {
+      console.warn("[API] Token validation failed on backend. Clearing tokens and redirecting...", detail);
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      if (typeof window !== "undefined") {
+        window.location.hash = "#/login";
+        window.location.reload();
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 // --- MOCK ADAPTER START ---
 // This adapter simulates the Backend responses using lib/storage.ts
@@ -51,14 +70,26 @@ api.defaults.adapter = async (config) => {
       const localToken = localStorage.getItem("access_token");
       if (localToken) {
         console.debug(`[Mock API] Header missing for ${url}, using token from localStorage`);
-        return await db.auth.me(localToken);
+        try {
+          return await db.auth.me(localToken);
+        } catch (e) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+          throw e;
+        }
       }
       console.warn(`[Mock API] No token provided for protected route: ${method?.toUpperCase()} ${url}`);
       throw new Error("No token provided");
     }
 
     const token = authHeader.toString().split(" ")[1];
-    return await db.auth.me(token);
+    try {
+      return await db.auth.me(token);
+    } catch (e) {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      throw e;
+    }
   };
 
   try {

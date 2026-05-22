@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
             &copy; 2026 Taleem360-School ERP. All rights reserved.
           </p>
           <p className="mt-4 md:mt-0">
-            Powered by <a href="https://blueoceanhub.info" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-600 font-medium">BlueOceanHub</a>
+            Powered by <a href="https://saasskul.com" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-600 font-medium">SaaSSkul</a>
           </p>
         </div>
       </div>
