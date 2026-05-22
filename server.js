@@ -49,6 +49,19 @@ async function startServer() {
     }
   });
 
+  const handleRegister = async (req, res) => {
+    try {
+      const { default: handler } = await import('./api/auth/register.js');
+      await handler(req, res);
+    } catch (err) {
+      console.error('[server.js] Error routing to /api/auth/register.js:', err);
+      res.status(500).json({ detail: 'Internal Server Error' });
+    }
+  };
+
+  app.post('/api/auth/register', handleRegister);
+  app.post('/api/auth/register/', handleRegister);
+
   app.get('/api/auth/google/url', (req, res) => {
     const redirectUri = getRedirectUri(req);
     

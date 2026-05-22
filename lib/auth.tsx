@@ -137,12 +137,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      console.debug(`[Auth] Registering as ${email}...`);
-      const res = await api.post("/auth/register/", { name, email, password });
+      console.debug(`[Auth] Registering as ${email} via serverless /api/auth/register...`);
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (!response.ok) {
+        let errText = "Registration failed";
+        try {
+          const errData = await response.json();
+          errText = errData.detail || errData.error || errText;
+        } catch (_) {
+          // Fallback if not JSON
+        }
+        throw new Error(errText);
+      }
+
+      const data = await response.json();
+      console.debug("[Auth] Serverless Register API success, saving token...", data);
       
-      console.debug("[Auth] Register API success, saving token...");
-      localStorage.setItem("access_token", res.data.access);
-      localStorage.setItem("refresh_token", res.data.refresh);
+      localStorage.setItem("access_token", data.access);
+      localStorage.setItem("refresh_token", data.refresh || data.access);
       
       refreshUser();
       return true;

@@ -1,13 +1,4 @@
-const USERS = [
-  { email: 'accts.pak@gmail.com' },
-  { email: 'support@taleem360.online' },
-  { email: 'admin@school.com' },
-  { email: 'teacher@school.com' },
-  { email: 'teacher2@school.com' },
-  { email: 'parent@school.com' },
-  { email: 'admin@b-school.com' },
-  { email: 'teacher@b-school.com' }
-];
+import { getUsers } from './db_store.js';
 
 export default async function handler(req, res) {
   // CORS Headers
@@ -43,7 +34,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ detail: 'Email is required' });
     }
 
-    const matchedUser = USERS.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
+    const matchedUser = getUsers().find(u => u.email.toLowerCase() === email.trim().toLowerCase());
     
     // In a production serverless function, we'd trigger an email via SendGrid, Mailgun, etc.
     // For local evaluation and preview correctness:

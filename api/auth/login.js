@@ -1,101 +1,7 @@
 import jwt from 'jsonwebtoken';
+import { getUsers } from './db_store.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'taleem360-secure-serverless-jwt-secret-key-2026';
-
-const USERS = [
-  // Super Admin
-  {
-    email: 'accts.pak@gmail.com',
-    password: 'super',
-    user_id: 'u0',
-    name: 'Super Admin',
-    role: 'admin',
-    app_role: 'SUPER_ADMIN',
-    school_id: 'school-1',
-    school_name: 'Springfield Elementary',
-    onboarded: true
-  },
-  {
-    email: 'support@taleem360.online',
-    password: 'super',
-    user_id: 'u-sa2',
-    name: 'Super Admin',
-    role: 'admin',
-    app_role: 'SUPER_ADMIN',
-    school_id: 'school-1',
-    school_name: 'Springfield Elementary',
-    onboarded: true
-  },
-  // Springfield Elementary (School A)
-  {
-    email: 'admin@school.com',
-    password: 'admin',
-    user_id: 'u1',
-    name: 'Principal Skinner',
-    role: 'admin',
-    app_role: 'ADMIN',
-    school_id: 'school-1',
-    school_name: 'Springfield Elementary',
-    onboarded: true
-  },
-  {
-    email: 'teacher@school.com',
-    password: 'teacher',
-    user_id: 'u2',
-    name: 'Edna Krabappel',
-    role: 'staff',
-    app_role: 'TEACHER',
-    school_id: 'school-1',
-    school_name: 'Springfield Elementary',
-    onboarded: true
-  },
-  {
-    email: 'teacher2@school.com',
-    password: 'teacher',
-    user_id: 'u3',
-    name: 'Dewey Largo',
-    role: 'staff',
-    app_role: 'TEACHER',
-    school_id: 'school-1',
-    school_name: 'Springfield Elementary',
-    onboarded: true
-  },
-  {
-    email: 'parent@school.com',
-    password: 'parent',
-    user_id: 'u6',
-    name: 'Marge Simpson',
-    role: 'user',
-    app_role: 'PARENT',
-    school_id: 'school-1',
-    school_name: 'Springfield Elementary',
-    student_id: 's1',
-    onboarded: true
-  },
-  // Springfield West (School B)
-  {
-    email: 'admin@b-school.com',
-    password: 'admin',
-    user_id: 'u4',
-    name: 'Superintendent Chalmers',
-    role: 'admin',
-    app_role: 'ADMIN',
-    school_id: 'school-2',
-    school_name: 'West Springfield Elementary',
-    onboarded: true
-  },
-  {
-    email: 'teacher@b-school.com',
-    password: 'teacher',
-    user_id: 'u5',
-    name: 'Elizabeth Hoover',
-    role: 'staff',
-    app_role: 'TEACHER',
-    school_id: 'school-2',
-    school_name: 'West Springfield Elementary',
-    onboarded: true
-  }
-];
 
 export default async function handler(req, res) {
   // CORS Headers for serverless compatibility
@@ -133,7 +39,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ detail: 'Email and password are required' });
     }
 
-    const matchedUser = USERS.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
+    const matchedUser = getUsers().find(u => u.email.toLowerCase() === email.trim().toLowerCase());
 
     if (!matchedUser || matchedUser.password !== password) {
       return res.status(401).json({ detail: 'Invalid email or password' });

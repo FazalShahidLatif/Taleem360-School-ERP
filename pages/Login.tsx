@@ -11,8 +11,8 @@ export const Login: React.FC = () => {
   const [resetEmail, setResetEmail] = useState('');
   const [resetSuccessMessage, setResetSuccessMessage] = useState('');
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('admin@school.com');
-  const [password, setPassword] = useState('admin');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
@@ -265,36 +265,6 @@ export const Login: React.FC = () => {
             </form>
             )}
 
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Or continue with</span>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <button
-                  onClick={async () => {
-                    try {
-                      const res = await fetch('/api/auth/google/url');
-                      const { url } = await res.json();
-                      window.open(url, 'google_oauth', 'width=500,height=600');
-                    } catch (err) {
-                      console.error('Failed to start Google OAuth:', err);
-                      setError('Failed to start Google login');
-                    }
-                  }}
-                  className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  <img className="h-5 w-5 mr-2" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
-                  Sign in with Google
-                </button>
-              </div>
-            </div>
-
             <div className="mt-6 text-center">
               <button
                 onClick={() => setIsRegister(!isRegister)}
@@ -302,61 +272,6 @@ export const Login: React.FC = () => {
               >
                 {isRegister ? 'Already have an account? Sign in' : "Don't have an account? Register your school"}
               </button>
-            </div>
-
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Test Credentials</span>
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-4">
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 text-center mb-2">School A (Springfield)</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    <button
-                      onClick={() => fillCreds('admin@school.com', 'admin')}
-                      className="w-full inline-flex justify-center py-2 px-2 border border-gray-300 rounded-md shadow-sm bg-white text-xs font-medium text-gray-500 hover:bg-gray-50"
-                    >
-                      Admin
-                    </button>
-                    <button
-                      onClick={() => fillCreds('teacher@school.com', 'teacher')}
-                      className="w-full inline-flex justify-center py-2 px-2 border border-gray-300 rounded-md shadow-sm bg-white text-xs font-medium text-gray-500 hover:bg-gray-50"
-                    >
-                      Teacher
-                    </button>
-                    <button
-                      onClick={() => fillCreds('parent@school.com', 'parent')}
-                      className="w-full inline-flex justify-center py-2 px-2 border border-indigo-200 rounded-md shadow-sm bg-indigo-50 text-xs font-medium text-indigo-700 hover:bg-indigo-100"
-                    >
-                      Parent
-                    </button>
-                  </div>
-                </div>
-                
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 text-center mb-2">School B (West)</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    <button
-                      onClick={() => fillCreds('admin@b-school.com', 'admin')}
-                      className="w-full inline-flex justify-center py-2 px-2 border border-gray-300 rounded-md shadow-sm bg-white text-xs font-medium text-gray-500 hover:bg-gray-50"
-                    >
-                      Admin
-                    </button>
-                    <button
-                      onClick={() => fillCreds('teacher@b-school.com', 'teacher')}
-                      className="w-full inline-flex justify-center py-2 px-2 border border-gray-300 rounded-md shadow-sm bg-white text-xs font-medium text-gray-500 hover:bg-gray-50"
-                    >
-                      Teacher
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
