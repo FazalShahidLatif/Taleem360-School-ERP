@@ -20,11 +20,6 @@ export const AIChatbot: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Only show for Admins and Super Admins
-  if (user?.role !== UserRole.ADMIN && user?.role !== UserRole.SUPER_ADMIN) {
-    return null;
-  }
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -32,6 +27,11 @@ export const AIChatbot: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Only show for Admins and Super Admins
+  if (user?.role !== UserRole.ADMIN && user?.role !== UserRole.SUPER_ADMIN) {
+    return null;
+  }
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();

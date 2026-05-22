@@ -22,12 +22,8 @@ export const Login: React.FC = () => {
     
     try {
       if (isRegister) {
-        const success = await register(name, email, password);
-        if (success) {
-          navigate('/onboarding');
-        } else {
-          setError('Registration failed');
-        }
+        await register(name, email, password);
+        navigate('/onboarding');
       } else {
         const success = await login(email, password);
         if (success) {

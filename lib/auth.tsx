@@ -146,9 +146,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       refreshUser();
       return true;
-    } catch (e) {
+    } catch (e: any) {
       console.error("[Auth] Register flow failed:", e);
-      return false;
+      throw e;
     }
   };
 
