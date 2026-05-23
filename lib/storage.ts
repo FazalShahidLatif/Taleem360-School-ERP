@@ -1,5 +1,6 @@
 import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, Affiliate, Referral, TimetableEntry, DayOfWeek, SubscriptionTier, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, BlogPost, AffiliateStatus, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
 import { ai } from './ai';
+import { BLOG_POSTS_DATA, RichBlogPost } from './blogContent';
 
 // Mock Database State (Internal)
 interface DBStudent extends Student { school_id: string; created_at: string; is_active: boolean; parent_id?: string; }
@@ -189,20 +190,7 @@ const INITIAL_TICKETS: SupportTicket[] = [
   }
 ];
 
-const INITIAL_BLOG_POSTS: BlogPost[] = [
-  {
-    id: '1',
-    title: 'How AI is Transforming School Administration',
-    slug: 'ai-transforming-school-admin',
-    excerpt: 'Discover how artificial intelligence is streamlining workflows and providing deeper insights for school leaders.',
-    content: 'Full content here...',
-    author: 'Dr. Sarah Ahmed',
-    category: 'Technology',
-    image_url: 'https://picsum.photos/seed/ai-school/800/400',
-    published_at: '2026-03-05',
-    is_published: true
-  }
-];
+const INITIAL_BLOG_POSTS: BlogPost[] = BLOG_POSTS_DATA as unknown as BlogPost[];
 
 const INITIAL_BOOKS: Book[] = [
   { id: 'b1', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', isbn: '9780743273565', category: 'Fiction', quantity: 5, available_quantity: 5, location: 'Shelf A1', school_id: SCHOOL_A_ID },
@@ -263,7 +251,7 @@ const KEYS = {
   ROUTES: 'erp_routes',
   PICKUP_POINTS: 'erp_pickup_points',
   TRANSPORT_ALLOCATIONS: 'erp_transport_allocations',
-  INIT: 'erp_initialized_v21'
+  INIT: 'erp_initialized_v22'
 };
 
 // Internal Helpers
@@ -359,7 +347,7 @@ export const db = {
       localStorage.setItem(KEYS.VEHICLES, JSON.stringify(INITIAL_VEHICLES));
       localStorage.setItem(KEYS.ROUTES, JSON.stringify(INITIAL_ROUTES));
       localStorage.setItem(KEYS.TRANSPORT_ALLOCATIONS, JSON.stringify([]));
-      localStorage.setItem(KEYS.INIT, 'true_v21');
+      localStorage.setItem(KEYS.INIT, 'true_v22');
       console.log('Database Initialized.');
     } else {
       console.log('Database already initialized.');
@@ -1706,9 +1694,15 @@ export const db = {
   },
 
   // Blog Methods
-  getBlogPosts: async (): Promise<BlogPost[]> => {
+  getBlogPosts: async (): Promise<RichBlogPost[]> => {
     await delay();
-    return load<BlogPost>(KEYS.BLOG_POSTS).filter(p => p.is_published);
+    return load<RichBlogPost>(KEYS.BLOG_POSTS).filter(p => p.is_published);
+  },
+
+  getBlogPostBySlug: async (slug: string): Promise<RichBlogPost | null> => {
+    await delay();
+    const posts = load<RichBlogPost>(KEYS.BLOG_POSTS);
+    return posts.find(p => p.slug === slug && p.is_published) || null;
   },
 
   // --- Transport Methods ---

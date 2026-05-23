@@ -575,8 +575,14 @@ api.defaults.adapter = async (config) => {
       responseData = await db.getTransportStats(user);
     }
     // Blog Routes
-    else if (url === "/blog/posts/" && method === "get") {
-      responseData = await db.getBlogPosts();
+    else if (url?.startsWith("/blog/posts/") && method === "get") {
+      const parts = url.substring(1).split('/');
+      const slug = parts[2]; // /blog/posts/slug-name -> parts = ["blog", "posts", "slug-name"]
+      if (slug && slug !== "") {
+        responseData = await db.getBlogPostBySlug(slug);
+      } else {
+        responseData = await db.getBlogPosts();
+      }
     }
     else if (url === "/onboard/" && method === "post") {
       const user = await getUserFromToken();

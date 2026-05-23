@@ -22,6 +22,7 @@ import { Subjects } from './pages/Subjects';
 import { Examination } from './pages/Examination';
 import { Pricing } from './pages/Pricing';
 import { Blog } from './pages/Blog';
+import { BlogPostDetail } from './pages/BlogPostDetail';
 import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
 import { Onboarding } from './pages/Onboarding';
@@ -100,6 +101,7 @@ const TermsPage = () => <Layout><TermsOfService /></Layout>;
 const CookiePage = () => <Layout><CookiePolicy /></Layout>;
 const PricingPage = () => <Layout><Pricing /></Layout>;
 const BlogPage = () => <Layout><Blog /></Layout>;
+const BlogPostDetailPage = () => <Layout><BlogPostDetail /></Layout>;
 const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
 const SupportPage = () => <Layout><Support /></Layout>;
@@ -366,6 +368,11 @@ const App: React.FC = () => {
           <Route 
             path="/blog" 
             element={<BlogPage />} 
+          />
+
+          <Route 
+            path="/blog/:slug" 
+            element={<BlogPostDetailPage />} 
           />
 
           <Route 
