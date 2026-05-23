@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taleem360.online/sitemap.xml
