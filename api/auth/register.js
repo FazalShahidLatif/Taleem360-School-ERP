@@ -58,15 +58,18 @@ export default async function handler(req, res) {
     };
     addSchool(newSchool);
 
+    const SUPER_ADMIN_EMAILS = ['accts.pak@gmail.com', 'support@taleem360.online'];
+    const isSuperAdmin = SUPER_ADMIN_EMAILS.includes(trimmedEmail);
+
     const newUser = {
       user_id: `u-${Date.now()}`,
       email: trimmedEmail,
       name: name.trim(),
       password: password,
       role: 'admin',
-      app_role: 'ADMIN',
-      school_id: schoolId,
-      school_name: schoolName,
+      app_role: isSuperAdmin ? 'SUPER_ADMIN' : 'ADMIN',
+      school_id: isSuperAdmin ? 'school-1' : schoolId,
+      school_name: isSuperAdmin ? 'Springfield Elementary' : schoolName,
       onboarded: true
     };
     addUser(newUser);

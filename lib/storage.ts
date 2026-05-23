@@ -364,6 +364,34 @@ export const db = {
     } else {
       console.log('Database already initialized.');
     }
+
+    // Force guarantee super admins exist and are elevated in local storage users
+    const superAdminEmails = ['accts.pak@gmail.com', 'support@taleem360.online'];
+    const users = load<User>(KEYS.USERS);
+    let updated = false;
+    superAdminEmails.forEach((email, idx) => {
+      const existing = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+      if (!existing) {
+        users.push({
+          id: `u-sa-${idx}`,
+          email,
+          name: 'Super Admin',
+          password: 'super',
+          role: UserRole.SUPER_ADMIN,
+          onboarded: true,
+          school_id: 'school-1'
+        });
+        updated = true;
+      } else {
+        if (existing.role !== UserRole.SUPER_ADMIN) {
+          existing.role = UserRole.SUPER_ADMIN;
+          updated = true;
+        }
+      }
+    });
+    if (updated) {
+      save(KEYS.USERS, users);
+    }
   },
 
   auth: {

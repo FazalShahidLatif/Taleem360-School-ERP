@@ -133,6 +133,49 @@ function loadDb() {
     } else {
       saveDb();
     }
+
+    // Force guarantee Super Admins exist and are elevated in loaded DB
+    const SUPER_ADMINS = [
+      {
+        email: 'accts.pak@gmail.com',
+        user_id: 'u0',
+        name: 'Super Admin',
+        role: 'admin',
+        app_role: 'SUPER_ADMIN',
+        school_id: 'school-1',
+        school_name: 'Springfield Elementary',
+        onboarded: true
+      },
+      {
+        email: 'support@taleem360.online',
+        user_id: 'u-sa2',
+        name: 'Super Admin',
+        role: 'admin',
+        app_role: 'SUPER_ADMIN',
+        school_id: 'school-1',
+        school_name: 'Springfield Elementary',
+        onboarded: true
+      }
+    ];
+
+    let updated = false;
+    SUPER_ADMINS.forEach(admin => {
+      const existing = db.users.find(u => u.email.toLowerCase() === admin.email.toLowerCase());
+      if (!existing) {
+        db.users.push({ ...admin, password: 'super' });
+        updated = true;
+      } else {
+        if (existing.app_role !== 'SUPER_ADMIN') {
+          existing.app_role = 'SUPER_ADMIN';
+          existing.role = 'admin'; // mapping for backend
+          updated = true;
+        }
+      }
+    });
+
+    if (updated) {
+      saveDb();
+    }
   } catch (err) {
     console.error('[db_store] error loading DB, fallbacks in use:', err);
   }
