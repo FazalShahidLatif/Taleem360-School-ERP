@@ -162,6 +162,16 @@ export function addUser(user) {
   saveDb();
 }
 
+export function updateUserPassword(email, password) {
+  const user = db.users.find(u => u.email.toLowerCase() === email.trim().toLowerCase());
+  if (user) {
+    user.password = password;
+    saveDb();
+    return true;
+  }
+  return false;
+}
+
 export function addSchool(school) {
   db.schools.push(school);
   saveDb();

@@ -39,6 +39,8 @@ export default async function handler(req, res) {
     // In a production serverless function, we'd trigger an email via SendGrid, Mailgun, etc.
     // For local evaluation and preview correctness:
     console.debug(`[Password Reset] Requested reset for email: ${email}`);
+    const token = Buffer.from(JSON.stringify({ email: email.trim().toLowerCase(), exp: Date.now() + 15 * 60 * 1000 })).toString('base64');
+
     if (matchedUser) {
       console.log(`[Password Reset] User found! Sending mock reset token/link to ${email}`);
     } else {
@@ -47,7 +49,10 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       detail: 'Password reset link has been dispatched to your email address successfully.',
-      success: true
+      success: true,
+      email: email.trim().toLowerCase(),
+      token: token,
+      exists: !!matchedUser
     });
   } catch (err) {
     console.error('[API Auth Password Reset] Error:', err);

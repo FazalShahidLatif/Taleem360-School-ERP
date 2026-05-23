@@ -49,6 +49,16 @@ async function startServer() {
     }
   });
 
+  app.post('/api/auth/password-update', async (req, res) => {
+    try {
+      const { default: handler } = await import('./api/auth/password-update.js');
+      await handler(req, res);
+    } catch (err) {
+      console.error('[server.js] Error routing to /api/auth/password-update.js:', err);
+      res.status(500).json({ detail: 'Internal Server Error' });
+    }
+  });
+
   const handleRegister = async (req, res) => {
     try {
       const { default: handler } = await import('./api/auth/register.js');

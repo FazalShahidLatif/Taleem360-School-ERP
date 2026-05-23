@@ -15,6 +15,11 @@ export const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [resetFlowToken, setResetFlowToken] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+  const [passwordResetCompleted, setPasswordResetCompleted] = useState(false);
+  
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
@@ -34,9 +39,65 @@ export const Login: React.FC = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setResetSuccessMessage(data.detail || 'Reset link dispatched.');
+        setResetSuccessMessage(data.detail || 'Password reset link has been dispatched to your email address successfully.');
+        if (data.exists && data.token) {
+          // Store token to enable immediate direct setup input
+          setResetFlowToken(data.token);
+        }
       } else {
         setError(data.detail || 'Failed to dispatch password reset request.');
+      }
+    } catch (err: any) {
+      setError(err.message || 'Connecting error.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePasswordUpdateSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword !== confirmNewPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+    if (newPassword.length < 3) {
+      setError('Password must be at least 3 characters long.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    setResetSuccessMessage('');
+
+    try {
+      const response = await fetch('/api/auth/password-update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: resetEmail,
+          token: resetFlowToken,
+          newPassword: newPassword,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setResetSuccessMessage(data.detail || 'Password updated successfully!');
+        setPasswordResetCompleted(true);
+        
+        // Auto sign in user or route back with credentials prepared in form
+        setTimeout(() => {
+          setIsReset(false);
+          setResetFlowToken('');
+          setError('');
+          setResetSuccessMessage('');
+          setPasswordResetCompleted(false);
+          setEmail(resetEmail);
+          setPassword(newPassword);
+        }, 2000);
+      } else {
+        setError(data.detail || 'Failed to update password.');
       }
     } catch (err: any) {
       setError(err.message || 'Connecting error.');
@@ -117,61 +178,145 @@ export const Login: React.FC = () => {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             {isReset ? (
-              <form className="space-y-6" onSubmit={handleResetSubmit}>
-                <div>
-                  <label htmlFor="reset-email" className="block text-sm font-medium text-gray-700">
-                    Email address
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="reset-email"
-                      name="reset-email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      value={resetEmail}
-                      onChange={(e) => setResetEmail(e.target.value)}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
+              resetFlowToken ? (
+                <form className="space-y-6" onSubmit={handlePasswordUpdateSubmit}>
+                  <div>
+                    <label className="block text-sm font-medium text-indigo-700 font-semibold mb-2 bg-indigo-50 p-3 rounded border border-indigo-150">
+                      Direct Set Active: Your account has been verified. Define your new password below to instantly update.
+                    </label>
                   </div>
-                </div>
 
-                {resetSuccessMessage && (
-                  <div className="text-sm text-green-600 bg-green-50 p-2 rounded">
-                    {resetSuccessMessage}
+                  <div>
+                    <label htmlFor="new-password" className="block text-sm font-medium text-gray-700">
+                      New Password
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="new-password"
+                        name="new-password"
+                        type="password"
+                        required
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Choose a strong password"
+                      />
+                    </div>
                   </div>
-                )}
 
-                {error && (
-                  <div className="text-sm text-red-600 bg-red-50 p-2 rounded">
-                    {error}
+                  <div>
+                    <label htmlFor="confirm-new-password" className="block text-sm font-medium text-gray-700">
+                      Confirm New Password
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="confirm-new-password"
+                        name="confirm-new-password"
+                        type="password"
+                        required
+                        value={confirmNewPassword}
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        placeholder="Re-enter your password"
+                      />
+                    </div>
                   </div>
-                )}
 
-                <div>
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-                  >
-                    {loading ? 'Sending link...' : 'Send reset link'}
-                  </button>
-                </div>
+                  {resetSuccessMessage && (
+                    <div className="text-sm text-green-600 bg-green-50 p-2 rounded">
+                      {resetSuccessMessage}
+                    </div>
+                  )}
 
-                <div className="text-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsReset(false);
-                      setError('');
-                      setResetSuccessMessage('');
-                    }}
-                    className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    Back to Sign In
-                  </button>
-                </div>
-              </form>
+                  {error && (
+                    <div className="text-sm text-red-600 bg-red-50 p-2 rounded">
+                      {error}
+                    </div>
+                  )}
+
+                  <div>
+                    <button
+                      type="submit"
+                      disabled={loading || passwordResetCompleted}
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                    >
+                      {loading ? 'Saving...' : passwordResetCompleted ? 'Saved successfully!' : 'Save New Password'}
+                    </button>
+                  </div>
+
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsReset(false);
+                        setResetFlowToken('');
+                        setError('');
+                        setResetSuccessMessage('');
+                        setPasswordResetCompleted(false);
+                      }}
+                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Back to Sign In
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form className="space-y-6" onSubmit={handleResetSubmit}>
+                  <div>
+                    <label htmlFor="reset-email" className="block text-sm font-medium text-gray-700">
+                      Email address
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="reset-email"
+                        name="reset-email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        value={resetEmail}
+                        onChange={(e) => setResetEmail(e.target.value)}
+                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {resetSuccessMessage && (
+                    <div className="text-sm text-green-600 bg-green-50 p-2 rounded border border-green-200">
+                      {resetSuccessMessage}
+                    </div>
+                  )}
+
+                  {error && (
+                    <div className="text-sm text-red-600 bg-red-50 p-2 rounded">
+                      {error}
+                    </div>
+                  )}
+
+                  <div>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                    >
+                      {loading ? 'Sending link...' : 'Send reset link'}
+                    </button>
+                  </div>
+
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsReset(false);
+                        setError('');
+                        setResetSuccessMessage('');
+                      }}
+                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Back to Sign In
+                    </button>
+                  </div>
+                </form>
+              )
             ) : (
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {isRegister && (
