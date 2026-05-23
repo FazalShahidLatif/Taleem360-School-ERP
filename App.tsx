@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './lib/auth';
 import { Layout } from './components/Layout';
 import { Dashboard } from './pages/Dashboard';
