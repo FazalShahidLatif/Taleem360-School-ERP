@@ -12,6 +12,24 @@ export const Blog: React.FC = () => {
   const [selectedCluster, setSelectedCluster] = useState<string>('ALL');
 
   useEffect(() => {
+    document.title = 'Taleem360 - Educational ERP Knowledge Vault & Research Archive';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Explore our comprehensive, research-backed guides built to optimize K-12 operations, improve student success, automate fees, and simplify school payroll compliance with Taleem360 ERP.');
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://taleem360.online/blog');
+
     const fetchPosts = async () => {
       try {
         const res = await api.get('/blog/posts/');

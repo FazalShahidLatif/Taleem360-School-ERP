@@ -15,6 +15,26 @@ import { Link } from 'react-router-dom';
 import { Footer } from '../components/Footer';
 
 export const About: React.FC = () => {
+  React.useEffect(() => {
+    document.title = 'About Taleem360 - Educational Empowerment through Automation';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Learn more about Taleem360. We provide unified cloud-based solutions to automate school management operational complexity, giving educators more time to optimize student success.');
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://taleem360.online/about');
+  }, []);
+
   return (
     <div className="space-y-16 pb-12">
       {/* Hero Section */}

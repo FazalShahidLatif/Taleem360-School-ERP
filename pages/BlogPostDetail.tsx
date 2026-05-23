@@ -37,6 +37,23 @@ export const BlogPostDetail: React.FC = () => {
           setRelatedPosts(related);
 
           // --- SEO ENGINE: INJECT CANONICALS & SCHEMAS ---
+          // Coordinate dynamic title and meta descriptions
+          document.title = `${fetchedPost.title} | Taleem360 Knowledge Vault`;
+
+          let metaDesc = document.querySelector('meta[name="description"]');
+          if (!metaDesc) {
+            metaDesc = document.createElement('meta');
+            metaDesc.setAttribute('name', 'description');
+            document.head.appendChild(metaDesc);
+          }
+          metaDesc.setAttribute('content', fetchedPost.excerpt);
+
+          let ogT = document.querySelector('meta[property="og:title"]');
+          if (ogT) ogT.setAttribute('content', fetchedPost.title);
+
+          let ogD = document.querySelector('meta[property="og:description"]');
+          if (ogD) ogD.setAttribute('content', fetchedPost.excerpt);
+
           // 1. Dynamic Canonical
           let canonicalLink = document.querySelector('link[rel="canonical"]');
           if (!canonicalLink) {

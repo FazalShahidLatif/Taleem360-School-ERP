@@ -7,6 +7,27 @@ import { openCheckout } from '../lib/paddle';
 
 export const Pricing: React.FC = () => {
   const { user } = useAuth();
+
+  React.useEffect(() => {
+    document.title = 'Taleem360 ERP Suite Pricing Plans - K-12 Cloud Portal';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Choose the perfect Taleem360 pricing package for your institute. Pilot plan is free, with Premium Tier 1 and Tier 2 plans offering K-12 gradebook software, cashless billing, attendance, and support.');
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://taleem360.online/pricing');
+  }, []);
+
   const tiers = [
     {
       name: 'Pilot',
