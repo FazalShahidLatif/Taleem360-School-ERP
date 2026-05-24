@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { SubscriptionTier } from '../types';
@@ -169,7 +170,7 @@ export const Pricing: React.FC = () => {
 
         <div className="mt-12 text-center">
           <p className="text-gray-500">
-            All prices are in USD. Need a custom plan? <a href="#" className="text-indigo-600 font-medium hover:text-indigo-500">Talk to us</a>.
+            All prices are in USD. Need a custom plan? <Link to="/tickets" className="text-indigo-600 font-medium hover:text-indigo-500">Talk to us</Link>.
           </p>
         </div>
     </div>

@@ -105,7 +105,7 @@ export const Support: React.FC = () => {
               Documentation
             </div>
             <p className="text-sm text-gray-500">Read our full documentation</p>
-            <Link to="#" className="text-sm font-medium text-gray-900 hover:text-indigo-600">
+            <Link to="/blog" className="text-sm font-medium text-gray-900 hover:text-indigo-600">
               View Docs
             </Link>
           </div>

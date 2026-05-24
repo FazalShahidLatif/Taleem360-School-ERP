@@ -120,6 +120,15 @@ const HomeWrapper = () => {
 };
 
 const App: React.FC = () => {
+  React.useEffect(() => {
+    // Detect legacy HashRouter paths in URL (e.g., /#/blog or /#/pricing) and redirect to clean paths
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#/')) {
+      const cleanPath = hash.substring(2); // Remove '#/'
+      window.location.replace('/' + cleanPath);
+    }
+  }, []);
+
   return (
     <AuthProvider>
       <Router>
