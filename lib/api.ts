@@ -22,14 +22,28 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
+    const status = error.response?.status;
     const detail = error.response?.data?.detail;
-    if (detail === "Invalid token" || detail === "Token expired" || detail === "No token provided") {
-      console.warn("[API] Token validation failed on backend. Clearing tokens and redirecting...", detail);
+
+    // Trigger graceful logout/redirect on HTTP 401 (Unauthorized), 403 (Forbidden), 
+    // or when specific signature token errors are returned.
+    if (
+      status === 401 || 
+      status === 403 || 
+      detail === "Invalid token" || 
+      detail === "Token expired" || 
+      detail === "No token provided"
+    ) {
+      console.warn(
+        `[API] Authentication expired or unauthorized (Status: ${status}, Detail: "${detail}"). Gracefully signing out and redirecting...`
+      );
+      
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
+
       if (typeof window !== "undefined") {
-        window.location.hash = "#/login";
-        window.location.reload();
+        // Redirect to the clean login route and reload to flush old memory state
+        window.location.href = "/login";
       }
     }
     return Promise.reject(error);
