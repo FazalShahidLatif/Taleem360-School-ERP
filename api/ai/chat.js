@@ -2,13 +2,18 @@ import { GoogleGenAI } from '@google/genai';
 
 let aiClientInstance = null;
 
+function getApiKey() {
+  return process.env.GEMINI_API_KEY || process.env.API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.VITE_API_KEY;
+}
+
 function getAiClient() {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error('GEMINI_API_KEY environment variable is required');
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    throw new Error('Google Gemini API Key is required but was not found in environment');
   }
   if (!aiClientInstance) {
     aiClientInstance = new GoogleGenAI({
-      apiKey: process.env.GEMINI_API_KEY,
+      apiKey,
       httpOptions: {
         headers: {
           'User-Agent': 'aistudio-build'
@@ -51,9 +56,10 @@ export default async function handler(req, res) {
       }
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    const apiKey = getApiKey();
+    if (!apiKey) {
       return res.status(200).json({ 
-        text: "I am ready and online to assist you! However, the **GEMINI_API_KEY** secret has not been configured in your environment variables yet.\n\nPlease configure it in your environment variables. After that, I will be fully functional to answer questions and analyze your school data!"
+        text: "I am ready and online to assist you! However, the **GEMINI_API_KEY** secret has not been configured in your environment variables yet.\n\nPlease configure it in your Vercel or environment variables dashboard (as `GEMINI_API_KEY`). After that, I will be fully functional to answer questions and analyze your school data!"
       });
     }
 
