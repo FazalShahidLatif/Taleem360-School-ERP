@@ -44,8 +44,8 @@ const INITIAL_SCHOOLS: School[] = [
 
 const INITIAL_USERS: User[] = [
   // Super Admin
-  { id: 'u0', email: 'accts.pak@gmail.com', name: 'Super Admin', password: 'super', role: UserRole.SUPER_ADMIN, onboarded: true },
-  { id: 'u-sa2', email: 'support@taleem360.online', name: 'Super Admin', password: 'super', role: UserRole.SUPER_ADMIN, onboarded: true },
+  { id: 'u0', email: 'accts.pak@gmail.com', name: 'Super Admin', password: 'June@2026', role: UserRole.SUPER_ADMIN, onboarded: true },
+  { id: 'u-sa2', email: 'support@taleem360.online', name: 'Super Admin', password: 'June@2026', role: UserRole.SUPER_ADMIN, onboarded: true },
 
   // School A Users
   { id: 'u1', email: 'admin@school.com', name: 'Principal Skinner', password: 'admin', role: UserRole.ADMIN, school_id: SCHOOL_A_ID, onboarded: true },
@@ -364,7 +364,7 @@ export const db = {
           id: `u-sa-${idx}`,
           email,
           name: 'Super Admin',
-          password: 'super',
+          password: 'June@2026',
           role: UserRole.SUPER_ADMIN,
           onboarded: true,
           school_id: 'school-1'

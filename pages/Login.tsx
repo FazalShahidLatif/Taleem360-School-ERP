@@ -22,6 +22,7 @@ export const Login: React.FC = () => {
   
   const { login, register } = useAuth();
   const navigate = useNavigate();
+  const isLiveWebsite = typeof window !== 'undefined' && (window.location.hostname === 'taleem360.online' || window.location.hostname === 'www.taleem360.online');
 
   const handleResetSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -317,6 +318,25 @@ export const Login: React.FC = () => {
                   </div>
                 </form>
               )
+            ) : isRegister && isLiveWebsite ? (
+              <div className="space-y-6 text-center py-4">
+                <div className="bg-amber-50 rounded-xl p-5 border border-amber-200 text-amber-900 text-sm leading-relaxed shadow-sm">
+                  <p className="font-bold text-lg text-amber-800 mb-2">Registration Restricted</p>
+                  Self-service school registration is restricted on the live website. If you represent an educational institution, please reach out to our onboarding team to establish your school's dashboard.
+                </div>
+                <div className="text-gray-600 text-sm bg-gray-50 border border-gray-100 rounded-xl p-4">
+                  Send your onboarding request details to: 
+                  <a href="mailto:support@taleem360.online" className="block text-base font-bold text-indigo-600 hover:text-indigo-500 mt-2">
+                    support@taleem360.online
+                  </a>
+                </div>
+                <button
+                  onClick={() => setIsRegister(false)}
+                  className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer"
+                >
+                  Back to Sign In
+                </button>
+              </div>
             ) : (
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {isRegister && (

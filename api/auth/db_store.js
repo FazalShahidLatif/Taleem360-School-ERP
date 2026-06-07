@@ -26,7 +26,7 @@ const INITIAL_USERS = [
   // Super Admin
   {
     email: 'accts.pak@gmail.com',
-    password: 'super',
+    password: 'June@2026',
     user_id: 'u0',
     name: 'Super Admin',
     role: 'admin',
@@ -37,7 +37,7 @@ const INITIAL_USERS = [
   },
   {
     email: 'support@taleem360.online',
-    password: 'super',
+    password: 'June@2026',
     user_id: 'u-sa2',
     name: 'Super Admin',
     role: 'admin',
@@ -162,7 +162,7 @@ function loadDb() {
     SUPER_ADMINS.forEach(admin => {
       const existing = db.users.find(u => u.email.toLowerCase() === admin.email.toLowerCase());
       if (!existing) {
-        db.users.push({ ...admin, password: 'super' });
+        db.users.push({ ...admin, password: 'June@2026' });
         updated = true;
       } else {
         if (existing.app_role !== 'SUPER_ADMIN') {
