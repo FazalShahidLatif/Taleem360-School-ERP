@@ -8,15 +8,49 @@ export const PADDLE_VENDOR_ID = Number(import.meta.env.VITE_PADDLE_VENDOR_ID) ||
 export const PADDLE_ENVIRONMENT = import.meta.env.VITE_PADDLE_ENVIRONMENT || 'sandbox';
 
 export const initPaddle = () => {
+  if (typeof window === 'undefined') return;
+
   if (window.Paddle) {
-    window.Paddle.Environment.set(PADDLE_ENVIRONMENT);
-    window.Paddle.Initialize({ 
-      token: import.meta.env.VITE_PADDLE_TOKEN || 'test_token_placeholder', // Placeholder for sandbox token
-      eventCallback: (data: any) => {
-        console.log('Paddle Event:', data);
-      }
-    });
+    try {
+      window.Paddle.Environment.set(PADDLE_ENVIRONMENT);
+      window.Paddle.Initialize({ 
+        token: import.meta.env.VITE_PADDLE_TOKEN || 'test_token_placeholder', // Placeholder for sandbox token
+        eventCallback: (data: any) => {
+          console.log('Paddle Event:', data);
+        }
+      });
+    } catch (e) {
+      console.warn('Error initializing preloaded Paddle:', e);
+    }
+    return;
   }
+
+  // Load dynamically to prevent static script errors or blocks in iframe/sandbox environments
+  const existingScript = document.querySelector('script[src*="paddle.js"]');
+  if (existingScript) return;
+
+  const script = document.createElement('script');
+  script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
+  script.async = true;
+  script.onload = () => {
+    if (window.Paddle) {
+      try {
+        window.Paddle.Environment.set(PADDLE_ENVIRONMENT);
+        window.Paddle.Initialize({ 
+          token: import.meta.env.VITE_PADDLE_TOKEN || 'test_token_placeholder',
+          eventCallback: (data: any) => {
+            console.log('Paddle Event:', data);
+          }
+        });
+      } catch (e) {
+        console.warn('Error initializing dynamically loaded Paddle:', e);
+      }
+    }
+  };
+  script.onerror = () => {
+    console.warn("Failed to load third-party Paddle script (DNS/Blocker). Using sandbox/mock checkout fallback.");
+  };
+  document.head.appendChild(script);
 };
 
 export const openCheckout = (priceId: string, email: string, onSuccess: () => void) => {

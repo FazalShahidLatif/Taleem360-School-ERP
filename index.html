@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      // Gracefully prevent cross-origin tracking or utility script load issues from polluting logs as uncaught errors
+      window.addEventListener('error', function(e) {
+        if (e && (e.message === 'Script error.' || e.message === 'Script error' || !e.message)) {
+          console.warn('Suppressed cross-origin Script error from external provider (Paddle/GTag/Extensions):', e);
+          e.preventDefault();
+          e.stopPropagation();
+          return true;
+        }
+      }, true);
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GT-TXHQHSRK"></script>
     <script>
@@ -93,7 +104,6 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F46E5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 10v6M2 10l10-5 10 5-10 5z'/><path d='M6 12v5c0 2 2 3 6 3s6-1 6-3v-5'/></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
   </head>
   <body>
     <div id="root"></div>
