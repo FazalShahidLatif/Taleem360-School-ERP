@@ -3,7 +3,11 @@ import { GoogleGenAI } from '@google/genai';
 let aiClientInstance = null;
 
 function getApiKey() {
-  return process.env.GEMINI_API_KEY || process.env.API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.VITE_API_KEY || "AIzaSyAYtZocTPfSdCQ8T3brgMwV7YVIAQd_Eck";
+  const key = process.env.GEMINI_API_KEY || process.env.API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.VITE_API_KEY;
+  if (!key || key === "AIzaSyAYtZocTPfSdCQ8T3brgMwV7YVIAQd_Eck") {
+    return null;
+  }
+  return key;
 }
 
 function getAiClient() {
