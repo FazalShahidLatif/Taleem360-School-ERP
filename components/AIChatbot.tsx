@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI } from "@google/genai";
 import { MessageSquare, Send, X, Minimize2, Maximize2, Bot, User, Sparkles } from 'lucide-react';
 import { ChatMessage, UserRole } from '../types';
 import { useAuth } from '../lib/auth';
@@ -49,13 +48,6 @@ export const AIChatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Use the provided key as a fallback if the environment variable is missing
-      const apiKey = process.env.GEMINI_API_KEY || "AIzaSyAYtZocTPfSdCQ8T3brgMwV7YVIAQd_Eck";
-      console.debug('[AIChatbot] Initializing with API Key:', apiKey.substring(0, 8) + '...');
-      
-      const ai = new GoogleGenAI({ apiKey });
-      const model = "gemini-3-flash-preview";
-      
       const systemInstruction = `
         You are Taleem360 AI, a specialized assistant for school administrators using the Taleem360 School ERP.
         Your goal is to help admins with:
@@ -79,19 +71,28 @@ export const AIChatbot: React.FC = () => {
           parts: [{ text: m.text }]
         }));
 
-      const response = await ai.models.generateContent({
-        model,
-        contents: [...history, { role: 'user', parts: [{ text: input }] }],
-        config: {
-          systemInstruction,
-          temperature: 0.7,
-        }
+      const res = await fetch('/api/ai/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contents: [...history, { role: 'user', parts: [{ text: input }] }],
+          systemInstruction
+        })
       });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.detail || `Server error (${res.status})`);
+      }
+
+      const data = await res.json();
 
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'model',
-        text: response.text || "I'm sorry, I couldn't process that request.",
+        text: data.text || "I'm sorry, I couldn't process that request.",
         timestamp: new Date().toISOString()
       };
 

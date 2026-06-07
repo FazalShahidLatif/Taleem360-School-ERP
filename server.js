@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
 import { OAuth2Client } from 'google-auth-library';
+import { GoogleGenAI } from '@google/genai';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -11,6 +12,24 @@ const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '13089760026-fbr88j41r7
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 const SUPER_ADMIN_EMAILS = ['accts.pak@gmail.com', 'support@taleem360.online'];
+
+let aiClientInstance = null;
+function getAiClient() {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error('GEMINI_API_KEY environment variable is required');
+  }
+  if (!aiClientInstance) {
+    aiClientInstance = new GoogleGenAI({
+      apiKey: process.env.GEMINI_API_KEY,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build'
+        }
+      }
+    });
+  }
+  return aiClientInstance;
+}
 
 const getRedirectUri = (req) => {
   // Prefer APP_URL from environment, fallback to dynamic construction
@@ -159,6 +178,33 @@ async function startServer() {
     } catch (error) {
       console.error('OAuth callback error:', error);
       res.status(500).send('Authentication failed');
+    }
+  });
+
+  app.post('/api/ai/chat', async (req, res) => {
+    try {
+      const { contents, systemInstruction } = req.body;
+      
+      if (!process.env.GEMINI_API_KEY) {
+        return res.json({ 
+          text: "I am ready and online to assist you! However, the **GEMINI_API_KEY** secret has not been configured in your environment variables yet. \n\nPlease configure it in Google AI Studio under **Settings > Secrets**. After that, I will be fully functional to answer questions and analyze your school data!"
+        });
+      }
+
+      const client = getAiClient();
+      const response = await client.models.generateContent({
+        model: 'gemini-3.5-flash',
+        contents,
+        config: {
+          systemInstruction,
+          temperature: 0.7,
+        }
+      });
+
+      res.json({ text: response.text });
+    } catch (err) {
+      console.error('[server.js] Error in /api/ai/chat:', err);
+      res.status(500).json({ detail: err.message || 'Error processing AI chat' });
     }
   });
 
