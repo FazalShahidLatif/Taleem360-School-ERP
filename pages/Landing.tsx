@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
-  School, 
+  GraduationCap, 
   Shield, 
   Users, 
   BarChart3, 
@@ -26,7 +26,7 @@ const Landing: React.FC = () => {
           <div className="flex justify-between h-20 items-center">
             <div className="flex items-center gap-2">
               <div className="bg-indigo-600 p-2 rounded-xl">
-                <School className="w-6 h-6 text-white" />
+                <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-black text-slate-900 tracking-tight">Taleem360</span>
             </div>

@@ -7,6 +7,7 @@ export const AIChatbot: React.FC = () => {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -29,6 +30,10 @@ export const AIChatbot: React.FC = () => {
 
   // Only show for Admins and Super Admins
   if (user?.role !== UserRole.ADMIN && user?.role !== UserRole.SUPER_ADMIN) {
+    return null;
+  }
+
+  if (isHidden) {
     return null;
   }
 
@@ -124,16 +129,26 @@ export const AIChatbot: React.FC = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50">
       {!isOpen ? (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-110 flex items-center justify-center group"
-        >
-          <Sparkles className="w-6 h-6 mr-2 group-hover:animate-pulse" />
-          <span className="font-semibold">AI Assistant</span>
-        </button>
+        <div className="relative group/btn">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center justify-center group"
+          >
+            <Sparkles className="w-6 h-6 mr-2 group-hover:animate-pulse" />
+            <span className="font-semibold text-sm">AI Assistant</span>
+          </button>
+          <button 
+            type="button"
+            onClick={() => setIsHidden(true)}
+            className="absolute -top-2 -right-2 bg-rose-500 hover:bg-rose-600 text-white p-1 rounded-full shadow-md invisible group-hover/btn:visible hover:scale-110 transition-all flex items-center justify-center"
+            title="Dismiss Assistant"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        </div>
       ) : (
         <div className={`bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col transition-all duration-300 ${
-          isMinimized ? 'h-16 w-72' : 'h-[500px] w-96'
+          isMinimized ? 'h-16 w-72' : 'h-[475px] w-96'
         }`}>
           {/* Header */}
           <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-indigo-600 rounded-t-2xl text-white">

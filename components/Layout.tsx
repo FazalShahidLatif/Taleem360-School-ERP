@@ -97,7 +97,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="fixed inset-y-0 left-0 flex flex-col w-64 bg-white border-r border-gray-200">
              <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
                <div className="flex items-center font-bold text-xl text-indigo-600">
-                 <SchoolIcon className="w-8 h-8 mr-2" />
+                 <GraduationCap className="w-8 h-8 mr-2 text-indigo-600" />
                  Taleem360
                </div>
                <button onClick={() => setSidebarOpen(false)}>
@@ -129,7 +129,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {user && (
         <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:bg-white lg:pt-5 lg:pb-4">
           <div className="flex items-center flex-shrink-0 px-6">
-            <SchoolIcon className="w-8 h-8 text-indigo-600 mr-2" />
+            <GraduationCap className="w-8 h-8 text-indigo-600 mr-2" />
             <span className="text-xl font-bold text-gray-900">
               {isSuperAdmin ? 'Taleem360 HQ' : 'Taleem360'}
             </span>

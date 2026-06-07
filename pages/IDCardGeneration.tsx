@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IdCard, Printer, Download, Search, Filter, User, School as SchoolIcon, QrCode } from 'lucide-react';
+import { IdCard, Printer, Download, Search, Filter, User, GraduationCap as SchoolIcon, QrCode } from 'lucide-react';
 
 interface Student {
   id: string;

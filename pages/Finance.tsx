@@ -3,7 +3,7 @@ import api from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { UserRole, FeeCategory, StudentFee, Student, Payment } from '../types';
 import { Button } from '../components/ui/Button';
-import { CreditCard, CheckCircle, Clock, Plus, DollarSign, Trash2, History } from 'lucide-react';
+import { CreditCard, CheckCircle, Clock, Plus, DollarSign, Trash2, History, GraduationCap, Printer } from 'lucide-react';
 
 export const Finance: React.FC = () => {
   const { user } = useAuth();
@@ -486,12 +486,68 @@ export const Finance: React.FC = () => {
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
             <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               {paymentSuccess ? (
-                <div className="py-12 text-center">
-                  <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
-                    <CheckCircle className="h-10 w-10 text-green-600" />
+                <div className="space-y-6">
+                  <div className="text-center">
+                    <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-3">
+                      <CheckCircle className="h-8 h-8 text-green-600" />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900">Payment Successful!</h3>
+                    <p className="text-xs text-gray-500">Your payment has been captured and validated securely.</p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Payment Successful!</h3>
-                  <p className="text-gray-500">Your payment has been processed successfully. A receipt has been generated and sent to your email.</p>
+                  
+                  {/* Official Receipt / Invoice */}
+                  <div id="payment-receipt-print" className="border border-dashed border-gray-305 rounded-xl p-5 bg-slate-50 space-y-4 text-left">
+                    <div className="flex justify-between items-start border-b border-gray-200 pb-3">
+                      <div className="flex items-center gap-2">
+                        <GraduationCap className="w-6 h-6 text-indigo-600" />
+                        <span className="font-black text-slate-800 text-sm tracking-tight">Taleem360</span>
+                      </div>
+                      <span className="text-[10px] bg-green-100 text-green-700 font-black px-2 py-0.5 rounded uppercase tracking-wider">Official Invoice Receipt</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-y-2 text-[11px] text-gray-500">
+                      <div>
+                        <span className="block uppercase font-bold text-gray-400 text-[9px]">Receipt No</span>
+                        <span className="font-mono text-gray-800 font-bold">REC-{(Date.now() % 1000000).toString().padStart(6, '0')}</span>
+                      </div>
+                      <div>
+                        <span className="block uppercase font-bold text-gray-400 text-[9px]">Payment Date</span>
+                        <span className="text-gray-800 font-bold">{new Date().toISOString().split('T')[0]}</span>
+                      </div>
+                      <div className="col-span-2 border-t border-gray-100 pt-2">
+                        <span className="block uppercase font-bold text-gray-400 text-[9px]">Reference</span>
+                        <span className="text-gray-800 font-bold">Student Reference ID: {selectedFee.student_id}</span>
+                      </div>
+                      <div className="col-span-2 border-t border-gray-100 pt-2 flex justify-between">
+                        <span className="text-gray-700 font-bold">{selectedFee.category_name}</span>
+                        <span className="text-slate-900 font-extrabold">${selectedFee.amount}</span>
+                      </div>
+                    </div>
+
+                    <div className="border-t border-gray-200 pt-3 flex justify-between items-center text-xs">
+                      <span className="text-gray-500 uppercase font-bold text-[10px]">Total Paid Amount</span>
+                      <span className="text-indigo-600 font-black text-base">${selectedFee.amount} USD</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      className="flex-1"
+                      onClick={() => window.print()}
+                    >
+                      <Printer className="w-4 h-4 mr-2" />
+                      Print Receipt
+                    </Button>
+                    <Button
+                      type="button"
+                      className="flex-1"
+                      onClick={() => setShowPaymentModal(false)}
+                    >
+                      Close
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <>

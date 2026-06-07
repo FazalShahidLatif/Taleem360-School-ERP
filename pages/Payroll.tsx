@@ -12,7 +12,9 @@ import {
   Plus,
   Download,
   Filter,
-  Briefcase
+  Briefcase,
+  GraduationCap,
+  Printer
 } from 'lucide-react';
 
 export const Payroll: React.FC = () => {
@@ -29,6 +31,7 @@ export const Payroll: React.FC = () => {
     end_date: '',
     reason: ''
   });
+  const [selectedSalaryForPayslip, setSelectedSalaryForPayslip] = useState<StaffSalary | null>(null);
 
   const isAdmin = user?.role === UserRole.ADMIN || user?.role === UserRole.SUPER_ADMIN;
 
@@ -193,7 +196,11 @@ export const Payroll: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-2">
-                        <button className="text-indigo-600 hover:text-indigo-900" title="View Payslip">
+                        <button 
+                          onClick={() => setSelectedSalaryForPayslip(salary)}
+                          className="text-indigo-600 hover:text-indigo-900" 
+                          title="View Payslip"
+                        >
                           <FileText className="w-5 h-5" />
                         </button>
                         {isAdmin && salary.status === SalaryStatus.PENDING && (
@@ -341,6 +348,85 @@ export const Payroll: React.FC = () => {
                 <Button type="submit">Submit Request</Button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {selectedSalaryForPayslip && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 space-y-6">
+            <div className="text-center">
+              <div className="flex justify-center items-center gap-2 mb-2">
+                <GraduationCap className="w-8 h-8 text-indigo-600 animate-pulse" />
+                <span className="text-2xl font-black text-slate-800 tracking-tight">Taleem360 ERP</span>
+              </div>
+              <h2 className="text-xs font-bold text-indigo-600 uppercase tracking-widest leading-none">Administrative Salary Disbursal Slip</h2>
+            </div>
+
+            {/* Payslip content suitable for printing */}
+            <div id="payslip-print-block" className="border border-solid border-gray-200 rounded-xl p-5 bg-slate-50 space-y-4">
+              <div className="flex justify-between items-center border-b border-gray-200 pb-3">
+                <span className="text-xs font-bold text-gray-500 uppercase">Payslip Ref: #PS-{selectedSalaryForPayslip.id}</span>
+                <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${
+                  selectedSalaryForPayslip.status === 'PAID' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                }`}>
+                  {selectedSalaryForPayslip.status}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 text-xs">
+                <div>
+                  <span className="block text-[9px] uppercase font-bold text-gray-400">Employee Name</span>
+                  <span className="font-bold text-slate-800">{selectedSalaryForPayslip.staff_name}</span>
+                </div>
+                <div>
+                  <span className="block text-[9px] uppercase font-bold text-gray-400">Salary Month</span>
+                  <span className="font-bold text-slate-800">{selectedSalaryForPayslip.month}</span>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-200 pt-3 space-y-2">
+                <div className="flex justify-between text-xs text-gray-600">
+                  <span>Basic / Base Pay:</span>
+                  <span className="font-mono font-bold text-slate-800">${selectedSalaryForPayslip.basic_salary}</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-600">
+                  <span>Academic Bonuses / Allowances:</span>
+                  <span className="font-mono font-bold text-emerald-600">+${(selectedSalaryForPayslip.net_salary - selectedSalaryForPayslip.basic_salary >= 0) ? (selectedSalaryForPayslip.net_salary - selectedSalaryForPayslip.basic_salary).toFixed(2) : '0.00'}</span>
+                </div>
+                <div className="flex justify-between text-xs text-gray-600 border-b border-gray-100 pb-2">
+                  <span>Standard Deductions (Taxes):</span>
+                  <span className="font-mono font-bold text-rose-500">-$0.00</span>
+                </div>
+                <div className="flex justify-between text-sm pt-1">
+                  <span className="font-extrabold text-slate-800">Net Disbursement Amount:</span>
+                  <span className="font-mono font-black text-indigo-600">${selectedSalaryForPayslip.net_salary}</span>
+                </div>
+              </div>
+
+              <div className="text-[10px] text-gray-400 border-t border-gray-200 pt-3 text-center italic">
+                This is a computer-generated salary invoice slip. No physical signature is required.
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant="secondary"
+                className="flex-1"
+                onClick={() => window.print()}
+              >
+                <Printer className="w-4 h-4 mr-2" />
+                Print Payslip
+              </Button>
+              <Button
+                type="button"
+                className="flex-1"
+                onClick={() => setSelectedSalaryForPayslip(null)}
+              >
+                Close
+              </Button>
+            </div>
           </div>
         </div>
       )}

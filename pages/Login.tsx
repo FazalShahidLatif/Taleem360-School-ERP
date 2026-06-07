@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../lib/auth';
 import { useNavigate } from 'react-router-dom';
-import { School } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
 import api from '../lib/api';
 import { Footer } from '../components/Footer';
 
@@ -166,7 +166,7 @@ export const Login: React.FC = () => {
       <div className="flex-1 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="flex justify-center">
-            <School className="h-12 w-12 text-indigo-600" />
+            <GraduationCap className="h-12 w-12 text-indigo-600" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             {isReset ? 'Reset your password' : isRegister ? 'Register your school' : 'Sign in to your account'}
