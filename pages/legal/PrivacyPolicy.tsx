@@ -5,37 +5,88 @@ export const PrivacyPolicy: React.FC = () => {
     <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
       <div className="prose prose-indigo max-w-none text-gray-600 space-y-6">
-        <p>Last updated: March 08, 2026</p>
+        <p className="text-sm text-gray-500">Last updated: June 17, 2026</p>
+
+        <section className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 mb-8">
+          <h2 className="text-lg font-semibold text-indigo-900 mb-2">Paddle secure Billing Compliance</h2>
+          <p className="text-indigo-950 text-sm leading-relaxed">
+            All transaction processing is completed by our Merchant of Record and payment provider, <strong>Paddle.com</strong>. Paddle implements strict PCI-DSS database protocols, secure end-to-end encryption, and fraud prevention filters. Note that we do not process, receive, or store your credit card details or secure authentication passwords on our servers.
+          </p>
+        </section>
+
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">1. Introduction</h2>
-          <p>Welcome to Taleem360-School ERP. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+          <p>
+            Welcome to Taleem360-School ERP. We respect your privacy and are committed to protecting the confidential student and administrative data you load on our platform. This policy outlines how we gather, protect, process, and store user metadata when managing school portals and dashboards.
+          </p>
         </section>
+
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">2. Data We Collect</h2>
-          <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">2. The Categories of Data We Collect</h2>
+          <p>
+            We process two categories of data: platform administrator data and school-administered student/parent records.
+          </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Identity Data</strong> includes first name, last name, username or similar identifier.</li>
-            <li><strong>Contact Data</strong> includes email address and telephone numbers.</li>
-            <li><strong>Technical Data</strong> includes internet protocol (IP) address, your login data, browser type and version.</li>
-            <li><strong>Usage Data</strong> includes information about how you use our website, products and services.</li>
+            <li>
+              <strong>Identity &amp; Contact Data:</strong> Includes researcher names, email addresses, phone digits, and school registry fields populated during sign-up or billing checkout.
+            </li>
+            <li>
+              <strong>Student &amp; Parent Administration Data:</strong> Roster files, attendance coordinates, gradebooks, timetables, and billing fee ledgers submitted by the authorized school administrator.
+            </li>
+            <li>
+              <strong>Technical Logs &amp; Metadata:</strong> Internet Protocol (IP) addresses, browser cookies, local sessions metadata, and analytics detailing system navigation speed.
+            </li>
           </ul>
         </section>
+
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">3. How We Use Your Data</h2>
-          <p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">3. Payment Information &amp; Thid-Party Disclosures</h2>
+          <p>
+            To activate paid SaaS memberships (Starter, Professional, Enterprise), checkout forms are processed by Paddle.com. When you make a purchase, Paddle may collect billing information:
+          </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Where we need to perform the contract we are about to enter into or have entered into with you.</li>
-            <li>Where it is necessary for our legitimate interests and your interests and fundamental rights do not override those interests.</li>
-            <li>Where we need to comply with a legal obligation.</li>
+            <li>Your billing address, credit card coordinates, and VAT/Tax numbers.</li>
+            <li>Purchase history logs and payment verification parameters.</li>
+          </ul>
+          <p className="mt-3">
+            This information is held securely by Paddle under their specific privacy protocols. We only receive verification summaries (such as the subscription status "Active", the billing email, and matching payment IDs), which we utilize to lock or unlock paid school software features.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">4. How We Secure and Store Your Data</h2>
+          <p>
+            We implement high-level digital security protocols across all modules:
+          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>End-to-end data transmission security utilizing TLS (Transport Layer Security) encryption.</li>
+            <li>Role-Based Access Control (RBAC) ensuring only authorized regional school personnel can examine class records.</li>
+            <li>Regular database backups and secure firewall protocols hosted in reliable.</li>
           </ul>
         </section>
+
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">4. Data Security</h2>
-          <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">5. Cookies and Web Analytics</h2>
+          <p>
+            We use technical cookies to store active administrator sessions and verify subscription permissions dynamically on your web browser. You can disable cookies inside your personal browser settings, although doing so may restrict certain interactive elements of the core ERP interface.
+          </p>
         </section>
+
         <section>
-          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">5. Your Legal Rights</h2>
-          <p>Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to request access, correction, erasure, restriction, transfer, or to object to processing.</p>
+          <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">6. Your Legal Privacy Rights</h2>
+          <p>
+            Depending on your regional educational authority and jurisdiction, you possess specific legal rights, including requesting deletion of student registries or auditing held administrative metadata. To exercise these rights, or if you suspect any data breaches, please connect immediately with our safety officer:
+          </p>
+          <p className="mt-4 text-indigo-700 font-semibold">
+            Primary Communication Center:
+          </p>
+          <p className="text-gray-600 leading-relaxed">
+            Taleem360 Security Division
+            <br />
+            Email Support: <a href="mailto:support@taleem360.online" className="text-indigo-600 hover:underline">support@taleem360.online</a>
+            <br />
+            Address: Cantt Bazar Faisal, Karachi-75350, Pakistan
+          </p>
         </section>
       </div>
     </div>

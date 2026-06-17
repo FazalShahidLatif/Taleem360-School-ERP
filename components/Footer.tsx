@@ -41,19 +41,26 @@ export const Footer: React.FC = () => {
               <li><Link to="/tickets" className="text-gray-500 hover:text-indigo-600 text-sm">Support Tickets</Link></li>
               <li><Link to="/privacy" className="text-gray-500 hover:text-indigo-600 text-sm">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-gray-500 hover:text-indigo-600 text-sm">Terms of Service</Link></li>
+              <li><Link to="/refund-policy" className="text-gray-500 hover:text-indigo-600 text-sm">Refund &amp; Cancellation</Link></li>
               <li><Link to="/cookies" className="text-gray-500 hover:text-indigo-600 text-sm">Cookie Policy</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-2">
+              <li className="text-gray-500 text-sm font-medium">Taleem360 Ltd. (SECP No. 112349)</li>
+              <li className="text-gray-500 text-xs">Cantt Bazar Faisal, Karachi-75350</li>
               <li className="text-gray-500 text-sm">support@taleem360.online</li>
               <li className="text-gray-500 text-sm">+92 (332) 213 7898</li>
-              <li className="text-gray-500 text-sm">Cantt Bazar Faisal, Karachi-75350</li>
             </ul>
           </div>
         </div>
-        <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+        <div className="mt-8 pt-6 border-t border-gray-100 text-[11px] text-gray-400">
+          <p className="leading-relaxed">
+            * Our order checkout process and subscription renewals are managed securely by our official online Merchant of Record, <strong>Paddle.com</strong>. Paddle is responsible for handling payment operations, managing tax compliance, and resolving customer billing requests on behalf of Taleem360.
+          </p>
+        </div>
+        <div className="pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p className="text-center md:text-left">
             &copy; 2026 Taleem360-School ERP. All rights reserved.
           </p>

@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { ChevronUp } from 'lucide-react';
 import { AuthProvider, useAuth } from './lib/auth';
 import { Layout } from './components/Layout';
 import { Dashboard } from './pages/Dashboard';
@@ -11,6 +12,7 @@ import { Finance } from './pages/Finance';
 import { PrivacyPolicy } from './pages/legal/PrivacyPolicy';
 import { TermsOfService } from './pages/legal/TermsOfService';
 import { CookiePolicy } from './pages/legal/CookiePolicy';
+import { RefundPolicy } from './pages/legal/RefundPolicy';
 import { SuperAdminDashboard } from './pages/SuperAdminDashboard';
 import { Timetable } from './pages/Timetable';
 import { SuperAdminUsers } from './pages/SuperAdminUsers';
@@ -96,6 +98,7 @@ const DashboardPage = () => {
 const PrivacyPage = () => <Layout><PrivacyPolicy /></Layout>;
 const TermsPage = () => <Layout><TermsOfService /></Layout>;
 const CookiePage = () => <Layout><CookiePolicy /></Layout>;
+const RefundPage = () => <Layout><RefundPolicy /></Layout>;
 const PricingPage = () => <Layout><Pricing /></Layout>;
 const BlogPage = () => <Layout><Blog /></Layout>;
 const BlogPostDetailPage = () => <Layout><BlogPostDetail /></Layout>;
@@ -116,6 +119,81 @@ const HomeWrapper = () => {
   return <Landing />;
 };
 
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Scroll window
+    window.scrollTo(0, 0);
+    // Scroll all layout elements that might be scroll containers
+    const scrollableElements = document.querySelectorAll('.overflow-y-auto, main');
+    scrollableElements.forEach(el => {
+      el.scrollTop = 0;
+    });
+  }, [pathname]);
+
+  return null;
+};
+
+const ScrollToTopButton: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = (e: Event) => {
+      const target = e.target as HTMLElement;
+      let scrollTop = window.scrollY;
+      
+      if (target && target !== document as any) {
+        scrollTop = target.scrollTop || window.scrollY;
+      } else {
+        const mainEl = document.querySelector('main');
+        const scrollEl = document.querySelector('.overflow-y-auto');
+        scrollTop = window.scrollY || (mainEl?.scrollTop) || (scrollEl?.scrollTop) || 0;
+      }
+
+      if (scrollTop > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { capture: true });
+    
+    const interval = setInterval(() => {
+      const mainEl = document.querySelector('main');
+      const scrollEl = document.querySelector('.overflow-y-auto');
+      const scrollTop = window.scrollY || (mainEl?.scrollTop) || (scrollEl?.scrollTop) || 0;
+      setIsVisible(scrollTop > 300);
+    }, 500);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll, { capture: true });
+      clearInterval(interval);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const scrollableElements = document.querySelectorAll('.overflow-y-auto, main');
+    scrollableElements.forEach(el => {
+      el.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <button
+      onClick={scrollToTop}
+      aria-label="Go to top"
+      className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:scale-110 active:scale-95 transition-all focus:outline-none"
+    >
+      <ChevronUp className="w-6 h-6" />
+    </button>
+  );
+};
+
 const App: React.FC = () => {
   React.useEffect(() => {
     // Detect legacy HashRouter paths in URL (e.g., /#/blog or /#/pricing) and redirect to clean paths
@@ -129,6 +207,8 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
+        <ScrollToTopButton />
         <Routes>
           <Route path="/login" element={<Layout><Login /></Layout>} />
           <Route path="/onboarding" element={<Onboarding />} />
@@ -350,6 +430,10 @@ const App: React.FC = () => {
           <Route 
             path="/cookies" 
             element={<CookiePage />} 
+          />
+          <Route 
+            path="/refund-policy" 
+            element={<RefundPage />} 
           />
 
           <Route 
