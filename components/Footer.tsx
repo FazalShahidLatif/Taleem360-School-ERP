@@ -21,9 +21,9 @@ export const Footer: React.FC = () => {
               Empowering educational institutions with modern, AI-driven management tools.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/fazalsl/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-600 transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="https://x.com/FazalShahid66" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-600 transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="https://www.linkedin.com/in/fazal-shahid-b5981011b/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-600 transition-colors"><Linkedin className="w-5 h-5" /></a>
+              <a href="https://www.facebook.com/fazalsl/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-indigo-600 transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="https://x.com/FazalShahid66" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-400 hover:text-indigo-600 transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="https://www.linkedin.com/in/fazal-shahid-b5981011b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-400 hover:text-indigo-600 transition-colors"><Linkedin className="w-5 h-5" /></a>
             </div>
           </div>
           <div>

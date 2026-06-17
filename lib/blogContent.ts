@@ -47,7 +47,9 @@ export const TOPICAL_CLUSTERS = {
   SUPER_ADMIN: 'Super Admin, Multi-School & SaaS Security'
 };
 
-export const BLOG_POSTS_DATA: RichBlogPost[] = [
+import { ADDITIONAL_BLOG_POSTS } from './additionalBlogContent';
+
+const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
   // Cluster 1: School ERP & Productivity
   {
     id: 'bp1',
@@ -1839,4 +1841,9 @@ export const BLOG_POSTS_DATA: RichBlogPost[] = [
     },
     conclusion: 'A campus library is more than a room for books; it is a center for curiosity and growth. Upgrading to a modern, automated database protects inventory investments and makes reading accessible and engaging.'
   }
+];
+
+export const BLOG_POSTS_DATA: RichBlogPost[] = [
+  ...ORIGINAL_BLOG_POSTS_DATA,
+  ...ADDITIONAL_BLOG_POSTS
 ];

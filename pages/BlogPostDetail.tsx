@@ -489,7 +489,7 @@ export const BlogPostDetail: React.FC = () => {
                 </div>
               </section>
 
-              {/* Monetization Slot: B2B Premium affiliate/Lead Offer */}
+              {/* Monetization Slot: B2B Premium Lead Offer */}
               <section className="mt-12 pt-8 border-t border-slate-200">
                 <div className="bg-indigo-900 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden shadow-md">
                   <div className="relative z-10 space-y-3">
@@ -612,7 +612,7 @@ export const BlogPostDetail: React.FC = () => {
               </div>
             </div>
 
-            {/* Corporate Specifications Affiliate (E-Book Promo/Resource) */}
+            {/* Corporate Specifications (E-Book Promo/Resource) */}
             <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-slate-100 rounded-2xl p-5 border border-slate-700 shadow-sm">
               <span className="text-[8px] font-black bg-emerald-700 text-emerald-100 px-2 py-0.5 rounded tracking-widest uppercase mb-3 inline-block">
                 Premium Guide

@@ -142,7 +142,7 @@ const Landing: React.FC = () => {
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <button className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+                  <button aria-label="Play video" className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
                     <Play className="w-8 h-8 text-indigo-600 fill-current ml-1" />
                   </button>
                 </div>
