@@ -8,8 +8,6 @@ import { Students } from './pages/Students';
 import { Classes } from './pages/Classes';
 import { Attendance } from './pages/Attendance';
 import { Finance } from './pages/Finance';
-import { AffiliateProgram } from './pages/AffiliateProgram';
-import { AffiliateDashboard } from './pages/AffiliateDashboard';
 import { PrivacyPolicy } from './pages/legal/PrivacyPolicy';
 import { TermsOfService } from './pages/legal/TermsOfService';
 import { CookiePolicy } from './pages/legal/CookiePolicy';
@@ -95,7 +93,6 @@ const DashboardPage = () => {
   return user?.role === UserRole.SUPER_ADMIN ? <SuperAdminDashboard /> : <Dashboard />;
 };
 
-const AffiliatePage = () => <Layout><AffiliateProgram /></Layout>;
 const PrivacyPage = () => <Layout><PrivacyPolicy /></Layout>;
 const TermsPage = () => <Layout><TermsOfService /></Layout>;
 const CookiePage = () => <Layout><CookiePolicy /></Layout>;
@@ -337,20 +334,6 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute allowedRoles={[UserRole.ADMIN, UserRole.PARENT]}>
                 <Finance />
-              </ProtectedRoute>
-            } 
-          />
-
-          {/* Affiliate Routes */}
-          <Route 
-            path="/affiliate" 
-            element={<AffiliatePage />} 
-          />
-          <Route 
-            path="/affiliate/dashboard" 
-            element={
-              <ProtectedRoute>
-                <AffiliateDashboard />
               </ProtectedRoute>
             } 
           />

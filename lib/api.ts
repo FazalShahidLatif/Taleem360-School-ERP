@@ -318,19 +318,6 @@ api.defaults.adapter = async (config) => {
       const classId = url.split("?class_id=")[1];
       responseData = await db.getStudentsByClass(user, classId);
     }
-    // Affiliate Routes
-    else if (url === "/affiliate/" && method === "get") {
-      const user = await getUserFromToken();
-      responseData = await db.getAffiliate(user);
-    }
-    else if (url === "/affiliate/register/" && method === "post") {
-      const user = await getUserFromToken();
-      responseData = await db.registerAffiliate(user);
-    }
-    else if (url === "/affiliate/referrals/" && method === "get") {
-      const user = await getUserFromToken();
-      responseData = await db.getReferrals(user);
-    }
     else if (url === "/super-admin/stats/" && method === "get") {
       const user = await getUserFromToken();
       responseData = await db.getAllSchoolsStats(user);
@@ -346,20 +333,6 @@ api.defaults.adapter = async (config) => {
     else if (url === "/super-admin/schools/" && method === "post") {
       const user = await getUserFromToken();
       responseData = await db.onboardSchool(user, body);
-    }
-    else if (url === "/super-admin/affiliates/" && method === "get") {
-      const user = await getUserFromToken();
-      responseData = await db.getAllAffiliates(user);
-    }
-    else if (url === "/super-admin/affiliates/" && method === "post") {
-      const user = await getUserFromToken();
-      responseData = await db.onboardAffiliate(user, body);
-    }
-    else if (url?.startsWith("/super-admin/affiliates/") && method === "patch") {
-      const user = await getUserFromToken();
-      const parts = url.split('/');
-      const id = parts[parts.length - 2] || parts[parts.length - 1];
-      responseData = await db.updateAffiliateStatus(user, id, body.status);
     }
     else if (url?.startsWith("/super-admin/schools/") && method === "patch") {
       const user = await getUserFromToken();

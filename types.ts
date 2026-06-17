@@ -156,37 +156,6 @@ export interface Payment {
   school_id: string;
 }
 
-// --- Affiliate Program Types ---
-
-export enum AffiliateStatus {
-  PENDING = 'PENDING',
-  ACTIVE = 'ACTIVE',
-  SUSPENDED = 'SUSPENDED'
-}
-
-export interface Affiliate {
-  id: string;
-  user_id: string;
-  user_name?: string; // For UI display
-  user_email?: string; // For UI display
-  referral_code: string;
-  total_earnings: number;
-  balance: number;
-  referral_count: number;
-  status: AffiliateStatus;
-  created_at: string;
-}
-
-export interface Referral {
-  id: string;
-  affiliate_id: string;
-  referred_school_id: string;
-  referred_school_name: string;
-  status: 'PENDING' | 'ACTIVE' | 'CANCELLED';
-  commission_earned: number;
-  date: string;
-}
-
 // --- Timetable Types ---
 
 export enum DayOfWeek {

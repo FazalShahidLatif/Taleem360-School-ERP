@@ -1,4 +1,4 @@
-import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, Affiliate, Referral, TimetableEntry, DayOfWeek, SubscriptionTier, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, BlogPost, AffiliateStatus, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
+import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, TimetableEntry, DayOfWeek, SubscriptionTier, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, BlogPost, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
 import { ai } from './ai';
 import { BLOG_POSTS_DATA, RichBlogPost } from './blogContent';
 
@@ -231,8 +231,6 @@ const KEYS = {
   FEE_CATEGORIES: 'erp_fee_categories',
   STUDENT_FEES: 'erp_student_fees',
   PAYMENTS: 'erp_payments',
-  AFFILIATES: 'erp_affiliates',
-  REFERRALS: 'erp_referrals',
   TIMETABLE: 'erp_timetable',
   SCHOOLS: 'erp_schools',
   STAFF: 'erp_staff',
@@ -328,8 +326,6 @@ export const db = {
       localStorage.setItem(KEYS.FEE_CATEGORIES, JSON.stringify(INITIAL_FEE_CATEGORIES));
       localStorage.setItem(KEYS.STUDENT_FEES, JSON.stringify(INITIAL_STUDENT_FEES));
       localStorage.setItem(KEYS.PAYMENTS, JSON.stringify(INITIAL_PAYMENTS));
-      localStorage.setItem(KEYS.AFFILIATES, JSON.stringify([]));
-      localStorage.setItem(KEYS.REFERRALS, JSON.stringify([]));
       localStorage.setItem(KEYS.TIMETABLE, JSON.stringify(INITIAL_TIMETABLE));
       localStorage.setItem(KEYS.SCHOOLS, JSON.stringify(INITIAL_SCHOOLS));
       localStorage.setItem(KEYS.STAFF, JSON.stringify(INITIAL_STAFF));
@@ -1002,40 +998,6 @@ export const db = {
     return newResults;
   },
 
-  // Affiliate Methods
-  getAffiliate: async (user: User): Promise<Affiliate | null> => {
-    await delay();
-    return load<Affiliate>(KEYS.AFFILIATES).find(a => a.user_id === user.id) || null;
-  },
-
-  registerAffiliate: async (user: User): Promise<Affiliate> => {
-    await delay();
-    const affiliates = load<Affiliate>(KEYS.AFFILIATES);
-    const existing = affiliates.find(a => a.user_id === user.id);
-    if (existing) return existing;
-
-    const newAffiliate: Affiliate = {
-      id: `aff_${Date.now()}`,
-      user_id: user.id,
-      referral_code: `REF${user.id.toUpperCase()}${Math.floor(Math.random() * 1000)}`,
-      total_earnings: 0,
-      balance: 0,
-      referral_count: 0,
-      status: AffiliateStatus.PENDING,
-      created_at: new Date().toISOString()
-    };
-    affiliates.push(newAffiliate);
-    save(KEYS.AFFILIATES, affiliates);
-    return newAffiliate;
-  },
-
-  getReferrals: async (user: User): Promise<Referral[]> => {
-    await delay();
-    const affiliate = load<Affiliate>(KEYS.AFFILIATES).find(a => a.user_id === user.id);
-    if (!affiliate) return [];
-    return load<Referral>(KEYS.REFERRALS).filter(r => r.affiliate_id === affiliate.id);
-  },
-
   // Super Admin Methods
   getAllUsers: async (user: User): Promise<User[]> => {
     await delay();
@@ -1100,77 +1062,6 @@ export const db = {
     save(KEYS.USERS, users);
     
     return { school: newSchool, admin: newAdmin };
-  },
-
-  getAllAffiliates: async (user: User): Promise<Affiliate[]> => {
-    await delay();
-    if (user.role !== UserRole.SUPER_ADMIN) {
-      throw new Error("Unauthorized: Super Admin access required.");
-    }
-    const affiliates = load<Affiliate>(KEYS.AFFILIATES);
-    const users = load<User>(KEYS.USERS);
-    
-    return affiliates.map(a => {
-      const u = users.find(u => u.id === a.user_id);
-      return {
-        ...a,
-        user_name: u?.name,
-        user_email: u?.email
-      };
-    });
-  },
-
-  onboardAffiliate: async (user: User, data: { name: string; email: string; password?: string; referral_code?: string }) => {
-    await delay();
-    if (user.role !== UserRole.SUPER_ADMIN) {
-      throw new Error("Unauthorized: Super Admin access required.");
-    }
-    const users = load<User>(KEYS.USERS);
-    const affiliates = load<Affiliate>(KEYS.AFFILIATES);
-    
-    const userId = `u-aff-${Date.now()}`;
-    const newUser: User = {
-      id: userId,
-      email: data.email,
-      name: data.name,
-      password: data.password || 'affiliate123',
-      role: UserRole.PARENT, // Using PARENT as a placeholder for affiliate users if no specific role exists
-      // Actually, I should probably add an AFFILIATE role if it doesn't exist.
-      // Let me check UserRole.
-    };
-    
-    const newAffiliate: Affiliate = {
-      id: `aff-${Date.now()}`,
-      user_id: userId,
-      referral_code: data.referral_code || `REF-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
-      total_earnings: 0,
-      balance: 0,
-      referral_count: 0,
-      status: AffiliateStatus.ACTIVE,
-      created_at: new Date().toISOString()
-    };
-    
-    users.push(newUser);
-    affiliates.push(newAffiliate);
-    
-    save(KEYS.USERS, users);
-    save(KEYS.AFFILIATES, affiliates);
-    
-    return { user: newUser, affiliate: newAffiliate };
-  },
-
-  updateAffiliateStatus: async (user: User, id: string, status: AffiliateStatus) => {
-    await delay();
-    if (user.role !== UserRole.SUPER_ADMIN) {
-      throw new Error("Unauthorized: Super Admin access required.");
-    }
-    const affiliates = load<Affiliate>(KEYS.AFFILIATES);
-    const idx = affiliates.findIndex(a => a.id === id);
-    if (idx === -1) throw new Error("Affiliate not found");
-    
-    affiliates[idx].status = status;
-    save(KEYS.AFFILIATES, affiliates);
-    return affiliates[idx];
   },
 
   updateSchool: async (user: User, id: string, data: Partial<School>) => {
