@@ -8,6 +8,7 @@ import { openCheckout } from '../lib/paddle';
 
 export const Pricing: React.FC = () => {
   const { user } = useAuth();
+  const [notification, setNotification] = React.useState<{ type: 'success' | 'info'; message: string } | null>(null);
 
   React.useEffect(() => {
     document.title = 'Taleem360 ERP Suite Pricing Plans - K-12 Cloud Portal';
@@ -28,6 +29,16 @@ export const Pricing: React.FC = () => {
     }
     canonicalLink.setAttribute('href', 'https://taleem360.online/pricing');
   }, []);
+
+  // Auto-dismiss notification after 6 seconds
+  React.useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
 
   const tiers = [
     {
@@ -97,6 +108,29 @@ export const Pricing: React.FC = () => {
 
   return (
     <div className="space-y-12">
+      {notification && (
+        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 max-w-md w-full mx-auto px-4 sm:px-6">
+          <div className="bg-emerald-600 text-white rounded-2xl shadow-xl border border-emerald-500 p-4 relative flex items-center space-x-3 pr-10 animate-fade-in">
+            <div className="bg-white/20 p-1.5 rounded-lg flex-shrink-0">
+              <Check className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <p className="font-semibold text-sm">Action Complete</p>
+              <p className="text-xs text-emerald-100 mt-0.5">{notification.message}</p>
+            </div>
+            <button
+              onClick={() => setNotification(null)}
+              className="absolute top-3 right-3 text-white/70 hover:text-white transition-colors"
+              aria-label="Close notification"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="text-center">
         <h2 className="text-base font-semibold text-indigo-600 tracking-wide uppercase">Pricing</h2>
         <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
@@ -129,7 +163,7 @@ export const Pricing: React.FC = () => {
                   )}
                 </p>
                 <p className="mt-6 text-gray-500">{tier.description}</p>
-
+ 
                 <ul className="mt-6 space-y-4">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex">
@@ -149,11 +183,24 @@ export const Pricing: React.FC = () => {
                     [SubscriptionTier.TIER_3]: 'pri_tier3_012'
                   };
                   if (tier.id === SubscriptionTier.PILOT) {
-                    alert('Pilot plan selected. This is a free plan.');
+                    setNotification({
+                      type: 'info',
+                      message: 'Pilot plan selected. This is our Free plan containing all essential administrative rosters setup and timetable controls.'
+                    });
+                    return;
+                  }
+                  if (tier.id === SubscriptionTier.TIER_3) {
+                    setNotification({
+                      type: 'info',
+                      message: 'Enterprise proposal requested. Our sales team has received a notification and will connect with your academic director within 2 hours.'
+                    });
                     return;
                   }
                   openCheckout(priceIds[tier.id], user?.email || '', () => {
-                    alert(`Successfully subscribed to ${tier.name}!`);
+                    setNotification({
+                      type: 'success',
+                      message: `Congratulations! Your payment authorized successfully. You are now subscribed to the Taleem360 ${tier.name} Package.`
+                    });
                   });
                 }}
                 className={`mt-8 w-full ${
