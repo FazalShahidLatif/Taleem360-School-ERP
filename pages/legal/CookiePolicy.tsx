@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export const CookiePolicy: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Cookie Policy - Taleem360 School Cloud ERP';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Read about how cookies and session storage are used on Taleem360 school management portal dashboards.');
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://www.taleem360.online/cookies');
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Cookie Policy</h1>

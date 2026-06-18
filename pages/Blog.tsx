@@ -28,7 +28,7 @@ export const Blog: React.FC = () => {
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', 'https://taleem360.online/blog');
+    canonicalLink.setAttribute('href', 'https://www.taleem360.online/blog');
 
     const fetchPosts = async () => {
       try {

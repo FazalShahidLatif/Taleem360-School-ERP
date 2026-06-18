@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export const TermsOfService: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Terms of Service - Taleem360 School Cloud ERP';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Terms Of Service and customer agreement policies for Taleem360 ERP Suite. Understood with Paddle Merchant of Record compliance notices.');
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://www.taleem360.online/terms');
+  }, []);
+
   return (
     <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Terms of Service</h1>
