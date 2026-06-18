@@ -38,6 +38,7 @@ import {
 import { UserRole } from '../types';
 import { AIChatbot } from './AIChatbot';
 import { Footer } from './Footer';
+import FreeResourceBanner from './FreeResourceBanner';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -78,6 +79,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: 'Homework & LMS', href: '/assignments', icon: BookOpen, current: location.pathname === '/assignments' },
     { name: 'Transport & Fleet', href: '/transport', icon: Bus, current: location.pathname === '/transport' },
     { name: 'Pricing', href: '/pricing', icon: Tag, current: location.pathname === '/pricing' },
+    { name: 'Free Resources', href: '/free-resources', icon: Gift, current: location.pathname === '/free-resources' },
     { name: 'Blog', href: '/blog', icon: Newspaper, current: location.pathname.startsWith('/blog') },
     { name: 'About', href: '/about', icon: Award, current: location.pathname === '/about' },
     { name: 'Support', href: '/support', icon: LifeBuoy, current: location.pathname.startsWith('/support') },
@@ -89,7 +91,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
+      <FreeResourceBanner />
+      <div className="flex flex-1 w-full relative">
       {/* Mobile Sidebar Overlay */}
       {user && sidebarOpen && (
         <div className="fixed inset-0 z-40 lg:hidden" role="dialog" aria-modal="true">
@@ -222,6 +226,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </main>
       </div>
+     </div>
     </div>
   );
 };
