@@ -375,7 +375,7 @@ export const FreeResources: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-indigo-100 max-w-xl leading-relaxed mb-8"
           >
-            Download high-contrast sequence coloring pages and foundational tracing books designed for preschool and kindergarten students. 100% free, ready-to-print PDF format.
+            Download high-contrast sequence coloring pages and foundational tracing books designed for preschool and kindergarten students. Providing free resource for students globaly.
           </motion.p>
 
           <motion.div 
