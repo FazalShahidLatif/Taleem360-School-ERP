@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  School as SchoolIcon,
+  GraduationCap,
   Facebook,
   Twitter,
   Linkedin
@@ -13,9 +13,11 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center font-bold text-xl text-indigo-600 mb-4">
-              <SchoolIcon className="w-8 h-8 mr-2" />
-              Taleem360
+            <div className="flex items-center gap-2 mb-4">
+              <div className="bg-indigo-600 p-2 rounded-xl flex items-center justify-center">
+                <GraduationCap className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-black text-slate-900 tracking-tight">Taleem360</span>
             </div>
             <p className="text-gray-500 text-sm mb-6">
               Empowering educational institutions with modern, AI-driven management tools.

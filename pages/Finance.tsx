@@ -500,7 +500,9 @@ export const Finance: React.FC = () => {
                     <div className="flex justify-between items-start border-b border-gray-200 pb-3">
                       <div className="flex items-center gap-2">
                         <GraduationCap className="w-6 h-6 text-indigo-600" />
-                        <span className="font-black text-slate-800 text-sm tracking-tight">Taleem360</span>
+                        <span className="font-black text-slate-800 text-sm tracking-tight">
+                          {user?.school_name || "International Model Academy"}
+                        </span>
                       </div>
                       <span className="text-[10px] bg-green-100 text-green-700 font-black px-2 py-0.5 rounded uppercase tracking-wider">Official Invoice Receipt</span>
                     </div>

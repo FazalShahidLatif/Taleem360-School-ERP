@@ -26,6 +26,7 @@ import { BlogPostDetail } from './pages/BlogPostDetail';
 import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
 import { Onboarding } from './pages/Onboarding';
+import { NotFound } from './pages/NotFound';
 import { AdminPortal } from './pages/AdminPortal';
 import { LessonPlanning } from './pages/LessonPlanning';
 import { Accounts } from './pages/Accounts';
@@ -105,6 +106,7 @@ const BlogPostDetailPage = () => <Layout><BlogPostDetail /></Layout>;
 const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
 const SupportPage = () => <Layout><Support /></Layout>;
+const NotFoundPage = () => <NotFound />;
 
 const HomeWrapper = () => {
   const { user, loading } = useAuth();
@@ -467,11 +469,7 @@ const App: React.FC = () => {
 
           <Route 
             path="/support" 
-            element={
-              <ProtectedRoute>
-                <SupportPage />
-              </ProtectedRoute>
-            } 
+            element={<SupportPage />} 
           />
           
           <Route 
@@ -483,7 +481,7 @@ const App: React.FC = () => {
             } 
           />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </AuthProvider>

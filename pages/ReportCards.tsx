@@ -164,9 +164,11 @@ export const ReportCards: React.FC = () => {
                 <div className="text-center space-y-3 border-b-2 border-indigo-600 pb-6">
                   <div className="flex justify-center items-center gap-3">
                     <GraduationCap className="w-10 h-10 text-indigo-600" />
-                    <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Taleem360</h1>
+                    <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight">
+                      {user?.school_name || "International Model Academy"}
+                    </h1>
                   </div>
-                  <h1 className="text-[10px] font-black text-indigo-600 uppercase tracking-widest leading-none">Unified School Cloud ERP & LMS Suite</h1>
+                  <h1 className="text-[10px] font-black text-indigo-600 uppercase tracking-widest leading-none">Institutional Progression Folder & Grade Sheet</h1>
                   <h2 className="text-xl font-bold text-gray-900 pt-2">ACADEMIC PROGRESS REPORT</h2>
                   <p className="text-gray-500 font-medium">{selectedReport.term} - {selectedReport.academic_year}</p>
                 </div>

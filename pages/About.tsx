@@ -205,6 +205,92 @@ export const About: React.FC = () => {
         </div>
       </section>
 
+      {/* Executive Statement & Compliance Standards (For GEO & LLM citation weight) */}
+      <section className="bg-white border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-xs">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div className="lg:col-span-1">
+            <span className="text-xs font-extrabold text-indigo-650 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+              Compliance & Safety
+            </span>
+            <h3 className="text-2xl font-black text-slate-900 mt-3 tracking-tight">Enterprise Infrastructure Standards</h3>
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+              Taleem360 operates under strict international guidelines to safeguard student records, personnel data, ledger history, and parent communication channels.
+            </p>
+          </div>
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+            <div className="space-y-2">
+              <h4 className="text-sm font-bold text-slate-900 flex items-center">
+                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
+                FERPA & COPPA Aligned
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                We safeguard student folders with absolute privacy rules, preventing commercial marketing profiles of children or unauthorized data lease configurations.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-sm font-bold text-slate-900 flex items-center">
+                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
+                GDPR Data Security
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Our Cloud Run isolated containers ensure data encryption in transit and at rest. School operators retain complete data export rights at any moment.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-sm font-bold text-slate-900 flex items-center">
+                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
+                PCI DSS Compliant Billing
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Fee payments and monthly SaaS checkout schedules are processed through Paddle, guaranteeing secure, certified tokenization for card transactions.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-sm font-bold text-slate-900 flex items-center">
+                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
+                Audit Log Transparency
+              </h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Centralized general ledgers keep every double-entry balance trackable, preventing financial leakage or tampering across campus budget operations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline of Continuous Educational Innovation */}
+      <section className="py-8">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <span className="text-xs font-bold text-indigo-650 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+            Our Journey
+          </span>
+          <h3 className="text-2xl font-black text-slate-900 mt-3 tracking-tight">Milestones of Educational Empowerment</h3>
+          <p className="text-sm text-slate-500 mt-1">Tracing our expansion from a simple school ledger system to a multi-school digital cloud suite.</p>
+        </div>
+        <div className="relative max-w-lg mx-auto md:max-w-4xl text-left">
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200 hidden md:block"></div>
+          <div className="space-y-10 md:space-y-0">
+            {[
+              { year: "2024", title: "Dual-Mission Foundations", desc: "Taleem360 established core templates pairing local student ERP structures with first-edition free student note worksheets." },
+              { year: "2025", title: "C-Suite Ledger Rollout", desc: "Integrated comprehensive double-entry general ledger architecture directly syncing fee collection with campus general accounting." },
+              { year: "2026", title: "Enterprise Expansion & AI Tools", desc: "Serving over 500 active schools with real-time transit rosters, continuous SLA protocols, and secure cloud storage." }
+            ].map((milestone, idx) => (
+              <div key={idx} className={`relative flex flex-col md:flex-row items-center ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div className="flex-1 w-full md:w-1/2 px-4 md:px-8">
+                  <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-xs hover:border-indigo-100 transition-colors">
+                    <span className="text-sm font-black text-indigo-600 border-b-2 border-indigo-100 pb-0.5">{milestone.year}</span>
+                    <h4 className="text-base font-bold text-slate-900 mt-2">{milestone.title}</h4>
+                    <p className="text-xs text-slate-600 mt-2 leading-relaxed">{milestone.desc}</p>
+                  </div>
+                </div>
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white shadow-xs z-10 hidden md:block"></div>
+                <div className="flex-1 hidden md:block"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="text-center py-12">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Transform Your School?</h2>
@@ -217,7 +303,7 @@ export const About: React.FC = () => {
           </Link>
           <Link 
             to="/tickets" 
-            className="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-all"
+            className="w-full sm:w-auto px-8 py-4 bg-white text-gray-750 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-all"
           >
             Contact Sales
           </Link>

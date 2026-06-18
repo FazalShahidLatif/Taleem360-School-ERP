@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   MessageSquare, 
@@ -13,6 +13,26 @@ import {
 } from 'lucide-react';
 
 export const Support: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Institutional Cloud Support Center | Taleem360 School Cloud ERP';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Need assistance with your Taleem360 school management dashboards? Browse our knowledge base articles, video guides, and direct support SLA contacts.');
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://www.taleem360.online/support');
+  }, []);
+
   const supportCategories = [
     {
       title: 'Support Tickets',

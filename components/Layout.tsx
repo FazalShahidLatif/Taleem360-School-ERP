@@ -195,9 +195,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         {!user && (
           <header className="bg-white border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-              <Link to="/" className="flex items-center font-bold text-xl text-indigo-600">
-                <SchoolIcon className="w-8 h-8 mr-2" />
-                Taleem360
+              <Link to="/" className="flex items-center gap-2">
+                <div className="bg-indigo-600 p-2 rounded-xl flex items-center justify-center">
+                  <GraduationCap className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-black text-slate-900 tracking-tight">Taleem360</span>
               </Link>
               <div className="flex items-center space-x-4">
                 <Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm font-medium">Pricing</Link>

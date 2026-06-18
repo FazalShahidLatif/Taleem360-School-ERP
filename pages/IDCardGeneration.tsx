@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { IdCard, Printer, Download, Search, Filter, User, GraduationCap as SchoolIcon, QrCode } from 'lucide-react';
+import { useAuth } from '../lib/auth';
 
 interface Student {
   id: string;
@@ -18,6 +19,7 @@ const mockStudents: Student[] = [
 ];
 
 export const IDCardGeneration: React.FC = () => {
+  const { user } = useAuth();
   const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -105,7 +107,9 @@ export const IDCardGeneration: React.FC = () => {
                     <div className="bg-indigo-600 p-4 text-white text-center">
                       <div className="flex items-center justify-center mb-1">
                         <SchoolIcon className="w-5 h-5 mr-2" />
-                        <span className="text-sm font-bold tracking-wider uppercase">Taleem360 School</span>
+                        <span className="text-sm font-bold tracking-wider uppercase">
+                          {user?.school_name || "International Model Academy"}
+                        </span>
                       </div>
                       <p className="text-[10px] opacity-80">Empowering Future Generations</p>
                     </div>

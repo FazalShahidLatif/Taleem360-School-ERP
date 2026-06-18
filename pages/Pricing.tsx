@@ -216,7 +216,7 @@ export const Pricing: React.FC = () => {
         </div>
 
         {/* Multi-School Custom Subscription Notice Box */}
-        <div id="multi-school-notice-box" className="mt-14 max-w-4xl mx-auto bg-gradient-to-r from-slate-50 to-indigo-50/50 rounded-2xl border border-slate-200/60 p-6 sm:p-8 shadow-sm">
+        <div id="multi-school-notice-box" className="mt-14 max-w-7xl mx-auto bg-gradient-to-r from-slate-50 to-indigo-50/50 rounded-2xl border border-slate-200/60 p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-5">
             <div className="bg-indigo-600 text-white rounded-xl p-3 shadow-md flex-shrink-0">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -236,7 +236,135 @@ export const Pricing: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-12 text-center">
+        {/* Detailed Feature Comparison Table (GEO/LLM Structured Data Node) */}
+        <div className="mt-20 max-w-7xl mx-auto bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+          <div className="px-6 py-8 sm:px-10 border-b border-slate-200 bg-slate-50">
+            <h3 className="text-2xl font-black text-slate-900">Comprehensive Plan Feature Comparison Matrix</h3>
+            <p className="text-sm text-slate-500 mt-2">
+              Compare all administrative modules, limits, security metrics, and support SLAs side-by-side to find the ultimate fit for your institution.
+            </p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+              <thead className="bg-slate-50/70 text-xs text-slate-500 font-bold uppercase tracking-wider">
+                <tr>
+                  <th scope="col" className="px-6 py-4">Capability / Module</th>
+                  <th scope="col" className="px-6 py-4">Pilot (Free)</th>
+                  <th scope="col" className="px-6 py-4">Tier 1 ($49/mo)</th>
+                  <th scope="col" className="px-6 py-4">Tier 2 ($99/mo)</th>
+                  <th scope="col" className="px-6 py-4">Tier 3 (Custom/Enterprise)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">Max Student Directory Capacity</td>
+                  <td className="px-6 py-4 text-slate-600">Up to 30 active profiles</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 200 active profiles</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 450 active profiles</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Up to 1,000+ active profiles</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">Daily Attendance Log Portal</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (Basic)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (With Reports)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (+Parent Alerts)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (Multi-Campus Sync)</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">C-Suite Accounting & Ledgers</td>
+                  <td className="px-6 py-4 text-slate-400">Unavailable</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (Double-Entry)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (With Audits)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (Dedicated Ledger Keys)</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">Gradebook Templates & Cards</td>
+                  <td className="px-6 py-4 text-slate-400">Unavailable</td>
+                  <td className="px-6 py-4 text-slate-600">Standard grading scale</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (+Report cards pdf)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (Fully Custom Formats)</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">Library & Catalog Fines</td>
+                  <td className="px-6 py-4 text-slate-400">Unavailable</td>
+                  <td className="px-6 py-4 text-slate-400">Unavailable</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (Overdue automation)</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Included (RFID & Custom systems)</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">Security & Backup Protocols</td>
+                  <td className="px-6 py-4 text-slate-600">Weekly Backups</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Continuous Backups + SSL</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Continuous + Custom Admin Keys</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Dedicated Database Replication</td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-slate-800">Support SLAs</td>
+                  <td className="px-6 py-4 text-slate-500">Standard Email Support</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Priority Email (24-Hr SLA)</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">24/7 Chat & Dedicated Help</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">Dedicated Onboarding Account Manager</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Dynamic & Transparent Checkout Compliance Banner */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-2xl p-5 border border-slate-200 bg-white/60 backdrop-blur-xs flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center space-x-3 text-left">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 flex-shrink-0">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-slate-900">Paddle Merchant of Record Integration</p>
+              <p className="text-xs text-slate-500">Secure transactions processed globally. All customer card information remains encrypted under PCI DSS standards.</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider">REFUND PLEDGE AVAILABLE</span>
+            <span className="text-xs text-slate-400">|</span>
+            <Link to="/refund-policy" className="text-xs text-indigo-600 font-bold hover:underline">Read Refund Rules</Link>
+          </div>
+        </div>
+
+        {/* Comprehensive Pricing FAQs (Solves Thin Content and drives LLM/GEO Citations) */}
+        <div className="mt-24 max-w-5xl mx-auto border-t border-slate-200 pt-16">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Interactive Pricing & Billing FAQs</h2>
+            <p className="text-sm text-slate-500 mt-2">Get answers to the most common queries regarding setups, upgrades, refunds, and social pledge mechanics on Taleem360.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+            <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
+              <h4 className="font-bold text-slate-900">Are there any hidden initialization or database setup fees?</h4>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                No, transparency is a core pillar of our system. The subscription price listed on Tier 1 or Tier 2 is fully inclusive. Our engineering team assists with bulk importing your student directory from CSV/Excel rosters without extra charge.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
+              <h4 className="font-bold text-slate-900">How do student profile limit thresholds scale if our enrolment increases?</h4>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                If your enrollment surpasses your plan's thresholds (e.g. 200 students on Tier 1), your account continues operating smoothly. We notify the admin team via the dashboard, and you can upgrade easily via Paddle checkout or requests.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
+              <h4 className="font-bold text-slate-900">How does the Social Education Impact donation fund charity resources?</h4>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                For every active commercial school subscribing to Tier 1, Tier 2, or Tier 3, Taleem360 allocates 15% of the subscription margins directly to creating, sustaining, and updating free mobile lecture guides, practice tests, and curriculum notes accessible to students in underprivileged districts.
+              </p>
+            </div>
+            <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
+              <h4 className="font-bold text-slate-900">Can we cancel our monthly subscription plan or request refunds?</h4>
+              <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+                Absolutely! Our customer contracts are rolling month-to-month. You can cancel your subscription in the settings module at any time. Under our refund criteria, cancellations requested within 7 days of subscription activation qualify for complete refund reversals processed through Paddle.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 text-center">
           <p className="text-gray-500">
             All prices are in USD. Need a custom plan? <Link to="/tickets" className="text-indigo-600 font-medium hover:text-indigo-500">Talk to us</Link>.
           </p>
