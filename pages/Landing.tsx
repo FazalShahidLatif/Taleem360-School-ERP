@@ -24,12 +24,12 @@ const Landing: React.FC = () => {
       <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
-            <div className="flex items-center gap-2">
-              <div className="bg-indigo-600 p-2 rounded-xl">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="bg-indigo-600 p-2 rounded-xl flex items-center justify-center">
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <span className="text-2xl font-black text-slate-900 tracking-tight">Taleem360</span>
-            </div>
+            </Link>
             <div className="hidden md:flex items-center gap-8">
               <Link to="/about" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">About</Link>
               <Link to="/pricing" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Pricing</Link>
