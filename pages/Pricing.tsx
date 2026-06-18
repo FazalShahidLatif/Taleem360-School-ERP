@@ -78,7 +78,7 @@ export const Pricing: React.FC = () => {
       price: '$99',
       description: 'Comprehensive features for mid-sized institutions.',
       features: [
-        'Up to 500 students',
+        'Up to 450 students',
         'Everything in Tier 1',
         'Examination module',
         'AI insights & analytics',
@@ -92,9 +92,9 @@ export const Pricing: React.FC = () => {
       name: 'Tier 3',
       id: SubscriptionTier.TIER_3,
       price: 'Custom',
-      description: 'Enterprise-grade solution for large school networks.',
+      description: 'Enterprise grade solution for larger campuses.',
       features: [
-        'Unlimited students',
+        'Up to 1000 students',
         'Everything in Tier 2',
         'Multi-school management',
         'Custom integrations',
@@ -213,6 +213,27 @@ export const Pricing: React.FC = () => {
               </Button>
             </div>
           ))}
+        </div>
+
+        {/* Multi-School Custom Subscription Notice Box */}
+        <div id="multi-school-notice-box" className="mt-14 max-w-4xl mx-auto bg-gradient-to-r from-slate-50 to-indigo-50/50 rounded-2xl border border-slate-200/60 p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-5">
+            <div className="bg-indigo-600 text-white rounded-xl p-3 shadow-md flex-shrink-0">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-lg font-bold text-slate-900">Multi-School & Multi-Campus Networks</h4>
+              <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+                For complete educational conglomerates and multi-campus institutes, a dedicated <strong>Custom Subscription Model</strong> is designed. This model can be negotiated directly before generating any binding contract or charging any subscription fee, ensuring a customized budget alignment for your board of directors.
+              </p>
+              <div className="mt-4 flex items-center space-x-2 text-xs font-semibold text-indigo-700">
+                <span className="bg-indigo-100 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-wider">Note</span>
+                <span>Single-campus institutions with up to 1000 active student records can instantly subscribe online to Tier 3.</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="mt-12 text-center">

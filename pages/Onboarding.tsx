@@ -233,15 +233,15 @@ export const Onboarding: React.FC = () => {
                       tier: SubscriptionTier.TIER_2, 
                       name: 'Professional', 
                       price: '$99/mo', 
-                      students: 'Up to 500', 
+                      students: 'Up to 450', 
                       icon: Zap,
                       color: 'bg-indigo-50 text-indigo-600 border-indigo-200'
                     },
                     { 
                       tier: SubscriptionTier.TIER_3, 
                       name: 'Enterprise', 
-                      price: '$199/mo', 
-                      students: 'Unlimited', 
+                      price: 'Custom', 
+                      students: 'Up to 1000', 
                       icon: Award,
                       color: 'bg-amber-50 text-amber-600 border-amber-200'
                     }
@@ -281,10 +281,16 @@ export const Onboarding: React.FC = () => {
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                       >
-                        {plan.price === 'Free' ? 'Select Plan' : 'Pay & Select'}
+                        {plan.price === 'Free' ? 'Select Plan' : plan.price === 'Custom' ? 'Contact Sales' : 'Pay & Select'}
                       </button>
                     </motion.div>
                   ))}
+                </div>
+
+                {/* Onboarding Notice for Multi-School Institutions */}
+                <div className="mt-8 bg-slate-50 border border-slate-200/60 rounded-2xl p-5 text-left text-sm text-slate-600 max-w-4xl mx-auto">
+                  <span className="font-bold text-slate-800 block mb-1">🏫 Multi-School / Multi-Campus Networks Notice:</span>
+                  A Custom Subscription Model is designed for multi-school campus setups and can be negotiated with our accounts department before generating any contract or charging any subscription fee. Schools with up to 1000 students should subscribe to the Tier 3 subscription.
                 </div>
 
                 <div className="mt-10 flex justify-between">
