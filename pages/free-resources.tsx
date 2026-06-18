@@ -350,6 +350,29 @@ const AA_THEMES = [
   { name: 'Block Letter', icon: '🧱', label: 'Block Font', color: 'bg-zinc-100 text-zinc-700 border-zinc-200', text: 'Isometric brick letters offering 3D spatial alignment coloring.' }
 ];
 
+const THEME_ASSETS = [
+  { id: 'apple', name: 'Apple', icon: '🍎', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'ant', name: 'Ant', icon: '🐜', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'airplane', name: 'Airplane', icon: '✈️', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'astronaut', name: 'Astronaut', icon: '👨‍🚀', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'alligator', name: 'Alligator', icon: '🐊', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'bubble-letter', name: 'Bubble Letter', icon: '🫧', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'tracing', name: 'Tracing', icon: '🖋️', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'floral', name: 'Floral', icon: '🌸', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'kawaii', name: 'Kawaii', icon: '🎀', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'mandala', name: 'Mandala', icon: '🌀', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'cartoon-animal', name: 'Cartoon Animal', icon: '🐱', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'farm', name: 'Farm', icon: '👩‍🌾', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'jungle', name: 'Jungle', icon: '🦁', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'ocean', name: 'Ocean', icon: '🐋', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'space', name: 'Space', icon: '🪐', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'dinosaur', name: 'Dinosaur', icon: '🦖', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'castle', name: 'Castle', icon: '🏰', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'preschool', name: 'Preschool', icon: '🏫', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'patterns', name: 'Patterns', icon: '📐', path: '/resources/packs/alphabet-v1.pdf' },
+  { id: 'block-letter', name: 'Block Letter', icon: '🧱', path: '/resources/packs/alphabet-v1.pdf' }
+];
+
 export const FreeResources: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -528,9 +551,10 @@ export const FreeResources: React.FC = () => {
                       onClick={() => {
                         setActiveAaTheme(theme.name);
                       }}
-                      className={`aria-label={theme.label} flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all ${
+                      aria-label={theme.label}
+                      className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all ${
                         isActive
-                          ? 'bg-white border-indigo-455 ring-2 ring-indigo-500/10 shadow-sm scale-102'
+                          ? 'bg-white border-indigo-500 ring-2 ring-indigo-500/10 shadow-sm scale-102'
                           : 'bg-white/60 hover:bg-white hover:border-slate-300 border-slate-100/80 text-slate-700 shadow-3xs'
                       }`}
                     >
@@ -733,6 +757,46 @@ export const FreeResources: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Print Active Worksheet Now Button */}
+            <button
+              onClick={() => window.print()}
+              className="mt-4 px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:from-indigo-700 hover:to-purple-700 active:scale-95 transition-all text-sm flex items-center gap-2"
+            >
+              🖨️ Print Active Worksheet Now
+            </button>
+          </div>
+        </div>
+
+        {/* Direct Theme Downloads Matrix with Hybrid Branding */}
+        <div className="pt-8 border-t border-indigo-150/60">
+          <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Download className="w-4 h-4 text-indigo-600 animate-bounce" />
+            <span>Direct PDF Downloads : High-Contrast Series</span>
+          </h3>
+          <p className="text-slate-500 text-xs mb-6 max-w-2xl leading-relaxed">
+            Instantly download high-resolution individual PDF worksheet templates featuring premium academic branding of Taleem360. Every downloaded file is configured for standard US-Letter structure with clear high-contrast lines.
+          </p>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-4">
+            {THEME_ASSETS.map((theme) => (
+              <a 
+                key={theme.id}
+                href={theme.path}
+                download={`Taleem360-Alphabet-${theme.name}.pdf`}
+                className="flex flex-col items-center justify-center p-4 bg-white border border-slate-200/80 rounded-xl hover:shadow-lg hover:border-indigo-500 transition cursor-pointer group hover:scale-102"
+              >
+                <div className="text-3xl mb-2 group-hover:scale-110 transition duration-200">
+                  {theme.icon}
+                </div>
+                <span className="text-xs font-semibold text-slate-700">{theme.name}</span>
+                
+                {/* Subtle, smart fallback helper for older user mobile view engines */}
+                <span className="text-[10px] text-indigo-500 mt-1 opacity-0 group-hover:opacity-100 transition duration-150">
+                  Download PDF ↓
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </section>
