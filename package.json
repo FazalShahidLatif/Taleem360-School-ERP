@@ -8,7 +8,8 @@
     "build": "vite build",
     "start": "node server.js",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "build:v2-check": "cd taleem360-core-v2 && tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^1.44.0",
