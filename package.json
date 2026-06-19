@@ -9,6 +9,9 @@
     "start": "node server.js",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "build:v2-check": "cd taleem360-core-v2 && tsc --noEmit",
     "validate-assets": "node scripts/check-pdf-links.js"
   },
@@ -32,9 +35,13 @@
     "tsx": "^4.21.0"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.14.0",
     "@types/pg": "^8.20.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.11",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
