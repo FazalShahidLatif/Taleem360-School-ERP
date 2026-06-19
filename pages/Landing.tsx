@@ -16,6 +16,7 @@ import {
   Bus
 } from 'lucide-react';
 import { Footer } from '../components/Footer';
+import { TaleemEcosystemRoadmap } from '../components/TaleemEcosystemRoadmap';
 
 const Landing: React.FC = () => {
   return (
@@ -227,6 +228,8 @@ const Landing: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <TaleemEcosystemRoadmap />
 
       {/* Frequently Asked Questions Section (Eliminates Thin Content and Drives SEO Keywords) */}
       <section className="py-24 bg-white border-t border-slate-100">

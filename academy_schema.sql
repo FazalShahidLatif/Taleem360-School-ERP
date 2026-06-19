@@ -111,4 +111,21 @@ CREATE TABLE private_appointments_isolated (
 CREATE INDEX idx_tutor_public_slug ON tutor_profiles_isolated (public_slug);
 CREATE INDEX idx_tutor_calendar_lookup ON tutor_availability_slots (tutor_id, day_of_week);
 
+-- 4. Tutor Automated WhatsApp Delivery Ledger Tracking
+CREATE TABLE tutor_whatsapp_logs (
+    whatsapp_log_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    tutor_id UUID NOT NULL,               -- Reference to isolated tutor profile registry
+    student_t360_user_id UUID NOT NULL,   -- Loose coupling reference to global profile
+    appointment_id UUID,                  -- Optional linkage to the booking event
+    invoice_amount DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(10) DEFAULT 'PKR',
+    recipient_phone VARCHAR(20) NOT NULL, -- Enforced absolute global country-code string (+92...)
+    whatsapp_message_sid VARCHAR(100),   -- External tracking reference returned by the gateway provider
+    delivery_status VARCHAR(30) DEFAULT 'queued', -- 'queued', 'sent', 'delivered', 'failed'
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_whatsapp_tracking_sid ON tutor_whatsapp_logs (whatsapp_message_sid);
+
+
 
