@@ -12,6 +12,7 @@ import { applyLateFeeToLedger, fetchUnsyncedBillingSummaries, markLedgerAsSynced
 import courseRoutes from './routes/academy/courseRoutes.ts';
 import submissionRoutes from './routes/academy/submissionRoutes.ts';
 import bookingRoutes from './routes/academy/bookingRoutes.ts';
+import whatsappWebhookRoutes from './routes/academy/whatsappWebhook.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -135,6 +136,7 @@ async function startServer() {
   app.use(courseRoutes);
   app.use(submissionRoutes);
   app.use(bookingRoutes);
+  app.use(whatsappWebhookRoutes);
 
   // API Routes
   app.post('/api/auth/login', async (req, res) => {
