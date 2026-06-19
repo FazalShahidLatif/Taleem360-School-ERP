@@ -9,6 +9,9 @@ import { fetchCoreProfileData } from './services/taleemCoreService.ts';
 import { getDaycareGuardians, addDaycareGuardian, verifyDaycarePIN, getOperatingHours, saveOperatingHours, getBillingLedgers } from './api/auth/db_store.js';
 import { evaluateLatePickUpPenalty } from './services/daycare/lateFeeEngine.ts';
 import { applyLateFeeToLedger, fetchUnsyncedBillingSummaries, markLedgerAsSynced } from './repository/daycare/billingRepository.ts';
+import courseRoutes from './routes/academy/courseRoutes.ts';
+import submissionRoutes from './routes/academy/submissionRoutes.ts';
+import bookingRoutes from './routes/academy/bookingRoutes.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -127,6 +130,11 @@ async function startServer() {
   });
 
   app.use(express.json());
+
+  // Skills Academy multi-tenant routes
+  app.use(courseRoutes);
+  app.use(submissionRoutes);
+  app.use(bookingRoutes);
 
   // API Routes
   app.post('/api/auth/login', async (req, res) => {
