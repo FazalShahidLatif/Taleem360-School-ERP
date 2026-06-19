@@ -26,6 +26,7 @@ import { BlogPostDetail } from './pages/BlogPostDetail';
 import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
 import { FreeResources } from './pages/free-resources';
+import { DaycareSummary } from './pages/DaycareSummary';
 import { Onboarding } from './pages/Onboarding';
 import { NotFound } from './pages/NotFound';
 import { AdminPortal } from './pages/AdminPortal';
@@ -107,6 +108,7 @@ const BlogPostDetailPage = () => <Layout><BlogPostDetail /></Layout>;
 const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
 const FreeResourcesPage = () => <Layout><FreeResources /></Layout>;
+const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
 const SupportPage = () => <Layout><Support /></Layout>;
 const NotFoundPage = () => <NotFound />;
 
@@ -463,6 +465,11 @@ const App: React.FC = () => {
           <Route 
             path="/free-resources" 
             element={<FreeResourcesPage />} 
+          />
+
+          <Route 
+            path="/daycare" 
+            element={<DaycareSummaryPage />} 
           />
 
           <Route 

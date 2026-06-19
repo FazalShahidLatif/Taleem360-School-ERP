@@ -119,7 +119,10 @@ const INITIAL_USERS = [
 
 let db = {
   users: [...INITIAL_USERS],
-  schools: [...INITIAL_SCHOOLS]
+  schools: [...INITIAL_SCHOOLS],
+  daycare_authorized_guardians: [],
+  daycare_operating_hours: [],
+  daycare_billing_ledger: []
 };
 
 function loadDb() {
@@ -129,6 +132,15 @@ function loadDb() {
       const parsed = JSON.parse(content);
       if (parsed && Array.isArray(parsed.users)) {
         db = parsed;
+        if (!db.daycare_authorized_guardians) {
+          db.daycare_authorized_guardians = [];
+        }
+        if (!db.daycare_operating_hours) {
+          db.daycare_operating_hours = [];
+        }
+        if (!db.daycare_billing_ledger) {
+          db.daycare_billing_ledger = [];
+        }
       }
     } else {
       saveDb();
@@ -219,3 +231,74 @@ export function addSchool(school) {
   db.schools.push(school);
   saveDb();
 }
+
+export function getDaycareGuardians(childId) {
+  if (!db.daycare_authorized_guardians) {
+    db.daycare_authorized_guardians = [];
+  }
+  if (!childId) return db.daycare_authorized_guardians;
+  return db.daycare_authorized_guardians.filter(g => g.daycare_child_id === childId);
+}
+
+export function addDaycareGuardian(guardian) {
+  if (!db.daycare_authorized_guardians) {
+    db.daycare_authorized_guardians = [];
+  }
+  db.daycare_authorized_guardians.push(guardian);
+  saveDb();
+  return guardian;
+}
+
+export function verifyDaycarePIN(pinHash) {
+  if (!db.daycare_authorized_guardians) return null;
+  // Match active guardian's pin hash
+  return db.daycare_authorized_guardians.find(g => g.secure_pin_hash === pinHash && g.is_active !== false) || null;
+}
+
+export function getOperatingHours(facilityId) {
+  if (!db.daycare_operating_hours) {
+    db.daycare_operating_hours = [];
+  }
+  if (!facilityId) return db.daycare_operating_hours;
+  return db.daycare_operating_hours.find(h => h.facility_id === facilityId) || null;
+}
+
+export function saveOperatingHours(hours) {
+  if (!db.daycare_operating_hours) {
+    db.daycare_operating_hours = [];
+  }
+  const idx = db.daycare_operating_hours.findIndex(h => h.facility_id === hours.facility_id);
+  if (idx !== -1) {
+    db.daycare_operating_hours[idx] = { ...db.daycare_operating_hours[idx], ...hours };
+  } else {
+    db.daycare_operating_hours.push(hours);
+  }
+  saveDb();
+  return hours;
+}
+
+export function getBillingLedgers() {
+  if (!db.daycare_billing_ledger) {
+    db.daycare_billing_ledger = [];
+  }
+  return db.daycare_billing_ledger;
+}
+
+export function saveBillingLedger(ledger) {
+  if (!db.daycare_billing_ledger) {
+    db.daycare_billing_ledger = [];
+  }
+  const idx = db.daycare_billing_ledger.findIndex(
+    l => l.daycare_child_id === ledger.daycare_child_id && l.billing_period_start === ledger.billing_period_start
+  );
+  if (idx !== -1) {
+    db.daycare_billing_ledger[idx] = { ...db.daycare_billing_ledger[idx], ...ledger };
+  } else {
+    db.daycare_billing_ledger.push(ledger);
+  }
+  saveDb();
+  return ledger;
+}
+
+
+

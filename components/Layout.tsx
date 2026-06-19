@@ -33,7 +33,8 @@ import {
   Briefcase,
   GraduationCap,
   Bus,
-  Book as BookIcon
+  Book as BookIcon,
+  Baby
 } from 'lucide-react';
 import { UserRole } from '../types';
 import { AIChatbot } from './AIChatbot';
@@ -84,6 +85,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: 'About', href: '/about', icon: Award, current: location.pathname === '/about' },
     { name: 'Support', href: '/support', icon: LifeBuoy, current: location.pathname.startsWith('/support') },
     { name: 'Attendance', href: '/attendance', icon: CalendarCheck, current: location.pathname.startsWith('/attendance') },
+    { name: 'Daycare Daily Summary', href: '/daycare', icon: Baby, current: location.pathname === '/daycare' },
     // Finance visible to Admin (Management) and Parent (Payment)
     ...((isSuperAdmin || isAdmin || isParent) ? [
       { name: 'Finance', href: '/finance', icon: CreditCard, current: location.pathname.startsWith('/finance') }
