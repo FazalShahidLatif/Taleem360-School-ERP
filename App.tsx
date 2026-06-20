@@ -41,6 +41,7 @@ import { Payroll } from './pages/Payroll';
 import { ReportCards } from './pages/ReportCards';
 import { Library } from './pages/Library';
 import { Assignments } from './pages/Assignments';
+import { Nexus } from './pages/Nexus';
 import Transport from './pages/Transport';
 import Landing from './pages/Landing';
 import { UserRole } from './types';
@@ -231,6 +232,15 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <DashboardPage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route 
+            path="/nexus" 
+            element={
+              <ProtectedRoute>
+                <Nexus />
               </ProtectedRoute>
             } 
           />

@@ -34,7 +34,8 @@ import {
   GraduationCap,
   Bus,
   Book as BookIcon,
-  Baby
+  Baby,
+  Sparkles
 } from 'lucide-react';
 import { UserRole } from '../types';
 import { AIChatbot } from './AIChatbot';
@@ -56,6 +57,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard, current: location.pathname === '/' },
+    { name: 'Nexus Web3 Quiz', href: '/nexus', icon: Sparkles, current: location.pathname === '/nexus' },
     ...(isSuperAdmin ? [
       { name: 'Users', href: '/super-admin/users', icon: Users, current: location.pathname === '/super-admin/users' },
     ] : []),
