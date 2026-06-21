@@ -631,7 +631,7 @@ export const FreeResources: React.FC = () => {
                       window.print();
                     }, 800);
                   }}
-                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white rounded-xl text-xs font-black self-end inline-flex items-center gap-1.5 shadow-xs transition-all animate-pulse"
+                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white rounded-xl text-xs font-black self-end inline-flex items-center gap-1.5 shadow-xs transition-colors"
                 >
                   {isSpooling ? (
                     <>
@@ -644,6 +644,21 @@ export const FreeResources: React.FC = () => {
                       <span>Print Custom Sheet</span>
                     </>
                   )}
+                </button>
+
+                <button
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = THEME_ASSETS.find(t => t.name.toLowerCase() === activeAaTheme.toLowerCase())?.path || '/resources/packs/alphabet-v1.pdf';
+                    link.download = `Taleem360_Alphabet_${activeAaTheme}_Theme_Worksheet.pdf`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                  }}
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs font-black self-end inline-flex items-center gap-1.5 shadow-xs transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download PDF Asset</span>
                 </button>
               </div>
             </div>
@@ -758,13 +773,30 @@ export const FreeResources: React.FC = () => {
               </div>
             </div>
 
-            {/* Print Active Worksheet Now Button */}
-            <button
-              onClick={() => window.print()}
-              className="mt-4 px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:from-indigo-700 hover:to-purple-700 active:scale-95 transition-all text-sm flex items-center gap-2"
-            >
-              🖨️ Print Active Worksheet Now
-            </button>
+            {/* Print Active Worksheet Now Button Group with direct download */}
+            <div className="flex flex-col sm:flex-row gap-2 mt-4 w-full justify-center">
+              <button
+                onClick={() => window.print()}
+                className="px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:from-indigo-700 hover:to-purple-700 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
+              >
+                <span>🖨️ Print Active Worksheet Now</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = THEME_ASSETS.find(t => t.name.toLowerCase() === activeAaTheme.toLowerCase())?.path || '/resources/packs/alphabet-v1.pdf';
+                  link.download = `Taleem360_Alphabet_${activeAaTheme}_Theme_Worksheet.pdf`;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold rounded-lg shadow-md transition-all text-sm flex items-center justify-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download PDF Asset</span>
+              </button>
+            </div>
           </div>
         </div>
 
