@@ -16,30 +16,37 @@ export const TaleemEcosystemRoadmap = () => {
     {
       title: "School & College ERP",
       status: "Live in Production",
-      desc: "Complete academic management, grading matrix workflows, and fee modules for K-12 and Higher Ed.",
+      desc: "Complete academic management, grading matrix workflows, transport, and cashless fee structures.",
       icon: <School className="w-6 h-6 text-blue-600" />,
-      badgeColor: "bg-blue-100 text-blue-800"
+      badgeColor: "bg-blue-100 text-blue-800 font-bold"
     },
     {
       title: "Solo Pro & Private Tutors",
-      status: "Launching 14th Aug, 2026",
-      desc: "Micro-tenant personal booking links, optimistic-locked availability matrices, and automated direct invoice tracking.",
+      status: "Active & Deployed",
+      desc: "Personal tutor mini-websites, instant availability matrices, automatic Paddle checkouts, and student logs tracking.",
       icon: <Users className="w-6 h-6 text-emerald-600" />,
-      badgeColor: "bg-emerald-100 text-emerald-800 font-semibold ring-2 ring-emerald-500/20 animate-pulse"
+      badgeColor: "bg-emerald-100 text-emerald-800 font-bold ring-2 ring-emerald-500/10"
     },
     {
       title: "Skills Academies & Bootcamps",
-      status: "Launching 15th Nov, 2026",
+      status: "Active & Deployed",
       desc: "White-label multi-tenant LMS for IT, technical, and vocational institutes with Paddle split-installment plans.",
       icon: <GraduationCap className="w-6 h-6 text-purple-600" />,
-      badgeColor: "bg-purple-100 text-purple-800 font-semibold"
+      badgeColor: "bg-purple-100 text-purple-800 font-bold ring-2 ring-purple-500/10"
     },
     {
       title: "Daycare Center Hub",
-      status: "Launching Jan 2027",
-      desc: "Real-time child care tracking, secure kiosk PIN terminals, UTC late-fee engines, and Gemini AI log polishing.",
+      status: "Active & Deployed",
+      desc: "Real-time child care tracking, secure kiosk PIN terminals, UTC late-fee engines, and automatic billing ledger sync.",
       icon: <Baby className="w-6 h-6 text-amber-600" />,
-      badgeColor: "bg-amber-100 text-amber-800"
+      badgeColor: "bg-amber-100 text-amber-800 font-semibold ring-2 ring-amber-500/10"
+    },
+    {
+      title: "Global Student Competition Hub",
+      status: "Live Now • Pre-K to 10th",
+      desc: "Local, regional, and global competitions after nominal $1/$2 entry fee supporting transparent 100-student giveaway cash prizes.",
+      icon: <Sparkles className="w-6 h-6 text-indigo-600" />,
+      badgeColor: "bg-indigo-100 text-indigo-800 font-bold ring-2 ring-indigo-500/25"
     }
   ];
 
@@ -75,7 +82,7 @@ export const TaleemEcosystemRoadmap = () => {
                 <p className="text-gray-600 text-sm leading-relaxed">{mod.desc}</p>
               </div>
               
-              {mod.status !== "Live in Production" && (
+              {!mod.status.includes("Live") && !mod.status.includes("Active") && (
                 <button 
                   onClick={() => { setSelectedModule(mod.title); setSubmitted(false); }}
                   className="mt-4 text-sm font-medium text-indigo-600 inline-flex items-center gap-1 hover:text-indigo-700 w-fit cursor-pointer"

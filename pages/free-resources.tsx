@@ -16,8 +16,19 @@ import {
   Palette,
   FileDown,
   Trash2,
-  Paintbrush
+  Paintbrush,
+  Trophy,
+  Coins,
+  Award,
+  ShieldCheck,
+  Globe,
+  MapPin,
+  Send,
+  HelpCircle,
+  Info
 } from 'lucide-react';
+
+import { CompetitionHub } from '../components/CompetitionHub';
 
 export interface FreeResourceAsset {
   id: string;
@@ -423,6 +434,119 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
 ];
 
 export const FreeResources: React.FC = () => {
+  const [activeMainTab, setActiveMainTab] = useState<'resources' | 'competitions'>('resources');
+  
+  // Competition State Variables
+  const [compSearch, setCompSearch] = useState('');
+  const [compCategory, setCompCategory] = useState('all');
+  const [compEntrantInput, setCompEntrantInput] = useState<number>(2450);
+  const [compFeeChoice, setCompFeeChoice] = useState<number>(2); // default $2
+  
+  // Participant Form States
+  const [studName, setStudName] = useState('');
+  const [studEmail, setStudEmail] = useState('');
+  const [studGrade, setStudGrade] = useState('Grade 5');
+  const [studSchool, setStudSchool] = useState('');
+  const [studCity, setStudCity] = useState('');
+  const [studCountry, setStudCountry] = useState('Pakistan');
+  const [compChoiceCategory, setCompChoiceCategory] = useState('art');
+  const [compTitleInput, setCompTitleInput] = useState('');
+  const [compPayload, setCompPayload] = useState('');
+  const [compFormFee, setCompFormFee] = useState<number>(2);
+  const [isSubmittingComp, setIsSubmittingComp] = useState(false);
+  const [compSuccess, setCompSuccess] = useState(false);
+
+  // Default entries to populate the talent gallery instantly
+  const [compSubmissions, setCompSubmissions] = useState<Array<{
+    id: string;
+    studentName: string;
+    grade: string;
+    schoolName: string;
+    city: string;
+    country: string;
+    category: 'writing' | 'art' | 'code';
+    title: string;
+    payloadSnippet: string;
+    feePaid: number;
+    txnHash: string;
+    status: 'Evaluated' | 'Approved' | 'Winner';
+    prizeDetails?: string;
+  }>>([
+    {
+      id: 'sub-comp-01',
+      studentName: 'Zainab Fatima',
+      grade: 'Grade 5',
+      schoolName: 'The City School Capital Campus',
+      city: 'Islamabad',
+      country: 'Pakistan',
+      category: 'art',
+      title: 'Water Colors of Margalla Hills sunrise',
+      payloadSnippet: 'An active watercolor painting tracing solar rise gradients over Islamabad mountains utilizing geometric space perspectives with lovely violet tones.',
+      feePaid: 2,
+      txnHash: '0x3dfa...78a1',
+      status: 'Winner',
+      prizeDetails: 'Rank 1 ($271.50 Prize Pot distributed!)'
+    },
+    {
+      id: 'sub-comp-02',
+      studentName: 'Ayaan Ahmed',
+      grade: 'Grade 10 / O Levels',
+      schoolName: 'Roots Millennium School',
+      city: 'Peshawar',
+      country: 'Pakistan',
+      category: 'code',
+      title: 'Taleem Solar Tracker Python Simulator',
+      payloadSnippet: 'A light-weight python algorithm simulating solar panel orbit alignment ratios using visual pandas & numpy coordinates for grade optimization.',
+      feePaid: 2,
+      txnHash: '0x6e31...88c2',
+      status: 'Winner',
+      prizeDetails: 'Rank 2 ($181.00 Prize Pot distributed!)'
+    },
+    {
+      id: 'sub-comp-03',
+      studentName: 'Sarah Jenkins',
+      grade: 'Grade 8',
+      schoolName: 'Central High School',
+      city: 'London',
+      country: 'United Kingdom',
+      category: 'writing',
+      title: 'The Future of Green Energy in Classrooms',
+      payloadSnippet: 'A 600-word descriptive article mapping the carbon footprint optimizations achievable via standard kinetic desk rotations and energy metrics analysis.',
+      feePaid: 1,
+      txnHash: '0x99a2...91b0',
+      status: 'Winner',
+      prizeDetails: 'Rank 3 ($90.50 Prize Pot distributed!)'
+    },
+    {
+      id: 'sub-comp-04',
+      studentName: 'Haris Khan',
+      grade: 'Grade 4',
+      schoolName: 'Beaconhouse School System',
+      city: 'Lahore',
+      country: 'Pakistan',
+      category: 'art',
+      title: 'Futuristic Eco-Friendly School Bus Design',
+      payloadSnippet: 'A digital sketch showcasing wind turbines on student double-decker electric transit, finished with bright yellow and solar paneled accents.',
+      feePaid: 2,
+      txnHash: '0xfa11...2392',
+      status: 'Approved',
+    },
+    {
+      id: 'sub-comp-05',
+      studentName: 'Clara Oswald',
+      grade: 'Grade 9',
+      schoolName: 'Maplewood Prep',
+      city: 'Toronto',
+      country: 'Canada',
+      category: 'writing',
+      title: 'Why coding will save our oceans',
+      payloadSnippet: 'A reflective essay studying drone mapping optimization metrics that track plastic trash currents globally using simple standard algorithms.',
+      feePaid: 1,
+      txnHash: '0xbb82...1049',
+      status: 'Approved',
+    }
+  ]);
+
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [downloadProgress, setDownloadProgress] = useState<Record<string, boolean>>({});
@@ -536,6 +660,34 @@ export const FreeResources: React.FC = () => {
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indigo-400 rounded-full blur-3xl opacity-30"></div>
         <div className="absolute bottom-0 right-10 -mb-20 w-80 h-80 bg-pink-400 rounded-full blur-3xl opacity-20"></div>
       </section>
+
+      {/* Platform Core Segment Navigation Switcher */}
+      <div id="main-t360-hub-tabs" className="flex border-b border-slate-200">
+        <button
+          onClick={() => setActiveMainTab('resources')}
+          className={`flex-1 sm:flex-initial text-center px-6 py-4.5 text-sm font-bold border-b-2 transition-all ${
+            activeMainTab === 'resources'
+              ? 'border-indigo-600 text-indigo-600 font-extrabold'
+              : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
+          }`}
+        >
+          🎨 Worksheets & Digital Art Sandbox
+        </button>
+        <button
+          onClick={() => setActiveMainTab('competitions')}
+          className={`flex-1 sm:flex-initial text-center px-6 py-4.5 text-sm font-bold border-b-2 transition-all flex items-center justify-center gap-2 ${
+            activeMainTab === 'competitions'
+              ? 'border-indigo-600 text-indigo-600 bg-indigo-50/20 font-extrabold'
+              : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
+          }`}
+        >
+          <span>🏆 Global Student Competition Hub</span>
+          <span className="bg-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse uppercase tracking-wider">PRE-K to 12th</span>
+        </button>
+      </div>
+
+      {activeMainTab === 'resources' ? (
+        <>
 
       {/* Interactive Creative Art & Craft Studio Sandbox */}
       <section className="bg-gradient-to-br from-indigo-50/50 via-slate-50 to-pink-50/30 rounded-3xl p-6 sm:p-8 border border-indigo-100 shadow-xs space-y-8 no-print">
@@ -1570,6 +1722,10 @@ export const FreeResources: React.FC = () => {
           </div>
         </div>
       </section>
+        </>
+      ) : (
+        <CompetitionHub />
+      )}
       
     </div>
   );
