@@ -495,25 +495,51 @@ export const FreeResources: React.FC = () => {
       {/* Dynamic Print Styles specifically to support full-page high-fidelity physical printable outputs */}
       <style>{`
         @media print {
-          body * {
-            visibility: hidden;
-            background: none !important;
+          /* Hide non-printable app shell completely */
+          header, footer, nav, aside, .no-print, [role="dialog"], button, a, #paddle-mock-checkout-overlay, .py-12, #preview-heading {
+            display: none !important;
           }
-          #printable-sheet-element, #printable-sheet-element * {
-            visibility: visible;
-          }
-          #printable-sheet-element {
-            position: absolute;
-            left: 50% !important;
-            top: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            width: 100% !important;
-            max-width: 650px !important;
-            border: none !important;
-            box-shadow: none !important;
+          
+          /* Also hide site-wide elements but keep full page bounds */
+          body, html, #root, main, .min-h-screen, .py-6, .max-w-7xl {
+            background: #ffffff !important;
+            padding: 0 !important;
             margin: 0 !important;
-            padding: 2rem !important;
+            box-shadow: none !important;
+            border: none !important;
+            height: auto !important;
+          }
+
+          /* Force exact print background colors and opaque graphic items */
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+
+          /* Elevate canvas to take full printing viewport */
+          #printable-sheet-element {
+            position: fixed !important;
+            top: 5% !important;
+            left: 5% !important;
+            width: 90% !important;
+            max-width: 650px !important;
+            height: auto !important;
+            aspect-ratio: 1/1.414 !important;
+            border: 2px solid #000000 !important;
+            border-radius: 12px !important;
+            box-shadow: none !important;
+            margin: 0 auto !important;
+            padding: 3rem !important;
             background-color: white !important;
+            z-index: 9999999 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+          }
+
+          #printable-sheet-element * {
+            visibility: visible !important;
+            opacity: 1.0 !important;
           }
         }
       `}</style>
@@ -648,17 +674,16 @@ export const FreeResources: React.FC = () => {
 
                 <button
                   onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = THEME_ASSETS.find(t => t.name.toLowerCase() === activeAaTheme.toLowerCase())?.path || '/resources/packs/alphabet-v1.pdf';
-                    link.download = `Taleem360_Alphabet_${activeAaTheme}_Theme_Worksheet.pdf`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                    setIsSpooling(true);
+                    setTimeout(() => {
+                      setIsSpooling(false);
+                      window.print();
+                    }, 500);
                   }}
                   className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white rounded-xl text-xs font-black self-end inline-flex items-center gap-1.5 shadow-xs transition-colors"
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>Download PDF Asset</span>
+                  <span>Download Custom PDF</span>
                 </button>
               </div>
             </div>
@@ -696,79 +721,90 @@ export const FreeResources: React.FC = () => {
               className="w-full max-w-[340px] aspect-[1/1.414] bg-white border border-slate-200 rounded-xl shadow-md flex flex-col justify-between p-6 sm:p-7 relative select-none text-slate-900"
             >
               <div className="space-y-4">
-                {/* Top header values */}
-                <div className="flex justify-between items-start text-xs font-bold text-slate-900">
-                  <div className="space-y-1 border-b border-dashed border-slate-350 pb-1 pr-6 flex items-center">
-                    <span className="text-[9px] uppercase tracking-wider text-slate-400 mr-1.5 select-none">Date:</span>
-                    <span className="font-mono font-bold tracking-wide select-text">
-                      {customDate || '_______________________'}
-                    </span>
+                {/* Top header values - customized name on header section */}
+                <div className="flex flex-col gap-1 pb-2 border-b border-slate-200">
+                  <div className="flex justify-between items-center text-slate-800">
+                    <span className="text-[10px] font-black tracking-widest text-indigo-600 uppercase">Taleem360 Early Learner Series</span>
+                    <span className="text-xl font-black block tracking-tighter leading-none select-none">Aa</span>
                   </div>
-                  <div className="text-center">
-                    <span className="text-2xl font-black block tracking-tighter leading-none select-none">Aa</span>
+                  
+                  <div className="grid grid-cols-2 gap-3 text-[10px] font-bold text-slate-700 mt-1">
+                    <div className="border-b border-dashed border-slate-350 pb-0.5 flex items-center min-w-0">
+                      <span className="text-[8px] uppercase tracking-wider text-slate-450 mr-1.5 select-none shrink-0">NAME:</span>
+                      <span className="font-mono font-black text-slate-900 truncate">
+                        {studentName || '_______________________'}
+                      </span>
+                    </div>
+                    <div className="border-b border-dashed border-slate-350 pb-0.5 flex items-center min-w-0">
+                      <span className="text-[8px] uppercase tracking-wider text-slate-450 mr-1.5 select-none shrink-0">DATE:</span>
+                      <span className="font-mono font-black text-slate-900 truncate">
+                        {customDate || '_______________________'}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Subtitle / Theme descriptor and page heading */}
-                <div className="pt-2 border-t border-slate-100">
-                  <h3 className="text-sm font-black text-slate-905 tracking-wide uppercase select-none">
-                    {activeAaTheme} Colouring Page
+                <div className="pt-1">
+                  <h3 className="text-xs font-black text-slate-900 tracking-wide uppercase select-none">
+                    Theme: {activeAaTheme} Colouring Page / Tracing Sheet
                   </h3>
                 </div>
 
                 {/* Huge letters tracing mock */}
-                <div className="py-2 flex flex-col items-center justify-center relative">
-                  <span className="text-8xl font-black font-serif tracking-tight select-none uppercase drop-shadow-3xs text-center leading-none select-all relative">
+                <div className="py-1 flex flex-col items-center justify-center relative">
+                  <span className="text-7xl font-black font-serif tracking-tight select-none uppercase text-center leading-none select-all relative">
                     A a
                     {/* Inner dash tracing lines overlays for higher fidelity */}
-                    <span className="absolute inset-0 flex items-center justify-center font-serif text-[115px] text-white opacity-25 font-bold pointer-events-none select-none">
+                    <span className="absolute inset-0 flex items-center justify-center font-serif text-[100px] text-white opacity-25 font-bold pointer-events-none select-none">
                       A a
                     </span>
                   </span>
                 </div>
 
-                {/* Geometric Interactive shapes / overlapping structures matching the exact uploaded PDF layouts */}
-                <div className="mt-2 py-4 flex items-center justify-center relative min-h-[90px] border-y border-dashed border-slate-150 rounded-lg bg-slate-50/20 group">
-                  
-                  {/* Overlapping geometries replicating the provided screenshots (Circle, Square, Intersecting Oval) */}
-                  <div className="flex items-center justify-center gap-3 relative w-full h-[65px] select-none">
-                    {/* Circle */}
-                    <div className="w-[38px] h-[38px] rounded-full border-1.5 border-slate-800 flex items-center justify-center" />
-                    
-                    {/* Square overlapping with Oval */}
-                    <div className="relative flex items-center">
-                      <div className="w-[45px] h-[45px] border-1.5 border-slate-800 bg-white" />
-                      <div className="w-[72px] h-[42px] rounded-full border-1.5 border-slate-800 bg-white/20 -ml-5 shadow-3xs" />
-                    </div>
-                  </div>
-
-                  {/* Centered Large Theme Icon Backdrop */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 filter blur-[0.5px]">
-                    <span className="text-6xl">{AA_THEMES.find(t => t.name === activeAaTheme)?.icon}</span>
+                {/* REQUIRED IMAGE of the alphabet - solid, prominent, high-contrast, non-blurry, fully opaque emoji representation for perfect prints! */}
+                <div className="my-2 py-4 flex flex-col items-center justify-center gap-2 border border-dashed border-slate-300 rounded-xl bg-slate-50/50 p-4 relative">
+                  <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Color the {activeAaTheme}!</span>
+                  <div className="flex items-center justify-center relative w-20 h-20 bg-white rounded-2xl border border-slate-200 shadow-3xs">
+                    <span className="text-5xl select-none" role="img" aria-label={activeAaTheme}>
+                      {AA_THEMES.find(t => t.name.toLowerCase() === activeAaTheme.toLowerCase() || t.name === activeAaTheme)?.icon || '🍎'}
+                    </span>
                   </div>
                 </div>
 
                 {/* Customized Tracing Guides: Dotted User Name Option */}
                 {studentName && (
-                  <div className="py-2.5 px-3 bg-indigo-50/30 rounded-lg border border-dashed border-indigo-100 text-center select-text relative">
-                    <span className="text-[9px] uppercase tracking-wider text-indigo-400 font-bold block mb-1">Custom Tracer Name:</span>
-                    <span className="text-lg font-mono font-black text-indigo-950 tracking-widest leading-none">
+                  <div className="py-1.5 px-2.5 bg-indigo-50/30 rounded-lg border border-dashed border-indigo-100 text-center select-text relative">
+                    <span className="text-[8px] uppercase tracking-wider text-indigo-400 font-bold block mb-0.5">Custom Tracer Name:</span>
+                    <span className="text-sm font-mono font-black text-indigo-950 tracking-widest leading-none">
                       {studentName.split('').join(' • ')}
                     </span>
-                    <div className="absolute top-1 right-2 text-[8px] uppercase tracking-widest text-indigo-550 font-black">Ready</div>
                   </div>
                 )}
+                
+                {/* Visual Tracing grid guide for writing skills */}
+                <div className="pt-2 space-y-1">
+                  <span className="text-[8px] uppercase tracking-wider text-slate-400 font-bold block">Trace the Alphabet Guidelines:</span>
+                  <div className="border-t border-b border-dashed border-slate-400 h-6 flex items-center relative bg-slate-50/30">
+                    <div className="absolute inset-x-0 h-px top-1/2 border-t border-dotted border-slate-300"></div>
+                    <span className="text-xs font-mono select-none text-slate-400 pl-4 tracking-[1.2rem]">A A A A A A A</span>
+                  </div>
+                  <div className="border-t border-b border-dashed border-slate-400 h-6 flex items-center relative bg-slate-50/30">
+                    <div className="absolute inset-x-0 h-px top-1/2 border-t border-dotted border-slate-300"></div>
+                    <span className="text-xs font-mono select-none text-slate-400 pl-4 tracking-[1.2rem]">a a a a a a a</span>
+                  </div>
+                </div>
               </div>
 
-              {/* PDF Footer Footnotes exact replica */}
-              <div className="pt-3 border-t border-slate-200 mt-2 flex flex-col justify-end text-[9px] font-mono font-medium text-slate-450 space-y-0.5">
-                <div className="flex justify-between">
-                  <span>Taleem360 - Alphabet "Aa" Colouring Pages</span>
-                  <span className="font-bold">Vol. 1 • Pack 0</span>
+              {/* PDF Footer Footnotes with taleem360.online branding in the footer section */}
+              <div className="pt-2.5 border-t border-slate-200 mt-2 flex flex-col justify-end text-[9px] font-mono font-bold text-slate-500 space-y-0.5">
+                <div className="flex justify-between items-center">
+                  <span>Educational Worksheet Series - Letter "Aa"</span>
+                  <span className="font-extrabold uppercase text-indigo-650">taleem360.online Free Resource</span>
                 </div>
-                <div className="flex justify-between text-indigo-650/80">
-                  <span>https://www.taleem360.online/free-resources</span>
-                  <span className="underline font-bold">Free Printable License</span>
+                <div className="flex justify-between items-center text-slate-400 text-[8px] font-medium border-t border-slate-100 pt-1">
+                  <span>Print Scale: Fit To Page (US Letter / A4)</span>
+                  <span>Visit <span className="underline font-bold text-slate-700">https://www.taleem360.online</span></span>
                 </div>
               </div>
             </div>
@@ -777,28 +813,29 @@ export const FreeResources: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-2 mt-4 w-full justify-center">
               <button
                 onClick={() => window.print()}
-                className="px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:from-indigo-700 hover:to-purple-700 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
+                className="px-5 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg shadow-md hover:from-indigo-700 hover:to-purple-700 active:scale-95 transition-all text-sm flex items-center justify-center gap-2"
               >
-                <span>🖨️ Print Active Worksheet Now</span>
+                <span>🖨️ Print Active Worksheet</span>
               </button>
 
               <button
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = THEME_ASSETS.find(t => t.name.toLowerCase() === activeAaTheme.toLowerCase())?.path || '/resources/packs/alphabet-v1.pdf';
-                  link.download = `Taleem360_Alphabet_${activeAaTheme}_Theme_Worksheet.pdf`;
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                }}
+                onClick={() => window.print()}
                 className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold rounded-lg shadow-md transition-all text-sm flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" />
-                <span>Download PDF Asset</span>
+                <span>Download Custom PDF</span>
               </button>
             </div>
+
+            {/* Elegant browser instructions to download custom PDF */}
+            <div className="mt-3 p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-slate-800 text-[11px] leading-relaxed select-none max-w-[340px] shadow-xs">
+              <span className="font-black text-amber-800 flex items-center gap-1 mb-1">
+                <span>💡</span> Download Option Guidelines:
+              </span>
+              Click <strong>"Download Custom PDF"</strong> or <strong>"Print Active Worksheet"</strong>, then select <strong>"Save as PDF"</strong> (under the Destination options of the window prompt) to download your fully customized theme worksheet with your custom student name on your device!
+            </div>
           </div>
-        </div>
+          </div>
 
         {/* Direct Theme Downloads Matrix with Hybrid Branding */}
         <div className="pt-8 border-t border-indigo-150/60">
