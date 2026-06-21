@@ -1,4 +1,44 @@
 User-agent: *
 Allow: /
+Allow: /about
+Allow: /blog
+Allow: /pricing
+Allow: /free-resources
+Allow: /daycare
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+Allow: /cookies
+Allow: /refund-policy
+
+# Do not index administrative or authenticated segments
+Disallow: /login
+Disallow: /onboarding
+Disallow: /dashboard
+Disallow: /nexus
+Disallow: /students
+Disallow: /staff
+Disallow: /classes
+Disallow: /subjects
+Disallow: /accounts
+Disallow: /whatsapp
+Disallow: /admissions
+Disallow: /id-cards
+Disallow: /data-management
+Disallow: /payroll
+Disallow: /report-cards
+Disallow: /library
+Disallow: /assignments
+Disallow: /transport
+Disallow: /timetable
+Disallow: /lesson-planning
+Disallow: /examination
+Disallow: /super-admin/
+Disallow: /settings
+Disallow: /attendance
+Disallow: /finance
+Disallow: /tickets
+Disallow: /support
+Disallow: /admin-portal
 
 Sitemap: https://taleem360.online/sitemap.xml

@@ -663,8 +663,8 @@ export const CompetitionHub: React.FC = () => {
             <input 
               type="text" 
               placeholder="Filter by pupil, school, country, or project keywords..." 
-              value={compSearch}
-              onChange={(e) => setCompSearch(e.target.value)}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-4 py-2.5 rounded-xl text-slate-900 border border-slate-200 focus:outline-none focus:border-indigo-600 text-xs"
             />
           </div>
