@@ -38,7 +38,7 @@ export const TermsOfService: React.FC = () => {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">1. Acceptance of Terms</h2>
           <p>
-            By registering, logging into, or using Taleem360 ("Taleem360-School ERP"), you form a binding legal contract with Taleem360 Ltd. and agree to comply at all times with these Terms of Service. If you do not agree to these Terms, please immediately terminate your session and delete your account.
+            By registering, logging into, or using Taleem360 ("Taleem360-School ERP"), you form a binding legal contract with Taleem360 and agree to comply at all times with these Terms of Service. If you do not agree to these Terms, please immediately terminate your session and delete your account.
           </p>
         </section>
 
@@ -107,13 +107,13 @@ export const TermsOfService: React.FC = () => {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mt-8 mb-4">8. Governing Law &amp; Corporate Address</h2>
           <p>
-            These terms and conditions and any legal interaction with Taleem360 Ltd. shall be governed by and interpreted in accordance with the laws of Pakistan.
+            These terms and conditions and any legal interaction with Taleem360 shall be governed by and interpreted in accordance with the laws of Pakistan.
           </p>
           <p className="mt-4 font-semibold text-gray-800">
             Corporate Contact Office:
           </p>
           <p className="text-gray-600 leading-relaxed">
-            Taleem360 Ltd.
+            Taleem360
             <br />
             Cantt Bazar Faisal, Karachi-75350, Pakistan
             <br />

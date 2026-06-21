@@ -41,6 +41,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Support</h4>
             <ul className="space-y-2">
               <li><Link to="/support" className="text-gray-500 hover:text-indigo-600 text-sm">Support Hub</Link></li>
+              <li><Link to="/faq" className="text-gray-500 hover:text-indigo-600 text-sm">FAQs</Link></li>
               <li><Link to="/tickets" className="text-gray-500 hover:text-indigo-600 text-sm">Support Tickets</Link></li>
               <li><Link to="/privacy" className="text-gray-500 hover:text-indigo-600 text-sm">Privacy Policy</Link></li>
               <li><Link to="/terms" className="text-gray-500 hover:text-indigo-600 text-sm">Terms of Service</Link></li>
@@ -51,7 +52,7 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-2">
-              <li className="text-gray-500 text-sm font-medium">Taleem360 Ltd. (SECP No. 112349)</li>
+              <li className="text-gray-500 text-sm font-medium">Taleem360</li>
               <li className="text-gray-500 text-xs">Cantt Bazar Faisal, Karachi-75350</li>
               <li className="text-gray-500 text-sm">support@taleem360.online</li>
               <li className="text-gray-500 text-sm">+92 (332) 213 7898</li>

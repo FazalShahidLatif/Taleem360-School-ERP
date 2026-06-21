@@ -45,21 +45,21 @@ export const Support: React.FC = () => {
       title: 'Knowledge Base',
       description: 'Browse articles and guides on how to use Taleem360.',
       icon: Book,
-      link: '#',
+      link: '/blog',
       color: 'bg-emerald-50 text-emerald-600'
     },
     {
       title: 'Video Tutorials',
       description: 'Watch step-by-step videos for quick onboarding.',
       icon: Video,
-      link: '#',
+      link: '/onboarding',
       color: 'bg-rose-50 text-rose-600'
     },
     {
       title: 'FAQs',
       description: 'Quick answers to common questions.',
       icon: HelpCircle,
-      link: '#',
+      link: '/faq',
       color: 'bg-amber-50 text-amber-600'
     }
   ];

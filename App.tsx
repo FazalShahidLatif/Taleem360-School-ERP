@@ -37,6 +37,7 @@ import { AdmissionForm } from './pages/AdmissionForm';
 import { IDCardGeneration } from './pages/IDCardGeneration';
 import { DataManagement } from './pages/DataManagement';
 import { Support } from './pages/Support';
+import { FAQ } from './pages/FAQ';
 import { Payroll } from './pages/Payroll';
 import { ReportCards } from './pages/ReportCards';
 import { Library } from './pages/Library';
@@ -111,6 +112,7 @@ const AboutPage = () => <Layout><About /></Layout>;
 const FreeResourcesPage = () => <Layout><FreeResources /></Layout>;
 const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
 const SupportPage = () => <Layout><Support /></Layout>;
+const FAQPage = () => <Layout><FAQ /></Layout>;
 const NotFoundPage = () => <NotFound />;
 
 const HomeWrapper = () => {
@@ -494,6 +496,11 @@ const App: React.FC = () => {
           <Route 
             path="/support" 
             element={<SupportPage />} 
+          />
+          
+          <Route 
+            path="/faq" 
+            element={<FAQPage />} 
           />
           
           <Route 
