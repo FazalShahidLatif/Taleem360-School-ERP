@@ -304,7 +304,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
     colorScheme: {
       bg: 'bg-amber-50/60',
       accent: 'bg-amber-500',
-      border: 'border-amber-150',
+      border: 'border-amber-200',
       text: 'text-amber-800'
     },
     mockup: (
@@ -319,7 +319,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
           <div className="w-full h-1 bg-slate-200 mt-2 rounded"></div>
           <div className="w-3/4 h-1 bg-slate-200 mt-1 rounded"></div>
         </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-amber-250 text-amber-905 rounded-md font-bold uppercase">Scrapbook</div>
+        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-amber-200 text-amber-900 rounded-md font-bold uppercase">Scrapbook</div>
       </div>
     )
   },
@@ -346,7 +346,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
           </div>
           <span className="text-[9px] font-mono font-bold text-stone-600 z-10 uppercase tracking-widest bg-stone-100/80 px-1 border border-stone-200">Sketch Guide</span>
         </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-stone-300 text-stone-850 rounded-md font-bold uppercase">Drawing</div>
+        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-stone-300 text-stone-800 rounded-md font-bold uppercase">Drawing</div>
       </div>
     )
   },
@@ -359,7 +359,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
     ageRange: 'Ages 3-8',
     colorScheme: {
       bg: 'bg-pink-50/70',
-      accent: 'bg-pink-505',
+      accent: 'bg-pink-500',
       border: 'border-pink-100',
       text: 'text-pink-700'
     },
@@ -369,7 +369,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
         <div className="text-[10px] font-bold text-pink-700 uppercase tracking-widest bg-pink-100/80 px-2 py-0.5 rounded border border-pink-200 mt-2">
           Cute Chibi Animals
         </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-pink-200 text-pink-850 rounded-md font-bold uppercase">Cartoons</div>
+        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-pink-200 text-pink-800 rounded-md font-bold uppercase">Cartoons</div>
       </div>
     )
   },
@@ -388,7 +388,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
     },
     mockup: (
       <div className="flex flex-col items-center justify-center h-full w-full relative p-2">
-        <div className="font-extrabold text-3xl text-red-650 uppercase tracking-tighter bg-amber-300 px-3 py-1 rounded-lg border-2 border-slate-900 rotate-[-4deg] shadow-xs">
+        <div className="font-extrabold text-3xl text-red-600 uppercase tracking-tighter bg-amber-300 px-3 py-1 rounded-lg border-2 border-slate-900 rotate-[-4deg] shadow-xs">
           BOOM!
         </div>
         <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mt-2">Action Comic Panels</span>
@@ -405,7 +405,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
     ageRange: 'Ages 6-14',
     colorScheme: {
       bg: 'bg-indigo-50/70',
-      accent: 'bg-indigo-505',
+      accent: 'bg-indigo-500',
       border: 'border-indigo-100',
       text: 'text-indigo-700'
     },
@@ -416,7 +416,7 @@ const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
           <span className="text-xl">🪐</span>
         </div>
         <span className="text-[10px] uppercase font-mono font-bold text-indigo-700 tracking-widest mt-2 bg-indigo-100/50 px-1.5 py-0.5 rounded border border-indigo-200">Cosmos Quest</span>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-indigo-200 text-indigo-850 rounded-md font-bold uppercase">Sci-Fi</div>
+        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-indigo-200 text-indigo-800 rounded-md font-bold uppercase">Sci-Fi</div>
       </div>
     )
   }
@@ -571,8 +571,8 @@ export const FreeResources: React.FC = () => {
               }}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all border ${
                 activeStudioCategory === tab.id
-                  ? 'bg-indigo-650 text-white border-indigo-650 shadow-md scale-102 font-black'
-                  : 'bg-white hover:bg-slate-50 text-slate-600 border-slate-200 shadow-3xs'
+                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-100 scale-105 active:scale-95 font-extrabold'
+                  : 'bg-white hover:bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300 shadow-3xs active:scale-98'
               }`}
             >
               <span className="text-lg">{tab.icon}</span>
@@ -588,11 +588,11 @@ export const FreeResources: React.FC = () => {
             {/* Color Palette Header */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-semibold font-mono uppercase tracking-widest text-slate-555 flex items-center gap-1.5">
+                <h4 className="text-xs font-semibold font-mono uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                   <Paintbrush className="w-3.5 h-3.5 text-indigo-500" />
                   <span>Coloring Palette</span>
                 </h4>
-                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold uppercaseScale">
+                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
                   Brush Active
                 </span>
               </div>
@@ -635,8 +635,8 @@ export const FreeResources: React.FC = () => {
             {/* Sticker Stamp Pad Selection */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-semibold font-mono uppercase tracking-widest text-slate-555 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-pink-555" />
+                <h4 className="text-xs font-semibold font-mono uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-pink-500" />
                   <span>Stickers Stamp Box</span>
                 </h4>
                 <span className="text-[10px] bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded font-black uppercase tracking-wide">
