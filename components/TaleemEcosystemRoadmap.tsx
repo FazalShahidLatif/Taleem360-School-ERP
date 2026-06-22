@@ -29,8 +29,8 @@ export const TaleemEcosystemRoadmap = () => {
       desc: "Personal tutor mini-websites, instant availability matrices, automatic Paddle checkouts, and student logs tracking.",
       icon: <Users className="w-6 h-6 text-emerald-600" />,
       badgeColor: "bg-emerald-100 text-emerald-800 font-bold ring-2 ring-emerald-500/10",
-      route: "/pricing",
-      actionText: "View Private Tutor Plans"
+      route: "/private-tutors",
+      actionText: "Launch Tutor Space Sandbox"
     },
     {
       title: "Skills Academies & Bootcamps",
@@ -38,8 +38,8 @@ export const TaleemEcosystemRoadmap = () => {
       desc: "White-label multi-tenant LMS for IT, technical, and vocational institutes with Paddle split-installment plans.",
       icon: <GraduationCap className="w-6 h-6 text-purple-600" />,
       badgeColor: "bg-purple-100 text-purple-800 font-bold ring-2 ring-purple-500/10",
-      route: "/pricing",
-      actionText: "View Academy Solutions"
+      route: "/skills-academy",
+      actionText: "Launch Academy Sandbox"
     },
     {
       title: "Daycare Center Hub",

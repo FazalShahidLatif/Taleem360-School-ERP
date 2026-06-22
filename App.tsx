@@ -27,6 +27,8 @@ import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
 import { FreeResources } from './pages/free-resources';
 import { DaycareSummary } from './pages/DaycareSummary';
+import { SkillsAcademy } from './pages/SkillsAcademy';
+import { PrivateTutors } from './pages/PrivateTutors';
 import { Onboarding } from './pages/Onboarding';
 import { NotFound } from './pages/NotFound';
 import { AdminPortal } from './pages/AdminPortal';
@@ -111,6 +113,8 @@ const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
 const FreeResourcesPage = () => <Layout><FreeResources /></Layout>;
 const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
+const SkillsAcademyPage = () => <Layout><SkillsAcademy /></Layout>;
+const PrivateTutorsPage = () => <Layout><PrivateTutors /></Layout>;
 const SupportPage = () => <Layout><Support /></Layout>;
 const FAQPage = () => <Layout><FAQ /></Layout>;
 const NotFoundPage = () => <NotFound />;
@@ -482,6 +486,16 @@ const App: React.FC = () => {
           <Route 
             path="/daycare" 
             element={<DaycareSummaryPage />} 
+          />
+
+          <Route 
+            path="/skills-academy" 
+            element={<SkillsAcademyPage />} 
+          />
+
+          <Route 
+            path="/private-tutors" 
+            element={<PrivateTutorsPage />} 
           />
 
           <Route 
