@@ -80,6 +80,16 @@ export const Nexus: React.FC = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submittingQuestion, setSubmittingQuestion] = useState(false);
 
+  // Bring Your Own File (BYOF) AI Generator states
+  const [isBYOFMode, setIsBYOFMode] = useState(true); // Default to true so it is highly visible to the user!
+  const [byofTopic, setByofTopic] = useState('');
+  const [byofText, setByofText] = useState('');
+  const [byofFileName, setByofFileName] = useState('');
+  const [byofIsDragging, setByofIsDragging] = useState(false);
+  const [byofQuestions, setByofQuestions] = useState<any[]>([]);
+  const [byofIsGenerating, setByofIsGenerating] = useState(false);
+  const [byofError, setByofError] = useState('');
+
   // Ledger state
   const [ledgerLogs, setLedgerLogs] = useState<PayoutLog[]>([]);
   const [loadingLedger, setLoadingLedger] = useState(false);
@@ -219,6 +229,79 @@ export const Nexus: React.FC = () => {
       console.error('Error submitting custom Q&A:', err);
     } finally {
       setSubmittingQuestion(false);
+    }
+  };
+
+  // Bring Your Own File (BYOF) Actions
+  const handleByofFileRead = (file: File) => {
+    setByofFileName(file.name);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      if (text) {
+        setByofText(text);
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  const handleGenerateByofQuiz = async () => {
+    if (!byofTopic && !byofText) {
+      setByofError('Please enter a target topic segment or paste/upload source study files.');
+      return;
+    }
+    setByofIsGenerating(true);
+    setByofError('');
+    try {
+      const res = await fetch('/api/nexus/generate-quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topic: byofTopic,
+          fileContent: byofText
+        })
+      });
+      const data = await res.json();
+      if (data.success && data.questions) {
+        setByofQuestions(data.questions.map((q: any) => ({ ...q, ingested: false })));
+      } else {
+        setByofError(data.error || 'Could not parse document structure. Please try another format.');
+      }
+    } catch (err) {
+      console.error(err);
+      setByofError('Failed to establish contact with Taleem360 AI generator.');
+    } finally {
+      setByofIsGenerating(false);
+    }
+  };
+
+  const handleIngestGeneratedQuestion = async (q: any, index: number) => {
+    try {
+      const res = await fetch('/api/nexus/submit-question', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_interest_topic: q.user_interest_topic,
+          question_text: q.question_text,
+          question_type: 'multiple_choice',
+          correct_answer: q.correct_answer,
+          json_options: [q.correct_answer, ...q.distractor_options].sort(() => Math.random() - 0.5)
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setByofQuestions(prev => {
+          const copy = [...prev];
+          copy[index] = { ...copy[index], ingested: true };
+          return copy;
+        });
+        fetchQuestions();
+      } else {
+        alert(data.error || 'Failed to ingest question.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Network failure saving generated question block.');
     }
   };
 
@@ -543,112 +626,286 @@ export const Nexus: React.FC = () => {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmitQuestion} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Sub-tab switcher */}
+            <div className="flex border-b border-slate-100 mb-6">
+              <button
+                onClick={() => setIsBYOFMode(true)}
+                className={`py-2 px-4 text-xs font-bold transition-all border-b-2 -mb-[2px] ${
+                  isBYOFMode
+                    ? 'border-indigo-600 text-indigo-600'
+                    : 'border-transparent text-slate-400 hover:text-slate-600'
+                }`}
+              >
+                BYOF AI Quiz Generator (Bring Your Own File)
+              </button>
+              <button
+                onClick={() => setIsBYOFMode(false)}
+                className={`py-2 px-4 text-xs font-bold transition-all border-b-2 -mb-[2px] ${
+                  !isBYOFMode
+                    ? 'border-indigo-600 text-indigo-600'
+                    : 'border-transparent text-slate-400 hover:text-slate-600'
+                }`}
+              >
+                Manual Ingestion
+              </button>
+            </div>
+
+            {isBYOFMode ? (
+              <div className="space-y-6">
+                <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 text-xs text-slate-600 leading-relaxed">
+                  <strong className="text-slate-800">Bring Your Own File (BYOF) Method:</strong> Upload or drag-and-drop a lecture note, textbook page, syllabus, or raw syllabus file (.txt, .md, .csv) and let Gemini generate premium, context-specific questions automatically!
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Target Subject / Category
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Database Systems, Web3 Protocol"
+                      value={byofTopic}
+                      onChange={(e) => setByofTopic(e.target.value)}
+                      className="bg-white block w-full px-3 py-2.5 border border-slate-200 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Fast File Upload (Drag & Drop or Click)
+                    </label>
+                    <div
+                      onDragOver={(e) => { e.preventDefault(); setByofIsDragging(true); }}
+                      onDragLeave={() => setByofIsDragging(false)}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        setByofIsDragging(false);
+                        const file = e.dataTransfer.files?.[0];
+                        if (file) handleByofFileRead(file);
+                      }}
+                      className={`border-2 border-dashed rounded-xl p-3 text-center transition-all cursor-pointer ${
+                        byofIsDragging ? 'border-indigo-500 bg-indigo-50/50' : 'border-slate-200 bg-white hover:border-slate-300'
+                      }`}
+                    >
+                      <input
+                        type="file"
+                        id="byof-file-picker"
+                        accept=".txt,.md,.csv,.json"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleByofFileRead(file);
+                        }}
+                        className="hidden"
+                      />
+                      <label htmlFor="byof-file-picker" className="cursor-pointer block text-xs">
+                        <span className="font-bold text-indigo-600">
+                          {byofFileName ? `Loaded: ${byofFileName}` : 'Select Syllabus / Lecture File'}
+                        </span>
+                        <span className="text-slate-400 block text-[10px] mt-0.5">Drag-and-drop or click to parse</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    User Interest Topic
+                    Extracted Source Content / Study notes
                   </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Solidity Security, Cryptography"
-                    value={newTopic}
-                    onChange={(e) => { setSubmitSuccess(false); setNewTopic(e.target.value); }}
-                    className="bg-white block w-full px-3 py-2.5 border border-slate-200 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
+                  <textarea
+                    rows={4}
+                    placeholder="Pasted educational guidelines, code snips, or lecture blocks..."
+                    value={byofText}
+                    onChange={(e) => setByofText(e.target.value)}
+                    className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm font-mono"
                   />
                 </div>
+
+                {byofError && (
+                  <p className="text-xs text-rose-500 font-bold bg-rose-50 rounded-lg p-2.5 border border-rose-100">
+                    {byofError}
+                  </p>
+                )}
+
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleGenerateByofQuiz}
+                    disabled={byofIsGenerating}
+                    className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition-all tracking-wider uppercase flex items-center gap-1.5 shadow-md cursor-pointer"
+                  >
+                    {byofIsGenerating ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        AI Generating Quizzes...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4" />
+                        Generate 3 Quizzes with Gemini
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Display generated quiz cards */}
+                {byofQuestions.length > 0 && (
+                  <div className="pt-6 border-t border-slate-100 space-y-4">
+                    <h3 className="text-xs font-extrabold text-slate-850 uppercase tracking-wider">
+                      Successfully Generated Q&As:
+                    </h3>
+                    
+                    <div className="space-y-3">
+                      {byofQuestions.map((q, idx) => (
+                        <div key={idx} className="p-4 bg-slate-50 border border-slate-250 rounded-xl hover:border-slate-355 transition">
+                          <div className="flex justify-between items-start gap-2 mb-2">
+                            <span className="text-[10px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full uppercase">
+                              {q.user_interest_topic}
+                            </span>
+                            {q.ingested ? (
+                              <span className="text-[10px] font-extrabold text-emerald-600 flex items-center gap-1">
+                                <CheckCircle2 className="w-3.5 h-3.5" /> Published
+                              </span>
+                            ) : null}
+                          </div>
+
+                          <h4 className="text-xs font-bold text-slate-800 mb-2">{q.question_text}</h4>
+                          
+                          <div className="grid grid-cols-2 gap-2 text-[10px]">
+                            <div className="p-2 bg-emerald-50 text-emerald-850 font-semibold rounded-lg border border-emerald-100">
+                              <span className="text-emerald-500 uppercase font-extrabold tracking-wider block text-[8px] mb-0.5">Correct Answer</span>
+                              {q.correct_answer}
+                            </div>
+                            {q.distractor_options.map((option: string, oIdx: number) => (
+                              <div key={oIdx} className="p-2 bg-slate-100 text-slate-600 rounded-lg">
+                                <span className="text-slate-400 uppercase font-extrabold tracking-wider block text-[8px] mb-0.5">Distractor {oIdx+1}</span>
+                                {option}
+                              </div>
+                            ))}
+                          </div>
+
+                          {!q.ingested && (
+                            <div className="mt-3 flex justify-end">
+                              <button
+                                onClick={() => handleIngestGeneratedQuestion(q, idx)}
+                                className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-1.5 px-3 rounded-lg text-[10px] transition-all flex items-center gap-1 cursor-pointer"
+                              >
+                                <PlusCircle className="w-3.5 h-3.5" /> Publish & Index to Warehouse
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <form onSubmit={handleSubmitQuestion} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      User Interest Topic
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Solidity Security, Cryptography"
+                      value={newTopic}
+                      onChange={(e) => { setSubmitSuccess(false); setNewTopic(e.target.value); }}
+                      className="bg-white block w-full px-3 py-2.5 border border-slate-200 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Correct Answer Choice
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Specify the absolute correct answer"
+                      value={newCorrectAnswer}
+                      onChange={(e) => { setSubmitSuccess(false); setNewCorrectAnswer(e.target.value); }}
+                      className="bg-white block w-full px-3 py-2.5 border border-emerald-300 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                    Correct Answer Choice
+                    Question Text Block
                   </label>
-                  <input
-                    type="text"
+                  <textarea
                     required
-                    placeholder="Specify the absolute correct answer"
-                    value={newCorrectAnswer}
-                    onChange={(e) => { setSubmitSuccess(false); setNewCorrectAnswer(e.target.value); }}
-                    className="bg-white block w-full px-3 py-2.5 border border-emerald-300 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
+                    rows={2}
+                    placeholder="Formulate your explicit technical question text..."
+                    value={newQuestionText}
+                    onChange={(e) => { setSubmitSuccess(false); setNewQuestionText(e.target.value); }}
+                    className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
                   />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                  Question Text Block
-                </label>
-                <textarea
-                  required
-                  rows={2}
-                  placeholder="Formulate your explicit technical question text..."
-                  value={newQuestionText}
-                  onChange={(e) => { setSubmitSuccess(false); setNewQuestionText(e.target.value); }}
-                  className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
-                />
-              </div>
-
-              <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                <span className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
-                  Secondary Distractor Choices (Wrong Options)
-                </span>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-slate-400 mb-1">Option 2 (Incorrect)</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Wrong option A"
-                      value={newOption1}
-                      onChange={(e) => { setSubmitSuccess(false); setNewOption1(e.target.value); }}
-                      className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-lg text-xs placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-slate-400 mb-1">Option 3 (Incorrect)</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Wrong option B"
-                      value={newOption2}
-                      onChange={(e) => { setSubmitSuccess(false); setNewOption2(e.target.value); }}
-                      className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-lg text-xs placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-slate-400 mb-1">Option 4 (Incorrect)</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Wrong option C"
-                      value={newOption3}
-                      onChange={(e) => { setSubmitSuccess(false); setNewOption3(e.target.value); }}
-                      className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-lg text-xs placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                    />
+                <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                  <span className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
+                    Secondary Distractor Choices (Wrong Options)
+                  </span>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-1">Option 2 (Incorrect)</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Wrong option A"
+                        value={newOption1}
+                        onChange={(e) => { setSubmitSuccess(false); setNewOption1(e.target.value); }}
+                        className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-lg text-xs placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-1">Option 3 (Incorrect)</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Wrong option B"
+                        value={newOption2}
+                        onChange={(e) => { setSubmitSuccess(false); setNewOption2(e.target.value); }}
+                        className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-lg text-xs placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-1">Option 4 (Incorrect)</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Wrong option C"
+                        value={newOption3}
+                        onChange={(e) => { setSubmitSuccess(false); setNewOption3(e.target.value); }}
+                        className="bg-white block w-full px-3 py-2 border border-slate-200 rounded-lg text-xs placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="pt-2 flex justify-end">
-                <button
-                  type="submit"
-                  disabled={submittingQuestion}
-                  className="bg-slate-900 hover:bg-slate-800 active:scale-95 disabled:scale-100 disabled:opacity-50 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition-all tracking-wider uppercase flex items-center gap-1.5 shadow-md"
-                >
-                  {submittingQuestion ? (
-                    <>
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                      Uploading Q&A...
-                    </>
-                  ) : (
-                    <>
-                      <PlusCircle className="w-4 h-4" />
-                      Save & Publish indexed
-                    </>
-                  )}
-                </button>
-              </div>
-            </form>
+                <div className="pt-2 flex justify-end">
+                  <button
+                    type="submit"
+                    disabled={submittingQuestion}
+                    className="bg-slate-900 hover:bg-slate-800 active:scale-95 disabled:scale-100 disabled:opacity-50 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition-all tracking-wider uppercase flex items-center gap-1.5 shadow-md"
+                  >
+                    {submittingQuestion ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        Uploading Q&A...
+                      </>
+                    ) : (
+                      <>
+                        <PlusCircle className="w-4 h-4" />
+                        Save & Publish indexed
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         )}
 

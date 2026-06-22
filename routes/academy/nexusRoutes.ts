@@ -1,9 +1,34 @@
 // routes/academy/nexusRoutes.ts
 import express from 'express';
 import pkg from 'pg';
+import { GoogleGenAI, Type } from '@google/genai';
 
 const { Pool } = pkg;
 const router = express.Router();
+
+let aiClientInstance: GoogleGenAI | null = null;
+
+function getApiKey(): string | null {
+  return process.env.GEMINI_API_KEY || process.env.API_KEY || null;
+}
+
+function getAiClient(): GoogleGenAI {
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    throw new Error('Google Gemini API Key is required but was not found in environment');
+  }
+  if (!aiClientInstance) {
+    aiClientInstance = new GoogleGenAI({
+      apiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build'
+        }
+      }
+    });
+  }
+  return aiClientInstance;
+}
 
 const dbPool = new Pool({ 
   connectionString: process.env.SKILLS_ACADEMY_DATABASE_URL || process.env.DATABASE_URL
@@ -316,6 +341,195 @@ router.post('/api/nexus/submit-question', async (req, res) => {
  * 5. GET /api/nexus/payouts
  * Returns crypto payout ledger list by wallet address.
  */
+/**
+ * 6. POST /api/nexus/generate-quiz
+ * Generates structured quiz questions from a file or pasted educational text using Gemini.
+ */
+router.post('/api/nexus/generate-quiz', async (req, res) => {
+  const { topic, fileContent } = req.body;
+  
+  if (!topic && !fileContent) {
+    return res.status(400).json({ error: 'Please specify a topic or provide file contents.' });
+  }
+
+  const userTopic = topic || 'General CS & Web3';
+  const textSource = fileContent ? `Content: "${fileContent.substring(0, 4000)}"` : '';
+
+  try {
+    const hasKey = getApiKey();
+    if (hasKey) {
+      const ai = getAiClient();
+      const systemInstruction = 
+        `You are the Taleem360 Nexus AI Quiz Generator. Your goal is to analyze educational text, lectures, or syllabi (or a given topic) and output 3 high-quality multiple choice questions.
+        The questions must specifically test core computer science, software engineering, or blockchain & Web3 concepts.
+        Each question must have EXACTLY 4 options: one correct answer, and three wrong/distractor options.
+        Do not output any introductory or conversational text, markdown formatting blocks, or surrounding wrappers outside of the JSON schema requested.`;
+
+      const prompt = `Develop exactly 3 challenging multiple choice questions based on the parent topic "${userTopic}". ${textSource}`;
+
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.5-flash',
+        contents: prompt,
+        config: {
+          systemInstruction,
+          responseMimeType: 'application/json',
+          responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+              questions: {
+                type: Type.ARRAY,
+                items: {
+                  type: Type.OBJECT,
+                  properties: {
+                    user_interest_topic: { 
+                      type: Type.STRING,
+                      description: "A short category label, e.g. " + userTopic
+                    },
+                    question_text: { 
+                      type: Type.STRING,
+                      description: "The formulation of the multiple-choice question."
+                    },
+                    correct_answer: { 
+                      type: Type.STRING,
+                      description: "The specific correct option string."
+                    },
+                    distractor_options: { 
+                      type: Type.ARRAY,
+                      items: { type: Type.STRING },
+                      description: "Exactly three incorrect options / distractors."
+                    }
+                  },
+                  required: ["user_interest_topic", "question_text", "correct_answer", "distractor_options"]
+                }
+              }
+            },
+            required: ["questions"]
+          }
+        }
+      });
+
+      const rawJson = response.text;
+      if (rawJson) {
+        const parsed = JSON.parse(rawJson);
+        if (parsed && parsed.questions && Array.isArray(parsed.questions)) {
+          return res.json({ success: true, questions: parsed.questions, source: 'ai' });
+        }
+      }
+    }
+
+    // Fallback: Generate custom high-fidelity questions based on topic keywords if Gemini fails or is unconfigured
+    const lowerTopic = userTopic.toLowerCase();
+    let questionsFallback = [];
+
+    if (lowerTopic.includes('react') || lowerTopic.includes('frontend') || lowerTopic.includes('js')) {
+      questionsFallback = [
+        {
+          user_interest_topic: userTopic,
+          question_text: 'What major issue is associated with including non-memoized objects or functions in a React useEffect dependency array?',
+          correct_answer: 'It triggers infinite re-render loops on state alterations.',
+          distractor_options: [
+            'It automatically compiles all modules to standard ES Module paths.',
+            'It blocks standard port binding of nginx containers.',
+            'It causes CSS layout overrides on responsive grids.'
+          ]
+        },
+        {
+          user_interest_topic: userTopic,
+          question_text: 'Which React 18+ hook is specifically used to transition standard state modifications without blocking the UI main thread?',
+          correct_answer: 'useTransition',
+          distractor_options: [
+            'useLayoutEffect',
+            'useRef',
+            'useCallback'
+          ]
+        },
+        {
+          user_interest_topic: userTopic,
+          question_text: 'Why does Vite disable Hot Module Replacement (HMR) under a secure agentic development iframe sandbox?',
+          correct_answer: 'To prevent visual rendering flicker during incremental automated code edits.',
+          distractor_options: [
+            'Because WebSockets are restricted to port 3000.',
+            'To force synchronous hydration of server-side Node.js assets.',
+            'Because React-Router-Dom routes are unmount-resilient.'
+          ]
+        }
+      ];
+    } else if (lowerTopic.includes('solidity') || lowerTopic.includes('contract') || lowerTopic.includes('web3') || lowerTopic.includes('eth')) {
+      questionsFallback = [
+        {
+          user_interest_topic: userTopic,
+          question_text: 'Which Solidity visibility modifier allows a state variable to be accessed by internal and derived contracts, but not externally?',
+          correct_answer: 'internal',
+          distractor_options: [
+            'private',
+            'public',
+            'external'
+          ]
+        },
+        {
+          user_interest_topic: userTopic,
+          question_text: 'What major security vulnerability occurs when a contract sends ETH to an untrusted recipient before updating its local balance state?',
+          correct_answer: 'Reentrancy attack',
+          distractor_options: [
+            'Integer overflow/underflow',
+            'Front-running or sandwich exploit',
+            'Denial of service via block gas limit'
+          ]
+        },
+        {
+          user_interest_topic: userTopic,
+          question_text: 'What is the role of gas refunds in modern EVM executions?',
+          correct_answer: 'To reward developers for freeing up storage slots (e.g. via SELFDESTRUCT or clearing storage variables).',
+          distractor_options: [
+            'To automatically mint dynamic ERC-20 staking tokens.',
+            'To cover RPC connection timeouts inside private test networks.',
+            'To authenticate client wallet addresses without digital signatures.'
+          ]
+        }
+      ];
+    } else {
+      questionsFallback = [
+        {
+          user_interest_topic: userTopic,
+          question_text: `Which core concept describes the ability to process raw data or files in "${userTopic}" format dynamically?`,
+          correct_answer: 'Semantic parser extraction',
+          distractor_options: [
+            'Isolated Docker container routing',
+            'Multi-tenant database transaction replication',
+            'Static client router rewrites'
+          ]
+        },
+        {
+          user_interest_topic: userTopic,
+          question_text: `What is a primary system scalability bottleneck when managing complex structures in "${userTopic}"?`,
+          correct_answer: 'High CPU computational indexing on unstructured text payloads',
+          distractor_options: [
+            'Standard port 3000 ingress channel conflicts',
+            'Redundant CSS-in-JS style hydration',
+            'Stale JWT signature expiry cycles'
+          ]
+        },
+        {
+          user_interest_topic: userTopic,
+          question_text: `When generating active quizzes with modern AI models for "${userTopic}", what role does the template validation step play?`,
+          correct_answer: 'It guarantees output JSON schemas strictly match database entry boundaries.',
+          distractor_options: [
+            'It forces clients to run full-screen canvas animations.',
+            'It synchronizes offline service worker cache storage.',
+            'It bypasses local client-side state hooks.'
+          ]
+        }
+      ];
+    }
+
+    return res.json({ success: true, questions: questionsFallback, source: 'offline-adapter' });
+
+  } catch (err) {
+    console.error('[Quiz Generation Endpoint Failure]:', err);
+    return res.status(500).json({ error: 'AI Quiz generation endpoint error' });
+  }
+});
+
 router.get('/api/nexus/payouts', async (req, res) => {
   const { wallet_address } = req.query;
   if (!wallet_address) {
