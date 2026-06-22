@@ -285,15 +285,6 @@ export const DaycareSummary: React.FC = () => {
             Empower early daycare caregivers to auto-translate brief, raw logs into warm, calming, and structured digital summaries for parents using AI.
           </p>
         </div>
-        <div className="mt-4 md:mt-0 flex gap-3">
-          <button
-            onClick={handlePrint}
-            className="inline-flex items-center justify-center px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none transition"
-          >
-            <Printer className="w-4 h-4 mr-2 text-gray-500" />
-            Print Worksheet
-          </button>
-        </div>
       </div>
 
       {/* Tab Switcher */}
@@ -324,9 +315,9 @@ export const DaycareSummary: React.FC = () => {
 
       {apiNotification && (
         <div className={`mb-6 p-4 rounded-xl border flex items-start gap-3 shadow-sm ${
-          apiNotification.type === 'success' ? 'bg-emerald-50 text-emerald-900 border-emerald-250' :
-          apiNotification.type === 'info' ? 'bg-indigo-50 text-indigo-900 border-indigo-250' :
-          'bg-amber-50 text-amber-950 border-amber-250'
+          apiNotification.type === 'success' ? 'bg-emerald-50 text-emerald-950 border-emerald-200' :
+          apiNotification.type === 'info' ? 'bg-indigo-50 text-indigo-950 border-indigo-200' :
+          'bg-amber-50 text-amber-950 border-amber-200'
         }`}>
           {apiNotification.type === 'success' ? <CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> : 
            apiNotification.type === 'info' ? <Sparkles className="w-5 h-5 text-indigo-600 mt-0.5" /> :
@@ -349,7 +340,7 @@ export const DaycareSummary: React.FC = () => {
                 <span>Select Early Child Profile</span>
               </h3>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {PRESET_CHILDREN.map((child) => (
                   <button
                     key={child.id}
@@ -479,7 +470,7 @@ export const DaycareSummary: React.FC = () => {
                   <Heart className="w-8 h-8 text-indigo-600 fill-indigo-200" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-indigo-600 uppercase tracking-wider">Early Childhood Caregiver Draft</p>
+                  <p className="text-xs font-bold text-indigo-600 uppercase tracking-wider">ECE Daily Summary Report</p>
                   <h3 className="text-xl font-black text-gray-800">Polished Narrative Output</h3>
                   <p className="text-xs text-gray-400">Instantly formatted to warm, parent-reassuring tone.</p>
                 </div>
@@ -560,6 +551,14 @@ export const DaycareSummary: React.FC = () => {
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download schema.json</span>
+                </button>
+
+                <button
+                  onClick={handlePrint}
+                  className="px-4 py-2.5 bg-white border border-gray-300 rounded-lg text-xs font-bold text-gray-700 hover:bg-gray-50 flex items-center gap-1.5 focus:outline-none transition active:scale-95"
+                >
+                  <Printer className="w-3.5 h-3.5 text-gray-500" />
+                  <span>Print Report Worksheet</span>
                 </button>
               </div>
 

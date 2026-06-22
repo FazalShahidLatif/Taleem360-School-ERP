@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { School, Baby, GraduationCap, Users, Sparkles, ArrowRight } from 'lucide-react';
 
 export const TaleemEcosystemRoadmap = () => {
@@ -18,35 +19,45 @@ export const TaleemEcosystemRoadmap = () => {
       status: "Live in Production",
       desc: "Complete academic management, grading matrix workflows, transport, and cashless fee structures.",
       icon: <School className="w-6 h-6 text-blue-600" />,
-      badgeColor: "bg-blue-100 text-blue-800 font-bold"
+      badgeColor: "bg-blue-100 text-blue-800 font-bold",
+      route: "/login",
+      actionText: "Launch ERP Portal"
     },
     {
       title: "Solo Pro & Private Tutors",
       status: "Active & Deployed",
       desc: "Personal tutor mini-websites, instant availability matrices, automatic Paddle checkouts, and student logs tracking.",
       icon: <Users className="w-6 h-6 text-emerald-600" />,
-      badgeColor: "bg-emerald-100 text-emerald-800 font-bold ring-2 ring-emerald-500/10"
+      badgeColor: "bg-emerald-100 text-emerald-800 font-bold ring-2 ring-emerald-500/10",
+      route: "/pricing",
+      actionText: "View Private Tutor Plans"
     },
     {
       title: "Skills Academies & Bootcamps",
       status: "Active & Deployed",
       desc: "White-label multi-tenant LMS for IT, technical, and vocational institutes with Paddle split-installment plans.",
       icon: <GraduationCap className="w-6 h-6 text-purple-600" />,
-      badgeColor: "bg-purple-100 text-purple-800 font-bold ring-2 ring-purple-500/10"
+      badgeColor: "bg-purple-100 text-purple-800 font-bold ring-2 ring-purple-500/10",
+      route: "/pricing",
+      actionText: "View Academy Solutions"
     },
     {
       title: "Daycare Center Hub",
       status: "Active & Deployed",
       desc: "Real-time child care tracking, secure kiosk PIN terminals, UTC late-fee engines, and automatic billing ledger sync.",
       icon: <Baby className="w-6 h-6 text-amber-600" />,
-      badgeColor: "bg-amber-100 text-amber-800 font-semibold ring-2 ring-amber-500/10"
+      badgeColor: "bg-amber-100 text-amber-800 font-semibold ring-2 ring-amber-500/10",
+      route: "/daycare",
+      actionText: "Open Daycare Hub Sandbox"
     },
     {
       title: "Global Student Competition Hub",
       status: "Live Now • Pre-K to 10th",
       desc: "Local, regional, and global competitions after nominal $1/$2 entry fee supporting transparent 100-student giveaway cash prizes.",
       icon: <Sparkles className="w-6 h-6 text-indigo-600" />,
-      badgeColor: "bg-indigo-100 text-indigo-800 font-bold ring-2 ring-indigo-500/25"
+      badgeColor: "bg-indigo-100 text-indigo-800 font-bold ring-2 ring-indigo-500/25",
+      route: "/free-resources",
+      actionText: "Open Student Competition Hub"
     }
   ];
 
@@ -70,26 +81,34 @@ export const TaleemEcosystemRoadmap = () => {
         {/* 2x2 Feature Matrix Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {modules.map((mod, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between transition hover:shadow-md">
+            <div key={index} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between transition hover:shadow-md hover:border-slate-200">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="p-3 bg-gray-50 rounded-lg">{mod.icon}</div>
-                  <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${mod.badgeColor}`}>
+                  <div className="p-3 bg-slate-50 rounded-xl">{mod.icon}</div>
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${mod.badgeColor}`}>
                     {mod.status}
                   </span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{mod.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{mod.desc}</p>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{mod.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{mod.desc}</p>
               </div>
               
-              {!mod.status.includes("Live") && !mod.status.includes("Active") && (
+              {mod.route ? (
+                <Link 
+                  to={mod.route}
+                  className="mt-6 inline-flex items-center gap-1.5 text-xs font-extrabold text-indigo-600 hover:text-indigo-800 bg-indigo-50/50 hover:bg-indigo-100/80 px-4 py-2.5 rounded-xl transition w-fit"
+                >
+                  <span>{mod.actionText}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              ) : !mod.status.includes("Live") && !mod.status.includes("Active") ? (
                 <button 
                   onClick={() => { setSelectedModule(mod.title); setSubmitted(false); }}
-                  className="mt-4 text-sm font-medium text-indigo-600 inline-flex items-center gap-1 hover:text-indigo-700 w-fit cursor-pointer"
+                  className="mt-6 text-sm font-semibold text-indigo-600 inline-flex items-center gap-1 hover:text-indigo-700 w-fit cursor-pointer"
                 >
                   Pre-register for early access <ArrowRight className="w-4 h-4" />
                 </button>
-              )}
+              ) : null}
             </div>
           ))}
         </div>

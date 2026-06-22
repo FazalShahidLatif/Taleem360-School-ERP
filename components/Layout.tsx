@@ -209,10 +209,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </div>
                 <span className="text-xl font-black text-slate-900 tracking-tight">Taleem360</span>
               </Link>
-              <div className="flex items-center space-x-4">
-                <Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm font-medium">Pricing</Link>
-                <Link to="/about" className="text-gray-600 hover:text-indigo-600 text-sm font-medium">About</Link>
-                <Link to="/login" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+              <div className="flex items-center space-x-6">
+                <nav className="flex items-center space-x-6">
+                  <Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">Pricing</Link>
+                  <Link to="/about" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">About</Link>
+                </nav>
+                <div className="h-5 w-px bg-gray-200" aria-hidden="true" />
+                <Link to="/login" className="inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-black rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:shadow-md active:scale-95 transition-all">
                   Sign In
                 </Link>
               </div>

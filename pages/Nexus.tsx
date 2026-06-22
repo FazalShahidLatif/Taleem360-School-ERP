@@ -568,7 +568,7 @@ export const Nexus: React.FC = () => {
                     placeholder="Specify the absolute correct answer"
                     value={newCorrectAnswer}
                     onChange={(e) => { setSubmitSuccess(false); setNewCorrectAnswer(e.target.value); }}
-                    className="bg-white block w-full px-3 py-2.5 border border-emerald-250 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
+                    className="bg-white block w-full px-3 py-2.5 border border-emerald-300 rounded-xl text-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm"
                   />
                 </div>
               </div>
