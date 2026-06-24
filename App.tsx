@@ -25,6 +25,7 @@ import { Blog } from './pages/Blog';
 import { BlogPostDetail } from './pages/BlogPostDetail';
 import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
+import { Contact } from './pages/Contact';
 import { FreeResources } from './pages/free-resources';
 import { DaycareSummary } from './pages/DaycareSummary';
 import { SkillsAcademy } from './pages/SkillsAcademy';
@@ -111,6 +112,7 @@ const BlogPage = () => <Layout><Blog /></Layout>;
 const BlogPostDetailPage = () => <Layout><BlogPostDetail /></Layout>;
 const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
+const ContactPage = () => <Layout><Contact /></Layout>;
 const FreeResourcesPage = () => <Layout><FreeResources /></Layout>;
 const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
 const SkillsAcademyPage = () => <Layout><SkillsAcademy /></Layout>;
@@ -476,6 +478,11 @@ const App: React.FC = () => {
           <Route 
             path="/about" 
             element={<AboutPage />} 
+          />
+
+          <Route 
+            path="/contact" 
+            element={<ContactPage />} 
           />
 
           <Route 

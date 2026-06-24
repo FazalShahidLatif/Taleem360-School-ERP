@@ -35,6 +35,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/pricing" className="text-gray-500 hover:text-indigo-600 text-sm">Pricing</Link></li>
               <li><Link to="/free-resources" className="text-gray-500 hover:text-indigo-600 text-sm">Free Resources</Link></li>
               <li><Link to="/blog" className="text-gray-500 hover:text-indigo-600 text-sm">Blog</Link></li>
+              <li><Link to="/contact" className="text-gray-500 hover:text-indigo-600 text-sm">Contact Us</Link></li>
             </ul>
           </div>
           <div>
@@ -53,7 +54,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-2">
               <li className="text-gray-500 text-sm font-medium">Taleem360</li>
-              <li className="text-gray-500 text-xs">Cantt Bazar Faisal, Karachi-75350</li>
+              <li className="text-gray-500 text-xs">26/792 Cantt Bazar, Drigh Road, Karaci -75350</li>
               <li className="text-gray-500 text-sm">support@taleem360.online</li>
               <li className="text-gray-500 text-sm">+92 (332) 213 7898</li>
             </ul>
@@ -66,7 +67,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p className="text-center md:text-left">
-            &copy; 2026 Taleem360-School ERP. All rights reserved.
+            &copy; 2026 Taleem360-School ERP. Open, collaborative, and built with transparency as a core guiding principal. No proprietary registered trademark claims.
           </p>
           <p className="mt-4 md:mt-0">
             Powered by <a href="https://saasskul.com" target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:text-indigo-600 font-medium">SaaSSkul</a>

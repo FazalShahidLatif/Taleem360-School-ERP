@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Users, 
   Calendar, 
@@ -13,6 +13,7 @@ import {
   Trash2,
   Lock
 } from 'lucide-react';
+import { initPaddle, openCheckout } from '../lib/paddle';
 
 interface AvailabilitySlot {
   id: string;
@@ -32,6 +33,11 @@ const INITIAL_SLOTS: AvailabilitySlot[] = [
 ];
 
 export const PrivateTutors: React.FC = () => {
+  // Initialize Paddle Sandbox Environment
+  useEffect(() => {
+    initPaddle();
+  }, []);
+
   // Slots State
   const [slots, setSlots] = useState<AvailabilitySlot[]>(INITIAL_SLOTS);
   const [selectedSlotForBooking, setSelectedSlotForBooking] = useState<string | null>(null);
@@ -357,6 +363,23 @@ export const PrivateTutors: React.FC = () => {
                 <div className="flex justify-between items-center pt-1 text-sm">
                   <span className="font-extrabold text-slate-800">Net Monthly Earnings:</span>
                   <span className="font-black text-emerald-600 font-mono">${financials.monthlyNet}</span>
+                </div>
+
+                <div className="pt-3 border-t border-slate-200/60 flex justify-end">
+                  <button
+                    onClick={() => {
+                      openCheckout(
+                        `pri_tutor_gross_${financials.weekly}`,
+                        'parent@tutorclient.com',
+                        () => {
+                          alert(`TUTOR TUITION SECURED\nSimulated weekly tuition payment of $${financials.weekly} collected via Paddle. Escrow processing fee applied.`);
+                        }
+                      );
+                    }}
+                    className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-[10px] tracking-wider uppercase transition-all duration-200 active:scale-95 cursor-pointer shadow-sm flex items-center justify-center gap-1"
+                  >
+                    Collect Tuition via Paddle Sandbox
+                  </button>
                 </div>
               </div>
             </div>

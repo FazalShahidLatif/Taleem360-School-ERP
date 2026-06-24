@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   GraduationCap, 
   Layers, 
@@ -16,6 +16,7 @@ import {
   Sparkles,
   Award
 } from 'lucide-react';
+import { initPaddle, openCheckout } from '../lib/paddle';
 
 interface CourseSyllabus {
   id: string;
@@ -46,6 +47,11 @@ const SYLLABUS_PRESETS: CourseSyllabus[] = [
 ];
 
 export const SkillsAcademy: React.FC = () => {
+  // Initialize Paddle Sandbox Environment
+  useEffect(() => {
+    initPaddle();
+  }, []);
+
   // Calculator States
   const [bootcampPrice, setBootcampPrice] = useState<number>(1500);
   const [installmentDuration, setInstallmentDuration] = useState<number>(3); // Months
@@ -207,7 +213,15 @@ export const SkillsAcademy: React.FC = () => {
                   <div className="mt-4 flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-200/60">
                     <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Secure Paddle Escrow checkout rules</span>
                     <button 
-                      onClick={() => alert(`TUITION PAYMENT LINK GENERATED\nBase: $${bootcampPrice}\nInstallments: ${installmentDuration} payments of $${results.monthlyPayment}`)}
+                      onClick={() => {
+                        openCheckout(
+                          `pri_bootcamp_${bootcampPrice}`,
+                          'student@academy.edu',
+                          () => {
+                            alert(`TUITION PAYMENT SUCCESSFUL\nSimulated payment of $${results.monthlyPayment} monthly ($${results.totalBillable} total) authorized via Paddle Sandbox.`);
+                          }
+                        );
+                      }}
                       className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] tracking-wide transition active:scale-95 cursor-pointer"
                     >
                       Retrieve Checkout payload

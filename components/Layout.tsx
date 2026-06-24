@@ -35,7 +35,8 @@ import {
   Bus,
   Book as BookIcon,
   Baby,
-  Sparkles
+  Sparkles,
+  Phone
 } from 'lucide-react';
 import { UserRole } from '../types';
 import { AIChatbot } from './AIChatbot';
@@ -85,6 +86,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     { name: 'Free Resources', href: '/free-resources', icon: Gift, current: location.pathname === '/free-resources' },
     { name: 'Blog', href: '/blog', icon: Newspaper, current: location.pathname.startsWith('/blog') },
     { name: 'About', href: '/about', icon: Award, current: location.pathname === '/about' },
+    { name: 'Contact Us', href: '/contact', icon: Phone, current: location.pathname === '/contact' },
     { name: 'Support', href: '/support', icon: LifeBuoy, current: location.pathname.startsWith('/support') },
     { name: 'Attendance', href: '/attendance', icon: CalendarCheck, current: location.pathname.startsWith('/attendance') },
     { name: 'Daycare Daily Summary', href: '/daycare', icon: Baby, current: location.pathname === '/daycare' },
@@ -213,6 +215,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <nav className="flex items-center space-x-6">
                   <Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">Pricing</Link>
                   <Link to="/about" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">About</Link>
+                  <Link to="/contact" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">Contact</Link>
                 </nav>
                 <div className="h-5 w-px bg-gray-200" aria-hidden="true" />
                 <Link to="/login" className="inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-black rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:shadow-md active:scale-95 transition-all">

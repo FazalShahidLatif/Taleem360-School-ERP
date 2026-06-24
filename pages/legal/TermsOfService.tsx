@@ -115,7 +115,7 @@ export const TermsOfService: React.FC = () => {
           <p className="text-gray-600 leading-relaxed">
             Taleem360
             <br />
-            Cantt Bazar Faisal, Karachi-75350, Pakistan
+            26/792 Cantt Bazar, Drigh Road, Karaci -75350, Pakistan
             <br />
             Business Helpline: +92 (332) 213 7898
             <br />
