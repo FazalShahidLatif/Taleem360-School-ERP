@@ -19,6 +19,18 @@ import { Footer } from '../components/Footer';
 import { TaleemEcosystemRoadmap } from '../components/TaleemEcosystemRoadmap';
 
 const Landing: React.FC = () => {
+  React.useEffect(() => {
+    document.title = 'Taleem360 - Complete Educational ERP Ecosystem & School Cloud Suite';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Taleem360 ERP Ecosystem is a high-performance educational management suite. Features integrated modules for modern schools, academies, daycares, and independent tutors, powered by dual-persistence and Paddle.');
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation Header (Public) */}

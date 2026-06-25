@@ -24,6 +24,18 @@ export const Login: React.FC = () => {
   const navigate = useNavigate();
   const isLiveWebsite = typeof window !== 'undefined' && (window.location.hostname === 'taleem360.online' || window.location.hostname === 'www.taleem360.online');
 
+  React.useEffect(() => {
+    document.title = 'Sign In & Access Cloud Portal | Taleem360 ERP Suite';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Sign in securely to your Taleem360 multi-tenant school portal. Check academic grades, student attendance, parent dashboards, and process billing checkout payments.');
+  }, []);
+
   const handleResetSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);

@@ -35,6 +35,16 @@ export const Onboarding: React.FC = () => {
   });
 
   useEffect(() => {
+    document.title = 'Establish Your School Cloud Portal | Taleem360 Onboarding';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Initiate your custom institutional subdomain, configure your initial database repository, and select your subscription tier to access Taleem360.');
+
     initPaddle();
     if (user?.onboarded) {
       navigate('/');
