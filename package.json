@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.js",
-    "build": "vite build",
+    "build": "tsx scripts/generate-sitemap.ts && vite build",
     "start": "node server.js",
     "preview": "vite preview",
     "lint": "tsc --noEmit",

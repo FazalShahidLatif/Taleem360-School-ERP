@@ -32,7 +32,25 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://taleem360.online/skills-academy</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/private-tutors</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://taleem360.online/about</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/contact</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -45,12 +63,6 @@
   </url>
   <url>
     <loc>https://taleem360.online/support</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://taleem360.online/tickets</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -80,7 +92,7 @@
     <priority>0.4</priority>
   </url>
 
-  <!-- Topical Cluster 1: School ERP & Productivity -->
+  <!-- Dynamic Blog Posts -->
   <url>
     <loc>https://taleem360.online/blog/streamlining-school-operations-ultimate-erp-guide</loc>
     <lastmod>2026-05-10</lastmod>
@@ -117,8 +129,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Topical Cluster 2: AI & EdTech Integrations -->
   <url>
     <loc>https://taleem360.online/blog/ai-transforming-school-administrative-decision-making</loc>
     <lastmod>2026-05-16</lastmod>
@@ -149,8 +159,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Topical Cluster 3: School Payroll, Finance & Compliance -->
   <url>
     <loc>https://taleem360.online/blog/comprehensive-guide-school-fees-automatic-collections</loc>
     <lastmod>2026-05-21</lastmod>
@@ -181,8 +189,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Topical Cluster 4: Student Success & Attendance Tracking -->
   <url>
     <loc>https://taleem360.online/blog/real-time-attendance-tracking-parent-peace-of-mind</loc>
     <lastmod>2026-05-26</lastmod>
@@ -213,8 +219,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Topical Cluster 5: Parent Engagement & Communication -->
   <url>
     <loc>https://taleem360.online/blog/parent-teacher-communication-portal-best-practices</loc>
     <lastmod>2026-05-31</lastmod>
@@ -245,29 +249,141 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Topical Cluster 6: Super Admin & Multi-School SaaS Growth -->
   <url>
     <loc>https://taleem360.online/blog/multi-school-franchise-management-centralized-erp-dashboards</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://taleem360.online/blog/data-security-pci-compliance-student-privacy</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://taleem360.online/blog/scaling-school-operations-franchise-growth-modules</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://taleem360.online/blog/digital-school-libraries-optimizing-book-inventory-turnover</loc>
     <lastmod>2026-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/pakistani-schools-digital-revolution-cloud-erp</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/saudi-vision-2030-school-administration-transformation</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/overcoming-low-bandwidth-regional-lms-solutions</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/simplifying-bise-board-exam-registration-cloud-erp</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/biometric-attendance-integration-gcc-academies</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/multilingual-education-middle-east-dual-language-portals</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/punjab-private-education-growth-scalable-saas-erp</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/pakistani-school-fee-payments-mobile-wallets-integration</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/empowering-teachers-pakistan-rural-districts-offline-lms</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/modernization-fbise-federal-board-academies-cloud-erp</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/integrating-sms-gateway-apis-regional-cellular-challenges</loc>
+    <lastmod>2026-06-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/managing-financial-audits-nonprofit-ngo-schools-south-asia</loc>
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/stem-curriculum-middle-east-schools-lms-integration</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/student-data-security-framework-south-asia-gcc-regulations</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/modern-lesson-planners-olevel-alevel-pk-gcc-cie-syllabus</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/stress-free-parents-multi-payment-portals-fee-recovery</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/taleem360-definitive-multi-tenant-educational-erp-solution</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/ece-daycare-early-childhood-kiosk-guardian-security</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://taleem360.online/blog/white-labeled-educational-growth-vercel-subdomains-branding</loc>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
