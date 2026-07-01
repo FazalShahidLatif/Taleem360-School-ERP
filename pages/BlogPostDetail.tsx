@@ -349,6 +349,9 @@ export const BlogPostDetail: React.FC = () => {
                   alt={post.alt_text} 
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  width="800"
+                  height="450"
                 />
               </div>
 

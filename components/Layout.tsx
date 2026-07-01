@@ -211,14 +211,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </div>
                 <span className="text-xl font-black text-slate-900 tracking-tight">Taleem360</span>
               </Link>
-              <div className="flex items-center space-x-6">
-                <nav className="flex items-center space-x-6">
+              <div className="flex items-center space-x-4 sm:space-x-6">
+                <nav className="hidden sm:flex items-center space-x-4 sm:space-x-6">
                   <Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">Pricing</Link>
                   <Link to="/about" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">About</Link>
                   <Link to="/contact" className="text-gray-600 hover:text-indigo-600 text-sm font-bold transition-colors">Contact</Link>
                 </nav>
-                <div className="h-5 w-px bg-gray-200" aria-hidden="true" />
-                <Link to="/login" className="inline-flex items-center justify-center px-5 py-2.5 border border-transparent text-sm font-black rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:shadow-md active:scale-95 transition-all">
+                <div className="hidden sm:block h-5 w-px bg-gray-200" aria-hidden="true" />
+                <Link to="/login" className="inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 border border-transparent text-sm font-black rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 hover:shadow-md active:scale-95 transition-all">
                   Sign In
                 </Link>
               </div>
