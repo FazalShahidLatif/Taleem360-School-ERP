@@ -125,8 +125,28 @@ export const FreeResourcesMatrixPage: React.FC = () => {
     // 2. Subject Filter
     let isSubjectMatch = true;
     if (subject !== 'all') {
-      const lowerSubject = res.title.toLowerCase() + ' ' + res.description.toLowerCase();
-      isSubjectMatch = lowerSubject.includes(subject.toLowerCase());
+      const searchTarget = (
+        res.title + ' ' + 
+        res.description + ' ' + 
+        res.slug + ' ' + 
+        res.id + ' ' + 
+        (res.seo?.keywords?.join(' ') || '') + ' ' +
+        (res.framework?.standardCode || '') + ' ' +
+        (res.framework?.syllabusCode || '')
+      ).toLowerCase();
+      
+      const subjectMapping: Record<string, string[]> = {
+        'algebra': ['algebra', 'equation', 'alg', 'linear', 'coefficient'],
+        'geometry': ['geometry', 'theorem', 'proof', 'shape', 'circle', 'angle'],
+        'fractions': ['fraction', 'decimal', 'percentage', 'equivalent', 'frac'],
+        'trigonometry': ['trigonometry', 'bearing', 'sine', 'cosine', 'trig'],
+        'phonics': ['phonic', 'sound', 'speech', 'alphabet', 'letter', 'pronunciation'],
+        'literacy': ['literacy', 'tracing', 'write', 'read', 'word', 'vocabulary'],
+        'physics': ['physics', 'kinetic', 'speed', 'velocity', 'motion', 'acceleration']
+      };
+      
+      const keywords = subjectMapping[subject.toLowerCase()] || [subject.toLowerCase()];
+      isSubjectMatch = keywords.some(keyword => searchTarget.includes(keyword));
     }
 
     // 3. Age Group/Grade Filter

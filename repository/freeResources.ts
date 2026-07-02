@@ -652,7 +652,10 @@ export class FreeResourcesRepository {
 
       try {
         const res = await dbPool.query(query, params);
-        return res.rows.map(row => this.mapToInterface(row));
+        if (res.rows && res.rows.length > 0) {
+          return res.rows.map(row => this.mapToInterface(row));
+        }
+        console.warn(`[WARN - FreeResourcesRepository] Database returned 0 rows for framework ${framework}. Using JSON fallback.`);
       } catch (err) {
         console.error(`[DB ERROR - FreeResourcesRepository] Falling back to static framework matrix arrays.`, err);
       }
@@ -680,7 +683,10 @@ export class FreeResourcesRepository {
       `;
       try {
         const res = await dbPool.query(query);
-        return res.rows.map(row => this.mapToInterface(row));
+        if (res.rows && res.rows.length > 0) {
+          return res.rows.map(row => this.mapToInterface(row));
+        }
+        console.warn(`[WARN - FreeResourcesRepository] Database returned 0 active resources. Using JSON fallback.`);
       } catch (err) {
         console.error(`[DB ERROR - FreeResourcesRepository] Falling back to static JSON array in getAllActiveResources.`, err);
       }
