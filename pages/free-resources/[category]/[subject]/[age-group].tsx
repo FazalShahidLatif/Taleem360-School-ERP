@@ -514,6 +514,136 @@ export const FreeResourcesMatrixPage: React.FC = () => {
                 </div>
               </div>
 
+              {/* 📊 Mathematics General Instruction & Adoption Panel */}
+              {category === 'mathematics' && subject === 'all' && ageGroup === 'all' && (
+                <motion.section 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-slate-900 border border-emerald-500/20 rounded-2xl p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 shadow-xl"
+                  id="math-general-adoption-guide"
+                >
+                  <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+                  
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 text-emerald-400">
+                        <BookOpen className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h2 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
+                          Mathematics Curriculum Hub
+                        </h2>
+                        <p className="text-xs text-slate-400 mt-0.5">
+                          General instructions, adoption blueprints, and pedagogy guidelines for classrooms & home study.
+                        </p>
+                      </div>
+                    </div>
+                    <span className="self-start sm:self-center px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full text-xs font-mono font-semibold border border-emerald-500/20">
+                      Standardized Math & Algebra
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Column 1: Implementation Steps */}
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                        <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                        4-Step Classroom Delivery Guide
+                      </h3>
+
+                      <div className="flex flex-col gap-3">
+                        <div className="flex gap-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 hover:border-slate-800 transition-colors">
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xs font-mono font-bold">
+                            1
+                          </span>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-xs font-bold text-slate-200">Align & Discover</span>
+                            <p className="text-[11px] text-slate-400 leading-relaxed">
+                              Use the left sidebar to select your students' standard: **Nursery (EYFS Patterns)**, **Grade 2 (Algebraic Balance)**, **Grade 5 (Variables & Expressions)**, or **Grade 10 (Quadratics & Polynomials)**.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 hover:border-slate-800 transition-colors">
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xs font-mono font-bold">
+                            2
+                          </span>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-xs font-bold text-slate-200">Interactive Workspace</span>
+                            <p className="text-[11px] text-slate-400 leading-relaxed">
+                              Click **"Study Now"** to load the active module on your digital whiteboard or student tablets. Play quizzes, practice algebraic scale equations, or demonstrate formula proofs.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 hover:border-slate-800 transition-colors">
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xs font-mono font-bold">
+                            3
+                          </span>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-xs font-bold text-slate-200">Adopt Offline Worksheets</span>
+                            <p className="text-[11px] text-slate-400 leading-relaxed">
+                              Click **"Download Worksheets (PDF)"** to print complete structural math booklets. Hands-on manual pencil-and-paper workouts ensure retention and active cognitive mastery.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3 bg-slate-950/40 p-4 rounded-xl border border-slate-800/60 hover:border-slate-800 transition-colors">
+                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xs font-mono font-bold">
+                            4
+                          </span>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-xs font-bold text-slate-200">Assess & Record Metrics</span>
+                            <p className="text-[11px] text-slate-400 leading-relaxed">
+                              Run the built-in digital Speed Sprint quizzes. Check score outcomes immediately and record performance marks back in the core Taleem360 Grade Book.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Column 2: Pedagogy & Standards Integration */}
+                    <div className="flex flex-col justify-between gap-5">
+                      <div className="flex flex-col gap-4">
+                        <h3 className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                          <Award className="w-3.5 h-3.5 text-emerald-400" />
+                          Curriculum & Pedagogy Guidelines
+                        </h3>
+
+                        <div className="bg-slate-950/40 border border-slate-800/80 rounded-xl p-5 flex flex-col gap-3">
+                          <div>
+                            <span className="text-xs font-bold text-slate-200 block">Classroom Teacher Integration</span>
+                            <p className="text-[11px] text-slate-400 leading-relaxed mt-1">
+                              Copy standard codes (e.g., <code className="text-emerald-400 font-mono">CCSS.Math.2.OA.B.2</code> or <code className="text-emerald-400 font-mono">EYFS-MATH-P2</code>) into your weekly Lesson Planner. Use the interactive boards as daily bell-ringers or quick warm-up challenges before formal textbook delivery.
+                            </p>
+                          </div>
+
+                          <div className="border-t border-slate-800/60 pt-3">
+                            <span className="text-xs font-bold text-slate-200 block">Parent & Home Tutor Study</span>
+                            <p className="text-[11px] text-slate-400 leading-relaxed mt-1">
+                              Schedule two 30-minute blocks per week. First, review step-by-step math cards together, then have the child practice finding unknown quantities independently using our printable PDF worksheets.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Call-to-Action to Adopt */}
+                      <div className="bg-emerald-950/20 border border-emerald-500/15 rounded-xl p-4 sm:p-5 flex items-center gap-4">
+                        <div className="hidden sm:block p-2.5 bg-emerald-500/10 text-emerald-400 rounded-lg">
+                          <CheckCircle className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1">
+                          <span className="text-xs font-bold text-white block">Obtaining Optimal Learning Results</span>
+                          <span className="text-[10px] text-slate-400 leading-relaxed block mt-0.5">
+                            Pair digital interactive exercises with tactile offline assignments. Align learning milestones using global UK and US frameworks to guarantee year-on-year advancement.
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.section>
+              )}
+
               {/* Grid Content */}
               {matchedResources.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
