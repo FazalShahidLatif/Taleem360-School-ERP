@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { 
   Download, 
@@ -630,10 +631,25 @@ export const FreeResources: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-indigo-100 max-w-xl leading-relaxed mb-8"
+            className="text-lg text-indigo-100 max-w-xl leading-relaxed mb-6"
           >
             Download high-contrast sequence coloring pages and foundational tracing books designed for preschool and kindergarten students. Providing free resource for students globaly.
           </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.25 }}
+            className="mb-8"
+          >
+            <Link 
+              to="/free-resources/mathematics/all/all"
+              className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black px-6 py-3.5 rounded-xl text-sm transition-all transform hover:scale-[1.03] shadow-lg active:scale-95"
+            >
+              <Sparkles className="w-4 h-4 text-slate-950 animate-pulse" />
+              Academic Curriculum Materials (Cambridge / CCSS)
+            </Link>
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0, y: 15 }}

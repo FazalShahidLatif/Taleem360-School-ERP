@@ -381,6 +381,159 @@ Master both the Sine Rule and Cosine Rule for non-right triangles:
 ## 2. Exam Bearings Tip
 Always measure bearings clockwise from North ($000^\\circ$).`
     }
+  },
+  // ==========================================
+  // LANGUAGES & LITERACY (UK EYFS & US Common Core)
+  // ==========================================
+  {
+    id: "glob_lang_ccss_g2_dolch",
+    slug: "dolch-sight-word-flashcard-pack",
+    title: "Dolch Sight Word Flashcard Pack: Grades 1-3 Literacy Core",
+    description: "High-contrast printable sight word flashcards designed to build rapid recognition and reading fluency in alignment with US Common Core standards.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "US Common Core",
+      syllabusCode: "CCSS-ELA-L1-3",
+      gradeLevel: "Grade 2",
+      standardCode: "CCSS.ELA-LITERACY.RF.2.3.F"
+    },
+    seo: {
+      metaTitle: "Free Dolch Sight Word Flashcard Pack PDF | Grade 1-3 Literacy",
+      metaDescription: "Download free printable high-contrast sight word flashcards. Help primary schoolers master Dolch high-frequency words for reading fluency.",
+      keywords: ["dolch sight words", "grade 2 sight word pdf", "printable vocabulary cards", "free literacy workbooks"],
+      structuredDataType: "DigitalDocument"
+    },
+    payload: {
+      viewComponentType: "PDFViewer",
+      cdnPdfUrl: "https://taleem360.online",
+      markdownContent: `# Dolch Sight Words Grade 1-3 Practice Handout
+
+## Core Vocabulary Lists
+Master these high-frequency words using our visual flashcard sets:
+
+* **Grade 1 Words:** *after, again, an, any, ask, as, by, could, every, fly, from, give, going, had, has, her, him, his, how, just, know, let, live, may, of, old, once, open, over, put, round, some, stop, take, thank, them, then, think, walk, were, when*
+* **Grade 2 Words:** *always, around, because, been, before, best, both, buy, call, cold, does, don't, fast, first, five, found, gave, goes, green, its, made, many, off, or, pull, read, right, sing, sit, sleep, tell, their, these, those, upon, us, use, very, wash, which, why, wish, work, would, write, your*
+* **Grade 3 Words:** *about, better, bring, carry, clean, cut, done, draw, drink, eight, fall, far, full, got, grow, hold, hot, hurt, if, keep, kind, laugh, light, long, much, myself, never, only, own, pick, seven, shall, show, six, small, start, ten, today, together, try, warm*`
+    }
+  },
+
+  // ==========================================
+  // CORE MATHEMATICS (US Common Core & Cambridge Primary)
+  // ==========================================
+  {
+    id: "glob_math_ccss_g5_drill",
+    slug: "interactive-percentage-decimal-drill-widget",
+    title: "Interactive Percentage & Decimal Drill Widget",
+    description: "A digital interactive testing card that checks equivalent fractions, percentages, and decimals, providing instant marking schemes.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "US Common Core",
+      syllabusCode: "CCSS-MATH-5NF",
+      gradeLevel: "Grade 5",
+      standardCode: "CCSS.MATH.CONTENT.5.NF.B.3"
+    },
+    seo: {
+      metaTitle: "Interactive Fractions Decimals & Percentages Quiz Widget",
+      metaDescription: "Test equivalent conversions with our free 5th grade interactive drill widget. Generates instant scoring for classroom review.",
+      keywords: ["fractions decimal widget", "percentages drill", "5th grade math quiz", "free interactive math games"],
+      structuredDataType: "InteractiveReview"
+    },
+    payload: {
+      viewComponentType: "QuizWidget",
+      interactiveConfig: {
+        timerSeconds: 90,
+        difficulty: "medium"
+      },
+      markdownContent: `# Fractions, Decimals, and Percentages Equivalents
+
+Welcome to the interactive conversion assessment sheet. Solve the tasks below to earn your badge:
+
+* **Rule 1:** To turn a fraction into a decimal, divide the numerator by the denominator.
+* **Rule 2:** To turn a decimal into a percentage, multiply by 100.`
+    }
+  },
+
+  // ==========================================
+  // NATURAL SCIENCES (Cambridge Primary & IGCSE)
+  // ==========================================
+  {
+    id: "glob_sci_caie_g5_cell",
+    slug: "human-anatomy-plant-cell-labeling-worksheet",
+    title: "Human Anatomy & Plant Cell Structure Labeling Worksheet",
+    description: "A printable diagram study pack covering eukaryotic cells, mitochondria, chloroplasts, and standard cell wall identification for upper primary.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "Cambridge CAIE",
+      syllabusCode: "0846-Primary-Science",
+      gradeLevel: "Grade 5",
+      standardCode: "Cambridge.Primary.Science.5Bs1"
+    },
+    seo: {
+      metaTitle: "Plant Cell Structure & Anatomy Worksheet PDF | Grade 5 Science",
+      metaDescription: "Download free printable plant and animal cell labeling sheets for Grade 5. Perfect for classroom science lessons aligned with Cambridge Primary.",
+      keywords: ["plant cell diagram", "animal cell worksheet pdf", "grade 5 cell anatomy", "free biology printables"],
+      structuredDataType: "DigitalDocument"
+    },
+    payload: {
+      viewComponentType: "PDFViewer",
+      cdnPdfUrl: "https://taleem360.online",
+      markdownContent: `# Eukaryotic Cell Structure: Plant & Animal Cell Identification
+
+## 1. Primary Organelles Checklist
+In Cambridge Primary Science Grade 5, students study the function of core cell parts:
+
+1. **Cell Wall (Plant Only):** Provides rigid structural support. Made of cellulose.
+2. **Cell Membrane (Both):** Controls what goes in and out of the cell.
+3. **Nucleus (Both):** The control center holding DNA instructions.
+4. **Cytoplasm (Both):** Jelly-like fluid where chemical reactions happen.
+5. **Chloroplast (Plant Only):** Contains chlorophyll for photosynthesis.
+6. **Vacuole (Large in Plants):** Stores water and nutrients.`
+    }
+  },
+  {
+    id: "glob_sci_caie_igcse_0625",
+    slug: "igcse-physics-0625-kinematics-mock-simulator",
+    title: "IGCSE Physics (0625) Kinematics Exam Mock Simulator",
+    description: "Interactive kinematics calculation workbench with simulated velocity-time charts and past-paper mock questions for Cambridge IGCSE Physics.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "Cambridge CAIE",
+      syllabusCode: "0625-Extended",
+      gradeLevel: "Grade 10",
+      standardCode: "Syllabus-0625-Topic-P1-Motion"
+    },
+    seo: {
+      metaTitle: "IGCSE Physics 0625 Kinematics Mock Simulator Online",
+      metaDescription: "Master speed, velocity, acceleration, and terminal velocity with our free IGCSE 0625 Physics interactive calculator simulator.",
+      keywords: ["0625 physics kinematics", "velocity time graph simulator", "igcse physics worksheets", "free physics 0625 quiz"],
+      structuredDataType: "InteractiveReview"
+    },
+    payload: {
+      viewComponentType: "CanvasApp",
+      interactiveConfig: {
+        equations: ["v = u + at", "s = ut + 0.5at²", "v² = u² + 2as"],
+        topics: ["Speed-Time Graphs", "Free Fall", "Terminal Velocity"]
+      },
+      markdownContent: `# IGCSE Physics (0625) Chapter 1: Kinematics Core Theory
+
+## 1. Essential Formulas
+* **Average Speed:** $\\text{speed} = \\frac{\\text{total distance}}{\\text{total time}}$
+* **Acceleration:** $a = \\frac{v - u}{t}$
+* **Distance under v-t graph:** Equal to the area under the velocity-time graph.
+
+## 2. Speed-Time Graph Analysis
+1. A straight line shows constant acceleration.
+2. A horizontal line shows zero acceleration (constant speed).
+3. A curve shows changing acceleration.`
+    }
   }
 ];
 
