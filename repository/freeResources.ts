@@ -204,6 +204,42 @@ Welcome to UK EYFS Early Years Numeracy tracing cards!
 3. **Number 3:** Curve around and around again. Count: 🍎🍎🍎 Three apples.`
     }
   },
+  {
+    id: "glob_math_eyfs_alg_pat",
+    slug: "eyfs-visual-pattern-matching-algebra",
+    title: "Pattern Recognition & Early Algebraic Sequencing Activity",
+    description: "Fun, visual sequence-matching cards designed to introduce nursery students to repeating patterns, shape sequences, and early algebraic sorting logic.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "UK EYFS",
+      syllabusCode: "EYFS-MATH-P2",
+      gradeLevel: "Nursery",
+      standardCode: "EYFS.Mathematics.Patterns"
+    },
+    seo: {
+      metaTitle: "Free EYFS Pattern Matching & Early Algebra Activity",
+      metaDescription: "Introduce early algebraic reasoning to early years students with printable repeating pattern cards. Designed to align with UK EYFS curriculum standards.",
+      keywords: ["EYFS repeating patterns", "early years algebra", "nursery shape sequences", "interactive math activities"],
+      structuredDataType: "DigitalDocument"
+    },
+    payload: {
+      viewComponentType: "PDFViewer",
+      cdnPdfUrl: "https://taleem360.online",
+      markdownContent: `# Pattern Recognition & Early Algebraic Sequencing
+
+Repeating pattern cards introduce early years learners to algebraic sequencing by matching and continuing visual rules.
+
+## 1. Repeating Sequences Activities
+* **Activity A (AB Pattern):** Apple, Banana, Apple, Banana, [___?___]
+* **Activity B (AAB Pattern):** Circle, Circle, Star, Circle, Circle, [___?___]
+* **Activity C (ABC Pattern):** Red square, Blue square, Green square, Red square, Blue square, [___?___]
+
+## 2. Interactive Shape Assembly
+Guide students to lay down block sequences using wooden toys, repeating the rhythmic patterns out loud.`
+    }
+  },
 
   // ==========================================
   // LOWER PRIMARY (Grades 1 - 3)
@@ -249,6 +285,47 @@ Welcome to UK EYFS Early Years Numeracy tracing cards!
 4. 89 - 45 = ?`
     }
   },
+  {
+    id: "glob_math_ccss_g2_alg_bal",
+    slug: "grade-2-missing-numbers-algebraic-balance",
+    title: "Missing Numbers & Balanced Scale Equations",
+    description: "Interactive mathematical exercises focused on operations, inverse operations, and determining the unknown number 'x' to balance basic equations.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "US Common Core",
+      syllabusCode: "CCSS-MATH-2OA-ALG",
+      gradeLevel: "Grade 2",
+      standardCode: "CCSS.Math.2.OA.B.2"
+    },
+    seo: {
+      metaTitle: "Grade 2 Missing Numbers & Algebraic Balance Worksheets",
+      metaDescription: "Help lower primary schoolers master equation balance and find the missing value. Fully aligned with US Common Core standard CCSS.Math.2.OA.B.2.",
+      keywords: ["grade 2 missing numbers", "algebraic balancing scale", "mental math equations", "finding the unknown x"],
+      structuredDataType: "InteractiveReview"
+    },
+    payload: {
+      viewComponentType: "QuizWidget",
+      interactiveConfig: {
+        timerSeconds: 120,
+        questionCount: 10
+      },
+      markdownContent: `# Missing Numbers & Algebraic Balance
+
+Welcome to algebraic balancing scales!
+
+## Equation Balance Challenges
+Find the missing number to make both sides of the balance equal:
+* **Problem 1:** 8 + 4 = 10 + [__]
+* **Problem 2:** 15 - [__] = 9
+* **Problem 3:** [__] + 5 = 12 + 2
+* **Problem 4:** 20 - 7 = 6 + [__]
+
+## Learning Concept: Inverse Operations
+Remember, if addition is happening on one side, subtraction can help you find the missing piece!`
+    }
+  },
 
   // ==========================================
   // UPPER PRIMARY (Grades 4 - 6)
@@ -285,6 +362,48 @@ Welcome to UK EYFS Early Years Numeracy tracing cards!
 | 3/4      | 0.75    | 75%        | [██████░░]            |
 | 1/5      | 0.2     | 20%        | [██░░░░░░]            |
 | 1/10     | 0.1     | 10%        | [█░░░░░░░]            |`
+    }
+  },
+  {
+    id: "glob_math_ccss_g5_alg_exp",
+    slug: "grade-5-introduction-to-variables-expressions",
+    title: "Variables & Writing Simple Algebraic Expressions Guide",
+    description: "A comprehensive study guide introducing variables, converting word problems into expressions, and evaluating simple algebraic statements with replacement numbers.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "US Common Core",
+      syllabusCode: "CCSS-MATH-5OA",
+      gradeLevel: "Grade 5",
+      standardCode: "CCSS.MATH.CONTENT.5.OA.A.2"
+    },
+    seo: {
+      metaTitle: "Introduction to Variables & Algebraic Expressions | Grade 5 Math",
+      metaDescription: "Learn how to write and evaluate algebraic expressions with variables. Free guide for Grade 5 upper primary students aligned with CCSS.MATH.CONTENT.5.OA.A.2.",
+      keywords: ["grade 5 variables", "writing algebraic expressions", "evaluating simple algebra", "common core math grade 5"],
+      structuredDataType: "Course"
+    },
+    payload: {
+      viewComponentType: "PDFViewer",
+      cdnPdfUrl: "https://taleem360.online",
+      markdownContent: `# Introduction to Variables & Simple Expressions
+
+Learn how variables act as placeholders for numbers, and write expressions from word scenarios.
+
+## 1. What is a Variable?
+A variable is a letter (like $x$ or $y$) that stands for an unknown number.
+
+## 2. Writing Expressions from Words
+* **Word Phrase:** "5 more than a number $x$" -> **Expression:** $x + 5$
+* **Word Phrase:** "3 times a number $y$" -> **Expression:** $3y$
+* **Word Phrase:** "7 less than twice a number $z$" -> **Expression:** $2z - 7$
+
+## 3. Practice Evaluation Questions
+Evaluate the following expressions when $x = 4$ and $y = 7$:
+1. Calculate: $3x + 2$ -> Solution: $3(4) + 2 = 14$
+2. Calculate: $2y - x$ -> Solution: $2(7) - 4 = 10$
+3. Calculate: $\\frac{x}{2} + 5y$ -> Solution: $\\frac{4}{2} + 5(7) = 2 + 35 = 37$`
     }
   },
 
@@ -380,6 +499,55 @@ Master both the Sine Rule and Cosine Rule for non-right triangles:
 
 ## 2. Exam Bearings Tip
 Always measure bearings clockwise from North ($000^\\circ$).`
+    }
+  },
+  {
+    id: "glob_math_caie_g10_alg_quad",
+    slug: "cambridge-igcse-grade-10-quadratics-factoring",
+    title: "Quadratic Equations & Polynomial Factoring Workbook",
+    description: "Advanced workbook detailing polynomial expansion, factoring quadratics, completing the square, and applying the quadratic formula with worked Cambridge IGCSE past-paper examples.",
+    createdAt: new Date("2026-07-02T12:00:00Z"),
+    updatedAt: new Date("2026-07-02T12:00:00Z"),
+    isTenantIsolated: false,
+    framework: {
+      frameworkName: "Cambridge CAIE",
+      syllabusCode: "0580-Extended-Algebra",
+      gradeLevel: "Grade 10",
+      standardCode: "Syllabus-0580-Algebra-E2"
+    },
+    seo: {
+      metaTitle: "Cambridge IGCSE Grade 10 Quadratic Equations & Factoring PDF",
+      metaDescription: "Master IGCSE 0580 Algebra with our free polynomial factoring and quadratic equation guide. Complete with worked examples and formula checks.",
+      keywords: ["quadratic equation formula", "factoring polynomials grade 10", "completing the square IGCSE", "0580 past paper algebra"],
+      structuredDataType: "DigitalDocument"
+    },
+    payload: {
+      viewComponentType: "PDFViewer",
+      cdnPdfUrl: "https://taleem360.online",
+      markdownContent: `# Chapter 2: Quadratic Equations & Polynomial Factoring
+
+Comprehensive review of factoring methods, completing the square, and using the general quadratic formula.
+
+## 1. Polynomial Factoring Methods
+To factor a trinomial of the form $ax^2 + bx + c$:
+* Find two numbers that multiply to $ac$ and add to $b$.
+* Split the middle term and factor by grouping.
+
+### Worked Example:
+Factor: $x^2 - 5x + 6$
+* Multiplies to $6$, adds to $-5$ -> Numbers are $-2$ and $-3$.
+* Factored form: $(x - 2)(x - 3)$
+
+## 2. General Quadratic Formula
+For any quadratic equation of the form $ax^2 + bx + c = 0$:
+$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
+
+### Practice Question:
+Solve: $2x^2 + 7x - 3 = 0$ giving answers correct to 2 decimal places.
+* Coefficients: $a = 2, b = 7, c = -3$
+* Discriminant: $b^2 - 4ac = 7^2 - 4(2)(-3) = 49 + 24 = 73$
+* Roots: $x = \\frac{-7 \\pm \\sqrt{73}}{4}$
+* Solutions: $x \\approx 0.39$ and $x \\approx -3.89$`
     }
   },
   // ==========================================
