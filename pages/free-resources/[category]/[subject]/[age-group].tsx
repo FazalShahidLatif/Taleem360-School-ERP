@@ -17,6 +17,7 @@ import {
   Award
 } from 'lucide-react';
 import { ResourceDirectorySidebar } from '@/components/ResourceDirectorySidebar';
+import { ResourceSEOHead } from '@/components/ResourceSEOHead';
 import { FreeResource } from '@/repository/freeResources';
 
 export const FreeResourcesMatrixPage: React.FC = () => {
@@ -66,67 +67,35 @@ export const FreeResourcesMatrixPage: React.FC = () => {
     fetchResources();
   }, []);
 
-  // Sync dynamic JSON-LD metadata for SEO injection
+  // Auto-select resource if 'resource' query param is present
   useEffect(() => {
-    // Remove old schema script if present
-    const existingScript = document.getElementById('taleem360-jsonld-schema');
-    if (existingScript) {
-      existingScript.remove();
-    }
-
-    if (!selectedResource) {
-      // Dynamic Directory Schema
-      const directorySchema = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": `Free ${category.toUpperCase()} Resources Directory`,
-        "description": `Browse our global free curriculum-aligned guides for ${category}, subject ${subject}, grade ${ageGroup}.`,
-        "itemListElement": resources.map((res, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "url": `https://taleem360.online/free-resources/detail/${res.slug}`,
-          "name": res.title
-        }))
-      };
-
-      const script = document.createElement('script');
-      script.id = 'taleem360-jsonld-schema';
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify(directorySchema);
-      document.head.appendChild(script);
-
-      document.title = `Free ${category.charAt(0).toUpperCase() + category.slice(1)} ${subject !== 'all' ? subject : ''} Materials | Taleem360`;
-    } else {
-      // Resource-specific document/course schema
-      const resourceSchema = {
-        "@context": "https://schema.org",
-        "@type": selectedResource.seo?.structuredDataType || 'DigitalDocument',
-        "name": selectedResource.seo?.metaTitle || selectedResource.title,
-        "description": selectedResource.seo?.metaDescription || selectedResource.description,
-        "url": `https://taleem360.online/free-resources/detail/${selectedResource.slug}`,
-        "inLanguage": "en",
-        "publisher": {
-          "@type": "Organization",
-          "name": "Taleem360",
-          "url": "https://taleem360.online"
-        },
-        "educationalAlignment": {
-          "@type": "AlignmentObject",
-          "alignmentType": "educationalLevel",
-          "educationalFramework": selectedResource.framework?.frameworkName,
-          "targetName": selectedResource.framework?.gradeLevel
+    if (resources.length > 0) {
+      const searchParams = new URLSearchParams(window.location.search);
+      const resourceSlug = searchParams.get('resource');
+      if (resourceSlug) {
+        const found = resources.find(r => r.slug.toLowerCase() === resourceSlug.toLowerCase());
+        if (found) {
+          setSelectedResource(found);
         }
-      };
-
-      const script = document.createElement('script');
-      script.id = 'taleem360-jsonld-schema';
-      script.type = 'application/ld+json';
-      script.text = JSON.stringify(resourceSchema);
-      document.head.appendChild(script);
-
-      document.title = `${selectedResource.seo?.metaTitle || selectedResource.title} | Taleem360`;
+      }
     }
-  }, [selectedResource, category, subject, ageGroup, resources]);
+  }, [resources]);
+
+  const handleSelectResource = (resource: FreeResource) => {
+    setSelectedResource(resource);
+    const url = new URL(window.location.href);
+    url.searchParams.set('resource', resource.slug);
+    window.history.pushState({}, '', url.toString());
+  };
+
+  const handleBackToDirectory = () => {
+    setSelectedResource(null);
+    const url = new URL(window.location.href);
+    url.searchParams.delete('resource');
+    window.history.pushState({}, '', url.toString());
+  };
+
+
 
   // Handle Dynamic Sidebar filter switches
   const handleFilterChange = (newFilters: { category?: string; subject?: string; ageGroup?: string }) => {
@@ -144,11 +113,11 @@ export const FreeResourcesMatrixPage: React.FC = () => {
     let isCategoryMatch = false;
 
     if (category === 'mathematics') {
-      isCategoryMatch = lowerFramework.includes('math') || res.framework.frameworkName === 'Cambridge CAIE' || res.framework.frameworkName === 'US Common Core';
+      isCategoryMatch = lowerFramework.includes('math') || res.id.toLowerCase().includes('math') || res.slug.includes('math') || res.slug.includes('equation') || res.slug.includes('fraction') || res.slug.includes('algebra') || res.slug.includes('trigonometry');
     } else if (category === 'languages') {
-      isCategoryMatch = lowerFramework.includes('eyfs') || lowerFramework.includes('literacy') || lowerFramework.includes('phonic');
+      isCategoryMatch = lowerFramework.includes('eyfs') || lowerFramework.includes('literacy') || lowerFramework.includes('phonic') || lowerFramework.includes('language') || res.id.toLowerCase().includes('lang') || res.slug.includes('phonic') || res.slug.includes('word') || res.slug.includes('sight');
     } else if (category === 'sciences') {
-      isCategoryMatch = lowerFramework.includes('caie') || lowerFramework.includes('physics');
+      isCategoryMatch = lowerFramework.includes('caie') || lowerFramework.includes('physics') || lowerFramework.includes('science') || res.id.toLowerCase().includes('sci') || res.slug.includes('biology') || res.slug.includes('cell') || res.slug.includes('physics') || res.slug.includes('anatomy');
     } else {
       isCategoryMatch = true;
     }
@@ -212,6 +181,31 @@ export const FreeResourcesMatrixPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       
+      {/* Dynamic Open Graph, Twitter cards, and Schema.org Head Serialization */}
+      {selectedResource ? (
+        <ResourceSEOHead 
+          title={selectedResource.seo?.metaTitle || selectedResource.title}
+          description={selectedResource.seo?.metaDescription || selectedResource.description}
+          slug={selectedResource.slug}
+          category={category}
+          subject={subject}
+          ageGroup={ageGroup}
+          keywords={selectedResource.seo?.keywords}
+          structuredDataType={selectedResource.seo?.structuredDataType}
+          isHubPage={false}
+        />
+      ) : (
+        <ResourceSEOHead 
+          title={`Free ${category.charAt(0).toUpperCase() + category.slice(1)} ${subject !== 'all' ? subject : ''} Materials | Taleem360`}
+          description={`Browse our premium global curriculum-aligned free educational guides for ${category} (${subject}), mapped to Grade level ${ageGroup}.`}
+          category={category}
+          subject={subject}
+          ageGroup={ageGroup}
+          isHubPage={true}
+          itemList={matchedResources.map(r => ({ name: r.title, slug: r.slug }))}
+        />
+      )}
+
       {/* 1. Header Breadcrumbs Bar */}
       <nav aria-label="breadcrumb" className="bg-slate-900/60 border-b border-slate-800/80 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -263,7 +257,7 @@ export const FreeResourcesMatrixPage: React.FC = () => {
               
               {/* Back Button */}
               <button 
-                onClick={() => setSelectedResource(null)}
+                onClick={handleBackToDirectory}
                 className="self-start flex items-center gap-2 text-xs font-mono text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 transition-all mb-2"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -539,7 +533,7 @@ export const FreeResourcesMatrixPage: React.FC = () => {
                         </span>
                         
                         <button 
-                          onClick={() => setSelectedResource(resource)}
+                          onClick={() => handleSelectResource(resource)}
                           className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors bg-emerald-500/5 hover:bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/10"
                         >
                           Study Now

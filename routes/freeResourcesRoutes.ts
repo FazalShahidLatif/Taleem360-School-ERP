@@ -133,4 +133,78 @@ router.get('/api/free-resources/slug/:slug', async (req, res) => {
   }
 });
 
+/**
+ * 4. GET /sitemap-resources.xml
+ * Dynamic XML sitemap endpoint strictly located at taleem360.online/sitemap-resources.xml
+ * compliant with Sitemaps.org, with Edge caching headers & stale-while-revalidate.
+ */
+router.get('/sitemap-resources.xml', async (req, res) => {
+  try {
+    const resources = await repo.getAllActiveResources();
+    const baseUrl = 'https://taleem360.online';
+
+    // Build XML string conforming to Sitemaps.org protocols
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+    // 1. Static landing pages
+    const todayStr = new Date().toISOString().split('T')[0];
+    const staticUrls = [
+      { path: '/free-resources', priority: '1.0', changefreq: 'daily' },
+      { path: '/free-resources/mathematics/all/all', priority: '0.9', changefreq: 'daily' },
+      { path: '/free-resources/languages/all/all', priority: '0.9', changefreq: 'daily' },
+      { path: '/free-resources/sciences/all/all', priority: '0.9', changefreq: 'daily' },
+    ];
+
+    for (const urlInfo of staticUrls) {
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}${urlInfo.path}</loc>\n`;
+      xml += `    <lastmod>${todayStr}</lastmod>\n`;
+      xml += `    <changefreq>${urlInfo.changefreq}</changefreq>\n`;
+      xml += `    <priority>${urlInfo.priority}</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    // 2. Dynamic resources mapping
+    for (const r of resources) {
+      // Clean slug or use encoded string
+      const cleanSlug = encodeURIComponent(r.slug);
+      
+      const categoryPath = r.framework.frameworkName.toLowerCase().includes('math') ? 'mathematics' :
+                           r.framework.frameworkName.toLowerCase().includes('eyfs') || r.framework.frameworkName.toLowerCase().includes('literacy') ? 'languages' : 'sciences';
+      const subjectPath = r.slug.includes('phonics') ? 'phonics' :
+                          r.slug.includes('grammar') ? 'grammar' :
+                          r.slug.includes('fraction') || r.slug.includes('percentage') ? 'fractions' :
+                          r.slug.includes('algebra') || r.slug.includes('linear') ? 'algebra' :
+                          r.slug.includes('trigonometry') ? 'trigonometry' :
+                          r.slug.includes('biology') || r.slug.includes('cell') || r.slug.includes('anatomy') ? 'biology' : 'physics';
+      const agePath = r.framework.gradeLevel.toLowerCase().includes('nursery') ? 'nursery' :
+                      r.framework.gradeLevel.toLowerCase().includes('grade 2') || r.framework.gradeLevel.toLowerCase().includes('grade-2') || r.framework.gradeLevel.toLowerCase().includes('1-3') ? 'grade-2' :
+                      r.framework.gradeLevel.toLowerCase().includes('grade 5') || r.framework.gradeLevel.toLowerCase().includes('grade-5') || r.framework.gradeLevel.toLowerCase().includes('4-6') ? 'grade-5' :
+                      r.framework.gradeLevel.toLowerCase().includes('grade 8') || r.framework.gradeLevel.toLowerCase().includes('grade-8') || r.framework.gradeLevel.toLowerCase().includes('7-8') ? 'grade-8' : 'grade-10';
+
+      const detailUrl = `${baseUrl}/free-resources/${categoryPath}/${subjectPath}/${agePath}?resource=${cleanSlug}`;
+      const lastMod = (r.updatedAt || r.createdAt || new Date()).toISOString().split('T')[0];
+
+      xml += `  <url>\n`;
+      xml += `    <loc>${detailUrl}</loc>\n`;
+      xml += `    <lastmod>${lastMod}</lastmod>\n`;
+      xml += `    <changefreq>weekly</changefreq>\n`;
+      xml += `    <priority>0.8</priority>\n`;
+      xml += `  </url>\n`;
+    }
+
+    xml += `</urlset>`;
+
+    // Configure cache headers: 1 hour max-age, 1 day stale-while-revalidate
+    res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    return res.status(200).send(xml);
+  } catch (err) {
+    console.error('[Sitemap Error] Generation failed:', err);
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    return res.status(500).send('<?xml version="1.0" encoding="UTF-8"?><error>Internal Server Error</error>');
+  }
+});
+
 export default router;
