@@ -27,6 +27,7 @@ import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { FreeResources } from './pages/free-resources';
+import { AIResourceStudio } from './pages/AIResourceStudio';
 import { DaycareSummary } from './pages/DaycareSummary';
 import { SkillsAcademy } from './pages/SkillsAcademy';
 import { PrivateTutors } from './pages/PrivateTutors';
@@ -114,6 +115,7 @@ const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
 const ContactPage = () => <Layout><Contact /></Layout>;
 const FreeResourcesPage = () => <Layout><FreeResources /></Layout>;
+const AIResourceStudioPage = () => <Layout><AIResourceStudio /></Layout>;
 const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
 const SkillsAcademyPage = () => <Layout><SkillsAcademy /></Layout>;
 const PrivateTutorsPage = () => <Layout><PrivateTutors /></Layout>;
@@ -488,6 +490,11 @@ const App: React.FC = () => {
           <Route 
             path="/free-resources" 
             element={<FreeResourcesPage />} 
+          />
+
+          <Route 
+            path="/ai-resource-studio" 
+            element={<AIResourceStudioPage />} 
           />
 
           <Route 

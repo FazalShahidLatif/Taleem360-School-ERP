@@ -14,6 +14,7 @@ import submissionRoutes from './routes/academy/submissionRoutes.ts';
 import bookingRoutes from './routes/academy/bookingRoutes.ts';
 import whatsappWebhookRoutes from './routes/academy/whatsappWebhook.ts';
 import nexusRoutes from './routes/academy/nexusRoutes.ts';
+import freeResourcesRoutes from './routes/freeResourcesRoutes.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -139,6 +140,7 @@ async function startServer() {
   app.use(bookingRoutes);
   app.use(whatsappWebhookRoutes);
   app.use(nexusRoutes);
+  app.use(freeResourcesRoutes);
 
   // API Routes
   app.post('/api/auth/login', async (req, res) => {
@@ -299,6 +301,60 @@ async function startServer() {
     } catch (err) {
       console.error('[server.js] Error in /api/ai/chat:', err);
       res.status(500).json({ detail: err.message || 'Error processing AI chat' });
+    }
+  });
+
+  app.post('/api/ai/process-resource', async (req, res) => {
+    try {
+      const { cleanedText, systemInstruction, temperature, responseMimeType, responseSchema } = req.body;
+      
+      const apiKey = getApiKey();
+      if (!apiKey) {
+        // High fidelity mock fallback
+        return res.json({ 
+          text: JSON.stringify({
+            status: "success",
+            fallback: true,
+            message: "Taleem360 AI Prompt Studio is in offline simulation mode because the GEMINI_API_KEY environment variable is not set. Below is a high-fidelity mock of the structured student experience.",
+            quiz: [
+              {
+                question: "Which of the following is the main feature of the Taleem360 Cloud Suite?",
+                options: ["Automated grading and BISE alignment", "Manual spreadsheet tracking", "Decentralized paper registers", "Traditional chalkboards"],
+                correctAnswer: "Automated grading and BISE alignment",
+                explanation: "Taleem360 provides unified multi-tenant school operations, BISE integration, and automated reporting."
+              },
+              {
+                question: "What Python library is commonly used for coordinate-based PDF extraction?",
+                options: ["pdfplumber", "requests", "numpy", "pandas"],
+                correctAnswer: "pdfplumber",
+                explanation: "pdfplumber offers extensive control over character layouts, tables, and words inside PDF files."
+              }
+            ],
+            flashcards: [
+              { term: "PyPDF", definition: "A pure-Python PDF library capable of splitting, merging, cropping, and transforming PDF files." },
+              { term: "System Prompt", definition: "High-level rules provided to a large language model to dictate its persona, constraints, and output format." }
+            ],
+            summary: "Extracted textbook data emphasizes digital modernizations of school portals and local compliance workflows."
+          }, null, 2)
+        });
+      }
+
+      const client = getAiClient();
+      const response = await client.models.generateContent({
+        model: 'gemini-3.5-flash',
+        contents: [{ role: 'user', parts: [{ text: cleanedText }] }],
+        config: {
+          systemInstruction,
+          temperature: temperature !== undefined ? parseFloat(temperature) : 0.7,
+          responseMimeType: responseMimeType || 'text/plain',
+          responseSchema: responseSchema || undefined
+        }
+      });
+
+      res.json({ text: response.text });
+    } catch (err) {
+      console.error('[server.js] Error in /api/ai/process-resource:', err);
+      res.status(500).json({ detail: err.message || 'Error processing AI resource pipeline' });
     }
   });
 
