@@ -41,7 +41,6 @@ import {
 import { UserRole } from '../types';
 import { AIChatbot } from './AIChatbot';
 import { Footer } from './Footer';
-import FreeResourceBanner from './FreeResourceBanner';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -99,7 +98,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      <FreeResourceBanner />
       <div className="flex flex-1 w-full relative">
       {/* Mobile Sidebar Overlay */}
       {user && sidebarOpen && (

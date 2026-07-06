@@ -49,15 +49,6 @@ export const TaleemEcosystemRoadmap = () => {
       badgeColor: "bg-amber-100 text-amber-800 font-semibold ring-2 ring-amber-500/10",
       route: "/daycare",
       actionText: "Open Daycare Hub Sandbox"
-    },
-    {
-      title: "Global Student Competition Hub",
-      status: "Live Now • Pre-K to 10th",
-      desc: "Local, regional, and global competitions after nominal $1/$2 entry fee supporting transparent 100-student giveaway cash prizes.",
-      icon: <Sparkles className="w-6 h-6 text-indigo-600" />,
-      badgeColor: "bg-indigo-100 text-indigo-800 font-bold ring-2 ring-indigo-500/25",
-      route: "/free-resources",
-      actionText: "Open Student Competition Hub"
     }
   ];
 

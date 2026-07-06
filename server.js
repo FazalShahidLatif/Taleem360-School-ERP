@@ -14,7 +14,6 @@ import submissionRoutes from './routes/academy/submissionRoutes.ts';
 import bookingRoutes from './routes/academy/bookingRoutes.ts';
 import whatsappWebhookRoutes from './routes/academy/whatsappWebhook.ts';
 import nexusRoutes from './routes/academy/nexusRoutes.ts';
-import freeResourcesRoutes from './routes/freeResourcesRoutes.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -140,7 +139,6 @@ async function startServer() {
   app.use(bookingRoutes);
   app.use(whatsappWebhookRoutes);
   app.use(nexusRoutes);
-  app.use(freeResourcesRoutes);
 
   // API Routes
   app.post('/api/auth/login', async (req, res) => {

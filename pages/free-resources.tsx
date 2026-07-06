@@ -1,1750 +1,1633 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import React, { useState } from "react";
 import { 
+  FileText, 
   Download, 
-  BookOpen, 
+  ExternalLink, 
   Sparkles, 
-  Printer, 
-  Heart, 
   Search, 
-  Grid, 
-  Check, 
-  Flame, 
-  Maximize2, 
-  Smile, 
-  Layers, 
-  Palette,
-  FileDown,
-  Trash2,
-  Paintbrush,
-  Trophy,
-  Coins,
-  Award,
-  ShieldCheck,
-  Globe,
-  MapPin,
-  Send,
-  HelpCircle,
-  Info
-} from 'lucide-react';
+  BookOpen, 
+  Gift, 
+  ArrowRight,
+  Printer,
+  Lightbulb,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  User,
+  Heart as HeartIcon,
+  CheckCircle2,
+  RefreshCw
+} from "lucide-react";
+import { jsPDF } from "jspdf";
 
-import { CompetitionHub } from '../components/CompetitionHub';
+// ==========================================
+// DATA STRUCTURES & DEFINITIONS
+// ==========================================
 
-export interface FreeResourceAsset {
+interface ResourcePack {
   id: string;
   title: string;
-  category: 'alphabet' | 'numbers' | 'fruits-veggies' | 'shapes' | 'vehicles' | 'scrapbook' | 'sketch-pages' | 'cartoons' | 'comic-characters' | 'sci-fi';
-  itemsCount: number;
-  path: string;
-  ageRange: string;
-  colorScheme: {
-    bg: string;
-    accent: string;
-    border: string;
-    text: string;
-  };
-  mockup: React.ReactNode;
+  category: "phonics" | "numbers" | "coloring";
+  categoryLabel: string;
+  ageGroup: string;
+  pages: number;
+  description: string;
+  highlights: string[];
+  skills: string[];
 }
 
-const FREE_RESOURCE_ASSETS: FreeResourceAsset[] = [
+const RESOURCE_PACKS: ResourcePack[] = [
   {
-    id: 'pack-1',
-    title: 'Alphabet Volume 1: Letters A-G',
-    category: 'alphabet',
-    itemsCount: 7,
-    path: '/resources/packs/alphabet-v1.pdf',
-    ageRange: 'Ages 3-5',
-    colorScheme: {
-      bg: 'bg-rose-50/70',
-      accent: 'bg-rose-500',
-      border: 'border-rose-100',
-      text: 'text-rose-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <span className="text-7xl font-extrabold tracking-tight text-slate-800">Aa</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Trace: A - B - C - D</span>
-          <span>Vol. 1</span>
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[10px] bg-rose-200 text-rose-800 rounded-md font-bold uppercase">A-G</div>
-      </div>
-    )
+    id: "alphabet-aa-mega",
+    title: "Phonics & Alphabet A-Z Mega Pack",
+    category: "phonics",
+    categoryLabel: "Phonics & Alphabet",
+    ageGroup: "Ages 3-6 (Pre-K / Kindergarten)",
+    pages: 52,
+    description: "A comprehensive worksheet compilation for teaching letter identification, sound correlation, tracing grids, and vocabulary associations for all 26 letters of the English alphabet.",
+    highlights: ["Interactive letter tracing templates", "Initial sound recognition grids", "Hands-on vocabulary illustrations"],
+    skills: ["Phonemic Awareness", "Fine Motor Skills", "Letter Writing"]
   },
   {
-    id: 'pack-2',
-    title: 'Alphabet Volume 2: Letters H-P',
-    category: 'alphabet',
-    itemsCount: 9,
-    path: '/resources/packs/alphabet-v2.pdf',
-    ageRange: 'Ages 3-5',
-    colorScheme: {
-      bg: 'bg-amber-50/70',
-      accent: 'bg-amber-500',
-      border: 'border-amber-100',
-      text: 'text-amber-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <span className="text-7xl font-extrabold tracking-tight text-slate-800">Mm</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Trace: H - I - J - K - L</span>
-          <span>Vol. 2</span>
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[10px] bg-amber-200 text-amber-800 rounded-md font-bold uppercase">H-P</div>
-      </div>
-    )
+    id: "alphabet-v1",
+    title: "Alphabet Tracing Workbook (Edition 1)",
+    category: "phonics",
+    categoryLabel: "Phonics & Alphabet",
+    ageGroup: "Ages 3-5 (Toddler / Pre-K)",
+    pages: 28,
+    description: "Simple, spacious stroke-by-stroke guides to help early learners master the upper and lower-case shapes with friendly guided tracing dots.",
+    highlights: ["Symmetrical tracking indicators", "Uppercase and lowercase pairing", "Large fonts for small fingers"],
+    skills: ["Alphabet Shape Recognition", "Grip & Pen Control", "Tracing Fundamentals"]
   },
   {
-    id: 'pack-3',
-    title: 'Alphabet Volume 3: Letters Q-Z',
-    category: 'alphabet',
-    itemsCount: 10,
-    path: '/resources/packs/alphabet-v3.pdf',
-    ageRange: 'Ages 3-5',
-    colorScheme: {
-      bg: 'bg-emerald-50/70',
-      accent: 'bg-emerald-500',
-      border: 'border-emerald-100',
-      text: 'text-emerald-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <span className="text-7xl font-extrabold tracking-tight text-slate-800">Zz</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Trace: Q - R - S - T - U</span>
-          <span>Vol. 3</span>
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[10px] bg-emerald-200 text-emerald-800 rounded-md font-bold uppercase">Q-Z</div>
-      </div>
-    )
+    id: "alphabet-v2",
+    title: "Phonics & Spelling Workbook (Edition 2)",
+    category: "phonics",
+    categoryLabel: "Phonics & Alphabet",
+    ageGroup: "Ages 4-6 (Kindergarten / Grade 1)",
+    pages: 32,
+    description: "Advanced phonics worksheets focused on blending letter sounds, short vowels, and recognizing sight words through visual associations.",
+    highlights: ["Short-vowel matching exercises", "Easy sight-word puzzles", "Letter-blending workbook"],
+    skills: ["Phonics Blending", "Early Vocabulary", "Sight Word Identification"]
   },
   {
-    id: 'pack-4',
-    title: 'Number Foundations: Counts 1-5',
-    category: 'numbers',
-    itemsCount: 5,
-    path: '/resources/packs/numbers-v1.pdf',
-    ageRange: 'Ages 2-4',
-    colorScheme: {
-      bg: 'bg-blue-50/70',
-      accent: 'bg-blue-500',
-      border: 'border-blue-100',
-      text: 'text-blue-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="flex gap-1 items-end mb-2">
-          <div className="text-5xl font-black text-slate-800">1</div>
-          <div className="text-5xl font-black text-slate-300">2</div>
-          <div className="text-5xl font-black text-slate-800">3</div>
-        </div>
-        <div className="flex gap-2 mb-4">
-          <div className="w-4 h-4 rounded-full bg-blue-400 animate-pulse"></div>
-          <div className="w-4 h-4 rounded-full bg-blue-400 animate-pulse"></div>
-          <div className="w-4 h-4 rounded-full bg-blue-400 animate-pulse"></div>
-        </div>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Trace: One - Two - Three</span>
-          <span>1-5</span>
-        </div>
-      </div>
-    )
+    id: "alphabet-v3",
+    title: "Letter Sound & Picture Match (Edition 3)",
+    category: "phonics",
+    categoryLabel: "Phonics & Alphabet",
+    ageGroup: "Ages 4-6 (Kindergarten)",
+    pages: 24,
+    description: "Fun pictorial worksheets designed to connect initial phonetic letter sounds to everyday objects, animals, and fruits.",
+    highlights: ["Connect-the-dots visual matching", "Phonetic audio-cue associations", "Letter-to-picture coloring prompts"],
+    skills: ["Initial Sounds", "Auditory Discrimination", "Association Logic"]
   },
   {
-    id: 'pack-5',
-    title: 'Counting Mastery: Counts 6-10',
-    category: 'numbers',
-    itemsCount: 5,
-    path: '/resources/packs/numbers-v2.pdf',
-    ageRange: 'Ages 3-5',
-    colorScheme: {
-      bg: 'bg-purple-50/70',
-      accent: 'bg-purple-500',
-      border: 'border-purple-100',
-      text: 'text-purple-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="flex gap-1 items-end mb-1">
-          <span className="text-6xl font-black text-slate-800">8</span>
-          <span className="text-2xl font-bold text-slate-400">★</span>
-        </div>
-        <div className="grid grid-cols-4 gap-1 mb-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="w-2.5 h-2.5 rounded-full border border-purple-400"></div>
-          ))}
-        </div>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Trace: Six - Seven - Eight</span>
-          <span>6-10</span>
-        </div>
-      </div>
-    )
+    id: "numbers-v1",
+    title: "Numbers 1-10 Counting Workbook (Edition 1)",
+    category: "numbers",
+    categoryLabel: "Numbers & Math",
+    ageGroup: "Ages 3-5 (Pre-K)",
+    pages: 15,
+    description: "Gentle introduction to quantities and early counting. High-contrast tracing shapes paired with visual block counts.",
+    highlights: ["Visual hand-sign blocks", "Ten-frame grid representations", "Large number tracing sheets"],
+    skills: ["Number Concept 1-10", "One-to-One Correspondence", "Numeral Tracing"]
   },
   {
-    id: 'pack-6',
-    title: 'Advanced Double Digits: Counts 11-20',
-    category: 'numbers',
-    itemsCount: 10,
-    path: '/resources/packs/numbers-v3.pdf',
-    ageRange: 'Ages 4-6',
-    colorScheme: {
-      bg: 'bg-teal-50/70',
-      accent: 'bg-teal-500',
-      border: 'border-teal-100',
-      text: 'text-teal-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <span className="text-6xl font-black text-slate-800">15</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Double-digit sequence count</span>
-          <span>11-20</span>
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[10px] bg-teal-200 text-teal-800 rounded-md font-bold uppercase">10 Pages</div>
-      </div>
-    )
+    id: "numbers-v2",
+    title: "Math & Counting Match-Up (Edition 2)",
+    category: "numbers",
+    categoryLabel: "Numbers & Math",
+    ageGroup: "Ages 4-6 (Pre-K / Kindergarten)",
+    pages: 20,
+    description: "Exciting count-and-match exercises. Prompts children to count sets of objects and draw lines to correct numeric characters.",
+    highlights: ["Diverse icon groups for counting", "Number line navigation", "Dynamic coloring elements"],
+    skills: ["Cardinality", "Set Matching", "Basic Numeric Literacy"]
   },
   {
-    id: 'pack-7',
-    title: 'Orchard Collection: Common Fruits',
-    category: 'fruits-veggies',
-    itemsCount: 8,
-    path: '/resources/packs/fruits-pack.pdf',
-    ageRange: 'Ages 2-5',
-    colorScheme: {
-      bg: 'bg-pink-50/70',
-      accent: 'bg-pink-500',
-      border: 'border-pink-100',
-      text: 'text-pink-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="text-6xl filter drop-shadow">🍎</div>
-        <span className="text-sm font-bold text-slate-700 mt-2 uppercase tracking-wide">A-P-P-L-E</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Apple • Banana • Orange</span>
-          <span>Fruits</span>
-        </div>
-      </div>
-    )
+    id: "numbers-v3",
+    title: "Simple Addition & Math Flashcards (Edition 3)",
+    category: "numbers",
+    categoryLabel: "Numbers & Math",
+    ageGroup: "Ages 5-7 (Kindergarten / Grade 1)",
+    pages: 25,
+    description: "Ready-to-print math cards and worksheets that teach simple addition equations using real-life objects and counting shapes.",
+    highlights: ["Printable cut-out math flashcards", "Simple single-digit additions", "Illustrated equation grids"],
+    skills: ["Basic Addition", "Visual Arithmetic", "Fast Number Facts"]
   },
   {
-    id: 'pack-8',
-    title: 'Garden Harvest: Fresh Vegetables',
-    category: 'fruits-veggies',
-    itemsCount: 8,
-    path: '/resources/packs/vegetables-pack.pdf',
-    ageRange: 'Ages 2-5',
-    colorScheme: {
-      bg: 'bg-lime-50/70',
-      accent: 'bg-lime-600',
-      border: 'border-lime-100',
-      text: 'text-lime-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="text-6xl">🥕</div>
-        <span className="text-sm font-bold text-slate-700 mt-2 uppercase tracking-wide">C-A-R-R-O-T</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Carrot • Broccoli • Tomato</span>
-          <span>Veggies</span>
-        </div>
-      </div>
-    )
+    id: "shapes-pack",
+    title: "Geometric Shapes & Pattern Play",
+    category: "numbers",
+    categoryLabel: "Numbers & Math",
+    ageGroup: "Ages 3-6 (Pre-K / Kindergarten)",
+    pages: 18,
+    description: "Interactive sheets for recognizing, tracing, coloring, and finding fundamental shapes in everyday environments.",
+    highlights: ["Identify circles, squares, and triangles", "Pattern completion challenges", "Symmetry tracing exercises"],
+    skills: ["Geometry Basics", "Pattern Tracking", "Visual Sorting"]
   },
   {
-    id: 'pack-9',
-    title: 'Basic Geometry: Shapes & Patterns',
-    category: 'shapes',
-    itemsCount: 6,
-    path: '/resources/packs/shapes-pack.pdf',
-    ageRange: 'Ages 2-4',
-    colorScheme: {
-      bg: 'bg-sky-50/70',
-      accent: 'bg-sky-500',
-      border: 'border-sky-100',
-      text: 'text-sky-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="flex gap-3 justify-center items-center">
-          <div className="w-12 h-12 rounded-full border-4 border-dashed border-slate-700"></div>
-          <div className="w-12 h-12 border-4 border-dashed border-slate-700"></div>
-        </div>
-        <span className="text-xs font-bold text-slate-500 mt-3">CIRCLE • SQUARE • TRIANGLE</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Dotted tracing structures</span>
-          <span>Shapes</span>
-        </div>
-      </div>
-    )
+    id: "fruits-pack",
+    title: "Fruits Vocabulary, Trace & Color",
+    category: "coloring",
+    categoryLabel: "Vocabulary & Coloring",
+    ageGroup: "Ages 2-5 (Toddlers / Pre-K)",
+    pages: 16,
+    description: "A wonderful sensory activity packet to teach fruit vocabulary names while practicing fine coloring inside bold borders.",
+    highlights: ["Extra-bold borders for coloring", "Dotted name tracing beneath drawings", "Fruity color-by-numbers page"],
+    skills: ["Fruit Nomenclature", "Hand-Eye Coordination", "Color Discrimination"]
   },
   {
-    id: 'pack-10',
-    title: 'Early Transport: Vehicles & Logistics',
-    category: 'vehicles',
-    itemsCount: 8,
-    path: '/resources/packs/vehicles-pack.pdf',
-    ageRange: 'Ages 3-6',
-    colorScheme: {
-      bg: 'bg-violet-50/70',
-      accent: 'bg-violet-500',
-      border: 'border-violet-100',
-      text: 'text-violet-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative">
-        <div className="text-6xl">🚌</div>
-        <span className="text-sm font-bold text-slate-700 mt-2 uppercase tracking-wide">S-C-H-O-O-L  B-U-S</span>
-        <div className="absolute bottom-2 left-3 right-3 flex justify-between text-xs font-mono text-slate-400">
-          <span>Bus • Airplane • Bicycle</span>
-          <span>Vehicles</span>
-        </div>
-      </div>
-    )
+    id: "vegetables-pack",
+    title: "Vegetables Trace, Match & Workbook",
+    category: "coloring",
+    categoryLabel: "Vocabulary & Coloring",
+    ageGroup: "Ages 3-6 (Pre-K / Kindergarten)",
+    pages: 18,
+    description: "Help youngsters learn about nutritious garden vegetables with these high-contrast identification and spelling tracing worksheets.",
+    highlights: ["Letter tracing for vegetable names", "Match the veggie to its shadow", "Fun gardening illustrations"],
+    skills: ["Vegetable Recognition", "Shadow Matching", "Beginning Spelling"]
   },
   {
-    id: 'pack-11',
-    title: 'Creative Scrapbook & Memory Maker Pack',
-    category: 'scrapbook',
-    itemsCount: 15,
-    path: '/resources/packs/scrapbook-pack.pdf',
-    ageRange: 'All Ages',
-    colorScheme: {
-      bg: 'bg-amber-50/60',
-      accent: 'bg-amber-500',
-      border: 'border-amber-200',
-      text: 'text-amber-800'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative p-2">
-        <div className="border border-dashed border-slate-400 p-2 bg-amber-50/30 rounded-lg flex flex-col items-center w-40">
-          <div className="flex gap-1.5 mb-1.5">
-            <span className="text-xl">📸</span>
-            <span className="text-xl">🎀</span>
-            <span className="text-xl">✨</span>
-          </div>
-          <span className="text-[10px] font-bold text-slate-700 tracking-wider">MY MEMORIES</span>
-          <div className="w-full h-1 bg-slate-200 mt-2 rounded"></div>
-          <div className="w-3/4 h-1 bg-slate-200 mt-1 rounded"></div>
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-amber-200 text-amber-900 rounded-md font-bold uppercase">Scrapbook</div>
-      </div>
-    )
-  },
-  {
-    id: 'pack-12',
-    title: 'Pro-Sketch Guides: Perspective & Nature Drawings',
-    category: 'sketch-pages',
-    itemsCount: 12,
-    path: '/resources/packs/sketch-pack.pdf',
-    ageRange: 'Ages 6-12',
-    colorScheme: {
-      bg: 'bg-stone-100',
-      accent: 'bg-stone-600',
-      border: 'border-stone-200',
-      text: 'text-stone-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative p-2">
-        <div className="w-24 h-16 border-2 border-stone-400 rounded relative flex items-center justify-center bg-stone-50">
-          <div className="absolute inset-0 flex items-center justify-center opacity-40">
-            <svg className="w-full h-full text-stone-500" viewBox="0 0 100 50">
-              <path d="M 0,40 L 30,10 L 60,35 L 80,20 L 100,45" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="3,3" />
-            </svg>
-          </div>
-          <span className="text-[9px] font-mono font-bold text-stone-600 z-10 uppercase tracking-widest bg-stone-100/80 px-1 border border-stone-200">Sketch Guide</span>
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-stone-300 text-stone-800 rounded-md font-bold uppercase">Drawing</div>
-      </div>
-    )
-  },
-  {
-    id: 'pack-13',
-    title: 'Chibi Friends: Ultimate Cartoon Coloring Book',
-    category: 'cartoons',
-    itemsCount: 20,
-    path: '/resources/packs/cartoons-pack.pdf',
-    ageRange: 'Ages 3-8',
-    colorScheme: {
-      bg: 'bg-pink-50/70',
-      accent: 'bg-pink-500',
-      border: 'border-pink-100',
-      text: 'text-pink-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative p-2">
-        <div className="text-5xl filter drop-shadow">🐼</div>
-        <div className="text-[10px] font-bold text-pink-700 uppercase tracking-widest bg-pink-100/80 px-2 py-0.5 rounded border border-pink-200 mt-2">
-          Cute Chibi Animals
-        </div>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-pink-200 text-pink-800 rounded-md font-bold uppercase">Cartoons</div>
-      </div>
-    )
-  },
-  {
-    id: 'pack-14',
-    title: 'Action Superheroes & Comic Panel Frames',
-    category: 'comic-characters',
-    itemsCount: 16,
-    path: '/resources/packs/comics-pack.pdf',
-    ageRange: 'Ages 5-12',
-    colorScheme: {
-      bg: 'bg-red-50/70',
-      accent: 'bg-red-500',
-      border: 'border-red-100',
-      text: 'text-red-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative p-2">
-        <div className="font-extrabold text-3xl text-red-600 uppercase tracking-tighter bg-amber-300 px-3 py-1 rounded-lg border-2 border-slate-900 rotate-[-4deg] shadow-xs">
-          BOOM!
-        </div>
-        <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider mt-2">Action Comic Panels</span>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-red-200 text-red-800 rounded-md font-bold uppercase">Comics</div>
-      </div>
-    )
-  },
-  {
-    id: 'pack-15',
-    title: 'Cosmic Odyssey: Advanced Space & Sci-Fi Coloring',
-    category: 'sci-fi',
-    itemsCount: 18,
-    path: '/resources/packs/scifi-pack.pdf',
-    ageRange: 'Ages 6-14',
-    colorScheme: {
-      bg: 'bg-indigo-50/70',
-      accent: 'bg-indigo-500',
-      border: 'border-indigo-100',
-      text: 'text-indigo-700'
-    },
-    mockup: (
-      <div className="flex flex-col items-center justify-center h-full w-full relative p-2">
-        <div className="flex items-center gap-1">
-          <span className="text-4xl text-slate-800">🚀</span>
-          <span className="text-xl">🪐</span>
-        </div>
-        <span className="text-[10px] uppercase font-mono font-bold text-indigo-700 tracking-widest mt-2 bg-indigo-100/50 px-1.5 py-0.5 rounded border border-indigo-200">Cosmos Quest</span>
-        <div className="absolute top-2 right-2 px-1.5 py-0.5 text-[9px] bg-indigo-200 text-indigo-800 rounded-md font-bold uppercase">Sci-Fi</div>
-      </div>
-    )
+    id: "vehicles-pack",
+    title: "Vehicles & Transport Coloring Book",
+    category: "coloring",
+    categoryLabel: "Vocabulary & Coloring",
+    ageGroup: "Ages 3-6 (Pre-K / Kindergarten)",
+    pages: 22,
+    description: "Printable transportation flashcards and full-page coloring illustrations featuring cars, trains, airplanes, and ships.",
+    highlights: ["Air, water, and road categorization", "Action tracing sounds (Choo choo!)", "Full-sheet detailed coloring"],
+    skills: ["Vehicle Classification", "Sound Association", "Creative Coloring"]
   }
 ];
 
-export const FreeResources: React.FC = () => {
-  const [activeMainTab, setActiveMainTab] = useState<'resources' | 'competitions'>('resources');
-  
-  // Competition State Variables
-  const [compSearch, setCompSearch] = useState('');
-  const [compCategory, setCompCategory] = useState('all');
-  const [compEntrantInput, setCompEntrantInput] = useState<number>(2450);
-  const [compFeeChoice, setCompFeeChoice] = useState<number>(2); // default $2
-  
-  // Participant Form States
-  const [studName, setStudName] = useState('');
-  const [studEmail, setStudEmail] = useState('');
-  const [studGrade, setStudGrade] = useState('Grade 5');
-  const [studSchool, setStudSchool] = useState('');
-  const [studCity, setStudCity] = useState('');
-  const [studCountry, setStudCountry] = useState('Pakistan');
-  const [compChoiceCategory, setCompChoiceCategory] = useState('art');
-  const [compTitleInput, setCompTitleInput] = useState('');
-  const [compPayload, setCompPayload] = useState('');
-  const [compFormFee, setCompFormFee] = useState<number>(2);
-  const [isSubmittingComp, setIsSubmittingComp] = useState(false);
-  const [compSuccess, setCompSuccess] = useState(false);
+// List of alphabetic words & simple illustrations mapped
+const ALPHABET_DATA = [
+  { char: "A", word: "Apple", desc: "A is for Apple, sweet and red!" },
+  { char: "B", word: "Banana", desc: "B is for Banana, peeling is fun!" },
+  { char: "C", word: "Car", desc: "C is for Car, beep beep!" },
+  { char: "D", word: "Dog", desc: "D is for Dog, wagging its tail!" },
+  { char: "E", word: "Egg", desc: "E is for Egg, oval and white!" },
+  { char: "F", word: "Fish", desc: "F is for Fish, swimming around!" },
+  { char: "G", word: "Grapes", desc: "G is for Grapes, juicy and sweet!" },
+  { char: "H", word: "Heart", desc: "H is for Heart, full of love!" },
+  { char: "I", word: "Ice", desc: "I is for Ice, cold and chilly!" },
+  { char: "J", word: "Jar", desc: "J is for Jar, holding honey!" },
+  { char: "K", word: "Kite", desc: "K is for Kite, flying high!" },
+  { char: "L", word: "Leaf", desc: "L is for Leaf, falling down!" },
+  { char: "M", word: "Melon", desc: "M is for Melon, fresh and green!" },
+  { char: "N", word: "Net", desc: "N is for Net, catch the ball!" },
+  { char: "O", word: "Orange", desc: "O is for Orange, round and bright!" },
+  { char: "P", word: "Pen", desc: "P is for Pen, write your name!" },
+  { char: "Q", word: "Queen", desc: "Q is for Queen, wears a crown!" },
+  { char: "R", word: "Rocket", desc: "R is for Rocket, blast off!" },
+  { char: "S", word: "Star", desc: "S is for Star, shining bright!" },
+  { char: "T", word: "Tomato", desc: "T is for Tomato, red and round!" },
+  { char: "U", word: "Umbrella", desc: "U is for Umbrella, blocks the rain!" },
+  { char: "V", word: "Van", desc: "V is for Van, driving down!" },
+  { char: "W", word: "Water", desc: "W is for Water, splash splash!" },
+  { char: "X", word: "Xylophone", desc: "X is for Xylophone, play a tune!" },
+  { char: "Y", word: "Yarn", desc: "Y is for Yarn, cozy and warm!" },
+  { char: "Z", word: "Zebra", desc: "Z is for Zebra, black and white stripes!" }
+];
 
-  // Default entries to populate the talent gallery instantly
-  const [compSubmissions, setCompSubmissions] = useState<Array<{
-    id: string;
-    studentName: string;
-    grade: string;
-    schoolName: string;
-    city: string;
-    country: string;
-    category: 'writing' | 'art' | 'code';
-    title: string;
-    payloadSnippet: string;
-    feePaid: number;
-    txnHash: string;
-    status: 'Evaluated' | 'Approved' | 'Winner';
-    prizeDetails?: string;
-  }>>([
-    {
-      id: 'sub-comp-01',
-      studentName: 'Zainab Fatima',
-      grade: 'Grade 5',
-      schoolName: 'The City School Capital Campus',
-      city: 'Islamabad',
-      country: 'Pakistan',
-      category: 'art',
-      title: 'Water Colors of Margalla Hills sunrise',
-      payloadSnippet: 'An active watercolor painting tracing solar rise gradients over Islamabad mountains utilizing geometric space perspectives with lovely violet tones.',
-      feePaid: 2,
-      txnHash: '0x3dfa...78a1',
-      status: 'Winner',
-      prizeDetails: 'Rank 1 ($271.50 Prize Pot distributed!)'
-    },
-    {
-      id: 'sub-comp-02',
-      studentName: 'Ayaan Ahmed',
-      grade: 'Grade 10 / O Levels',
-      schoolName: 'Roots Millennium School',
-      city: 'Peshawar',
-      country: 'Pakistan',
-      category: 'code',
-      title: 'Taleem Solar Tracker Python Simulator',
-      payloadSnippet: 'A light-weight python algorithm simulating solar panel orbit alignment ratios using visual pandas & numpy coordinates for grade optimization.',
-      feePaid: 2,
-      txnHash: '0x6e31...88c2',
-      status: 'Winner',
-      prizeDetails: 'Rank 2 ($181.00 Prize Pot distributed!)'
-    },
-    {
-      id: 'sub-comp-03',
-      studentName: 'Sarah Jenkins',
-      grade: 'Grade 8',
-      schoolName: 'Central High School',
-      city: 'London',
-      country: 'United Kingdom',
-      category: 'writing',
-      title: 'The Future of Green Energy in Classrooms',
-      payloadSnippet: 'A 600-word descriptive article mapping the carbon footprint optimizations achievable via standard kinetic desk rotations and energy metrics analysis.',
-      feePaid: 1,
-      txnHash: '0x99a2...91b0',
-      status: 'Winner',
-      prizeDetails: 'Rank 3 ($90.50 Prize Pot distributed!)'
-    },
-    {
-      id: 'sub-comp-04',
-      studentName: 'Haris Khan',
-      grade: 'Grade 4',
-      schoolName: 'Beaconhouse School System',
-      city: 'Lahore',
-      country: 'Pakistan',
-      category: 'art',
-      title: 'Futuristic Eco-Friendly School Bus Design',
-      payloadSnippet: 'A digital sketch showcasing wind turbines on student double-decker electric transit, finished with bright yellow and solar paneled accents.',
-      feePaid: 2,
-      txnHash: '0xfa11...2392',
-      status: 'Approved',
-    },
-    {
-      id: 'sub-comp-05',
-      studentName: 'Clara Oswald',
-      grade: 'Grade 9',
-      schoolName: 'Maplewood Prep',
-      city: 'Toronto',
-      country: 'Canada',
-      category: 'writing',
-      title: 'Why coding will save our oceans',
-      payloadSnippet: 'A reflective essay studying drone mapping optimization metrics that track plastic trash currents globally using simple standard algorithms.',
-      feePaid: 1,
-      txnHash: '0xbb82...1049',
-      status: 'Approved',
+const NUMBERS_DATA = [
+  { num: "1", word: "One", item: "Star" },
+  { num: "2", word: "Two", item: "Hearts" },
+  { num: "3", word: "Three", item: "Apples" },
+  { num: "4", word: "Four", item: "Blocks" },
+  { num: "5", word: "Five", item: "Grapes" },
+  { num: "6", word: "Six", item: "Stars" },
+  { num: "7", word: "Seven", item: "Hearts" },
+  { num: "8", word: "Eight", item: "Apples" },
+  { num: "9", word: "Nine", item: "Blocks" },
+  { num: "10", word: "Ten", item: "Grapes" }
+];
+
+const SHAPES_DATA = [
+  "Circle", "Square", "Triangle", "Star", "Heart", "Oval", "Hexagon", "Pentagon"
+];
+
+const FRUITS_DATA = [
+  "Apple", "Banana", "Orange", "Strawberry", "Grapes", "Watermelon", "Mango", "Cherry"
+];
+
+const VEGETABLES_DATA = [
+  "Carrot", "Tomato", "Potato", "Broccoli", "Peas", "Corn", "Eggplant", "Onion"
+];
+
+const VEHICLES_DATA = [
+  "Car", "Bus", "Train", "Airplane", "Boat", "Rocket", "Truck", "Helicopter"
+];
+
+// ==========================================
+// DYNAMIC WORKsheet SOLVER (PAGE RESOLVER)
+// ==========================================
+
+interface PageDetails {
+  title: string;
+  subtitle: string;
+  type: "dedication" | "tracing" | "coloring" | "math" | "matching" | "certificate";
+  payload: any;
+}
+
+function resolvePageDetails(packId: string, pageNum: number, childName: string): PageDetails {
+  const nameToUse = childName.trim() || "Your Name";
+
+  // Page 1 is ALWAYS the custom dedication page
+  if (pageNum === 1) {
+    return {
+      title: "This Workbook Belongs To",
+      subtitle: "Personalized Educational Printable Workbook",
+      type: "dedication",
+      payload: { childName: nameToUse }
+    };
+  }
+
+  switch (packId) {
+    case "alphabet-aa-mega": {
+      // 52 pages: Page 1 Dedication, Pages 2-51 are Letters A-Z (2 pages per letter), Page 52 is Certificate
+      if (pageNum === 52) {
+        return {
+          title: "Certificate of Achievement",
+          subtitle: "Phonics & Alphabet Mastery",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for completing the 52-page Phonics & Alphabet Mega Worksheets" }
+        };
+      }
+      const letterIndex = Math.floor((pageNum - 2) / 2);
+      const isOdd = (pageNum - 2) % 2 === 0; // Page 2, 4, 6...
+      const data = ALPHABET_DATA[letterIndex % ALPHABET_DATA.length];
+
+      if (isOdd) {
+        return {
+          title: `Letter ${data.char} Capital Tracing`,
+          subtitle: `${data.char} is for ${data.word}`,
+          type: "tracing",
+          payload: { char: data.char, lowercase: data.char.toLowerCase(), word: data.word, uppercaseOnly: true }
+        };
+      } else {
+        return {
+          title: `Letter ${data.char.toLowerCase()} Practice & Coloring`,
+          subtitle: `${data.desc}`,
+          type: "coloring",
+          payload: { char: data.char, word: data.word, lowercaseOnly: true }
+        };
+      }
     }
-  ]);
 
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [downloadProgress, setDownloadProgress] = useState<Record<string, boolean>>({});
-
-  // Interactive Coloring & Art Studio Sandbox states
-  const [activeStudioCategory, setActiveStudioCategory] = useState<string>('cartoons');
-  const [activeColor, setActiveColor] = useState<string>('#ec4899'); // default lovely pink
-  const [activeSticker, setActiveSticker] = useState<string | null>(null);
-  const [paintedElements, setPaintedElements] = useState<Record<string, string>>({});
-  const [scrapbookCaption, setScrabookCaption] = useState<string>('My Adventure Book!');
-  const [stickersList, setStickersList] = useState<Array<{ id: number; emoji: string; x: number; y: number }>>([]);
-
-  useEffect(() => {
-    // Standard non-blocking SEO setup
-    document.title = 'Free Printable Coloring Pages & Tracing PDFs | Taleem360';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+    case "alphabet-v1": {
+      // 28 pages: Page 1 Dedication, Page 2-27 are letters A-Z (1 per page), Page 28 is Certificate
+      if (pageNum === 28) {
+        return {
+          title: "Certificate of Handwriting",
+          subtitle: "Alphabet Pen Control Completed",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for successfully mastering uppercase and lowercase line tracing" }
+        };
+      }
+      const data = ALPHABET_DATA[(pageNum - 2) % ALPHABET_DATA.length];
+      return {
+        title: `Alphabet Tracing - Letter ${data.char}`,
+        subtitle: `Practice tracing upper and lower-case '${data.char}' inside the school guidelines.`,
+        type: "tracing",
+        payload: { char: data.char, lowercase: data.char.toLowerCase(), word: data.word }
+      };
     }
-    metaDescription.setAttribute('content', 'Access free printable alphabet, number, fruit, vegetable, custom scrapbook, and sci-fi cartoons coloring pages. Quality sequence sheets designed for children of all ages.');
 
-    // Adding dynamic page analytics tags optionally or updating canonical links
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
+    case "alphabet-v2": {
+      // 32 pages: Page 1 Dedication, 2-6 Vowels, 7-16 Sight words, 17-31 Blends, 32 Certificate
+      if (pageNum === 32) {
+        return {
+          title: "Spelling Star Award",
+          subtitle: "Sight Words & Blends Accomplished",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for completing the advanced Letter-Blending and Phonics workbook" }
+        };
+      }
+      if (pageNum >= 2 && pageNum <= 6) {
+        const vowels = ["A", "E", "I", "O", "U"];
+        const v = vowels[pageNum - 2];
+        const vWord = v === "A" ? "Ant" : v === "E" ? "Elk" : v === "I" ? "Ink" : v === "O" ? "Owl" : "Urn";
+        return {
+          title: `Vowel Practice: Letter ${v}`,
+          subtitle: `Trace the vowel sound and color the ${vWord}!`,
+          type: "tracing",
+          payload: { char: v, lowercase: v.toLowerCase(), word: vWord }
+        };
+      }
+      if (pageNum >= 7 && pageNum <= 16) {
+        const sightWords = ["THE", "AND", "LIKE", "YOU", "SHE", "HAVE", "WITH", "THIS", "PLAY", "HERE"];
+        const word = sightWords[pageNum - 7];
+        return {
+          title: `Sight Word: ${word}`,
+          subtitle: `Trace the high-frequency sight word and write it in the empty block.`,
+          type: "tracing",
+          payload: { char: word[0], lowercase: word.toLowerCase(), word: word, isSightWord: true }
+        };
+      }
+      // Blends (17-31)
+      const blends = ["at", "an", "op", "ig", "un", "ed", "ip", "og", "ub", "et", "ad", "ox", "in", "ap", "ug"];
+      const blend = blends[pageNum - 17];
+      return {
+        title: `Phonics Blend: -${blend}`,
+        subtitle: `Complete words ending with -${blend} (e.g. c-${blend}, m-${blend}, h-${blend})`,
+        type: "matching",
+        payload: { blend: blend, examples: [`c${blend}`, `m${blend}`, `b${blend}`, `p${blend}`] }
+      };
     }
-    canonicalLink.setAttribute('href', 'https://taleem360.online/free-resources');
-  }, []);
 
-  // Filter Logic matching categories properly
-  const filteredAssets = FREE_RESOURCE_ASSETS.filter(asset => {
-    const matchesSearch = asset.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          asset.category.toLowerCase().includes(searchQuery.toLowerCase());
-
-    if (selectedCategory === 'all') return matchesSearch;
-    if (selectedCategory === 'shapes-vehicles') {
-      return (asset.category === 'shapes' || asset.category === 'vehicles') && matchesSearch;
+    case "alphabet-v3": {
+      // 24 pages: Page 1 Dedication, 2-23 letters (A to V), 24 Certificate
+      if (pageNum === 24) {
+        return {
+          title: "Phonics Sound Award",
+          subtitle: "Initial Sounds Mastery Certificate",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for connecting letters to their phoneme sounds correctly" }
+        };
+      }
+      const data = ALPHABET_DATA[(pageNum - 2) % ALPHABET_DATA.length];
+      return {
+        title: `Phonics Match: Letter ${data.char}`,
+        subtitle: `Identify the letter sound, trace the word, and connect the dots.`,
+        type: "coloring",
+        payload: { char: data.char, word: data.word, withConnectLine: true }
+      };
     }
-    return asset.category === selectedCategory && matchesSearch;
-  });
 
-  // Simulated instant feedback download activation triggers
-  const triggerDownloadIndicator = (id: string) => {
-    setDownloadProgress(prev => ({ ...prev, [id]: true }));
-    setTimeout(() => {
-      setDownloadProgress(prev => ({ ...prev, [id]: false }));
-    }, 2000);
-  };
-
-  return (
-    <div className="space-y-12 pb-16">
-      
-      {/* Premium Hero Banner Card */}
-      <section className="relative overflow-hidden rounded-3xl bg-indigo-600 px-6 py-16 sm:px-12 sm:py-24 shadow-xl border border-indigo-500/10">
-        <div className="relative z-10 max-w-3xl">
-          <motion.span 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-indigo-500/30 text-indigo-100 text-xs font-bold mb-6 backdrop-blur-sm border border-indigo-400/20"
-          >
-            <Sparkles className="w-4 h-4 text-amber-300" />
-            Empowering Foundational Learning
-          </motion.span>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-none mb-6"
-          >
-            Free Creative Resources <br />
-            <span className="text-amber-300">for Early Learners</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-indigo-100 max-w-xl leading-relaxed mb-6"
-          >
-            Download high-contrast sequence coloring pages and foundational tracing books designed for preschool and kindergarten students. Providing free resource for students globaly.
-          </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="mb-8"
-          >
-            <Link 
-              to="/free-resources/mathematics/all/all"
-              className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black px-6 py-3.5 rounded-xl text-sm transition-all transform hover:scale-[1.03] shadow-lg active:scale-95"
-            >
-              <Sparkles className="w-4 h-4 text-slate-950 animate-pulse" />
-              Academic Curriculum Materials (Cambridge / CCSS)
-            </Link>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap gap-4 text-xs font-medium text-indigo-100"
-          >
-            <div className="flex items-center gap-1.5 bg-indigo-700/50 px-3 py-2 rounded-lg border border-indigo-500/25">
-              <Printer className="w-3.5 h-3.5 text-indigo-200" />
-              <span>Printer Friendly Design</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-indigo-700/50 px-3 py-2 rounded-lg border border-indigo-500/25">
-              <BookOpen className="w-3.5 h-3.5 text-indigo-200" />
-              <span>Full Worksheets Bundle</span>
-            </div>
-            <div className="flex items-center gap-1.5 bg-indigo-700/50 px-3 py-2 rounded-lg border border-indigo-500/25">
-              <Heart className="w-3.5 h-3.5 text-pink-300" />
-              <span>Completely Free</span>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Dynamic Abstract Art Background */}
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indigo-400 rounded-full blur-3xl opacity-30"></div>
-        <div className="absolute bottom-0 right-10 -mb-20 w-80 h-80 bg-pink-400 rounded-full blur-3xl opacity-20"></div>
-      </section>
-
-      {/* Platform Core Segment Navigation Switcher */}
-      <div id="main-t360-hub-tabs" className="flex border-b border-slate-200">
-        <button
-          onClick={() => setActiveMainTab('resources')}
-          className={`flex-1 sm:flex-initial text-center px-6 py-4.5 text-sm font-bold border-b-2 transition-all ${
-            activeMainTab === 'resources'
-              ? 'border-indigo-600 text-indigo-600 font-extrabold'
-              : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
-          }`}
-        >
-          🎨 Worksheets & Digital Art Sandbox
-        </button>
-        <button
-          onClick={() => setActiveMainTab('competitions')}
-          className={`flex-1 sm:flex-initial text-center px-6 py-4.5 text-sm font-bold border-b-2 transition-all flex items-center justify-center gap-2 ${
-            activeMainTab === 'competitions'
-              ? 'border-indigo-600 text-indigo-600 bg-indigo-50/20 font-extrabold'
-              : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
-          }`}
-        >
-          <span>🏆 Global Student Competition Hub</span>
-          <span className="bg-rose-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse uppercase tracking-wider">PRE-K to 12th</span>
-        </button>
-      </div>
-
-      {activeMainTab === 'resources' ? (
-        <>
-
-      {/* Interactive Creative Art & Craft Studio Sandbox */}
-      <section className="bg-gradient-to-br from-indigo-50/50 via-slate-50 to-pink-50/30 rounded-3xl p-6 sm:p-8 border border-indigo-100 shadow-xs space-y-8 no-print">
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-[11px] font-black uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            Interactive Arts & Craft Sandbox Studio
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">
-            Digital Art & Scrapbook Studio
-          </h2>
-          <p className="text-slate-500 text-sm mt-1 leading-relaxed">
-            Choose from our brand new expanded categories below. Paint interactive sheets with our candy color palette, stamp collectible scrapbook stickers, and type custom Polaroid captions instantly in your web browser!
-          </p>
-        </div>
-
-        {/* Studio Category Selection Tabs & Controller */}
-        <div className="flex flex-wrap gap-2 pb-4 border-b border-indigo-50/60">
-          {[
-            { id: 'cartoons', label: 'Cute Cartoons', icon: '🐼' },
-            { id: 'scrapbook', label: 'Creative Scrapbook', icon: '📸' },
-            { id: 'sketch-pages', label: 'Nature Sketch', icon: '⛰️' },
-            { id: 'comic-characters', label: 'Comic Superheroes', icon: '⚡️' },
-            { id: 'sci-fi', label: 'Sci-Fi Cosmos', icon: '🚀' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => {
-                setActiveStudioCategory(tab.id);
-                setPaintedElements({});
-                setStickersList([]);
-                setActiveSticker(null);
-              }}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all border ${
-                activeStudioCategory === tab.id
-                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-100 scale-105 active:scale-95 font-extrabold'
-                  : 'bg-white hover:bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300 shadow-3xs active:scale-98'
-              }`}
-            >
-              <span className="text-lg">{tab.icon}</span>
-              <span>{tab.label}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Master Studio Workspace Panel */}
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-          {/* Workspace Left controls - spans 5 cols */}
-          <div className="xl:col-span-5 space-y-6 bg-white p-5 rounded-2xl border border-slate-100 shadow-3xs">
-            {/* Color Palette Header */}
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-semibold font-mono uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
-                  <Paintbrush className="w-3.5 h-3.5 text-indigo-500" />
-                  <span>Coloring Palette</span>
-                </h4>
-                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                  Brush Active
-                </span>
-              </div>
-              <div className="grid grid-cols-5 gap-2">
-                {[
-                  { name: 'Pink Blush', value: '#ec4899' },
-                  { name: 'Tangerine', value: '#f97316' },
-                  { name: 'Sunflower', value: '#eab308' },
-                  { name: 'Emerald', value: '#10b981' },
-                  { name: 'Sky Splash', value: '#0ea5e9' },
-                  { name: 'Lilac', value: '#a855f7' },
-                  { name: 'Deep Nebula', value: '#6366f1' },
-                  { name: 'Candy Red', value: '#ef4444' },
-                  { name: 'Charcoal', value: '#1e293b' },
-                  { name: 'Vanilla White', value: '#ffffff' },
-                ].map((color) => {
-                  const isSelected = activeColor === color.value;
-                  return (
-                    <button
-                      key={color.value}
-                      onClick={() => {
-                        setActiveColor(color.value);
-                        setActiveSticker(null); // Turn off sticker mode
-                      }}
-                      title={color.name}
-                      style={{ backgroundColor: color.value }}
-                      className={`h-9 w-full rounded-lg transition-transform hover:scale-110 relative flex items-center justify-center ${
-                        color.value === '#ffffff' ? 'bg-white border border-slate-200' : ''
-                      } ${isSelected ? 'ring-2 ring-indigo-600 ring-offset-2 scale-105' : ''}`}
-                    >
-                      {isSelected && (
-                        <div className={`w-2 h-2 rounded-full ${color.value === '#ffffff' ? 'bg-slate-800' : 'bg-white'}`}></div>
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Sticker Stamp Pad Selection */}
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-xs font-semibold font-mono uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-pink-500" />
-                  <span>Stickers Stamp Box</span>
-                </h4>
-                <span className="text-[10px] bg-pink-50 text-pink-600 border border-pink-100 px-2 py-0.5 rounded font-black uppercase tracking-wide">
-                  Stamps Mode
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-500 leading-normal mb-3">
-                Select a sticker below, then click inside the artwork box to stamp. Click a placed sticker to erase it.
-              </p>
-              <div className="flex flex-wrap gap-2.5">
-                {['🧸', '🎈', '🌟', '🐱', '🚀', '🌸', '⚡️', '❤️', '🛸', '🍩', '🍪', '🎨', '👑', '🌈'].map((emoji) => {
-                  const isSelected = activeSticker === emoji;
-                  return (
-                    <button
-                      key={emoji}
-                      onClick={() => setActiveSticker(isSelected ? null : emoji)}
-                      className={`text-2xl p-2 rounded-xl transition duration-150 hover:bg-slate-100 active:scale-95 border ${
-                        isSelected 
-                          ? 'border-indigo-500 bg-indigo-50/50 ring-2 ring-indigo-500/20 scale-105 font-bold' 
-                          : 'border-slate-100 bg-slate-50'
-                      }`}
-                    >
-                      {emoji}
-                    </button>
-                  );
-                })}
-              </div>
-              {activeSticker && (
-                <div className="mt-3 p-2 bg-indigo-50 border border-indigo-100 rounded-lg text-xs text-indigo-800 font-medium">
-                  🌟 <strong>Stamp tool ready:</strong> Click inside the artwork on the right to stamp <strong>{activeSticker}</strong>!
-                </div>
-              )}
-            </div>
-
-            {/* Conditional input controls for Scrapbook */}
-            {activeStudioCategory === 'scrapbook' && (
-              <div className="pt-4 border-t border-slate-100 space-y-2">
-                <h4 className="text-xs font-black uppercase tracking-wider text-slate-700">
-                  Customize Polaroid Caption:
-                </h4>
-                <input
-                  type="text"
-                  maxLength={24}
-                  value={scrapbookCaption}
-                  onChange={(e) => setScrabookCaption(e.target.value)}
-                  placeholder="e.g. Happy Holidays!"
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-colors font-semibold"
-                />
-              </div>
-            )}
-
-            {/* Utility control Actions */}
-            <div className="pt-5 border-t border-slate-100 flex flex-col sm:flex-row gap-2">
-              <button
-                onClick={() => {
-                  setPaintedElements({});
-                  setStickersList([]);
-                  setActiveSticker(null);
-                }}
-                className="flex-1 py-2 px-3 border border-slate-200 text-slate-500 hover:text-slate-800 hover:bg-slate-50 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1"
-              >
-                <Trash2 className="w-3.5 h-3.5" />
-                <span>Reset Canvas</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  const svgElement = document.getElementById('studio-canvas-svg');
-                  if (!svgElement) return;
-                  const svgString = new XMLSerializer().serializeToString(svgElement);
-                  const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-                  const svgUrl = URL.createObjectURL(svgBlob);
-                  const downloadLink = document.createElement('a');
-                  downloadLink.href = svgUrl;
-                  downloadLink.download = `Taleem360_Masterpiece_${activeStudioCategory}.svg`;
-                  document.body.appendChild(downloadLink);
-                  downloadLink.click();
-                  document.body.removeChild(downloadLink);
-                }}
-                className="flex-1 py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-black transition-colors flex items-center justify-center gap-1.5 shadow-3xs"
-              >
-                <Download className="w-3.5 h-3.5" />
-                <span>Save Artwork (.SVG)</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Workspace Right preview - spans 7 cols */}
-          <div className="xl:col-span-7 flex flex-col items-center">
-            <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-3 italic">
-              Digital Canvas • Tap regions to paint with active brush
-            </h4>
-
-            {/* Actual dynamic SVG render matrix wrapper */}
-            <div className="w-full max-w-[380px] sm:max-w-[420px] aspect-square bg-white border border-slate-200 rounded-3xl p-4 shadow-md relative group select-none">
-              <svg
-                id="studio-canvas-svg"
-                viewBox="0 0 400 400"
-                className="w-full h-full cursor-crosshair rounded-2xl overflow-hidden"
-                onClick={(e) => {
-                  // Compute click offset inside viewBox coordinate bounds for stickers
-                  if (activeSticker) {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 400;
-                    const y = ((e.clientY - rect.top) / rect.height) * 400;
-                    setStickersList(prev => [...prev, { id: Date.now(), emoji: activeSticker, x, y }]);
-                  }
-                }}
-              >
-                {/* 1. Cartoon Panda */}
-                {activeStudioCategory === 'cartoons' && (
-                  <>
-                    {/* Sky Background */}
-                    <rect 
-                      width="400" 
-                      height="400" 
-                      fill={paintedElements['cartoon-bg'] || '#fefafe'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'cartoon-bg': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    
-                    {/* Sky clouds */}
-                    <path 
-                      d="M 60,60 Q 80,40 100,60 Q 120,40 140,60 Q 160,40 180,60 Q 190,80 170,95 L 70,95 Z" 
-                      fill={paintedElements['cloud-l'] || '#ffffff'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'cloud-l': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    
-                    {/* Left Bamboo stalk */}
-                    <rect 
-                      x="25" 
-                      y="60" 
-                      width="18" 
-                      height="310" 
-                      rx="3" 
-                      fill={paintedElements['bamboo-stalk'] || '#e2e8f0'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'bamboo-stalk': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <line x1="25" y1="120" x2="43" y2="120" stroke="#475569" strokeWidth="3" />
-                    <line x1="25" y1="190" x2="43" y2="190" stroke="#475569" strokeWidth="3" />
-                    <line x1="25" y1="260" x2="43" y2="260" stroke="#475569" strokeWidth="3" />
-
-                    {/* Ears */}
-                    <circle 
-                      cx="140" 
-                      cy="110" 
-                      r="26" 
-                      fill={paintedElements['ear-l'] || '#334155'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ear-l': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <circle 
-                      cx="260" 
-                      cy="110" 
-                      r="26" 
-                      fill={paintedElements['ear-r'] || '#334155'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ear-r': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Face outline */}
-                    <circle 
-                      cx="200" 
-                      cy="180" 
-                      r="80" 
-                      fill={paintedElements['panda-face'] || '#ffffff'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'panda-face': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Eye Patches */}
-                    <ellipse 
-                      cx="168" 
-                      cy="175" 
-                      rx="16" 
-                      ry="22" 
-                      fill={paintedElements['eye-patch-l'] || '#475569'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'eye-patch-l': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <ellipse 
-                      cx="232" 
-                      cy="175" 
-                      rx="16" 
-                      ry="22" 
-                      fill={paintedElements['eye-patch-r'] || '#475569'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'eye-patch-r': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* White Pupil Highlights */}
-                    <circle cx="168" cy="170" r="6" fill="#ffffff" />
-                    <circle cx="232" cy="170" r="6" fill="#ffffff" />
-
-                    {/* Soft blushes */}
-                    <circle 
-                      cx="145" 
-                      cy="210" 
-                      r="10" 
-                      fill={paintedElements['blush-l'] || '#ffe4e6'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'blush-l': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <circle 
-                      cx="255" 
-                      cy="210" 
-                      r="10" 
-                      fill={paintedElements['blush-r'] || '#ffe4e6'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'blush-r': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Little cute nose */}
-                    <ellipse 
-                      cx="200" 
-                      cy="192" 
-                      rx="8" 
-                      ry="5" 
-                      fill={paintedElements['panda-nose'] || '#1e293b'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'panda-nose': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Cute smile path */}
-                    <path 
-                      d="M 194,204 Q 200,210 206,204" 
-                      fill="none" 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      strokeLinecap="round" 
-                    />
-
-                    {/* Paws */}
-                    <circle 
-                      cx="146" 
-                      cy="260" 
-                      r="16" 
-                      fill={paintedElements['paw-l'] || '#334155'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'paw-l': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <circle 
-                      cx="254" 
-                      cy="260" 
-                      r="16" 
-                      fill={paintedElements['paw-r'] || '#334155'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'paw-r': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Boba Cup body */}
-                    <path 
-                      d="M 160,245 L 240,245 L 230,340 L 170,340 Z" 
-                      fill={paintedElements['boba-cup-body'] || '#f1f5f9'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'boba-cup-body': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Boba tea tea-liquid height */}
-                    <path 
-                      d="M 163,270 L 237,270 L 230,340 L 170,340 Z" 
-                      fill={paintedElements['boba-liquid'] || '#fed7aa'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'boba-liquid': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Drinking Straw */}
-                    <rect 
-                      x="193" 
-                      y="210" 
-                      width="14" 
-                      height="65" 
-                      transform="rotate(-15 200 240)" 
-                      fill={paintedElements['boba-straw'] || '#fca5a5'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'boba-straw': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Boba pearls */}
-                    <circle 
-                      cx="185" 
-                      cy="315" 
-                      r="8" 
-                      fill={paintedElements['pearl-1'] || '#1e293b'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pearl-1': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <circle 
-                      cx="202" 
-                      cy="325" 
-                      r="8" 
-                      fill={paintedElements['pearl-2'] || '#1e293b'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pearl-2': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <circle 
-                      cx="218" 
-                      cy="312" 
-                      r="8" 
-                      fill={paintedElements['pearl-3'] || '#1e293b'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pearl-3': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                  </>
-                )}
-
-                {/* 2. Scrapbook template */}
-                {activeStudioCategory === 'scrapbook' && (
-                  <>
-                    {/* Binders Background */}
-                    <rect 
-                      width="400" 
-                      height="400" 
-                      fill={paintedElements['scrapbook-bg'] || '#fffef0'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrapbook-bg': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Pretty scrapbook trim lines */}
-                    <rect 
-                      x="12" 
-                      y="12" 
-                      width="376" 
-                      height="376" 
-                      fill="none" 
-                      stroke={paintedElements['scrapbook-stitch'] || '#cbd5e1'} 
-                      strokeWidth="6" 
-                      strokeDasharray="14, 8" 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrapbook-stitch': activeColor}))}}
-                      style={{ cursor: 'pointer', transition: 'stroke 200ms' }}
-                    />
-
-                    {/* Polaroid Outer photo Card */}
-                    <rect 
-                      x="110" 
-                      y="85" 
-                      width="180" 
-                      height="230" 
-                      rx="6" 
-                      fill={paintedElements['scrb-polaroid'] || '#ffffff'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrb-polaroid': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      transform="rotate(-3 200 200)"
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Inner Picture placeholder area */}
-                    <rect 
-                      x="125" 
-                      y="100" 
-                      width="150" 
-                      height="150" 
-                      fill={paintedElements['scrb-photo'] || '#f0f9ff'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrb-photo': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      transform="rotate(-3 200 200)"
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Washi masking tape */}
-                    <polygon 
-                      points="165,65 235,70 230,95 160,90" 
-                      fill={paintedElements['scrb-tape'] || '#fed7aa'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrb-tape': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Star sticker ornament */}
-                    <polygon 
-                      points="65,80 70,95 86,95 73,103 78,118 65,108 52,118 57,103 44,95 60,95" 
-                      fill={paintedElements['scrb-star-1'] || '#fef08a'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrb-star-1': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Heart sticker (left) */}
-                    <path 
-                      d="M 65,280 C 50,260 30,280 65,315 C 100,280 80,260 65,280 Z" 
-                      fill={paintedElements['scrb-heart'] || '#fca5a5'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scrb-heart': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Polaroid Custom Text block */}
-                    <text 
-                      x="200" 
-                      y="295" 
-                      textAnchor="middle" 
-                      transform="rotate(-3 200 200)" 
-                      className="font-serif font-black italic text-slate-800 text-sm tracking-wide select-none"
-                    >
-                      {scrapbookCaption || 'Memories!'}
-                    </text>
-                  </>
-                )}
-
-                {/* 3. Landscape Sketch Pages */}
-                {activeStudioCategory === 'sketch-pages' && (
-                  <>
-                    {/* Skybg */}
-                    <rect 
-                      width="400" 
-                      height="400" 
-                      fill={paintedElements['sketch-sky'] || '#bae6fd'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'sketch-sky': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Radiant sun disk */}
-                    <circle 
-                      cx="315" 
-                      cy="85" 
-                      r="32" 
-                      fill={paintedElements['sketch-sun'] || '#fef08a'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'sketch-sun': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Left Mountain range */}
-                    <polygon 
-                      points="-10,310 130,130 260,310" 
-                      fill={paintedElements['mtn-left'] || '#f1f5f9'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'mtn-left': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Right mountain range */}
-                    <polygon 
-                      points="110,310 260,105 410,310" 
-                      fill={paintedElements['mtn-right'] || '#cbd5e1'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'mtn-right': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Meadow ground */}
-                    <path 
-                      d="M -10,310 Q 100,290 200,310 T 410,310 L 410,410 L -10,410 Z" 
-                      fill={paintedElements['grass-meadow'] || '#bbf7d0'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'grass-meadow': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Sinuous snaky river */}
-                    <path 
-                      d="M 190,310 Q 205,340 180,365 T 215,410 L 255,410 Q 220,365 235,340 T 215,310 Z" 
-                      fill={paintedElements['sketch-river'] || '#93c5fd'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'sketch-river': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Evergreen Pine Trees left */}
-                    <polygon 
-                      points="55,270 85,270 70,225" 
-                      fill={paintedElements['pine-1-1'] || '#15803d'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pine-1-1': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <polygon 
-                      points="60,230 80,230 70,195" 
-                      fill={paintedElements['pine-1-2'] || '#14532d'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pine-1-2': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Evergreen Pine Trees right */}
-                    <polygon 
-                      points="315,290 355,290 335,240" 
-                      fill={paintedElements['pine-2-1'] || '#15803d'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pine-2-1': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <polygon 
-                      points="320,250 350,250 335,210" 
-                      fill={paintedElements['pine-2-2'] || '#166534'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'pine-2-2': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                  </>
-                )}
-
-                {/* 4. Comic Book Superheroes */}
-                {activeStudioCategory === 'comic-characters' && (
-                  <>
-                    {/* Retro radial comic bg */}
-                    <rect 
-                      width="400" 
-                      height="400" 
-                      fill={paintedElements['comic-sky'] || '#fffebd'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'comic-sky': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Sunburst action wedges */}
-                    <polygon 
-                      points="200,200 40,0 120,0" 
-                      fill={paintedElements['ray-1'] || '#f97316'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ray-1': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <polygon 
-                      points="200,200 270,0 350,0" 
-                      fill={paintedElements['ray-2'] || '#f97316'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ray-2': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <polygon 
-                      points="200,200 400,105 400,185" 
-                      fill={paintedElements['ray-3'] || '#fc8181'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ray-3': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <polygon 
-                      points="200,200 400,290 320,400" 
-                      fill={paintedElements['ray-4'] || '#facc15'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ray-4': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <polygon 
-                      points="200,200 80,400 0,320" 
-                      fill={paintedElements['ray-5'] || '#ec4899'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ray-5': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* City Silhouette */}
-                    <rect 
-                      x="25" 
-                      y="230" 
-                      width="75" 
-                      height="170" 
-                      rx="3" 
-                      fill={paintedElements['bldg-l'] || '#334155'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'bldg-l': activeColor}))}} 
-                      stroke="#1e293b" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <rect x="40" y="255" width="14" height="20" fill={paintedElements['window-l-1'] || '#ffffff'} onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'window-l-1': activeColor}))}} style={{ cursor: 'pointer' }} />
-                    <rect x="65" y="255" width="14" height="20" fill={paintedElements['window-l-2'] || '#ffffff'} onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'window-l-2': activeColor}))}} style={{ cursor: 'pointer' }} />
-
-                    <rect 
-                      x="300" 
-                      y="215" 
-                      width="75" 
-                      height="190" 
-                      rx="3" 
-                      fill={paintedElements['bldg-r'] || '#475569'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'bldg-r': activeColor}))}} 
-                      stroke="#1e293b" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <rect x="315" y="240" width="14" height="20" fill={paintedElements['window-r-1'] || '#ffffff'} onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'window-r-1': activeColor}))}} style={{ cursor: 'pointer' }} />
-                    <rect x="340" y="240" width="14" height="20" fill={paintedElements['window-r-2'] || '#ffffff'} onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'window-r-2': activeColor}))}} style={{ cursor: 'pointer' }} />
-
-                    {/* Giant superhero shield */}
-                    <polygon 
-                      points="125,115 275,115 255,225 200,280 145,225" 
-                      fill={paintedElements['super-shield'] || '#ef4444'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'super-shield': activeColor}))}} 
-                      stroke="#1e293b" 
-                      strokeWidth="4.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Lightning Symbol */}
-                    <polygon 
-                      points="185,130 225,130 205,185 225,185 180,255 195,195 180,195" 
-                      fill={paintedElements['super-lightning'] || '#facc15'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'super-lightning': activeColor}))}} 
-                      stroke="#1e293b" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                  </>
-                )}
-
-                {/* 5. Sci-Fi Space Voyager */}
-                {activeStudioCategory === 'sci-fi' && (
-                  <>
-                    {/* Stars Sky background */}
-                    <rect 
-                      width="400" 
-                      height="400" 
-                      fill={paintedElements['scifi-bg'] || '#0f172a'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scifi-bg': activeColor}))}} 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Giant ringed planet Saturn */}
-                    <circle 
-                      cx="95" 
-                      cy="105" 
-                      r="48" 
-                      fill={paintedElements['scifi-planet'] || '#ca8a04'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scifi-planet': activeColor}))}} 
-                      stroke="#e2e8f0" 
-                      strokeWidth="3.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                    <ellipse 
-                      cx="95" 
-                      cy="105" 
-                      rx="82" 
-                      ry="14" 
-                      fill="none" 
-                      stroke={paintedElements['scifi-rings'] || '#fed7aa'} 
-                      strokeWidth="9" 
-                      transform="rotate(-15 95 105)" 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'scifi-rings': activeColor}))}}
-                      style={{ cursor: 'pointer', transition: 'stroke 200ms' }}
-                    />
-
-                    {/* Fire thruster exhaust blast */}
-                    <polygon 
-                      points="260,225 355,205 260,185 290,205" 
-                      fill={paintedElements['thrust-fire'] || '#f97316'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'thrust-fire': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Rocket Futurisitc ship cone fuselage */}
-                    <path 
-                      d="M 115,205 Q 155,170 245,185 L 255,225 Q 155,240 115,205 Z" 
-                      fill={paintedElements['ship-fuselage'] || '#cbd5e1'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'ship-fuselage': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="4" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Ship cockpit dome window */}
-                    <ellipse 
-                      cx="150" 
-                      cy="205" 
-                      rx="16" 
-                      ry="7.5" 
-                      fill={paintedElements['cockpit-glass'] || '#38bdf8'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'cockpit-glass': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="2.5" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Wing delta stabilizer left */}
-                    <polygon 
-                      points="175,185 225,125 235,185" 
-                      fill={paintedElements['wing-l'] || '#6366f1'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'wing-l': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-
-                    {/* Wing delta stabilizer right */}
-                    <polygon 
-                      points="175,225 225,285 235,225" 
-                      fill={paintedElements['wing-r'] || '#6366f1'} 
-                      onClick={(e) => { e.stopPropagation(); setPaintedElements(p => ({...p, 'wing-r': activeColor}))}} 
-                      stroke="#475569" 
-                      strokeWidth="3" 
-                      style={{ cursor: 'pointer', transition: 'fill 200ms' }}
-                    />
-                  </>
-                )}
-
-                {/* Placed Stamp Stickers Container layer */}
-                {stickersList.map((stk) => (
-                  <text
-                    key={stk.id}
-                    x={stk.x}
-                    y={stk.y}
-                    fontSize="32"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    className="cursor-pointer select-none filter drop-shadow-sm animate-fade-in hover:scale-125 transition"
-                    onClick={(e) => {
-                      e.stopPropagation(); // Stop parent click layer
-                      // Click again to erase the selected sticker
-                      setStickersList(prev => prev.filter(item => item.id !== stk.id));
-                    }}
-                  >
-                    {stk.emoji}
-                  </text>
-                ))}
-              </svg>
-            </div>
-
-            {/* Clear-Cut guidelines summary text */}
-            <div className="mt-4 max-w-[380px] sm:max-w-[420px] p-3 text-center bg-slate-100 rounded-2xl border border-slate-200 text-slate-500 text-xs">
-              💡 <strong>How to play:</strong> Select drawing tabs above. Click any solid palette bar to define active brush color, or choose stamps to decorate! Tap regions on the canvas to fill them. Select <strong>Save Artwork</strong> to download your vector SVG work.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Dynamic Navigation Tabs & Simple Filter Widget */}
-      <section className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 space-y-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input 
-              type="text" 
-              placeholder="Search early learning worksheets..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-colors"
-            />
-          </div>
-
-          <div className="flex items-center gap-1 text-slate-500 text-xs font-mono">
-            <Grid className="w-4 h-4 text-slate-400" />
-            <span>Showing {filteredAssets.length} of {FREE_RESOURCE_ASSETS.length} available files</span>
-          </div>
-        </div>
-
-        {/* Standard SEO Category Tabs */}
-        <div className="flex flex-wrap gap-2 border-t border-slate-100 pt-4">
-          {[
-            { id: 'all', label: 'All Resources' },
-            { id: 'alphabet', label: 'Alphabet Packs' },
-            { id: 'numbers', label: 'Number Grids' },
-            { id: 'fruits-veggies', label: 'Fruits & Veggies' },
-            { id: 'shapes-vehicles', label: 'Shapes & Vehicles' },
-            { id: 'scrapbook', label: 'Scrapbook pages' },
-            { id: 'sketch-pages', label: 'Sketch Pages' },
-            { id: 'cartoons', label: 'Cute Cartoons' },
-            { id: 'comic-characters', label: 'Comic Characters' },
-            { id: 'sci-fi', label: 'Sci-Fi Cosmos' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setSelectedCategory(tab.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
-                selectedCategory === tab.id 
-                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-100 scale-102' 
-                  : 'bg-slate-50 hover:bg-slate-100 text-slate-600 border-slate-200/60'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Responsive Resource Asset Grid */}
-      <section className="space-y-6">
-        {filteredAssets.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-slate-200">
-            <Smile className="w-12 h-12 text-slate-300 mx-auto mb-4" />
-            <p className="text-slate-900 font-bold mb-1">No worksheets matched your search</p>
-            <p className="text-slate-400 text-sm">Try typing another category name or select "All Resources"</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAssets.map((asset) => (
-              <motion.div
-                key={asset.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full"
-              >
-                {/* Visual Canvas Mockup Cover */}
-                <div className={`h-48 ${asset.colorScheme.bg} border-b border-dashed ${asset.colorScheme.border} flex items-center justify-center relative p-6 select-none group`}>
-                  {asset.mockup}
-                  
-                  {/* Subtle hovering badge */}
-                  <div className="absolute top-2 left-2 px-2.5 py-1 bg-white/90 backdrop-blur-xs text-[11px] font-black text-slate-700 rounded-lg shadow-xs flex items-center gap-1">
-                    <Layers className="w-3 h-3 text-indigo-500" />
-                    <span>{asset.ageRange}</span>
-                  </div>
-                </div>
-
-                {/* Card Information Body */}
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        {asset.category.replace('-', ' & ')}
-                      </span>
-                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-800">
-                        {asset.itemsCount} Activities
-                      </span>
-                    </div>
-                    <h3 className="text-base font-bold text-slate-900 leading-tight">
-                      {asset.title}
-                    </h3>
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs text-slate-500 flex items-center gap-1 font-medium">
-                      <FileDown className="w-3.5 h-3.5 text-slate-400" />
-                      PDF Format • Ready-to-Print
-                    </span>
-                    
-                    {/* Native Anchor Download Trigger */}
-                    <a
-                      href={asset.path}
-                      download={`Taleem360_Free_Printable_${asset.title.replace(/\s+/g, '_')}.pdf`}
-                      onClick={() => triggerDownloadIndicator(asset.id)}
-                      className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-black transition-all ${
-                        downloadProgress[asset.id]
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700'
-                      }`}
-                    >
-                      {downloadProgress[asset.id] ? (
-                        <>
-                          <Check className="w-3.5 h-3.5" />
-                          <span>Downloading</span>
-                        </>
-                      ) : (
-                        <>
-                          <Download className="w-3.5 h-3.5" />
-                          <span>Print Free</span>
-                        </>
-                      )}
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+    case "numbers-v1": {
+      // 15 pages: Page 1 Dedication, 2-11 numbers (1-10), 12-14 math blocks, 15 Certificate
+      if (pageNum === 15) {
+        return {
+          title: "Math Wizard Certificate",
+          subtitle: "Numbers 1-10 counting mastery",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for counting, drawing and writing numerals from 1 to 10" }
+        };
+      }
+      if (pageNum >= 2 && pageNum <= 11) {
+        const data = NUMBERS_DATA[pageNum - 2];
+        return {
+          title: `Number ${data.num} Writing & Counting`,
+          subtitle: `Trace the numeral ${data.num} and count the ${data.item}!`,
+          type: "math",
+          payload: { num: data.num, word: data.word, count: parseInt(data.num), item: data.item }
+        };
+      }
+      // 12-14 math blocks
+      const countIndex = pageNum - 12 + 4;
+      return {
+        title: `Math Practice: Set Comparison`,
+        subtitle: `Compare quantities and color the box with more shapes.`,
+        type: "math",
+        payload: { num: `${countIndex}`, word: "Comparison", count: countIndex, item: "Star", compareMode: true }
+      };
+    }
+
+    case "numbers-v2": {
+      // 20 pages: Page 1 Dedication, 2-19 Math counting match-ups, 20 Certificate
+      if (pageNum === 20) {
+        return {
+          title: "Super Counter Badge",
+          subtitle: "Advanced counting exercises completed",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for completing 20 printable worksheets of sets and counting matches" }
+        };
+      }
+      const count = ((pageNum - 2) % 10) + 1;
+      const shapes = ["Heart", "Star", "Circle", "Apple", "Leaf"];
+      const shape = shapes[pageNum % shapes.length];
+      return {
+        title: `Count and Match: ${shape}s`,
+        subtitle: `Draw lines to connect the groups on the left with the numerals on the right.`,
+        type: "matching",
+        payload: { leftItems: Array(count).fill(shape), rightValue: count }
+      };
+    }
+
+    case "numbers-v3": {
+      // 25 pages: Page 1 Dedication, 2-24 Additions, 25 Cert
+      if (pageNum === 25) {
+        return {
+          title: "Addition Champion Certificate",
+          subtitle: "Single Digit Adding Accomplishment",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for completing single-digit math equation worksheets" }
+        };
+      }
+      const a = ((pageNum - 1) % 5) + 1;
+      const b = ((pageNum * 2) % 4) + 1;
+      return {
+        title: `Visual Addition: ${a} + ${b}`,
+        subtitle: `Count the stars in both groups, add them up, and write the answer in the box!`,
+        type: "math",
+        payload: { equation: `${a} + ${b} = ?`, valA: a, valB: b, sum: a + b }
+      };
+    }
+
+    case "shapes-pack": {
+      if (pageNum === 18) {
+        return {
+          title: "Geometry Genius Badge",
+          subtitle: "Shapes & Pattern Mastery",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for identifying and writing shapes like Circles, Squares, and Triangles" }
+        };
+      }
+      const idx = (pageNum - 2) % SHAPES_DATA.length;
+      const shape = SHAPES_DATA[idx];
+      return {
+        title: `Trace & Draw: ${shape}`,
+        subtitle: `Trace the dotted outline of the ${shape} and color it in!`,
+        type: "coloring",
+        payload: { isShape: true, name: shape }
+      };
+    }
+
+    case "fruits-pack": {
+      if (pageNum === 16) {
+        return {
+          title: "Healthy Fruits Explorer",
+          subtitle: "Fruit Vocabulary & Trace Certificate",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for tracing and coloring 16 delicious varieties of harvest fruits" }
+        };
+      }
+      const idx = (pageNum - 2) % FRUITS_DATA.length;
+      const fruit = FRUITS_DATA[idx];
+      return {
+        title: `Fruit Tracing: ${fruit}`,
+        subtitle: `Trace the fruit word '${fruit}' and color the outline of the crop.`,
+        type: "coloring",
+        payload: { isFruit: true, name: fruit }
+      };
+    }
+
+    case "vegetables-pack": {
+      if (pageNum === 18) {
+        return {
+          title: "Garden Expert Award",
+          subtitle: "Vegetables trace and match complete",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for learning the spellings and shapes of key garden vegetables" }
+        };
+      }
+      const idx = (pageNum - 2) % VEGETABLES_DATA.length;
+      const veg = VEGETABLES_DATA[idx];
+      return {
+        title: `Vegetable Tracing: ${veg}`,
+        subtitle: `Trace the vegetable name and fill in the outline with matching garden colors.`,
+        type: "coloring",
+        payload: { isVegetable: true, name: veg }
+      };
+    }
+
+    case "vehicles-pack": {
+      if (pageNum === 22) {
+        return {
+          title: "Master Transportation Pilot",
+          subtitle: "Vehicles & Craft Coloring Complete",
+          type: "certificate",
+          payload: { childName: nameToUse, desc: "for coloring and spelling various terrestrial, marine, and aerospace vehicles" }
+        };
+      }
+      const idx = (pageNum - 2) % VEHICLES_DATA.length;
+      const vehicle = VEHICLES_DATA[idx];
+      return {
+        title: `Vehicle Tracing: ${vehicle}`,
+        subtitle: `Color the outline of the vehicle and trace the letters beneath.`,
+        type: "coloring",
+        payload: { isVehicle: true, name: vehicle }
+      };
+    }
+
+    default:
+      return {
+        title: "Standard Worksheet Page",
+        subtitle: "Interactive Learning Workbook",
+        type: "dedication",
+        payload: { childName: nameToUse }
+      };
+  }
+}
+
+// ==========================================
+// HIGH-FIDELITY INLINE OUTLINE DRAWINGS (SVG)
+// ==========================================
+
+const OutlineIllustrator: React.FC<{ type: string; name: string }> = ({ type, name }) => {
+  const norm = name.toLowerCase();
+
+  // Draw simple recognizable vectors
+  if (norm === "apple") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        {/* Apple body */}
+        <path d="M50,35 C35,22 15,35 15,60 C15,85 35,90 50,82 C65,90 85,85 85,60 C85,35 65,22 50,35 Z" strokeDasharray="3,3" />
+        {/* Stem */}
+        <path d="M50,30 C50,20 60,15 62,15" />
+        {/* Leaf */}
+        <path d="M50,25 C55,20 65,22 62,28 C57,30 52,28 50,25 Z" fill="none" />
+      </svg>
+    );
+  }
+
+  if (norm === "banana") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M20,25 C45,22 75,40 80,75 C60,75 35,55 20,25 Z" strokeDasharray="3,3" />
+        <path d="M18,22 C22,23 20,28 20,25" />
+      </svg>
+    );
+  }
+
+  if (norm === "orange" || norm === "circle") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <circle cx="50" cy="50" r="35" strokeDasharray="3,3" />
+        {norm === "orange" && (
+          <>
+            <path d="M50,15 C52,10 58,12 56,15" />
+            <circle cx="50" cy="40" r="1" fill="currentColor" />
+            <circle cx="60" cy="55" r="1" fill="currentColor" />
+            <circle cx="40" cy="60" r="1" fill="currentColor" />
+          </>
         )}
-      </section>
+      </svg>
+    );
+  }
 
-      {/* Value Proposition Block */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 flex items-start gap-4 shadow-xs">
-          <div className="bg-indigo-50 p-3 rounded-xl">
-            <Printer className="w-6 h-6 text-indigo-600" />
-          </div>
-          <div>
-            <h4 className="font-bold text-slate-900 text-sm mb-1">Standard Scale Prints</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Every card layout is mathematically designed to render correctly on both standard A4 and US Letter sizes.
-            </p>
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 flex items-start gap-4 shadow-xs">
-          <div className="bg-emerald-50 p-3 rounded-xl">
-            <Flame className="w-6 h-6 text-emerald-600" />
-          </div>
-          <div>
-            <h4 className="font-bold text-slate-900 text-sm mb-1">High-Contrast Borders</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              Ultra-bold outlines designed specifically with strong boundaries to make learning tracing and visual logic painless for toddlers.
-            </p>
-          </div>
-        </div>
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 flex items-start gap-4 shadow-xs">
-          <div className="bg-pink-50 p-3 rounded-xl">
-            <Heart className="w-6 h-6 text-pink-600" />
-          </div>
-          <div>
-            <h4 className="font-bold text-slate-900 text-sm mb-1">Universal Access Guarantee</h4>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              No hidden cookies, subscription locks, or user tracking bounds. Print immediately for your classroom, homeschool, or tutoring sessions.
-            </p>
-          </div>
-        </div>
-      </section>
-        </>
-      ) : (
-        <CompetitionHub />
-      )}
-      
+  if (norm === "strawberry") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M50,20 C75,20 80,50 65,80 C55,90 45,90 35,80 C20,50 25,20 50,20 Z" strokeDasharray="3,3" />
+        {/* Seeds */}
+        <circle cx="40" cy="40" r="1" fill="currentColor" />
+        <circle cx="60" cy="40" r="1" fill="currentColor" />
+        <circle cx="50" cy="55" r="1" fill="currentColor" />
+        <circle cx="45" cy="70" r="1" fill="currentColor" />
+        <circle cx="55" cy="70" r="1" fill="currentColor" />
+        {/* Crown leaves */}
+        <path d="M35,20 C45,25 55,25 65,20 C60,15 50,18 35,20 Z" />
+      </svg>
+    );
+  }
+
+  if (norm === "star") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M50,10 L62,38 L92,38 L68,56 L78,85 L50,67 L22,85 L32,56 L8,38 L38,38 Z" strokeDasharray="3,3" />
+      </svg>
+    );
+  }
+
+  if (norm === "heart" || norm === "hearts") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M50,30 C50,15 25,15 25,35 C25,60 50,85 50,85 C50,85 75,60 75,35 C75,15 50,15 50,30 Z" strokeDasharray="3,3" />
+      </svg>
+    );
+  }
+
+  if (norm === "square") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <rect x="20" y="20" width="60" height="60" strokeDasharray="3,3" rx="4" />
+      </svg>
+    );
+  }
+
+  if (norm === "triangle") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <polygon points="50,15 15,80 85,80" strokeDasharray="3,3" />
+      </svg>
+    );
+  }
+
+  if (norm === "car") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M15,60 H85 V45 C85,45 75,42 68,35 H32 L22,45 C22,45 15,48 15,60 Z" strokeDasharray="3,3" />
+        <circle cx="32" cy="65" r="10" stroke="currentColor" strokeWidth="2.5" />
+        <circle cx="68" cy="65" r="10" stroke="currentColor" strokeWidth="2.5" />
+      </svg>
+    );
+  }
+
+  if (norm === "rocket") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        {/* Nose cone */}
+        <path d="M50,10 C42,25 40,40 40,65 H60 C60,40 58,25 50,10 Z" strokeDasharray="3,3" />
+        {/* Fins */}
+        <path d="M40,55 L25,70 L30,80 L40,75" />
+        <path d="M60,55 L75,70 L70,80 L60,75" />
+        {/* Thruster fire */}
+        <path d="M45,80 L50,95 L55,80 Z" />
+      </svg>
+    );
+  }
+
+  if (norm === "carrot") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <path d="M50,15 C60,15 62,25 55,60 L50,90 L45,60 C38,25 40,15 50,15 Z" strokeDasharray="3,3" />
+        <path d="M50,15 C52,5 58,10 55,15" />
+        <path d="M50,15 C48,5 42,10 45,15" />
+      </svg>
+    );
+  }
+
+  if (norm === "tomato") {
+    return (
+      <svg className="w-36 h-36 mx-auto text-slate-800" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.5">
+        <ellipse cx="50" cy="55" rx="35" ry="28" strokeDasharray="3,3" />
+        <path d="M50,27 L53,20 L47,20 Z" />
+        <path d="M50,27 C54,23 60,25 60,27" />
+        <path d="M50,27 C46,23 40,25 40,27" />
+      </svg>
+    );
+  }
+
+  // Fallback visual illustration
+  return (
+    <div className="w-36 h-36 mx-auto border-4 border-dashed border-slate-300 rounded-full flex flex-col items-center justify-center p-4">
+      <FileText className="w-10 h-10 text-slate-400 mb-1" />
+      <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider text-center truncate w-full">
+        {name}
+      </span>
     </div>
   );
 };
 
-export default FreeResources;
+// ==========================================
+// DYNAMIC WORKBOOK COMPILER (jsPDF BUILDER)
+// ==========================================
+
+function compileWorkbookPDF(pack: ResourcePack, childName: string) {
+  const doc = new jsPDF({
+    orientation: "portrait",
+    unit: "mm",
+    format: "a4"
+  });
+
+  const totalPages = pack.pages;
+
+  for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+    const details = resolvePageDetails(pack.id, pageNum, childName);
+
+    // Page Border and Header
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.4);
+    doc.rect(8, 8, 194, 281); // standard high border
+
+    // Brand and series
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    doc.text("TALEEM360 EARLY LEARNING WORKBOOKS", 12, 14);
+
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(7);
+    doc.text(`Workbook ID: ${pack.id} | Page ${pageNum} of ${totalPages}`, 190 - doc.getTextWidth(`Workbook ID: ${pack.id} | Page ${pageNum} of ${totalPages}`) / 2, 14);
+
+    // Main Header Divider Line
+    doc.setDrawColor(230, 230, 230);
+    doc.line(10, 17, 200, 17);
+
+    // Page Title
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(16);
+    doc.setTextColor(20, 30, 40);
+    doc.text(details.title.toUpperCase(), 15, 26);
+
+    // Subtitle
+    doc.setFont("Helvetica", "italic");
+    doc.setFontSize(9);
+    doc.setTextColor(80, 90, 100);
+    doc.text(details.subtitle, 15, 31);
+
+    // RENDER SPECIFIC CONTENT TYPES
+    if (details.type === "dedication") {
+      // Large beautifully centered dedication frame
+      doc.setDrawColor(16, 185, 129); // Emerald border
+      doc.setLineWidth(1.5);
+      doc.rect(20, 50, 170, 180);
+
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(28);
+      doc.setTextColor(16, 185, 129);
+      doc.text("THIS WORKBOOK", 105 - doc.getTextWidth("THIS WORKBOOK") / 2, 85);
+      doc.text("BELONGS TO:", 105 - doc.getTextWidth("BELONGS TO:") / 2, 100);
+
+      // Child name line
+      doc.setDrawColor(100, 100, 100);
+      doc.setLineWidth(0.8);
+      doc.line(35, 145, 175, 145);
+
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(24);
+      doc.setTextColor(20, 30, 40);
+      const name = details.payload.childName;
+      doc.text(name, 105 - doc.getTextWidth(name) / 2, 140);
+
+      // Footer notice inside frame
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(120, 120, 120);
+      doc.text("Print this book at home or classroom for fine pen tracing and coloring.", 105 - doc.getTextWidth("Print this book at home or classroom for fine pen tracing and coloring.") / 2, 180);
+      doc.text("Approved & Compiled by Taleem360 Academics Platform", 105 - doc.getTextWidth("Approved & Compiled by Taleem360 Academics Platform") / 2, 192);
+
+    } else if (details.type === "tracing") {
+      const p = details.payload;
+      
+      // Top guidance block
+      doc.setDrawColor(240, 240, 240);
+      doc.setFillColor(248, 250, 252);
+      doc.rect(15, 38, 180, 45, "F");
+
+      // Giant Letter Display
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(54);
+      doc.setTextColor(20, 30, 40);
+      doc.text(`${p.char} ${p.lowercase || ""}`, 25, 72);
+
+      // Keyword block
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(18);
+      doc.setTextColor(16, 185, 129);
+      doc.text(p.word || "", 110, 60);
+
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(100, 100, 100);
+      doc.text(`Trace letter ${p.char} inside guidelines.`, 110, 68);
+
+      // Handwriting tracing grids (Draw 4-line guidelines)
+      let startY = 100;
+      for (let gridIdx = 0; gridIdx < 4; gridIdx++) {
+        // Draw the 4 lines
+        const gy = startY + gridIdx * 40;
+        doc.setLineWidth(0.2);
+        
+        // Line 1: Top blue
+        doc.setDrawColor(173, 216, 230);
+        doc.line(15, gy, 195, gy);
+
+        // Line 2: Mid dashed
+        doc.setDrawColor(200, 200, 200);
+        doc.setLineDashPattern([2, 2], 0);
+        doc.line(15, gy + 8, 195, gy + 8);
+
+        // Line 3: Mid solid
+        doc.setLineDashPattern([], 0);
+        doc.setDrawColor(255, 182, 193); // Pink
+        doc.line(15, gy + 16, 195, gy + 16);
+
+        // Line 4: Bottom blue
+        doc.setDrawColor(173, 216, 230);
+        doc.line(15, gy + 24, 195, gy + 24);
+
+        // Draw dotted target character
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(200, 200, 200); // Light gray for tracing
+        
+        for (let col = 0; col < 6; col++) {
+          const colX = 25 + col * 30;
+          doc.text(`${p.char}`, colX, gy + 15);
+        }
+      }
+
+    } else if (details.type === "coloring") {
+      const p = details.payload;
+      
+      // Word Tracing line at top
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(36);
+      doc.setTextColor(220, 220, 220); // Dotted trace font color
+      doc.text(p.word.toUpperCase(), 105 - doc.getTextWidth(p.word.toUpperCase()) / 2, 60);
+
+      doc.setLineWidth(0.3);
+      doc.setDrawColor(150, 150, 150);
+      doc.setLineDashPattern([2, 2], 0);
+      doc.line(20, 65, 190, 65);
+
+      // Outline drawings frame
+      doc.setLineDashPattern([], 0);
+      doc.setDrawColor(220, 220, 220);
+      doc.rect(20, 80, 170, 140);
+
+      // Draw simple geometric shapes/outlines programmatically
+      const normName = (p.name || p.word || "").toLowerCase();
+      doc.setLineWidth(1.5);
+      doc.setDrawColor(40, 40, 40);
+
+      if (normName.includes("apple")) {
+        doc.ellipse(105, 150, 40, 35);
+        doc.line(105, 115, 115, 100); // stem
+      } else if (normName.includes("star")) {
+        // Draw 5-point star
+        const cx = 105, cy = 150, r = 40;
+        const points = [];
+        for (let i = 0; i < 10; i++) {
+          const angle = (Math.PI / 5) * i - Math.PI / 2;
+          const currR = i % 2 === 0 ? r : r / 2;
+          points.push({ x: cx + currR * Math.cos(angle), y: cy + currR * Math.sin(angle) });
+        }
+        for (let i = 0; i < 10; i++) {
+          const next = (i + 1) % 10;
+          doc.line(points[i].x, points[i].y, points[next].x, points[next].y);
+        }
+      } else if (normName.includes("circle")) {
+        doc.ellipse(105, 150, 40, 40);
+      } else if (normName.includes("square")) {
+        doc.rect(65, 110, 80, 80);
+      } else if (normName.includes("triangle")) {
+        doc.triangle(105, 110, 65, 190, 145, 190);
+      } else if (normName.includes("heart")) {
+        doc.ellipse(90, 140, 20, 20);
+        doc.ellipse(120, 140, 20, 20);
+        doc.triangle(71, 146, 139, 146, 105, 190);
+      } else {
+        // Simple rectangular block to color in
+        doc.rect(60, 110, 90, 80);
+        doc.setFontSize(10);
+        doc.text("COLOR ME!", 105 - doc.getTextWidth("COLOR ME!") / 2, 150);
+      }
+
+      // Tracing prompts at the bottom
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(80, 80, 80);
+      doc.text("Trace the spelling letters above, then color the graphic inside the borders.", 105 - doc.getTextWidth("Trace the spelling letters above, then color the graphic inside the borders.") / 2, 245);
+
+    } else if (details.type === "math") {
+      const p = details.payload;
+
+      if (p.compareMode) {
+        // Group columns
+        doc.setDrawColor(220, 220, 220);
+        doc.rect(20, 50, 75, 120);
+        doc.rect(115, 50, 75, 120);
+
+        // Draw counting items
+        doc.setLineWidth(0.5);
+        doc.setDrawColor(60, 60, 60);
+        for (let i = 0; i < parseInt(p.num); i++) {
+          const cy1 = 65 + i * 18;
+          doc.ellipse(57, cy1, 6, 6);
+          if (i < 3) {
+            doc.ellipse(152, cy1, 6, 6);
+          }
+        }
+
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(14);
+        doc.setTextColor(30, 40, 50);
+        doc.text(`Set A: ${p.num} items`, 30, 185);
+        doc.text(`Set B: 3 items`, 128, 185);
+
+      } else if (p.equation) {
+        // Big equation presentation
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(36);
+        doc.setTextColor(20, 30, 40);
+        doc.text(p.equation, 105 - doc.getTextWidth(p.equation) / 2, 80);
+
+        // Drawing calculation blocks
+        doc.setLineWidth(1);
+        doc.setDrawColor(16, 185, 129);
+        doc.rect(40, 110, 50, 50);
+        doc.rect(120, 110, 50, 50);
+
+        // Math symbols
+        doc.setFontSize(28);
+        doc.text("+", 102, 140);
+        doc.text("=", 180, 140);
+
+        // Little visual dots to count
+        doc.setDrawColor(100, 100, 100);
+        for (let i = 0; i < p.valA; i++) {
+          const offset = i * 8;
+          doc.ellipse(50 + offset, 135, 3, 3);
+        }
+        for (let i = 0; i < p.valB; i++) {
+          const offset = i * 8;
+          doc.ellipse(130 + offset, 135, 3, 3);
+        }
+
+        // Answer input block
+        doc.setDrawColor(16, 185, 129);
+        doc.rect(75, 190, 60, 40);
+        doc.setFontSize(10);
+        doc.text("WRITE ANSWER", 90, 212);
+      } else {
+        // Simple numeric card
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(80);
+        doc.text(`${p.num}`, 105 - doc.getTextWidth(`${p.num}`) / 2, 100);
+
+        doc.setFontSize(24);
+        doc.text(`${p.word.toUpperCase()}`, 105 - doc.getTextWidth(`${p.word.toUpperCase()}`) / 2, 130);
+
+        // Set representation
+        doc.setLineWidth(0.5);
+        doc.setDrawColor(100, 100, 100);
+        for (let i = 0; i < p.count; i++) {
+          const colX = 35 + (i % 5) * 30;
+          const rowY = 170 + Math.floor(i / 5) * 30;
+          doc.ellipse(colX, rowY, 8, 8);
+        }
+      }
+
+    } else if (details.type === "matching") {
+      const p = details.payload;
+      
+      // Interactive matching columns
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(12);
+      doc.setTextColor(100, 100, 100);
+      doc.text("ITEMS ON THE LEFT", 20, 60);
+      doc.text("NUMBERS ON THE RIGHT", 140, 60);
+
+      doc.setLineWidth(0.5);
+      doc.setDrawColor(200, 200, 200);
+      doc.line(20, 65, 190, 65);
+
+      // Draw rows
+      for (let row = 0; row < 5; row++) {
+        const ry = 90 + row * 35;
+        doc.ellipse(30, ry, 6, 6);
+        doc.circle(45, ry, 1, "F");
+
+        doc.circle(150, ry, 1, "F");
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(14);
+        doc.text(`${row + 1}`, 165, ry + 4);
+      }
+
+    } else if (details.type === "certificate") {
+      const p = details.payload;
+      
+      // Beautiful certificate border
+      doc.setDrawColor(218, 165, 32); // Golden borders
+      doc.setLineWidth(2);
+      doc.rect(15, 45, 180, 190);
+
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(24);
+      doc.setTextColor(218, 165, 32);
+      doc.text("CERTIFICATE OF ACHIEVEMENT", 105 - doc.getTextWidth("CERTIFICATE OF ACHIEVEMENT") / 2, 75);
+
+      doc.setFont("Helvetica", "italic");
+      doc.setFontSize(12);
+      doc.setTextColor(100, 100, 100);
+      doc.text("Proudly Awarded To:", 105 - doc.getTextWidth("Proudly Awarded To:") / 2, 105);
+
+      // Child name
+      doc.setFont("Helvetica", "bold");
+      doc.setFontSize(28);
+      doc.setTextColor(20, 30, 40);
+      doc.text(p.childName, 105 - doc.getTextWidth(p.childName) / 2, 125);
+
+      // Certificate underline
+      doc.setDrawColor(200, 200, 200);
+      doc.setLineWidth(0.5);
+      doc.line(35, 132, 175, 132);
+
+      // Course text
+      doc.setFont("Helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(80, 90, 100);
+      doc.text(p.desc, 105 - doc.getTextWidth(p.desc) / 2, 150);
+
+      // Bottom seals and sign blocks
+      doc.line(35, 200, 85, 200);
+      doc.line(125, 200, 175, 200);
+
+      doc.setFontSize(8);
+      doc.text("ACADEMIC SUPERVISOR", 60 - doc.getTextWidth("ACADEMIC SUPERVISOR") / 2, 205);
+      doc.text("TALEEM360 ERP PLATFORM", 150 - doc.getTextWidth("TALEEM360 ERP PLATFORM") / 2, 205);
+
+      // Cute golden star seal
+      doc.setFillColor(218, 165, 32);
+      doc.triangle(105, 180, 98, 195, 112, 195, "F");
+    }
+
+    // Add new page if not the last page
+    if (pageNum < totalPages) {
+      doc.addPage();
+    }
+  }
+
+  // Save the customized printable document
+  doc.save(`${pack.id}-${childName.replace(/\s+/g, "_") || "workbook"}.pdf`);
+}
+
+// ==========================================
+// REACT PRESENTATION MODULE
+// ==========================================
+
+export const FreeResources: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "phonics" | "numbers" | "coloring">("all");
+  const [activePack, setActivePack] = useState<ResourcePack | null>(RESOURCE_PACKS[0]);
+
+  // Customizable properties
+  const [childName, setChildName] = useState("");
+  const [previewPage, setPreviewPage] = useState(1);
+  const [isCompiling, setIsCompiling] = useState(false);
+  const [tracingLineStyle, setTracingLineStyle] = useState<"dotted" | "solid" | "light">("dotted");
+
+  const filteredPacks = RESOURCE_PACKS.filter((pack) => {
+    const matchesSearch = 
+      pack.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pack.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      pack.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const matchesCategory = selectedCategory === "all" || pack.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  const handlePackSelect = (pack: ResourcePack) => {
+    setActivePack(pack);
+    setPreviewPage(1); // Reset page selection on workbook switch
+  };
+
+  const handleDownload = () => {
+    if (!activePack) return;
+    setIsCompiling(true);
+    try {
+      compileWorkbookPDF(activePack, childName);
+    } catch (err) {
+      console.error("PDF Compilation failed", err);
+    } finally {
+      setIsCompiling(false);
+    }
+  };
+
+  // Resolve the details for the currently active page in the preview pane
+  const activePageDetails = activePack 
+    ? resolvePageDetails(activePack.id, previewPage, childName)
+    : null;
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 py-10 px-4 sm:px-6 lg:px-8">
+      {/* Decorative gradient blur */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto">
+        {/* HEADER AREA */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-semibold mb-4">
+            <Gift className="w-3.5 h-3.5" />
+            100% Free Educational Printables
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-none mb-4">
+            Free Printable Workbooks & Learning Packs
+          </h1>
+          <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Support early childhood development at home or in class with phonics grids, vocabulary tracings, number additions, and coloring sheets. Select a pack to view, print, or adapt.
+          </p>
+        </div>
+
+        {/* SEARCH AND FILTERS */}
+        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 mb-10 backdrop-blur-md">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            {/* Search Input */}
+            <div className="relative w-full md:w-96">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                <Search className="h-4 w-4 text-slate-400" />
+              </span>
+              <input
+                type="text"
+                className="block w-full pl-10 pr-4 py-2.5 bg-slate-950/80 border border-slate-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl text-xs text-white placeholder-slate-500 transition-colors"
+                placeholder="Search resources, skills or topics..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap gap-2 w-full md:w-auto justify-start md:justify-end">
+              <button
+                onClick={() => setSelectedCategory("all")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
+                  selectedCategory === "all"
+                    ? "bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20"
+                    : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700"
+                }`}
+              >
+                All Resources
+              </button>
+              <button
+                onClick={() => setSelectedCategory("phonics")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
+                  selectedCategory === "phonics"
+                    ? "bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20"
+                    : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700"
+                }`}
+              >
+                Alphabet & Phonics
+              </button>
+              <button
+                onClick={() => setSelectedCategory("numbers")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
+                  selectedCategory === "numbers"
+                    ? "bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20"
+                    : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700"
+                }`}
+              >
+                Numbers & Math
+              </button>
+              <button
+                onClick={() => setSelectedCategory("coloring")}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 ${
+                  selectedCategory === "coloring"
+                    ? "bg-emerald-500 text-slate-950 shadow-md shadow-emerald-500/20"
+                    : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700"
+                }`}
+              >
+                Coloring & Vocabulary
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* MAIN WORKSPACE GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* LEFT COLUMN: RESOURCES GRID */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-sm font-extrabold uppercase tracking-widest text-emerald-400">
+                Available Resource Packs ({filteredPacks.length})
+              </h2>
+              {searchTerm && (
+                <button 
+                  onClick={() => setSearchTerm("")}
+                  className="text-xs text-slate-500 hover:text-slate-300"
+                >
+                  Clear search
+                </button>
+              )}
+            </div>
+
+            {filteredPacks.length === 0 ? (
+              <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-12 text-center">
+                <FileText className="w-12 h-12 text-slate-600 mx-auto mb-4" />
+                <h3 className="text-sm font-bold text-slate-300 mb-1">No packs found</h3>
+                <p className="text-xs text-slate-500 max-w-xs mx-auto">
+                  Try adjusting your search terms or select another category filter above.
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {filteredPacks.map((pack) => {
+                  const isActive = activePack?.id === pack.id;
+                  return (
+                    <div
+                      key={pack.id}
+                      onClick={() => handlePackSelect(pack)}
+                      className={`group p-5 bg-slate-900/40 hover:bg-slate-900/80 border rounded-2xl cursor-pointer text-left transition-all duration-300 hover:border-emerald-500/30 ${
+                        isActive 
+                          ? "border-emerald-500 ring-1 ring-emerald-500/20 bg-slate-900/90" 
+                          : "border-slate-800"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-3 mb-3">
+                        <span className="inline-block px-2.5 py-1 bg-slate-800 text-slate-300 text-[10px] font-bold rounded-lg uppercase tracking-wide">
+                          {pack.categoryLabel}
+                        </span>
+                        <span className="text-[10px] text-slate-500 font-semibold flex items-center gap-1">
+                          <FileText className="w-3 h-3 text-slate-600" />
+                          {pack.pages} Pages
+                        </span>
+                      </div>
+
+                      <h3 className="text-xs font-extrabold text-white group-hover:text-emerald-400 transition-colors mb-2 line-clamp-1">
+                        {pack.title}
+                      </h3>
+                      
+                      <p className="text-[11px] text-slate-400 leading-relaxed line-clamp-2 mb-4">
+                        {pack.description}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-[10px] text-slate-500 italic">
+                          {pack.ageGroup}
+                        </span>
+                        <span className="text-[10px] font-extrabold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                          Inspect Pack
+                          <ArrowRight className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* DYNAMIC COMPILER WORKBENCH AREA */}
+            {activePack && (
+              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-left shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+                
+                <h3 className="text-sm font-extrabold text-white uppercase tracking-widest text-emerald-400 mb-4 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4" />
+                  Printable Document Configurator
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {/* Custom Name */}
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
+                      <User className="w-3 h-3 text-emerald-400" />
+                      Add Child's Name (Custom Dedication)
+                    </label>
+                    <input
+                      type="text"
+                      className="block w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 rounded-xl text-xs text-white placeholder-slate-500"
+                      placeholder="e.g. Ayaan, Emma, Sarah..."
+                      value={childName}
+                      onChange={(e) => setChildName(e.target.value)}
+                    />
+                    <p className="text-[10px] text-slate-500 mt-1.5">
+                      Dynamically auto-formats onto the frontpage dedication grid!
+                    </p>
+                  </div>
+
+                  {/* Line Style */}
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                      Handwriting Guideline Style
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      <button
+                        onClick={() => setTracingLineStyle("dotted")}
+                        className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${
+                          tracingLineStyle === "dotted"
+                            ? "bg-emerald-500/15 border-emerald-500 text-emerald-400"
+                            : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        Dotted Guide
+                      </button>
+                      <button
+                        onClick={() => setTracingLineStyle("solid")}
+                        className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${
+                          tracingLineStyle === "solid"
+                            ? "bg-emerald-500/15 border-emerald-500 text-emerald-400"
+                            : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        Classic Solid
+                      </button>
+                      <button
+                        onClick={() => setTracingLineStyle("light")}
+                        className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${
+                          tracingLineStyle === "light"
+                            ? "bg-emerald-500/15 border-emerald-500 text-emerald-400"
+                            : "bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-300"
+                        }`}
+                      >
+                        Light Grey
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Compilation Status & Core Actions */}
+                <div className="flex flex-col sm:flex-row gap-3 items-center justify-between border-t border-slate-800 pt-5">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-slate-950 border border-slate-800 rounded-xl">
+                      <Printer className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-200">
+                        Compile {activePack.pages} Printable Pages
+                      </h4>
+                      <p className="text-[10px] text-slate-500 leading-none mt-1">
+                        Client-side high-resolution vector layout assembly.
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleDownload}
+                    disabled={isCompiling}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 disabled:bg-slate-800 disabled:text-slate-600 text-slate-950 font-black py-3 px-6 rounded-xl text-xs transition-all active:scale-[0.98] shadow-lg shadow-emerald-500/10"
+                  >
+                    {isCompiling ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        Assembling Pages...
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-4 h-4" />
+                        Compile & Download PDF ({activePack.pages} Pages)
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT COLUMN: HIGH-FIDELITY WORKSHEET SHEET PREVIEW */}
+          <div className="lg:col-span-5 lg:sticky lg:top-6">
+            {activePack && activePageDetails ? (
+              <div className="space-y-4">
+                
+                {/* Visual Sheet Preview Panel */}
+                <div className="bg-white border-2 border-slate-200 rounded-2xl shadow-2xl p-6 text-slate-900 flex flex-col min-h-[580px] relative">
+                  
+                  {/* Decorative punch holes for realistic workbook vibe */}
+                  <div className="absolute top-1/2 -left-3 -translate-y-1/2 flex flex-col gap-6">
+                    <div className="w-3.5 h-3.5 bg-slate-950 border-2 border-slate-200 rounded-full shadow-inner" />
+                    <div className="w-3.5 h-3.5 bg-slate-950 border-2 border-slate-200 rounded-full shadow-inner" />
+                    <div className="w-3.5 h-3.5 bg-slate-950 border-2 border-slate-200 rounded-full shadow-inner" />
+                  </div>
+
+                  {/* Header Row */}
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-100 text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                    <span>Taleem360 Early Learners Series</span>
+                    <span>Page {previewPage} of {activePack.pages}</span>
+                  </div>
+
+                  {/* Main Worksheet Body Area */}
+                  <div className="py-6 flex-1 flex flex-col justify-between text-left">
+                    <div>
+                      <h2 className="text-xl font-black tracking-tight text-slate-900 leading-none">
+                        {activePageDetails.title}
+                      </h2>
+                      <p className="text-xs text-slate-500 leading-relaxed mt-1.5 font-medium">
+                        {activePageDetails.subtitle}
+                      </p>
+                    </div>
+
+                    {/* DYNAMIC RENDER BY PAGE TYPE */}
+                    <div className="my-8 flex-1 flex items-center justify-center">
+                      
+                      {activePageDetails.type === "dedication" && (
+                        <div className="border-4 border-emerald-500 border-double p-6 rounded-xl w-full text-center space-y-4">
+                          <h3 className="text-lg font-black text-emerald-600 tracking-wide uppercase">
+                            This Worksheet Pack
+                          </h3>
+                          <div className="text-2xl font-black text-slate-800 tracking-tight">
+                            BELONGS TO:
+                          </div>
+                          
+                          {/* Tracing guide style line for name */}
+                          <div className="py-3 border-b-2 border-slate-300 font-serif italic text-2xl font-black text-slate-800 min-h-[48px]">
+                            {activePageDetails.payload.childName}
+                          </div>
+                          <p className="text-[10px] text-slate-500 leading-relaxed">
+                            A customized selection of printable educational games, letters, traces, spelling helper cards, and coloring templates.
+                          </p>
+                        </div>
+                      )}
+
+                      {activePageDetails.type === "tracing" && (
+                        <div className="w-full space-y-6">
+                          
+                          {/* Top display card */}
+                          <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-center justify-between">
+                            <span className="text-6xl font-black font-sans text-slate-950">
+                              {activePageDetails.payload.char}
+                              <span className="text-slate-400 text-4xl ml-2">
+                                {activePageDetails.payload.lowercase}
+                              </span>
+                            </span>
+                            <div className="text-right">
+                              <span className="text-xs font-bold uppercase tracking-wider text-emerald-500 block">
+                                Association Word
+                              </span>
+                              <span className="text-lg font-black text-slate-800 block">
+                                {activePageDetails.payload.word}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Handwriting Guides lines */}
+                          <div className="space-y-4">
+                            {[1, 2, 3].map((g) => (
+                              <div key={g} className="relative py-2.5">
+                                {/* Top Line (Blue) */}
+                                <div className="border-t border-sky-200 w-full" />
+                                {/* Dash Line */}
+                                <div className="border-t border-dashed border-slate-300 w-full my-2.5" />
+                                {/* Bottom Guideline (Pink) */}
+                                <div className="border-t-2 border-rose-200 w-full" />
+                                {/* Base Guideline (Blue) */}
+                                <div className="border-t border-sky-200 w-full mt-2.5" />
+
+                                {/* Dotted Letter Tracing Overlays */}
+                                <div className="absolute inset-y-0 left-0 right-0 flex justify-around items-center pt-1">
+                                  {[1, 2, 3, 4, 5].map((c) => (
+                                    <span 
+                                      key={c} 
+                                      className={`text-lg font-bold select-none ${
+                                        tracingLineStyle === "dotted" 
+                                          ? "text-slate-300 stroke-dash" 
+                                          : tracingLineStyle === "light" 
+                                            ? "text-slate-200" 
+                                            : "text-slate-400"
+                                      }`}
+                                      style={tracingLineStyle === "dotted" ? { letterSpacing: "1px", borderBottom: "none" } : undefined}
+                                    >
+                                      {activePageDetails.payload.char}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {activePageDetails.type === "coloring" && (
+                        <div className="w-full space-y-4 text-center">
+                          {/* Trace word display */}
+                          <div className="text-3xl font-bold tracking-widest text-slate-300 uppercase select-none border-b border-dashed border-slate-200 py-2 inline-block">
+                            {activePageDetails.payload.word}
+                          </div>
+                          
+                          {/* Beautiful dynamic inline outline drawings */}
+                          <OutlineIllustrator type="coloring" name={activePageDetails.payload.name || activePageDetails.payload.word} />
+
+                          <p className="text-[10px] text-slate-400 font-medium italic">
+                            Trace the capital letters at the top, then custom-color the outline below.
+                          </p>
+                        </div>
+                      )}
+
+                      {activePageDetails.type === "math" && (
+                        <div className="w-full space-y-6 text-center">
+                          {activePageDetails.payload.compareMode ? (
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="border border-slate-200 rounded-xl p-4 bg-slate-50 flex flex-col items-center justify-center min-h-[140px]">
+                                <div className="flex flex-wrap gap-1.5 justify-center">
+                                  {Array.from({ length: parseInt(activePageDetails.payload.num) }).map((_, i) => (
+                                    <div key={i} className="w-6 h-6 border-2 border-slate-800 rounded-full" />
+                                  ))}
+                                </div>
+                                <span className="text-xs font-bold text-slate-500 mt-3">Group A ({activePageDetails.payload.num})</span>
+                              </div>
+                              <div className="border border-slate-200 rounded-xl p-4 bg-slate-50 flex flex-col items-center justify-center min-h-[140px]">
+                                <div className="flex flex-wrap gap-1.5 justify-center">
+                                  {Array.from({ length: 3 }).map((_, i) => (
+                                    <div key={i} className="w-6 h-6 border-2 border-slate-800 rounded-full" />
+                                  ))}
+                                </div>
+                                <span className="text-xs font-bold text-slate-500 mt-3">Group B (3)</span>
+                              </div>
+                            </div>
+                          ) : activePageDetails.payload.equation ? (
+                            <div className="space-y-4">
+                              <div className="text-4xl font-extrabold text-slate-900">
+                                {activePageDetails.payload.valA} + {activePageDetails.payload.valB} = <span className="inline-block w-12 border-b-2 border-slate-800 h-10"></span>
+                              </div>
+                              <div className="flex items-center justify-center gap-6 py-4">
+                                <div className="flex flex-wrap gap-1 justify-center max-w-[100px]">
+                                  {Array.from({ length: activePageDetails.payload.valA }).map((_, i) => (
+                                    <div key={i} className="w-4 h-4 border border-slate-800 rounded-sm bg-slate-100" />
+                                  ))}
+                                </div>
+                                <span className="text-xl font-bold">+</span>
+                                <div className="flex flex-wrap gap-1 justify-center max-w-[100px]">
+                                  {Array.from({ length: activePageDetails.payload.valB }).map((_, i) => (
+                                    <div key={i} className="w-4 h-4 border border-slate-800 rounded-sm bg-slate-100" />
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="space-y-4">
+                              <div className="text-6xl font-black text-slate-900">
+                                {activePageDetails.payload.num}
+                              </div>
+                              <div className="text-lg font-black text-emerald-600 tracking-wider">
+                                {activePageDetails.payload.word.toUpperCase()}
+                              </div>
+                              <div className="flex flex-wrap justify-center gap-2 max-w-sm mx-auto pt-2">
+                                {Array.from({ length: activePageDetails.payload.count }).map((_, i) => (
+                                  <div key={i} className="w-8 h-8 border-2 border-slate-800 rounded-full flex items-center justify-center text-[10px] font-bold">
+                                    {i + 1}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {activePageDetails.type === "matching" && (
+                        <div className="w-full space-y-4">
+                          <div className="flex items-center justify-between text-xs font-bold text-slate-400 pb-2 border-b border-slate-100">
+                            <span>Draw Line</span>
+                            <span>Matching Digit</span>
+                          </div>
+                          {[1, 2, 3, 4].map((idx) => (
+                            <div key={idx} className="flex items-center justify-between py-2.5">
+                              <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded-full border-2 border-slate-900" />
+                                <span className="text-xs font-medium text-slate-700">Set Group {idx}</span>
+                              </div>
+                              <div className="w-full mx-6 border-b border-dotted border-slate-300" />
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs font-black text-slate-900">{idx * 2 - 1}</span>
+                                <div className="w-4 h-4 rounded-full border-2 border-slate-900" />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {activePageDetails.type === "certificate" && (
+                        <div className="border-4 border-amber-400 border-double p-5 rounded-2xl w-full text-center space-y-4 bg-amber-50/20">
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-600 block">
+                            Award of Excellence
+                          </span>
+                          <h3 className="text-base font-black text-slate-900">
+                            {activePageDetails.title.toUpperCase()}
+                          </h3>
+                          <p className="text-xs text-slate-500 leading-normal">
+                            This is proudly certificate that:
+                          </p>
+                          <div className="text-xl font-bold font-serif text-slate-800 border-b border-slate-300 pb-1.5 inline-block min-w-[200px]">
+                            {activePageDetails.payload.childName}
+                          </div>
+                          <p className="text-[10px] text-slate-500 leading-relaxed px-4">
+                            {activePageDetails.payload.desc}
+                          </p>
+                          
+                          <div className="flex items-center justify-between pt-6 text-[8px] font-bold text-slate-400 uppercase">
+                            <div className="border-t border-slate-200 pt-1 w-24">Signature</div>
+                            <div className="w-8 h-8 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-600 font-bold">
+                              ★
+                            </div>
+                            <div className="border-t border-slate-200 pt-1 w-24">Date Issued</div>
+                          </div>
+                        </div>
+                      )}
+
+                    </div>
+
+                    {/* Footer Row */}
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[8px] font-bold text-slate-400 uppercase">
+                      <span>Designed & Certified by Taleem360 ERP</span>
+                      <span>Approved for Home-use</span>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* PAGINATION SWITCHES */}
+                <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 flex items-center justify-between">
+                  <button
+                    onClick={() => setPreviewPage((prev) => Math.max(1, prev - 1))}
+                    disabled={previewPage === 1}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs font-bold text-slate-300 hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    Prev Page
+                  </button>
+
+                  <span className="text-xs text-slate-400 font-bold">
+                    Page <span className="text-emerald-400">{previewPage}</span> of {activePack.pages}
+                  </span>
+
+                  <button
+                    onClick={() => setPreviewPage((prev) => Math.min(activePack.pages, prev + 1))}
+                    disabled={previewPage === activePack.pages}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs font-bold text-slate-300 hover:text-white disabled:opacity-30 disabled:pointer-events-none transition-colors"
+                  >
+                    Next Page
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+
+              </div>
+            ) : (
+              <div className="bg-slate-900/40 border border-slate-800 border-dashed rounded-3xl p-12 text-center h-[580px] flex flex-col items-center justify-center">
+                <Printer className="w-10 h-10 text-slate-700 mb-3" />
+                <h3 className="text-xs font-bold text-slate-400 mb-1">No active pack selected</h3>
+                <p className="text-[11px] text-slate-500 max-w-xs leading-relaxed">
+                  Click on any learning pack in the grid on the left to inspect, preview pages, customize or print.
+                </p>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+};

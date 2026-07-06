@@ -27,7 +27,6 @@ import { Tickets } from './pages/Tickets';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { FreeResources } from './pages/free-resources';
-import { FreeResourcesMatrixPage } from './pages/free-resources/[category]/[subject]/[age-group]';
 import { AIResourceStudio } from './pages/AIResourceStudio';
 import { DaycareSummary } from './pages/DaycareSummary';
 import { SkillsAcademy } from './pages/SkillsAcademy';
@@ -116,7 +115,6 @@ const TicketsPage = () => <Layout><Tickets /></Layout>;
 const AboutPage = () => <Layout><About /></Layout>;
 const ContactPage = () => <Layout><Contact /></Layout>;
 const FreeResourcesPage = () => <Layout><FreeResources /></Layout>;
-const FreeResourcesMatrixWrapper = () => <Layout><FreeResourcesMatrixPage /></Layout>;
 const AIResourceStudioPage = () => <Layout><AIResourceStudio /></Layout>;
 const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
 const SkillsAcademyPage = () => <Layout><SkillsAcademy /></Layout>;
@@ -492,18 +490,6 @@ const App: React.FC = () => {
           <Route 
             path="/free-resources" 
             element={<FreeResourcesPage />} 
-          />
-          <Route 
-            path="/free-resources/:category" 
-            element={<FreeResourcesMatrixWrapper />} 
-          />
-          <Route 
-            path="/free-resources/:category/:subject" 
-            element={<FreeResourcesMatrixWrapper />} 
-          />
-          <Route 
-            path="/free-resources/:category/:subject/:ageGroup" 
-            element={<FreeResourcesMatrixWrapper />} 
           />
 
           <Route 
