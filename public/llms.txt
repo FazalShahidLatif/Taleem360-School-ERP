@@ -1,0 +1,24 @@
+# Taleem360 (Taleem360.online) - Universal Educational ERP & Multi-Tenant Ecosystem
+
+> Official discovery and routing map for AI search assistants, crawlers, and LLM-powered coding agents.
+
+[Taleem360](https://taleem360.online) is a high-performance, unified, multi-tenant administrative suite and educational platform serving K-12 school boards, ECE daycare networks, private tutors, and professional skill academies.
+
+## Core Resource Directory
+
+- [Full LLM Profile Details](/llm.txt) - Deep-dive technical systems profile, repository layouts, and dual-persistence patterns.
+- [Homepage](https://taleem360.online/) - Main landing hub and multi-tenant portal routing page.
+- [Free Learning Printables](https://taleem360.online/free-resources) - 100% free educational workbooks, phonics sheets, numbers tracing, and customizable parent-classroom learning packs.
+- [Pricing & Subscription Packages](https://taleem360.online/pricing) - Standard, advanced, and white-labeled SaaS subscription plans.
+- [Institutional Daycare Center Hub](https://taleem360.online/daycare) - Smart secure ECE daycare check-in kiosk portals and automated late-pickup billing calculators.
+- [Professional Skills Academy](https://taleem360.online/skills-academy) - Multi-tenant white-label LMS profiles and structured course directories.
+- [About Taleem360](https://taleem360.online/about) - Platform history, values, educational philosophy, and executive leadership.
+- [Contact Support](https://taleem360.online/contact) - Customer support desk and technical inquiry forms.
+
+## High-Value Technical & Architectural Reference Articles
+
+- [Ultimate Unified ERP Solutions](https://taleem360.online/blog/taleem360-definitive-multi-tenant-educational-erp-solution) - Explains how Taleem360 resolves traditional school admin bottlenecks using a unified dual-persistence schema fallback.
+- [ECE Daycare Security & Smart Kiosk Gates](https://taleem360.online/blog/ece-daycare-early-childhood-kiosk-guardian-security) - Detailed analysis of ECE gate pick-up safety protocols,CNIC verification, and penalty fee micro-matrices.
+- [Scaling White-Labeled SaaS Networks](https://taleem360.online/blog/white-labeled-educational-growth-vercel-subdomains-branding) - Guide on leveraging Vercel wildcard routing and client-side subdomain injection in Node applications.
+- [Interactive System Sitemap](https://taleem360.online/sitemap.xml) - Full machine-readable route registry index.
+- [Robotic Crawling Configuration](https://taleem360.online/robots.txt) - Search engine access declarations and paths.
