@@ -313,14 +313,14 @@ export const Pricing: React.FC = () => {
         {/* Dynamic & Transparent Checkout Compliance Banner */}
         <div className="mt-12 max-w-5xl mx-auto rounded-2xl p-5 border border-slate-200 bg-white/60 backdrop-blur-xs flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center space-x-3 text-left">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 flex-shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-900">Paddle Merchant of Record Integration</p>
-              <p className="text-xs text-slate-500">Secure transactions processed globally. All customer card information remains encrypted under PCI DSS standards.</p>
+              <p className="text-sm font-bold text-slate-900">Direct Portal Authorization</p>
+              <p className="text-xs text-slate-500">Secure subscription provisioning processed directly within the school node dashboard. All activation flows are completely end-to-end encrypted.</p>
             </div>
           </div>
           <div className="flex items-center space-x-4">
@@ -346,7 +346,7 @@ export const Pricing: React.FC = () => {
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
               <h4 className="font-bold text-slate-900">How do student profile limit thresholds scale if our enrolment increases?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                If your enrollment surpasses your plan's thresholds (e.g. 200 students on Tier 1), your account continues operating smoothly. We notify the admin team via the dashboard, and you can upgrade easily via Paddle checkout or requests.
+                If your enrollment surpasses your plan's thresholds (e.g. 200 students on Tier 1), your account continues operating smoothly. We notify the admin team via the dashboard, and you can upgrade easily via direct dashboard panel or requests.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
@@ -358,7 +358,7 @@ export const Pricing: React.FC = () => {
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
               <h4 className="font-bold text-slate-900">Can we cancel our monthly subscription plan or request refunds?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                Absolutely! Our customer contracts are rolling month-to-month. You can cancel your subscription in the settings module at any time. Under our refund criteria, cancellations requested within 7 days of subscription activation qualify for complete refund reversals processed through Paddle.
+                Absolutely! Our customer contracts are rolling month-to-month. You can cancel your subscription in the settings module at any time. Under our refund criteria, cancellations requested within 7 days of subscription activation qualify for complete refund reversals.
               </p>
             </div>
           </div>

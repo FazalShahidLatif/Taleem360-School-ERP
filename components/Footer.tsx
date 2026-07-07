@@ -62,7 +62,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="mt-8 pt-6 border-t border-gray-100 text-[11px] text-gray-600">
           <p className="leading-relaxed">
-            * Our order checkout process and subscription renewals are managed securely by our official online Merchant of Record, <strong className="text-gray-900 font-extrabold">Paddle.com</strong>. Paddle is responsible for handling payment operations, managing tax compliance, and resolving customer billing requests on behalf of Taleem360.
+            * All school subscription agreements, institutional pilots, and renewal schedules are managed directly and securely by the Taleem360 ERP administration platform.
           </p>
         </div>
         <div className="pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
