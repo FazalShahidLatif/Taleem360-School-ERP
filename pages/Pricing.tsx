@@ -139,6 +139,19 @@ export const Pricing: React.FC = () => {
         <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
           Choose the perfect plan to streamline your school operations and enhance learning experiences.
         </p>
+        
+        <div className="mt-6 flex justify-center">
+          <a
+            href="/taleem360_pricing.zip"
+            download="taleem360_pricing.zip"
+            className="inline-flex items-center space-x-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold px-4 py-2.5 rounded-xl border border-emerald-200/80 transition-colors shadow-sm cursor-pointer"
+          >
+            <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span>Download Pricing Catalog CSV (ZIP Pack)</span>
+          </a>
+        </div>
       </div>
 
       <div className="mt-16 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
