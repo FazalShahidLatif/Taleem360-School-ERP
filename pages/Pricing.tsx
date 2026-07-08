@@ -75,15 +75,16 @@ export const Pricing: React.FC = () => {
     {
       name: 'Tier 2',
       id: SubscriptionTier.TIER_2,
-      price: '$99',
+      price: '$129',
       description: 'Comprehensive features for mid-sized institutions.',
       features: [
-        'Up to 450 students',
+        'Up to 2,000 students',
         'Everything in Tier 1',
         'Examination module',
         'AI insights & analytics',
         'Parent portal access',
-        '24/7 Chat support',
+        'Online biometric attendance hardware integrations',
+        'Digital report cards',
       ],
       cta: 'Get Started',
       mostPopular: false,
@@ -286,7 +287,7 @@ export const Pricing: React.FC = () => {
                   <th scope="col" className="px-6 py-4">Capability / Module</th>
                   <th scope="col" className="px-6 py-4">Pilot (Free)</th>
                   <th scope="col" className="px-6 py-4">Tier 1 ($49/mo)</th>
-                  <th scope="col" className="px-6 py-4">Tier 2 ($99/mo)</th>
+                  <th scope="col" className="px-6 py-4">Tier 2 ($129/mo)</th>
                   <th scope="col" className="px-6 py-4">Tier 3 (Custom/Enterprise)</th>
                 </tr>
               </thead>
@@ -295,7 +296,7 @@ export const Pricing: React.FC = () => {
                   <td className="px-6 py-4 font-bold text-slate-800">Max Student Directory Capacity</td>
                   <td className="px-6 py-4 text-slate-600">Up to 30 active profiles</td>
                   <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 200 active profiles</td>
-                  <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 450 active profiles</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 2,000 active profiles</td>
                   <td className="px-6 py-4 text-emerald-600 font-bold">Up to 1,000+ active profiles</td>
                 </tr>
                 <tr>

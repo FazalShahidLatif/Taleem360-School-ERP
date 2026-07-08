@@ -34,9 +34,9 @@ interface SchoolStats {
 
 const TIER_CONFIG = {
   [SubscriptionTier.PILOT]: { label: 'Pilot Project', max: 30, price: 'Free' },
-  [SubscriptionTier.TIER_1]: { label: 'Tier 1 (0-200)', max: 200, price: '$99/mo' },
-  [SubscriptionTier.TIER_2]: { label: 'Tier 2 (201-500)', max: 500, price: '$249/mo' },
-  [SubscriptionTier.TIER_3]: { label: 'Tier 3 (501+)', max: 5000, price: '$499/mo' },
+  [SubscriptionTier.TIER_1]: { label: 'Tier 1 (0-200)', max: 200, price: '$49/mo' },
+  [SubscriptionTier.TIER_2]: { label: 'Tier 2 (0-2000)', max: 2000, price: '$129/mo' },
+  [SubscriptionTier.TIER_3]: { label: 'Tier 3 (501+)', max: 5000, price: 'Custom' },
 };
 
 export const SuperAdminDashboard: React.FC = () => {

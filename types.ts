@@ -8,8 +8,8 @@ export enum UserRole {
 export enum SubscriptionTier {
   PILOT = 'PILOT', // 0-30 students
   TIER_1 = 'TIER_1', // 0-200 students
-  TIER_2 = 'TIER_2', // 201-500 students
-  TIER_3 = 'TIER_3'  // 501+ students
+  TIER_2 = 'TIER_2', // 0-2000 students
+  TIER_3 = 'TIER_3'  // 2001+ students
 }
 
 export interface School {

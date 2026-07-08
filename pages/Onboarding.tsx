@@ -242,8 +242,8 @@ export const Onboarding: React.FC = () => {
                     { 
                       tier: SubscriptionTier.TIER_2, 
                       name: 'Professional', 
-                      price: '$99/mo', 
-                      students: 'Up to 450', 
+                      price: '$129/mo', 
+                      students: 'Up to 2,000', 
                       icon: Zap,
                       color: 'bg-indigo-50 text-indigo-600 border-indigo-200'
                     },

@@ -63,11 +63,11 @@ export const PRODUCT_CATALOG: Record<string, PricingTier> = {
   },
   PROD_ERP_TIER2: {
     id: 'PROD_ERP_TIER2',
-    name: 'ERP Professional Suite (Tier 2)',
+    name: 'Professional School ERP (Tier 2)',
     moduleType: 'SchoolERP',
-    usdPricePerMonth: 9900, // $99.00
-    usdPricePerYear: 99000, // $990.00
-    maxStudents: 450,
+    usdPricePerMonth: 12900, // $129.00
+    usdPricePerYear: 129000, // $1,290.00
+    maxStudents: 2000,
     features: ['Examination Module', 'AI Performance Insights', 'Parent Portal Access', 'Biometric Integration'],
   },
   PROD_ERP_TIER3: {
