@@ -14,6 +14,7 @@ import submissionRoutes from './routes/academy/submissionRoutes.ts';
 import bookingRoutes from './routes/academy/bookingRoutes.ts';
 import whatsappWebhookRoutes from './routes/academy/whatsappWebhook.ts';
 import nexusRoutes from './routes/academy/nexusRoutes.ts';
+import creemPayRoutes from './routes/creemPayRoutes.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -64,43 +65,35 @@ async function startServer() {
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  // 1. Paddle Webhook Signature verification helper
-  function verifyPaddleSignature(payload, signature, secret) {
+  // 1. Creem Webhook Signature verification helper
+  function verifyCreemSignature(payload, signature, secret) {
     if (!secret) {
-      console.warn('[Paddle Webhook] Warning: DAYCARE_PADDLE_SECRET is not configured. Trusting request!');
+      console.warn('[Creem Webhook] Warning: CREEM_WEBHOOK_SECRET is not configured. Trusting request!');
       return true; // Graceful fallback
     }
     if (!signature) {
       return false;
     }
     try {
-      const parts = signature.split(';');
-      let ts = '';
-      let hash = '';
-      for (const part of parts) {
-        if (part.startsWith('ts=')) ts = part.substring(3);
-        if (part.startsWith('h=')) hash = part.substring(2);
-      }
-      if (!ts || !hash) return false;
       const hmac = createHmac('sha256', secret);
-      hmac.update(`${ts}:${payload}`);
+      hmac.update(payload);
       const computed = hmac.digest('hex');
-      return computed === hash;
+      return computed === signature;
     } catch (error) {
-      console.error('[Paddle Webhook] Signature verification error:', error);
+      console.error('[Creem Webhook] Signature verification error:', error);
       return false;
     }
   }
 
-  // 2. Paddle Webhook route (must be mounted BEFORE express.json() to read raw request body correctly)
-  app.post('/api/daycare/webhooks/paddle', express.raw({ type: 'application/json' }), async (req, res) => {
-    const signature = req.headers['paddle-signature'] || '';
+  // 2. Creem Webhook route (must be mounted BEFORE express.json() to read raw request body correctly)
+  app.post('/api/daycare/webhooks/creem', express.raw({ type: 'application/json' }), async (req, res) => {
+    const signature = req.headers['creem-signature'] || req.headers['x-creem-signature'] || '';
     const payload = req.body ? req.body.toString() : '';
-    const PADDLE_WEBHOOK_SECRET = process.env.DAYCARE_PADDLE_SECRET || '';
+    const CREEM_WEBHOOK_SECRET = process.env.CREEM_WEBHOOK_SECRET || '';
 
-    // Verify the signature to ensure the request came safely from Paddle
-    if (!verifyPaddleSignature(payload, signature, PADDLE_WEBHOOK_SECRET)) {
-      console.error('[Paddle Webhook] Signature verification failed');
+    // Verify the signature to ensure the request came safely from Creem
+    if (!verifyCreemSignature(payload, signature, CREEM_WEBHOOK_SECRET)) {
+      console.error('[Creem Webhook] Signature verification failed');
       return res.status(401).json({ error: 'Invalid webhook signature' });
     }
 
@@ -109,24 +102,30 @@ async function startServer() {
       try {
         event = JSON.parse(payload);
       } catch (jsonErr) {
-        console.error('[Paddle Webhook] Failed to parse JSON payload:', jsonErr);
+        console.error('[Creem Webhook] Failed to parse JSON payload:', jsonErr);
         return res.status(400).json({ error: 'Invalid JSON payload' });
       }
 
-      console.log(`[Paddle Webhook] Event received: ${event.event_type}`);
+      console.log(`[Creem Webhook] Event received: ${event.event || event.event_type}`);
 
-      // Process only daycare billing events
-      if (event.event_type === 'transaction.completed') {
-        const customData = event.data?.custom_data || {};
-        const daycare_child_id = customData.daycare_child_id;
-        const billing_period_id = customData.billing_period_id;
-
-        console.log(`[Isolated Billing] Payment captured for Child ID: ${daycare_child_id}, period: ${billing_period_id}`);
+      // Process Creem webhook events
+      if (event.event === 'checkout.session.completed' || event.event === 'payment.succeeded' || event.event_type === 'transaction.completed') {
+        const metadata = event.metadata || event.data?.metadata || event.data?.custom_data || {};
+        const reference_id = metadata.reference_id || metadata.referenceId;
+        
+        console.log(`[Creem Webhook] Payment captured for reference ID: ${reference_id}`);
+        
+        const daycare_child_id = metadata.daycare_child_id || metadata.childId;
+        const billing_period_id = metadata.billing_period_id || metadata.periodId;
+        
+        if (daycare_child_id && billing_period_id) {
+          console.log(`[Isolated Billing] Payment captured for Child ID: ${daycare_child_id}, period: ${billing_period_id}`);
+        }
       }
 
       return res.status(200).json({ received: true });
     } catch (error) {
-      console.error('[Paddle Webhook] Webhook processing failed internally:', error);
+      console.error('[Creem Webhook] Webhook processing failed internally:', error);
       return res.status(500).json({ error: 'Webhook processing failed internally' });
     }
   });
@@ -139,6 +138,7 @@ async function startServer() {
   app.use(bookingRoutes);
   app.use(whatsappWebhookRoutes);
   app.use(nexusRoutes);
+  app.use(creemPayRoutes);
 
   // API Routes
   app.post('/api/auth/login', async (req, res) => {

@@ -5,7 +5,7 @@
       // Gracefully prevent cross-origin tracking or utility script load issues from polluting logs as uncaught errors
       window.addEventListener('error', function(e) {
         if (e && (e.message === 'Script error.' || e.message === 'Script error' || !e.message)) {
-          console.warn('Suppressed cross-origin Script error from external provider (Paddle/GTag/Extensions):', e);
+          console.warn('Suppressed cross-origin Script error from external provider (Creem/GTag/Extensions):', e);
           e.preventDefault();
           e.stopPropagation();
           return true;
