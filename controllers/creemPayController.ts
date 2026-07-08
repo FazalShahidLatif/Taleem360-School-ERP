@@ -86,13 +86,14 @@ export async function initiatePayment(req: CreemPayRequest, res: Response): Prom
       currency || 'USD'
     );
 
-    // 2. Build the initiation request payload
+    // 2. Build the initiation request payload with standardized billing cycle suffix for Creem
+    const creemProductId = `${resolvedPrice.productId}_${resolvedPrice.billingCycle.toUpperCase()}`;
     const responseData = await creemPayService.initiatePayment({
       amount: resolvedPrice.amount,
       currency: resolvedPrice.currency,
       moduleType: resolvedPrice.moduleType as any as CreemPayModuleType,
       referenceId,
-      productId: resolvedPrice.productId,
+      productId: creemProductId,
       customer: {
         email: customerEmail || 'customer@taleem360.online',
         name: customerName || 'Taleem Customer',
