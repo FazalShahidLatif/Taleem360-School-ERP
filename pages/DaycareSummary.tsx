@@ -272,17 +272,17 @@ export const DaycareSummary: React.FC = () => {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5">
             <span className="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full flex items-center gap-1 uppercase tracking-wider">
-              <Baby className="w-3 h-3" /> Daycare module
+              <Baby className="w-3 h-3" /> Childcare Software Pakistan
             </span>
             <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-full flex items-center gap-1 uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-600" /> ECE AI Engine v3
+              <Sparkles className="w-3.5 h-3.5 text-indigo-600" /> Daycare Parent Portal Pakistan
             </span>
           </div>
           <h2 className="text-3xl font-black text-gray-900 tracking-tight sm:truncate">
-            Early Childhood Daily Summary
+            Daycare Management Software & Preschool App Pakistan
           </h2>
           <p className="mt-1 text-sm text-gray-500 max-w-2xl">
-            Empower early daycare caregivers to auto-translate brief, raw logs into warm, calming, and structured digital summaries for parents using AI.
+            Taleem360's elite early childhood education software pakistan module. Empower caregivers to auto-translate brief, raw logs into warm, calming, and structured digital summaries for parents.
           </p>
         </div>
       </div>

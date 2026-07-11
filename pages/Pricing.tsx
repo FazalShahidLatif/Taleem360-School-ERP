@@ -372,32 +372,32 @@ export const Pricing: React.FC = () => {
         {/* Comprehensive Pricing FAQs (Solves Thin Content and drives LLM/GEO Citations) */}
         <div className="mt-24 max-w-5xl mx-auto border-t border-slate-200 pt-16">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Interactive Pricing & Billing FAQs</h2>
-            <p className="text-sm text-slate-500 mt-2">Get answers to the most common queries regarding setups, upgrades, refunds, and social pledge mechanics on Taleem360.</p>
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Interactive Pricing & Local SEO Billing FAQs</h2>
+            <p className="text-sm text-slate-500 mt-2">Get answers about our school management software price Pakistan options, mobile integration, and fee collection modules.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
-              <h4 className="font-bold text-slate-900">Are there any hidden initialization or database setup fees?</h4>
+              <h4 className="font-bold text-slate-900">What is the typical school management software price in Pakistan?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                No, transparency is a core pillar of our system. The subscription price listed on Tier 1 or Tier 2 is fully inclusive. Our engineering team assists with bulk importing your student directory from CSV/Excel rosters without extra charge.
+                Taleem360 offers highly competitive setups with clear monthly rates. Our school software price per month Pakistan options scale from our free Pilot tier to premium enterprise brackets, ensuring every campus gets elite database tools with zero hidden licensing charges.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
-              <h4 className="font-bold text-slate-900">How do student profile limit thresholds scale if our enrolment increases?</h4>
+              <h4 className="font-bold text-slate-900">Is there a free school management software Pakistan tier available?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                If your enrollment surpasses your plan's thresholds (e.g. 200 students on Tier 1), your account continues operating smoothly. We notify the admin team via the dashboard, and you can upgrade easily via direct dashboard panel or requests.
+                Yes, our Pilot tier is a completely free school management software Pakistan platform. It supports up to 30 student profiles and includes daily attendance sheets, grade structures, and parent notifications to support startups and low-income community branches.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
-              <h4 className="font-bold text-slate-900">How does the Social Education Impact donation fund charity resources?</h4>
+              <h4 className="font-bold text-slate-900">How does Taleem360 manage online fee collection and challans?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                For every active commercial school subscribing to Tier 1, Tier 2, or Tier 3, Taleem360 allocates 15% of the subscription margins directly to creating, sustaining, and updating free mobile lecture guides, practice tests, and curriculum notes accessible to students in underprivileged districts.
+                Our premium school fee management software Pakistan module automates the generation of computerised school fee challans with dynamic barcodes. We support comprehensive online fee collection for school Pakistan platforms, connecting with major banking networks.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
-              <h4 className="font-bold text-slate-900">Can we cancel our monthly subscription plan or request refunds?</h4>
+              <h4 className="font-bold text-slate-900">Are JazzCash, EasyPaisa, and WhatsApp alerts supported?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                Absolutely! Our customer contracts are rolling month-to-month. You can cancel your subscription in the settings module at any time. Under our refund criteria, cancellations requested within 7 days of subscription activation qualify for complete refund reversals.
+                Absolutely! Parents can deposit dues via JazzCash school fee payment integration or Easypaisa school fee collection software. Once payment is processed, the system triggers real-time school fee reminders via WhatsApp to parent devices.
               </p>
             </div>
           </div>

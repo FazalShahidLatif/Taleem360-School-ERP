@@ -104,13 +104,13 @@ export const SkillsAcademy: React.FC = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 rounded-full text-purple-800 text-xs font-bold mb-4">
             <GraduationCap className="w-3.5 h-3.5" />
-            <span>WHITE-LABEL ENTERPRISE LMS</span>
+            <span>WHITE-LABEL LMS PAKISTAN</span>
           </div>
           <h1 className="text-3.5xl font-black text-slate-900 tracking-tight sm:text-4xl">
-            Taleem360 <span className="text-indigo-600 font-extrabold">Skills Academies</span> & Bootcamps
+            Taleem360 <span className="text-indigo-600 font-extrabold">Skills Academy Management Software</span>
           </h1>
           <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Unleash multi-tenant educational centers of excellence. Empower your academy with automatic Split-Installment Paddle checkout funnels, white-label study tracking dashboards, and customizable curriculum structures.
+            The premier IT institute management software Pakistan. Empower your center with a modern vocational training management system, coaching academy software pakistan, online tutor management software, integrated tutor booking system pakistan, and a fully customizable white label lms pakistan.
           </p>
         </div>
 

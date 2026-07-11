@@ -31,6 +31,8 @@ import { AIResourceStudio } from './pages/AIResourceStudio';
 import { DaycareSummary } from './pages/DaycareSummary';
 import { SkillsAcademy } from './pages/SkillsAcademy';
 import { PrivateTutors } from './pages/PrivateTutors';
+import { CitySEO } from './pages/CitySEO';
+import { Madrasa } from './pages/Madrasa';
 import { Onboarding } from './pages/Onboarding';
 import { NotFound } from './pages/NotFound';
 import { AdminPortal } from './pages/AdminPortal';
@@ -119,6 +121,8 @@ const AIResourceStudioPage = () => <Layout><AIResourceStudio /></Layout>;
 const DaycareSummaryPage = () => <Layout><DaycareSummary /></Layout>;
 const SkillsAcademyPage = () => <Layout><SkillsAcademy /></Layout>;
 const PrivateTutorsPage = () => <Layout><PrivateTutors /></Layout>;
+const CitySEOPage = () => <CitySEO />;
+const MadrasaPage = () => <Madrasa />;
 const SupportPage = () => <Layout><Support /></Layout>;
 const FAQPage = () => <Layout><FAQ /></Layout>;
 const NotFoundPage = () => <NotFound />;
@@ -510,6 +514,48 @@ const App: React.FC = () => {
           <Route 
             path="/private-tutors" 
             element={<PrivateTutorsPage />} 
+          />
+
+          <Route 
+            path="/madrasa" 
+            element={<MadrasaPage />} 
+          />
+
+          <Route 
+            path="/karachi" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/lahore" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/islamabad" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/rawalpindi" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/peshawar" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/faisalabad" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/multan" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/quetta" 
+            element={<CitySEOPage />} 
+          />
+          <Route 
+            path="/location/:city" 
+            element={<CitySEOPage />} 
           />
 
           <Route 

@@ -1085,13 +1085,13 @@ export const FreeResources: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-semibold mb-4">
             <Gift className="w-3.5 h-3.5" />
-            100% Free Educational Printables
+            100% Free Educational Resources for Schools Pakistan
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-none mb-4">
-            Free Printable Workbooks & Learning Packs
+            Free Worksheets & Free School LMS Pakistan
           </h1>
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-            Support early childhood development at home or in class with phonics grids, vocabulary tracings, number additions, and coloring sheets. Select a pack to view, print, or adapt.
+            Support early childhood development at home or in class with our high-value free worksheets for K12 students Pakistan. Use our free syllabus guide for students Pakistan, free notes for underprivileged students Pakistan, and complete free curriculum resources Pakistan schools.
           </p>
         </div>
 

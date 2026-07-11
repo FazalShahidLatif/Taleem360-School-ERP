@@ -386,17 +386,17 @@ export const Nexus: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="bg-indigo-600 text-xs text-white font-bold tracking-widest uppercase px-3 py-1 rounded-full flex items-center gap-1">
-                <Globe className="w-3 h-3" /> Web3 Academy
+                <Globe className="w-3 h-3" /> School Collaboration Portal Pakistan
               </span>
               <span className="bg-emerald-600 text-xs text-white font-bold tracking-widest uppercase px-3 py-1 rounded-full flex items-center gap-1">
-                <Zap className="w-3 h-3 animate-pulse" /> Live Earn
+                <Zap className="w-3 h-3 animate-pulse" /> School Community Portal Pakistan
               </span>
             </div>
             <h1 className="text-4xl font-extrabold font-sans tracking-tight mb-2">
-              Nexus Play-to-Earn Quiz Hub
+              Taleem360 Nexus Parent Teacher Communication System
             </h1>
             <p className="text-slate-300 max-w-xl text-sm leading-relaxed">
-              Verify your Web3 and Computer Science credentials natively. Solve cryptographically-valid community quizzes, earn $NEXUS incentive utility tokens, and upload your knowledge to the SEO Ingestion Warehouse safely.
+              Welcome to the elite school network platform pakistan and school association platform pakistan. Solve cryptographically-valid community quizzes, earn $NEXUS incentive utility tokens, and upload your knowledge safely.
             </p>
           </div>
 
