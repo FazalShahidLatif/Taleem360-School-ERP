@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { TaleemEcosystemRoadmap } from '../components/TaleemEcosystemRoadmap';
+import { ReviewsSection } from '../components/ReviewsSection';
 
 const Landing: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -325,6 +326,8 @@ const Landing: React.FC = () => {
       </section>
 
       <TaleemEcosystemRoadmap />
+
+      <ReviewsSection />
 
       {/* Frequently Asked Questions Section (Eliminates Thin Content and Drives SEO Keywords) */}
       <section className="py-24 bg-white border-t border-slate-100">
