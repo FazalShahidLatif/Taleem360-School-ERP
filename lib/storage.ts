@@ -249,7 +249,7 @@ const KEYS = {
   ROUTES: 'erp_routes',
   PICKUP_POINTS: 'erp_pickup_points',
   TRANSPORT_ALLOCATIONS: 'erp_transport_allocations',
-  INIT: 'erp_initialized_v22'
+  INIT: 'erp_initialized_v23'
 };
 
 // Internal Helpers
@@ -311,12 +311,12 @@ const generateToken = (user: User, schoolName?: string) => {
 // API Layer
 export const db = {
   init: () => {
-    const isInit = localStorage.getItem(KEYS.INIT) === 'true_v23';
+    const isInit = localStorage.getItem(KEYS.INIT) === 'true_v24';
     const hasUsers = load<User>(KEYS.USERS).length > 0;
 
     // Re-initialize if version mismatch OR if data is unexpectedly empty
     if (!isInit || !hasUsers) {
-      console.log('Initializing Mock Database (v23)...');
+      console.log('Initializing Mock Database (v24)...');
       localStorage.setItem(KEYS.USERS, JSON.stringify(INITIAL_USERS));
       localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
       localStorage.setItem(KEYS.CLASSES, JSON.stringify(INITIAL_CLASSES));
@@ -343,7 +343,7 @@ export const db = {
       localStorage.setItem(KEYS.VEHICLES, JSON.stringify(INITIAL_VEHICLES));
       localStorage.setItem(KEYS.ROUTES, JSON.stringify(INITIAL_ROUTES));
       localStorage.setItem(KEYS.TRANSPORT_ALLOCATIONS, JSON.stringify([]));
-      localStorage.setItem(KEYS.INIT, 'true_v23');
+      localStorage.setItem(KEYS.INIT, 'true_v24');
       console.log('Database Initialized.');
     } else {
       console.log('Database already initialized.');
