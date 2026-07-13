@@ -235,6 +235,7 @@ export const ReviewsSection: React.FC = () => {
                       key={star}
                       onClick={() => setFormRating(star)}
                       className="p-1 focus:outline-none focus:scale-125 transition-transform"
+                      aria-label={`Rate ${star} out of 5 stars`}
                     >
                       <Star
                         className={`w-5 h-5 ${
