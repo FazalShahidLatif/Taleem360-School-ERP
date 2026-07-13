@@ -55,6 +55,7 @@ import Transport from './pages/Transport';
 import Landing from './pages/Landing';
 import { UserRole } from './types';
 import { db } from './lib/storage';
+import { analytics } from './lib/analytics';
 
 // Initialize mock database
 db.init();
@@ -148,6 +149,9 @@ const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    // Track page views dynamically
+    analytics.trackPageView(pathname);
+    
     // Scroll window
     window.scrollTo(0, 0);
     // Scroll all layout elements that might be scroll containers
@@ -221,6 +225,9 @@ const ScrollToTopButton: React.FC = () => {
 
 const App: React.FC = () => {
   React.useEffect(() => {
+    // Initialize public and administrative tracking triggers
+    analytics.init();
+    
     // Detect legacy HashRouter paths in URL (e.g., /#/blog or /#/pricing) and redirect to clean paths
     const hash = window.location.hash;
     if (hash && hash.startsWith('#/')) {

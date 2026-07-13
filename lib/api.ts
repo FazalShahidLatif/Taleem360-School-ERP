@@ -571,6 +571,21 @@ api.defaults.adapter = async (config) => {
         responseData = await db.getBlogPosts();
       }
     }
+    else if (url === "/analytics/events/" && method === "post") {
+      // Endpoint to record tracking events
+      const currentEvents = JSON.parse(localStorage.getItem('t360_analytics_events') || '[]');
+      const alreadyExists = currentEvents.some((e: any) => e.id === body.id);
+      if (!alreadyExists) {
+        currentEvents.push(body);
+        localStorage.setItem('t360_analytics_events', JSON.stringify(currentEvents));
+      }
+      responseData = { success: true };
+    }
+    else if (url === "/analytics/stats/" && method === "get") {
+      // Endpoint to fetch computed traffic & CTA metrics
+      const { analytics } = await import('./analytics');
+      responseData = analytics.getStats();
+    }
     else if (url === "/onboard/" && method === "post") {
       const user = await getUserFromToken();
       responseData = await db.onboard(user, body);

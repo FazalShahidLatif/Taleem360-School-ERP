@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { initPaddle, openCheckout } from '../lib/paddle';
 import { Footer } from '../components/Footer';
+import { analytics } from '../lib/analytics';
 
 export const Onboarding: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -67,6 +68,10 @@ export const Onboarding: React.FC = () => {
       // For sandbox demo, we'll just simulate it
       
       const res = await api.post('/onboard/', formData);
+      
+      // Dispatch conversion analytics signal
+      analytics.trackEvent('lead_submission', 'complete_onboarding', formData.school_name);
+      
       // Re-login to update the user object with the new token
       // In our mock, the onboard endpoint returns the new token data
       localStorage.setItem("access_token", res.data.access);

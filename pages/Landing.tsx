@@ -176,11 +176,11 @@ const Landing: React.FC = () => {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <Link to="/onboarding" className="w-full sm:w-auto bg-indigo-600 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-2">
+              <Link to="/onboarding" data-cta="click_start_pilot" className="w-full sm:w-auto bg-indigo-600 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200 flex items-center justify-center gap-2">
                 Start Your Free Pilot
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link to="/about" className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-100 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
+              <Link to="/about" data-cta="click_learn_mission" className="w-full sm:w-auto bg-white text-slate-700 border-2 border-slate-100 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
                 Learn Our Mission
               </Link>
             </motion.div>
@@ -377,10 +377,10 @@ const Landing: React.FC = () => {
             Join hundreds of schools already using Taleem360 to streamline operations and improve student outcomes.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/onboarding" className="w-full sm:w-auto bg-white text-indigo-600 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-50 transition-all shadow-xl">
+            <Link to="/onboarding" data-cta="click_start_pilot_footer" className="w-full sm:w-auto bg-white text-indigo-600 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-50 transition-all shadow-xl">
               Start Free Pilot
             </Link>
-            <Link to="/tickets" className="w-full sm:w-auto bg-indigo-500 text-white border border-indigo-400 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-400 transition-all">
+            <Link to="/tickets" data-cta="click_contact_sales_footer" className="w-full sm:w-auto bg-indigo-500 text-white border border-indigo-400 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-indigo-400 transition-all">
               Contact Sales
             </Link>
           </div>

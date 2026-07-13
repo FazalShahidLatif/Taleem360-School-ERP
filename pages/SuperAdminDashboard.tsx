@@ -17,7 +17,11 @@ import {
   ExternalLink,
   Mail,
   Lock,
-  UserPlus
+  UserPlus,
+  Globe,
+  MousePointerClick,
+  FileText,
+  Clock
 } from 'lucide-react';
 
 interface SchoolStats {
@@ -42,6 +46,8 @@ const TIER_CONFIG = {
 export const SuperAdminDashboard: React.FC = () => {
   const [stats, setStats] = useState<SchoolStats[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<'schools' | 'analytics'>('schools');
+  const [analyticsStats, setAnalyticsStats] = useState<any>(null);
   
   // School Onboarding State
   const [showSchoolModal, setShowSchoolModal] = useState(false);
@@ -61,6 +67,13 @@ export const SuperAdminDashboard: React.FC = () => {
     try {
       const statsRes = await api.get('/super-admin/stats/');
       setStats(statsRes.data);
+      
+      try {
+        const analyticsRes = await api.get('/analytics/stats/');
+        setAnalyticsStats(analyticsRes.data);
+      } catch (err) {
+        console.error('Failed to load analytics statistics:', err);
+      }
     } catch (error) {
       console.error('Failed to fetch super admin data:', error);
     } finally {
@@ -156,87 +169,348 @@ export const SuperAdminDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* School Management */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div className="border-b border-gray-100 px-6 py-4 flex items-center justify-between bg-gray-50/50">
-          <h3 className="text-lg font-bold text-gray-900">School Management</h3>
-          <button
-            onClick={() => setShowSchoolModal(true)}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none transition-colors"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            Onboard School
-          </button>
-        </div>
+      {/* Subdomain-Aware Tab Navigation */}
+      <div className="flex border-b border-gray-200">
+        <button
+          onClick={() => setActiveTab('schools')}
+          className={`py-3 px-6 text-sm font-bold border-b-2 transition-all ${
+            activeTab === 'schools'
+              ? 'border-indigo-600 text-indigo-600'
+              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+          }`}
+        >
+          Institutional Onboarding
+        </button>
+        <button
+          onClick={() => setActiveTab('analytics')}
+          className={`py-3 px-6 text-sm font-bold border-b-2 transition-all flex items-center space-x-2 ${
+            activeTab === 'analytics'
+              ? 'border-indigo-600 text-indigo-600'
+              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+          }`}
+        >
+          <TrendingUp className="w-4 h-4" />
+          <span>Traffic & CTA Conversion Analytics</span>
+        </button>
+      </div>
 
-        <div className="p-0">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50/50">
-                <tr>
-                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Institution</th>
-                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Capacity</th>
-                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tier</th>
-                  <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-100">
-                {stats.map((school) => (
-                  <tr key={school.id} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600">
-                          <SchoolIcon className="h-5 w-5" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-bold text-gray-900">{school.name}</div>
-                          <div className="text-xs text-gray-500 font-mono">{school.code}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 font-medium">
-                        {school.studentCount} / <span className="text-gray-400">{school.maxStudents}</span>
-                      </div>
-                      <div className="w-24 bg-gray-100 rounded-full h-1.5 mt-1.5 overflow-hidden">
-                        <div 
-                          className="bg-indigo-500 h-full rounded-full" 
-                          style={{ width: `${Math.min((school.studentCount / school.maxStudents) * 100, 100)}%` }}
-                        ></div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
-                        {TIER_CONFIG[school.subscriptionTier].label}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-lg border ${
-                        school.isActive 
-                          ? 'bg-green-50 text-green-700 border-green-100' 
-                          : 'bg-red-50 text-red-700 border-red-100'
-                      }`}>
-                        {school.isActive ? 'Active' : 'Inactive'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button
-                        onClick={() => toggleSchoolStatus(school.id, school.isActive)}
-                        className={`font-bold ${
-                          school.isActive ? 'text-red-600 hover:text-red-700' : 'text-green-600 hover:text-green-700'
-                        }`}
-                      >
-                        {school.isActive ? 'Deactivate' : 'Activate'}
-                      </button>
-                    </td>
+      {activeTab === 'schools' ? (
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+          <div className="border-b border-gray-100 px-6 py-4 flex items-center justify-between bg-gray-50/50">
+            <h3 className="text-lg font-bold text-gray-900">School Management</h3>
+            <button
+              onClick={() => setShowSchoolModal(true)}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold rounded-xl shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none transition-colors"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Onboard School
+            </button>
+          </div>
+
+          <div className="p-0">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50/50">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Institution</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Capacity</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tier</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                    <th className="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-100">
+                  {stats.map((school) => (
+                    <tr key={school.id} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="h-10 w-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600">
+                            <SchoolIcon className="h-5 w-5" />
+                          </div>
+                          <div className="ml-4">
+                            <div className="text-sm font-bold text-gray-900">{school.name}</div>
+                            <div className="text-xs text-gray-500 font-mono">{school.code}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm text-gray-900 font-medium">
+                          {school.studentCount} / <span className="text-gray-400">{school.maxStudents}</span>
+                        </div>
+                        <div className="w-24 bg-gray-100 rounded-full h-1.5 mt-1.5 overflow-hidden">
+                          <div 
+                            className="bg-indigo-500 h-full rounded-full" 
+                            style={{ width: `${Math.min((school.studentCount / school.maxStudents) * 100, 100)}%` }}
+                          ></div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+                          {TIER_CONFIG[school.subscriptionTier].label}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2.5 py-1 inline-flex text-xs leading-5 font-bold rounded-lg border ${
+                          school.isActive 
+                            ? 'bg-green-50 text-green-700 border-green-100' 
+                            : 'bg-red-50 text-red-700 border-red-100'
+                        }`}>
+                          {school.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button
+                          onClick={() => toggleSchoolStatus(school.id, school.isActive)}
+                          className={`font-bold ${
+                            school.isActive ? 'text-red-600 hover:text-red-700' : 'text-green-600 hover:text-green-700'
+                          }`}
+                        >
+                          {school.isActive ? 'Deactivate' : 'Activate'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="space-y-6">
+          {/* Analytics Overview Metrics */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="bg-white shadow-sm rounded-2xl border border-gray-100 p-6 flex items-center">
+              <div className="bg-indigo-50 p-3 rounded-xl mr-4 text-indigo-600">
+                <Globe className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Page Views</p>
+                <p className="text-2xl font-black text-gray-900 mt-1">
+                  {analyticsStats?.totalViews || 0}
+                </p>
+                <p className="text-xs text-green-600 font-medium mt-1 flex items-center">
+                  <span className="inline-block w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                  Active Traffic Engine
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-sm rounded-2xl border border-gray-100 p-6 flex items-center">
+              <div className="bg-emerald-50 p-3 rounded-xl mr-4 text-emerald-600">
+                <MousePointerClick className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">CTA Clicks</p>
+                <p className="text-2xl font-black text-gray-900 mt-1 font-sans">
+                  {analyticsStats?.totalClicks || 0}
+                </p>
+                <p className="text-xs text-indigo-600 font-medium mt-1">
+                  Click Signals Received
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-sm rounded-2xl border border-gray-100 p-6 flex items-center">
+              <div className="bg-blue-50 p-3 rounded-xl mr-4 text-blue-600">
+                <FileText className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Trial Leads</p>
+                <p className="text-2xl font-black text-gray-900 mt-1">
+                  {analyticsStats?.totalLeads || 0}
+                </p>
+                <p className="text-xs text-indigo-600 font-medium mt-1">
+                  Completed Onboardings
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-sm rounded-2xl border border-gray-100 p-6 flex items-center">
+              <div className="bg-violet-50 p-3 rounded-xl mr-4 text-violet-600">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">Conversion (CTR)</p>
+                <p className="text-2xl font-black text-gray-900 mt-1">
+                  {analyticsStats?.conversionRate || '0.0'}%
+                </p>
+                <p className="text-xs text-violet-600 font-medium mt-1">
+                  Overall Landing CTR
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Activity Over Time & Details Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            {/* Timeline chart */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 lg:col-span-2 space-y-6">
+              <div>
+                <h3 className="text-lg font-extrabold text-gray-900">Traffic & Lead Signal Timeline</h3>
+                <p className="text-sm text-gray-500">Consolidated daily user actions (last 4 days)</p>
+              </div>
+              
+              <div className="space-y-4">
+                {analyticsStats?.timeline?.map((day: any) => {
+                  const maxVal = Math.max(
+                    ...(analyticsStats?.timeline?.map((d: any) => Math.max(d.views, d.clicks, d.leads)) || [1])
+                  ) || 1;
+                  
+                  return (
+                    <div key={day.date} className="space-y-2 border-b border-gray-50 pb-3 last:border-0 last:pb-0">
+                      <div className="flex justify-between items-center text-xs font-bold text-gray-600">
+                        <span className="font-mono">{day.date}</span>
+                        <span className="text-gray-400">
+                          {day.views} views • {day.clicks} clicks • {day.leads} leads
+                        </span>
+                      </div>
+                      
+                      <div className="space-y-1.5">
+                        {/* Views bar */}
+                        <div className="flex items-center space-x-2">
+                          <span className="text-[10px] font-bold text-gray-400 w-12 uppercase">Views</span>
+                          <div className="flex-1 bg-gray-100 h-2.5 rounded-full overflow-hidden">
+                            <div 
+                              className="bg-indigo-500 h-full rounded-full transition-all duration-500"
+                              style={{ width: `${(day.views / maxVal) * 100}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                        {/* Clicks bar */}
+                        <div className="flex items-center space-x-2">
+                          <span className="text-[10px] font-bold text-gray-400 w-12 uppercase">Clicks</span>
+                          <div className="flex-1 bg-gray-100 h-2.5 rounded-full overflow-hidden">
+                            <div 
+                              className="bg-emerald-500 h-full rounded-full transition-all duration-500"
+                              style={{ width: `${(day.clicks / maxVal) * 100}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* CTA performance and Public Paths */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+              <div>
+                <h3 className="text-lg font-extrabold text-gray-900 font-sans">Top Performing CTAs</h3>
+                <p className="text-sm text-gray-500">CTA trigger clicks count</p>
+              </div>
+              
+              <div className="space-y-3">
+                {analyticsStats?.ctaClicksByName && Object.entries(analyticsStats.ctaClicksByName).length > 0 ? (
+                  Object.entries(analyticsStats.ctaClicksByName)
+                    .sort((a: any, b: any) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([name, count]: any) => (
+                      <div key={name} className="flex justify-between items-center bg-gray-50 px-4 py-2.5 rounded-xl border border-gray-100">
+                        <div className="text-xs font-bold text-gray-700 font-mono flex items-center">
+                          <MousePointerClick className="w-3.5 h-3.5 text-emerald-500 mr-2 shrink-0" />
+                          <span className="truncate max-w-[150px]">{name}</span>
+                        </div>
+                        <span className="text-xs font-black text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-lg">
+                          {count} clicks
+                        </span>
+                      </div>
+                    ))
+                ) : (
+                  <p className="text-sm text-gray-400 text-center py-6">No CTA click logs found yet.</p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Page views breakdown */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <h3 className="text-lg font-extrabold text-gray-900 mb-2">Public Page View Analytics</h3>
+            <p className="text-sm text-gray-500 mb-6">Traffic distribution across educational landing pathways</p>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {analyticsStats?.pageViewsByPath && Object.entries(analyticsStats.pageViewsByPath).length > 0 ? (
+                Object.entries(analyticsStats.pageViewsByPath)
+                  .sort((a: any, b: any) => b[1] - a[1])
+                  .map(([path, count]: any) => (
+                    <div key={path} className="border border-gray-100 p-4 rounded-xl hover:border-indigo-100 transition-colors">
+                      <div className="text-xs font-mono font-bold text-indigo-600 truncate mb-2">{path}</div>
+                      <div className="flex justify-between items-baseline">
+                        <span className="text-2xl font-black text-slate-800">{count}</span>
+                        <span className="text-[10px] uppercase font-bold text-slate-400">Views</span>
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <div className="col-span-full text-center text-sm text-gray-400 py-6">No traffic pages tracked yet.</div>
+              )}
+            </div>
+          </div>
+
+          {/* Raw Tracking signal feed */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="border-b border-gray-100 px-6 py-4 bg-gray-50/50 flex justify-between items-center">
+              <div>
+                <h3 className="text-lg font-extrabold text-gray-900">Live Traffic & Conversion Signals Ledger</h3>
+                <p className="text-xs text-gray-500 mt-1">Real-time event trigger ledger from public domains</p>
+              </div>
+              <span className="px-2.5 py-1 text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 rounded-lg border border-emerald-100 animate-pulse">
+                Live Feed
+              </span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50/50 text-xs font-bold text-gray-500 uppercase tracking-wider">
+                  <tr>
+                    <th className="px-6 py-4 text-left">Category</th>
+                    <th className="px-6 py-4 text-left">Trigger Action</th>
+                    <th className="px-6 py-4 text-left">Target Label</th>
+                    <th className="px-6 py-4 text-left">Timestamp</th>
+                    <th className="px-6 py-4 text-left">Anonymous Session</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-100 text-xs font-medium text-gray-700">
+                  {analyticsStats?.recentEvents && analyticsStats.recentEvents.length > 0 ? (
+                    analyticsStats.recentEvents.map((evt: any) => (
+                      <tr key={evt.id} className="hover:bg-gray-50/50 transition-colors">
+                        <td className="px-6 py-3.5 whitespace-nowrap">
+                          <span className={`px-2.5 py-1 inline-flex text-[10px] font-black rounded-lg border uppercase ${
+                            evt.category === 'page_view' ? 'bg-indigo-50 text-indigo-700 border-indigo-100' :
+                            evt.category === 'cta_click' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' :
+                            evt.category === 'lead_submission' ? 'bg-blue-50 text-blue-700 border-blue-100' :
+                            'bg-gray-50 text-gray-700 border-gray-100'
+                          }`}>
+                            {evt.category}
+                          </span>
+                        </td>
+                        <td className="px-6 py-3.5 whitespace-nowrap font-mono text-gray-900 font-bold">
+                          {evt.action}
+                        </td>
+                        <td className="px-6 py-3.5 whitespace-nowrap text-gray-500 truncate max-w-[180px]">
+                          {evt.label || '-'}
+                        </td>
+                        <td className="px-6 py-3.5 whitespace-nowrap text-gray-400 font-mono flex items-center space-x-1">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>{new Date(evt.timestamp).toLocaleTimeString()}</span>
+                        </td>
+                        <td className="px-6 py-3.5 whitespace-nowrap text-gray-400 font-mono text-[10px]">
+                          {evt.sessionId}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="text-center py-8 text-gray-400 font-bold">No live traffic signals captured.</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* School Onboarding Modal */}
       {showSchoolModal && (
