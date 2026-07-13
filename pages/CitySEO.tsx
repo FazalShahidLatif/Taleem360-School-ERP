@@ -39,6 +39,69 @@ interface CityData {
 }
 
 const CITY_DETAILS: Record<string, CityData> = {
+  nigeria: {
+    name: 'Nigeria',
+    urduName: 'نائجیریا',
+    title: 'School Management Software Nigeria | Complete ERP Suite - Taleem360',
+    metaDesc: 'Discover the absolute best school management software in Nigeria. Streamline primary, secondary and high school workloads with online fee collection, SMS alerts, and double-entry accounting.',
+    headKeyword: 'school management software nigeria',
+    additionalKeywords: [
+      'school erp nigeria',
+      'school database management system nigeria',
+      'free lms for schools nigeria'
+    ],
+    intro: 'Nigeria represents one of the fastest-growing and most dynamic education systems in Africa. From Lagos and Abuja to Kano and Ibadan, school owners require scalable, offline-resilient cloud databases and automated school fee collection software to manage high volumes of students.',
+    keyChallenge: 'Preventing student tuition debt, managing cashflow receipts across multiple bank branches, and dealing with varying network connectivity in regional cities.',
+    localSchools: ['Lagos STEM Academy', 'Abuja International School', 'Kano Model High School', 'Kwara Community Academy'],
+    schemaLocalAddress: {
+      street: 'Herbert Macaulay Way, Yaba',
+      locality: 'Lagos',
+      region: 'Lagos State',
+      postalCode: '100001'
+    }
+  },
+  bangladesh: {
+    name: 'Bangladesh',
+    urduName: 'بنگلہ دیش',
+    title: 'School ERP Bangladesh | Complete School Management System - Taleem360',
+    metaDesc: 'Looking for the best school ERP in Bangladesh? Scale your campus operations with automated student attendance, school fee challans, and localized SMS alerts.',
+    headKeyword: 'school erp bangladesh',
+    additionalKeywords: [
+      'school management software bangladesh',
+      'free school lms bangladesh',
+      'best student information system bangladesh'
+    ],
+    intro: "Bangladesh's private and trust-run schools are rapidly expanding, seeking high-performance school database management tools. From Dhaka to Chattogram and Sylhet, managing admissions and daily collections requires a localized, reliable school erp.",
+    keyChallenge: 'Manual billing ledger errors, complex parent notification delivery, and tracking daily biometric student attendance across multiple campus branches.',
+    localSchools: ['Dhaka Grammar School', 'Chattogram STEM College', 'Sylhet Trust School', 'Allied Dhaka Campuses'],
+    schemaLocalAddress: {
+      street: 'Gulshan Avenue, Road 12',
+      locality: 'Dhaka',
+      region: 'Dhaka Division',
+      postalCode: '1212'
+    }
+  },
+  uae: {
+    name: 'UAE',
+    urduName: 'متحدہ عرب امارات',
+    title: 'School Management Software UAE | Premium Education Cloud Platform - Taleem360',
+    metaDesc: 'Discover the premier school management software in UAE. Taleem360 offers smart biometric integration, parent mobile portals, cashless invoicing, and multi-school ERP.',
+    headKeyword: 'school management software uae',
+    additionalKeywords: [
+      'school erp uae',
+      'best student tracking database uae',
+      'cloud based lms dubai uae'
+    ],
+    intro: 'The United Arab Emirates hosts some of the most technologically advanced and highly demanding international schools and multi-curriculum academies. From Dubai and Abu Dhabi to Sharjah, school administration mandates seamless parent communication, high-availability data infrastructure, and strict compliance with local financial ledgers.',
+    keyChallenge: 'Syncing real-time multi-branch student metrics, managing multi-currency fee schedules, and delivering instant parent-teacher coordination alerts.',
+    localSchools: ['Dubai International Academy', 'Abu Dhabi British School', 'Sharjah Elite Campus', 'Allied Dubai Academy Network'],
+    schemaLocalAddress: {
+      street: 'Sheikh Zayed Road, Al Barsha 1',
+      locality: 'Dubai',
+      region: 'Dubai',
+      postalCode: '00000'
+    }
+  },
   karachi: {
     name: 'Karachi',
     urduName: 'کراچی',
@@ -212,7 +275,8 @@ const CITY_DETAILS: Record<string, CityData> = {
 export const CitySEO: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { city } = useParams<{ city: string }>();
-  const normalizedCity = (city || 'karachi').toLowerCase();
+  const path = window.location.pathname.replace(/^\//, '').toLowerCase();
+  const normalizedCity = (city || path || 'karachi').toLowerCase();
   const data = CITY_DETAILS[normalizedCity] || CITY_DETAILS.karachi;
 
   useEffect(() => {
@@ -238,12 +302,30 @@ export const CitySEO: React.FC = () => {
       document.head.appendChild(schemaScript);
     }
 
+    const getCountryCode = (c: string) => {
+      if (c === 'nigeria') return 'NG';
+      if (c === 'bangladesh') return 'BD';
+      if (c === 'uae') return 'AE';
+      return 'PK';
+    };
+
+    const getCoordinates = (c: string) => {
+      if (c === 'nigeria') return { lat: '6.5244', lng: '3.3792' };
+      if (c === 'bangladesh') return { lat: '23.8103', lng: '90.4125' };
+      if (c === 'uae') return { lat: '25.2048', lng: '55.2708' };
+      if (c === 'karachi') return { lat: '24.8607', lng: '67.0011' };
+      if (c === 'lahore') return { lat: '31.5204', lng: '74.3587' };
+      return { lat: '33.6844', lng: '73.0479' }; // Islamabad & default
+    };
+
+    const coords = getCoordinates(normalizedCity);
+
     const localBusinessSchema = {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": `Taleem360 - ${data.name} School ERP Office`,
       "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80",
-      "telephone": "+92-300-1234567",
+      "telephone": normalizedCity === 'nigeria' ? "+234-1-1234567" : normalizedCity === 'uae' ? "+971-4-1234567" : normalizedCity === 'bangladesh' ? "+880-2-1234567" : "+92-300-1234567",
       "email": "support@taleem360.online",
       "url": `https://www.taleem360.online/${normalizedCity}`,
       "address": {
@@ -252,12 +334,12 @@ export const CitySEO: React.FC = () => {
         "addressLocality": data.schemaLocalAddress.locality,
         "addressRegion": data.schemaLocalAddress.region,
         "postalCode": data.schemaLocalAddress.postalCode,
-        "addressCountry": "PK"
+        "addressCountry": getCountryCode(normalizedCity)
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": normalizedCity === 'karachi' ? "24.8607" : normalizedCity === 'lahore' ? "31.5204" : "33.6844",
-        "longitude": normalizedCity === 'karachi' ? "67.0011" : normalizedCity === 'lahore' ? "74.3587" : "73.0479"
+        "latitude": coords.lat,
+        "longitude": coords.lng
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",

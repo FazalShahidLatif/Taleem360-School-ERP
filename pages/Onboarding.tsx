@@ -227,7 +227,7 @@ export const Onboarding: React.FC = () => {
                       tier: SubscriptionTier.PILOT, 
                       name: 'Pilot', 
                       price: 'Free', 
-                      students: 'Up to 30', 
+                      profiles: 'Up to 30', 
                       icon: Building2,
                       color: 'bg-gray-50 text-gray-600 border-gray-200'
                     },
@@ -235,7 +235,7 @@ export const Onboarding: React.FC = () => {
                       tier: SubscriptionTier.TIER_1, 
                       name: 'Essential', 
                       price: '$49/mo', 
-                      students: 'Up to 200', 
+                      profiles: 'Up to 200', 
                       icon: Rocket,
                       color: 'bg-blue-50 text-blue-600 border-blue-200'
                     },
@@ -243,7 +243,7 @@ export const Onboarding: React.FC = () => {
                       tier: SubscriptionTier.TIER_2, 
                       name: 'Professional', 
                       price: '$129/mo', 
-                      students: 'Up to 2,000', 
+                      profiles: 'Up to 500', 
                       icon: Zap,
                       color: 'bg-indigo-50 text-indigo-600 border-indigo-200'
                     },
@@ -251,7 +251,7 @@ export const Onboarding: React.FC = () => {
                       tier: SubscriptionTier.TIER_3, 
                       name: 'Enterprise', 
                       price: 'Custom', 
-                      students: 'Up to 1000', 
+                      profiles: '501+', 
                       icon: Award,
                       color: 'bg-amber-50 text-amber-600 border-amber-200'
                     }
@@ -272,7 +272,7 @@ export const Onboarding: React.FC = () => {
                       <ul className="space-y-3 mb-8">
                         <li className="flex items-center text-sm text-gray-500">
                           <CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2" />
-                          {plan.students} Students
+                          {plan.profiles} Active Profiles
                         </li>
                         <li className="flex items-center text-sm text-gray-500">
                           <CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2" />
@@ -300,7 +300,7 @@ export const Onboarding: React.FC = () => {
                 {/* Onboarding Notice for Multi-School Institutions */}
                 <div className="mt-8 bg-slate-50 border border-slate-200/60 rounded-2xl p-5 text-left text-sm text-slate-600 max-w-4xl mx-auto">
                   <span className="font-bold text-slate-800 block mb-1">🏫 Multi-School / Multi-Campus Networks Notice:</span>
-                  A Custom Subscription Model is designed for multi-school campus setups and can be negotiated with our accounts department before generating any contract or charging any subscription fee. Schools with up to 1000 students should subscribe to the Tier 3 subscription.
+                  A Custom Subscription Model is designed for multi-school campus setups and can be negotiated with our accounts department before generating any contract or charging any subscription fee. Schools with up to 1000 active profiles should subscribe to the Tier 3 subscription.
                 </div>
 
                 <div className="mt-10 flex justify-between">

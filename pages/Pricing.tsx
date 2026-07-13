@@ -47,7 +47,7 @@ export const Pricing: React.FC = () => {
       price: 'Free',
       description: 'Perfect for small schools or testing the platform.',
       features: [
-        'Up to 30 students',
+        'Up to 30 active profiles',
         'Basic student management',
         'Attendance tracking',
         'Class management',
@@ -62,7 +62,7 @@ export const Pricing: React.FC = () => {
       price: '$49',
       description: 'Ideal for growing primary schools.',
       features: [
-        'Up to 200 students',
+        'Up to 200 active profiles',
         'Everything in Pilot',
         'Finance & Fee management',
         'Staff management',
@@ -78,7 +78,7 @@ export const Pricing: React.FC = () => {
       price: '$129',
       description: 'Comprehensive features for mid-sized institutions.',
       features: [
-        'Up to 2,000 students',
+        'Up to 500 active profiles',
         'Everything in Tier 1',
         'Examination module',
         'AI insights & analytics',
@@ -95,7 +95,7 @@ export const Pricing: React.FC = () => {
       price: 'Custom',
       description: 'Enterprise grade solution for larger campuses.',
       features: [
-        'Up to 1000 students',
+        '501+ active profiles',
         'Everything in Tier 2',
         'Multi-school management',
         'Custom integrations',
@@ -299,8 +299,8 @@ export const Pricing: React.FC = () => {
                   <td className="px-6 py-4 font-bold text-slate-800">Max Student Directory Capacity</td>
                   <td className="px-6 py-4 text-slate-600">Up to 30 active profiles</td>
                   <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 200 active profiles</td>
-                  <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 2,000 active profiles</td>
-                  <td className="px-6 py-4 text-emerald-600 font-bold">Up to 1,000+ active profiles</td>
+                  <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 500 active profiles</td>
+                  <td className="px-6 py-4 text-emerald-600 font-bold">501+ active profiles</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 font-bold text-slate-800">Daily Attendance Log Portal</td>

@@ -34,6 +34,8 @@ import { PrivateTutors } from './pages/PrivateTutors';
 import { CitySEO } from './pages/CitySEO';
 import { Madrasa } from './pages/Madrasa';
 import { Onboarding } from './pages/Onboarding';
+import { WhiteLabel } from './pages/WhiteLabel';
+import { APIDocs } from './pages/APIDocs';
 import { NotFound } from './pages/NotFound';
 import { AdminPortal } from './pages/AdminPortal';
 import { LessonPlanning } from './pages/LessonPlanning';
@@ -123,6 +125,8 @@ const SkillsAcademyPage = () => <Layout><SkillsAcademy /></Layout>;
 const PrivateTutorsPage = () => <Layout><PrivateTutors /></Layout>;
 const CitySEOPage = () => <CitySEO />;
 const MadrasaPage = () => <Madrasa />;
+const WhiteLabelPage = () => <WhiteLabel />;
+const APIDocsPage = () => <APIDocs />;
 const SupportPage = () => <Layout><Support /></Layout>;
 const FAQPage = () => <Layout><FAQ /></Layout>;
 const NotFoundPage = () => <NotFound />;
@@ -519,6 +523,31 @@ const App: React.FC = () => {
           <Route 
             path="/madrasa" 
             element={<MadrasaPage />} 
+          />
+
+          <Route 
+            path="/white-label" 
+            element={<WhiteLabelPage />} 
+          />
+
+          <Route 
+            path="/api" 
+            element={<APIDocsPage />} 
+          />
+
+          <Route 
+            path="/nigeria" 
+            element={<CitySEOPage />} 
+          />
+
+          <Route 
+            path="/bangladesh" 
+            element={<CitySEOPage />} 
+          />
+
+          <Route 
+            path="/uae" 
+            element={<CitySEOPage />} 
           />
 
           <Route 

@@ -91,7 +91,7 @@ export const Blog: React.FC = () => {
               Topical Educational ERP Archive
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-300">
-              30 comprehensive, research-backed guides built to optimize operations, improve student success, simplify billing compliance, and streamline school logistics.
+              {posts.length || BLOG_POSTS_DATA.length} comprehensive, research-backed guides built to optimize operations, improve student success, simplify billing compliance, and streamline school logistics.
             </p>
           </div>
 
@@ -268,7 +268,7 @@ export const Blog: React.FC = () => {
         <div className="mt-20 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
           <h3 className="text-base font-bold text-slate-800 mb-6 flex items-center border-b border-slate-100 pb-3">
             <Network className="w-5 h-5 text-indigo-600 mr-2" />
-            Topical Map Sitemap Index (Total 30 Interlinked Articles)
+            Topical Map Sitemap Index (Total {posts.length || BLOG_POSTS_DATA.length} Interlinked Articles)
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Object.entries(TOPICAL_CLUSTERS).map(([key, value]) => {

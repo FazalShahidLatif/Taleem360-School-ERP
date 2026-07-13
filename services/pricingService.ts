@@ -67,7 +67,7 @@ export const PRODUCT_CATALOG: Record<string, PricingTier> = {
     moduleType: 'SchoolERP',
     usdPricePerMonth: 12900, // $129.00
     usdPricePerYear: 129000, // $1,290.00
-    maxStudents: 2000,
+    maxStudents: 500,
     features: ['Examination Module', 'AI Performance Insights', 'Parent Portal Access', 'Biometric Integration'],
   },
   PROD_ERP_TIER3: {

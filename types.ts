@@ -6,10 +6,10 @@ export enum UserRole {
 }
 
 export enum SubscriptionTier {
-  PILOT = 'PILOT', // 0-30 students
-  TIER_1 = 'TIER_1', // 0-200 students
-  TIER_2 = 'TIER_2', // 0-2000 students
-  TIER_3 = 'TIER_3'  // 2001+ students
+  PILOT = 'PILOT', // 0-30 active profiles
+  TIER_1 = 'TIER_1', // 0-200 active profiles
+  TIER_2 = 'TIER_2', // 0-500 active profiles
+  TIER_3 = 'TIER_3'  // 501+ active profiles
 }
 
 export interface School {

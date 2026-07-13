@@ -24,11 +24,11 @@ const renderMockCheckoutModal = (options: any) => {
   } else if (priceId.includes('tier1')) {
     pName = 'Starter School ERP License';
     pPr = '$49 / month';
-    pD = 'Up to 500 active student records, cloud financial journals, parent-teacher portals, and direct support tickets.';
+    pD = 'Up to 200 active student records, cloud financial journals, parent-teacher portals, and direct support tickets.';
   } else if (priceId.includes('tier2')) {
     pName = 'Professional School ERP Suite';
     pPr = '$129 / month';
-    pD = 'Up to 2,000 active student records, online biometric attendance hardware integrations, digital report cards, and SMS gateway.';
+    pD = 'Up to 500 active student records, online biometric attendance hardware integrations, digital report cards, and SMS gateway.';
   }
 
   const overlay = document.createElement('div');
