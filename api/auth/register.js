@@ -39,11 +39,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ detail: 'Name, email and password are required' });
     }
 
-    const host = req.headers.host || '';
-    if (host.includes('taleem360.online')) {
-      return res.status(400).json({ detail: 'School registration is restricted on the live website. Please contact support@taleem360.online to set up your school.' });
-    }
-
     const trimmedEmail = email.trim().toLowerCase();
     const existing = getUsers().find(u => u.email.toLowerCase() === trimmedEmail);
     if (existing) {

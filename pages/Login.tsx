@@ -22,7 +22,7 @@ export const Login: React.FC = () => {
   
   const { login, register } = useAuth();
   const navigate = useNavigate();
-  const isLiveWebsite = typeof window !== 'undefined' && (window.location.hostname === 'taleem360.online' || window.location.hostname === 'www.taleem360.online');
+  const isLiveWebsite = false;
 
   React.useEffect(() => {
     document.title = 'Sign In & Access Cloud Portal | Taleem360 ERP Suite';
