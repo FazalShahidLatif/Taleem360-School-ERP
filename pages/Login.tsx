@@ -251,7 +251,7 @@ export const Login: React.FC = () => {
                     <button
                       type="submit"
                       disabled={loading || passwordResetCompleted}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                      className="w-full flex justify-center py-2.5 px-4 min-h-[44px] border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 cursor-pointer"
                     >
                       {loading ? 'Saving...' : passwordResetCompleted ? 'Saved successfully!' : 'Save New Password'}
                     </button>
@@ -267,7 +267,7 @@ export const Login: React.FC = () => {
                         setResetSuccessMessage('');
                         setPasswordResetCompleted(false);
                       }}
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      className="min-h-[44px] py-2 px-4 inline-flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                     >
                       Back to Sign In
                     </button>
@@ -309,7 +309,7 @@ export const Login: React.FC = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                      className="w-full flex justify-center py-2.5 px-4 min-h-[44px] border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 cursor-pointer"
                     >
                       {loading ? 'Sending link...' : 'Send reset link'}
                     </button>
@@ -323,7 +323,7 @@ export const Login: React.FC = () => {
                         setError('');
                         setResetSuccessMessage('');
                       }}
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      className="min-h-[44px] py-2 px-4 inline-flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                     >
                       Back to Sign In
                     </button>
@@ -416,7 +416,7 @@ export const Login: React.FC = () => {
                           setResetSuccessMessage('');
                           setResetEmail(email);
                         }}
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="min-h-[44px] py-2 px-4 inline-flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
                       >
                         Forgot your password?
                       </button>
@@ -434,7 +434,7 @@ export const Login: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                  className="w-full flex justify-center py-2.5 px-4 min-h-[44px] border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (isRegister ? 'Registering...' : 'Signing in...') : (isRegister ? 'Register' : 'Sign in')}
                 </button>
@@ -442,14 +442,16 @@ export const Login: React.FC = () => {
             </form>
             )}
 
-            <div className="mt-6 text-center">
-              <button
-                onClick={() => setIsRegister(!isRegister)}
-                className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                {isRegister ? 'Already have an account? Sign in' : "Don't have an account? Register your school"}
-              </button>
-            </div>
+            {(!isRegister || !isLiveWebsite) && (
+              <div className="mt-6 text-center">
+                <button
+                  onClick={() => setIsRegister(!isRegister)}
+                  className="min-h-[44px] py-2.5 px-4 inline-flex items-center justify-center text-sm font-semibold text-indigo-600 hover:text-indigo-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+                >
+                  {isRegister ? 'Already have an account? Sign in' : "Don't have an account? Register your school"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
