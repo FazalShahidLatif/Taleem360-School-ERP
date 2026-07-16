@@ -368,7 +368,7 @@ router.post('/api/nexus/generate-quiz', async (req, res) => {
       const prompt = `Develop exactly 3 challenging multiple choice questions based on the parent topic "${userTopic}". ${textSource}`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-flash-latest',
         contents: prompt,
         config: {
           systemInstruction,

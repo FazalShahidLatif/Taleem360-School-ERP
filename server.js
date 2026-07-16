@@ -287,7 +287,7 @@ async function startServer() {
 
       const client = getAiClient();
       const response = await client.models.generateContent({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-flash-latest',
         contents,
         config: {
           systemInstruction,
@@ -339,7 +339,7 @@ async function startServer() {
 
       const client = getAiClient();
       const response = await client.models.generateContent({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-flash-latest',
         contents: [{ role: 'user', parts: [{ text: cleanedText }] }],
         config: {
           systemInstruction,
@@ -380,7 +380,7 @@ async function startServer() {
       const promptText = `Child Name: ${child}\nRaw Notes: ${rawNotes}`;
       
       const response = await client.models.generateContent({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-flash-latest',
         contents: promptText,
         config: {
           systemInstruction: `You are an expert Early Childhood Education (ECE) AI assistant integrated into the Taleem360 Daycare platform. Your task is to transform raw, fragmented, shorthand notes written by busy caregivers into a professional, warm, comforting, and highly structured daily summary for parents.
