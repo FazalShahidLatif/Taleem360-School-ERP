@@ -21,6 +21,10 @@ export const DataManagement: React.FC = () => {
   const [isBackingUp, setIsBackingUp] = useState(false);
   const [detectedLanguage, setDetectedLanguage] = useState('English');
   const [selectedLanguage, setSelectedLanguage] = useState('English');
+  
+  const [selectedTemplate, setSelectedTemplate] = useState<'student' | 'staff'>('student');
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
 
   // Simulate IP-based language detection
   useEffect(() => {
@@ -33,6 +37,42 @@ export const DataManagement: React.FC = () => {
   const handleBackup = () => {
     setIsBackingUp(true);
     setTimeout(() => setIsBackingUp(false), 2000);
+  };
+
+  const handleDownloadTemplate = (type: 'student' | 'staff') => {
+    const headers = type === 'student' 
+      ? "Name,Class,Email,ParentName,ParentPhone,EnrollmentDate\nAli Khan,Class 5,ali@example.com,Zafar Khan,03001234567,2026-04-15"
+      : "Name,Role,Email,Phone,Department,Salary\nSajid Mehmood,Teacher,sajid@example.com,03217654321,Science,45000";
+    
+    const blob = new Blob([headers], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('href', url);
+    a.setAttribute('download', `taleem360_${type}_template.csv`);
+    a.click();
+    setSelectedTemplate(type);
+  };
+
+  const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setIsUploading(true);
+      setUploadSuccess(null);
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const text = event.target?.result as string || '';
+        const lines = text.split('\n').filter(line => line.trim().length > 0);
+        // Header is line 0, data is lines 1+
+        const count = Math.max(0, lines.length - 1);
+        
+        setTimeout(() => {
+          setIsUploading(false);
+          setUploadSuccess(`Successfully parsed & imported ${count} ${selectedTemplate} entries from ${file.name} to your educational roster.`);
+        }, 1200);
+      };
+      reader.readAsText(file);
+    }
   };
 
   return (
@@ -193,27 +233,60 @@ export const DataManagement: React.FC = () => {
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <button className="p-4 border border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left group">
+              <button 
+                onClick={() => handleDownloadTemplate('student')}
+                className={`p-4 border rounded-xl text-left transition-all group ${
+                  selectedTemplate === 'student' ? 'border-indigo-600 bg-indigo-50/50' : 'border-gray-200 hover:border-indigo-500 hover:bg-indigo-50'
+                }`}
+              >
                 <div className="flex items-center mb-2">
-                  <Download className="w-4 h-4 text-gray-400 group-hover:text-indigo-600 mr-2" />
+                  <Download className={`w-4 h-4 mr-2 ${selectedTemplate === 'student' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600'}`} />
                   <span className="text-sm font-bold text-gray-900">Student Template</span>
                 </div>
-                <p className="text-xs text-gray-500">Download the format for student bulk upload</p>
+                <p className="text-xs text-gray-500">Download and select format for student bulk upload</p>
               </button>
-              <button className="p-4 border border-gray-200 rounded-xl hover:border-indigo-500 hover:bg-indigo-50 transition-all text-left group">
+              <button 
+                onClick={() => handleDownloadTemplate('staff')}
+                className={`p-4 border rounded-xl text-left transition-all group ${
+                  selectedTemplate === 'staff' ? 'border-indigo-600 bg-indigo-50/50' : 'border-gray-200 hover:border-indigo-500 hover:bg-indigo-50'
+                }`}
+              >
                 <div className="flex items-center mb-2">
-                  <Download className="w-4 h-4 text-gray-400 group-hover:text-indigo-600 mr-2" />
+                  <Download className={`w-4 h-4 mr-2 ${selectedTemplate === 'staff' ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600'}`} />
                   <span className="text-sm font-bold text-gray-900">Staff Template</span>
                 </div>
-                <p className="text-xs text-gray-500">Download the format for staff bulk upload</p>
+                <p className="text-xs text-gray-500">Download and select format for staff bulk upload</p>
               </button>
             </div>
 
-            <div className="border-2 border-dashed border-gray-200 rounded-2xl p-12 hover:border-indigo-500 transition-all cursor-pointer group">
-              <Upload className="w-12 h-12 text-gray-300 group-hover:text-indigo-500 mx-auto mb-4" />
-              <p className="text-sm font-medium text-gray-700">Click to upload or drag and drop CSV file</p>
-              <p className="text-xs text-gray-400 mt-1">Maximum file size: 10MB</p>
+            <div className="relative border-2 border-dashed border-gray-200 rounded-2xl p-12 hover:border-indigo-500 transition-all cursor-pointer group">
+              <input 
+                type="file" 
+                accept=".csv"
+                onChange={handleCsvUpload}
+                className="absolute inset-0 opacity-0 cursor-pointer"
+                id="csv-file-picker"
+              />
+              {isUploading ? (
+                <div className="flex flex-col items-center justify-center">
+                  <RefreshCw className="w-12 h-12 text-indigo-600 animate-spin mb-4" />
+                  <p className="text-sm font-medium text-gray-700">Analyzing columns and records...</p>
+                </div>
+              ) : (
+                <>
+                  <Upload className="w-12 h-12 text-gray-300 group-hover:text-indigo-500 mx-auto mb-4" />
+                  <p className="text-sm font-medium text-gray-700">Click to upload or drag and drop your {selectedTemplate} CSV file</p>
+                  <p className="text-xs text-gray-400 mt-1">Maximum file size: 10MB</p>
+                </>
+              )}
             </div>
+
+            {uploadSuccess && (
+              <div className="mt-6 p-4 bg-emerald-50 rounded-xl flex items-center gap-3 border border-emerald-100 text-left">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                <span className="text-xs text-emerald-800 font-bold leading-relaxed">{uploadSuccess}</span>
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -362,6 +362,20 @@ api.defaults.adapter = async (config) => {
       const user = await getUserFromToken();
       responseData = await db.createTicket(user, body);
     }
+    else if (url?.startsWith("/support/tickets/") && url?.includes("/messages") && method === "get") {
+      const user = await getUserFromToken();
+      const parts = url.split('/');
+      const ticketIdx = parts.indexOf("tickets");
+      const id = parts[ticketIdx + 1];
+      responseData = await db.getTicketMessages(user, id);
+    }
+    else if (url?.startsWith("/support/tickets/") && url?.includes("/messages") && method === "post") {
+      const user = await getUserFromToken();
+      const parts = url.split('/');
+      const ticketIdx = parts.indexOf("tickets");
+      const id = parts[ticketIdx + 1];
+      responseData = await db.createTicketMessage(user, id, body.message);
+    }
     else if (url?.startsWith("/support/tickets/") && method === "patch") {
       const user = await getUserFromToken();
       const parts = url.split('/');

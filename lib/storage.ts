@@ -1,4 +1,4 @@
-import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, TimetableEntry, DayOfWeek, SubscriptionTier, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, BlogPost, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
+import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, TimetableEntry, DayOfWeek, SubscriptionTier, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, TicketMessage, BlogPost, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
 import { ai } from './ai';
 import { BLOG_POSTS_DATA, RichBlogPost } from './blogContent';
 
@@ -237,6 +237,7 @@ const KEYS = {
   EXAMS: 'erp_exams',
   EXAM_RESULTS: 'erp_exam_results',
   TICKETS: 'erp_tickets',
+  TICKET_MESSAGES: 'erp_ticket_messages',
   BLOG_POSTS: 'erp_blog_posts',
   SALARIES: 'erp_salaries',
   LEAVE_REQUESTS: 'erp_leave_requests',
@@ -332,6 +333,17 @@ export const db = {
       localStorage.setItem(KEYS.EXAMS, JSON.stringify(INITIAL_EXAMS));
       localStorage.setItem(KEYS.EXAM_RESULTS, JSON.stringify(INITIAL_EXAM_RESULTS));
       localStorage.setItem(KEYS.TICKETS, JSON.stringify(INITIAL_TICKETS));
+      localStorage.setItem(KEYS.TICKET_MESSAGES, JSON.stringify([
+        {
+          id: 'tm1',
+          ticket_id: 't1',
+          user_id: 'u1',
+          user_name: 'Principal Skinner',
+          message: 'Could you please help check if there is a data sync mismatch?',
+          is_admin: false,
+          created_at: new Date(Date.now() - 3600000).toISOString()
+        }
+      ]));
       localStorage.setItem(KEYS.BLOG_POSTS, JSON.stringify(INITIAL_BLOG_POSTS));
       localStorage.setItem(KEYS.SALARIES, JSON.stringify([]));
       localStorage.setItem(KEYS.LEAVE_REQUESTS, JSON.stringify([]));
@@ -1183,6 +1195,49 @@ export const db = {
     tickets[idx] = { ...tickets[idx], ...data, updated_at: new Date().toISOString() };
     save(KEYS.TICKETS, tickets);
     return tickets[idx];
+  },
+
+  getTicketMessages: async (user: User, ticketId: string): Promise<TicketMessage[]> => {
+    await delay();
+    const tickets = load<SupportTicket>(KEYS.TICKETS);
+    const ticket = tickets.find(t => t.id === ticketId);
+    if (!ticket) throw new Error("Ticket not found");
+    if (user.role !== UserRole.SUPER_ADMIN && ticket.school_id !== user.school_id) {
+      throw new Error("Unauthorized");
+    }
+    const messages = load<TicketMessage>(KEYS.TICKET_MESSAGES);
+    return messages.filter(m => m.ticket_id === ticketId);
+  },
+
+  createTicketMessage: async (user: User, ticketId: string, message: string): Promise<TicketMessage> => {
+    await delay();
+    const tickets = load<SupportTicket>(KEYS.TICKETS);
+    const ticketIdx = tickets.findIndex(t => t.id === ticketId);
+    if (ticketIdx === -1) throw new Error("Ticket not found");
+    
+    const ticket = tickets[ticketIdx];
+    if (user.role !== UserRole.SUPER_ADMIN && ticket.school_id !== user.school_id) {
+      throw new Error("Unauthorized");
+    }
+
+    const messages = load<TicketMessage>(KEYS.TICKET_MESSAGES);
+    const newMessage: TicketMessage = {
+      id: `tm${Date.now()}`,
+      ticket_id: ticketId,
+      user_id: user.id,
+      user_name: user.name,
+      message,
+      is_admin: user.role === UserRole.SUPER_ADMIN,
+      created_at: new Date().toISOString()
+    };
+    messages.push(newMessage);
+    save(KEYS.TICKET_MESSAGES, messages);
+
+    // Update ticket's updated_at
+    tickets[ticketIdx] = { ...ticket, updated_at: new Date().toISOString() };
+    save(KEYS.TICKETS, tickets);
+
+    return newMessage;
   },
 
   // Payroll Methods
