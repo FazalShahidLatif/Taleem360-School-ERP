@@ -460,14 +460,36 @@ export const db = {
           const expTime = payload.exp > 9999999999 ? payload.exp : payload.exp * 1000;
           if (Date.now() >= expTime) throw new Error('Token expired');
         }
+
+        let schoolId = payload.school_id;
+        let schoolName = payload.school_name;
+
+        if (payload.role === 'SUPER_ADMIN') {
+          const customSchoolId = localStorage.getItem('super_admin_active_school_id');
+          if (customSchoolId) {
+            schoolId = customSchoolId;
+            try {
+              const schools = JSON.parse(localStorage.getItem('t360_schools') || '[]');
+              const matched = schools.find((s: any) => s.id === customSchoolId);
+              if (matched) {
+                schoolName = matched.name;
+              }
+            } catch (e) {
+              console.warn("[Storage] Failed to parse schools from localStorage", e);
+            }
+          } else if (!schoolId) {
+            schoolId = 'springfield_001';
+            schoolName = 'Springfield Elementary';
+          }
+        }
         
         return {
           id: payload.user_id,
           email: payload.email,
           name: payload.name,
           role: payload.role,
-          school_id: payload.school_id,
-          school_name: payload.school_name,
+          school_id: schoolId,
+          school_name: schoolName,
           student_id: payload.student_id,
           onboarded: payload.onboarded
         };
@@ -542,8 +564,10 @@ export const db = {
     const students = load<DBStudent>(KEYS.STUDENTS);
     const schoolStudents = students.filter(s => s.school_id === user.school_id);
     
-    if (schoolStudents.length >= school.max_students) {
-      throw new Error(`Student limit reached for your subscription tier (${school.max_students} students). Please upgrade your plan.`);
+    const limit = school.max_students || (school.subscription_tier === 'PILOT' ? 100 : (school.subscription_tier === 'TIER_1' ? 200 : 500));
+    
+    if (schoolStudents.length >= limit) {
+      throw new Error(`Student limit reached for your subscription tier (${limit} students). Please upgrade your plan.`);
     }
 
     const newStudentId = `s${Date.now()}`;

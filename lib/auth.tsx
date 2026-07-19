@@ -22,14 +22,37 @@ const getUserFromToken = (): User | null => {
   try {
     const decoded: any = jwtDecode(token);
     console.debug("[Auth] Token Decoded:", decoded);
+    
+    let school_id = decoded.school_id;
+    let school_name = decoded.school_name;
+
+    if (decoded.role === 'SUPER_ADMIN') {
+      const customSchoolId = localStorage.getItem('super_admin_active_school_id');
+      if (customSchoolId) {
+        school_id = customSchoolId;
+        try {
+          const schools = JSON.parse(localStorage.getItem('t360_schools') || '[]');
+          const matched = schools.find((s: any) => s.id === customSchoolId);
+          if (matched) {
+            school_name = matched.name;
+          }
+        } catch (e) {
+          console.warn("[Auth] Failed to load schools from storage", e);
+        }
+      } else if (!school_id) {
+        school_id = 'springfield_001';
+        school_name = 'Springfield Elementary';
+      }
+    }
+
     // Map JWT payload to User interface
     return {
       id: decoded.user_id,
       email: decoded.email,
       name: decoded.name || decoded.email.split('@')[0], 
       role: decoded.role as UserRole,
-      school_id: decoded.school_id,
-      school_name: decoded.school_name, // Captured from JWT
+      school_id: school_id,
+      school_name: school_name, // Captured from JWT
       student_id: decoded.student_id, // For Parents
       onboarded: decoded.onboarded
     };

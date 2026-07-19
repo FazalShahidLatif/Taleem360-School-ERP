@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../lib/auth';
 import { Link, useLocation } from 'react-router-dom';
 import { 
@@ -54,6 +54,30 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isAdmin = user?.role === UserRole.ADMIN;
   const isSuperAdmin = user?.role === UserRole.SUPER_ADMIN;
   const isParent = user?.role === UserRole.PARENT;
+
+  const [schools, setSchools] = useState<any[]>([]);
+  const [activeSchoolId, setActiveSchoolId] = useState<string>('');
+
+  useEffect(() => {
+    if (isSuperAdmin) {
+      try {
+        const storedSchools = JSON.parse(localStorage.getItem('t360_schools') || '[]');
+        setSchools(storedSchools);
+        const currentActive = localStorage.getItem('super_admin_active_school_id') || 'springfield_001';
+        setActiveSchoolId(currentActive);
+      } catch (e) {
+        console.error("Failed to load schools in Layout switcher", e);
+      }
+    }
+  }, [isSuperAdmin]);
+
+  const handleSchoolChange = (schoolId: string) => {
+    localStorage.setItem('super_admin_active_school_id', schoolId);
+    setActiveSchoolId(schoolId);
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
+  };
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard, current: location.pathname === '/' },
@@ -113,6 +137,24 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                  <X className="w-6 h-6 text-gray-500" />
                </button>
              </div>
+             {isSuperAdmin && schools.length > 0 && (
+               <div className="px-4 py-3 bg-slate-50 border-b border-gray-100">
+                 <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                   Active School Context
+                 </label>
+                 <select
+                   value={activeSchoolId}
+                   onChange={(e) => handleSchoolChange(e.target.value)}
+                   className="w-full text-xs font-bold text-indigo-700 bg-white border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none cursor-pointer"
+                 >
+                   {schools.map((sch) => (
+                     <option key={sch.id} value={sch.id}>
+                       {sch.name} ({sch.subscription_tier || 'PILOT'})
+                     </option>
+                   ))}
+                 </select>
+               </div>
+             )}
              <nav className="flex-1 px-2 py-4 space-y-1">
                {navigation.map((item) => (
                  <Link
@@ -143,6 +185,24 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               {isSuperAdmin ? 'Taleem360 HQ' : 'Taleem360'}
             </span>
           </div>
+          {isSuperAdmin && schools.length > 0 && (
+            <div className="px-6 mt-4">
+              <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                Active School Context
+              </label>
+              <select
+                value={activeSchoolId}
+                onChange={(e) => handleSchoolChange(e.target.value)}
+                className="w-full text-xs font-bold text-indigo-700 bg-indigo-50/50 border border-indigo-100 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer"
+              >
+                {schools.map((sch) => (
+                  <option key={sch.id} value={sch.id}>
+                    {sch.name} ({sch.subscription_tier || 'PILOT'})
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="mt-6 flex-1 flex flex-col overflow-y-auto">
             <nav className="flex-1 px-2 space-y-1">
                {navigation.map((item) => (

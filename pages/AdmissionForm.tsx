@@ -170,7 +170,7 @@ export const AdmissionForm: React.FC = () => {
         fatherName: formData.fatherName
       });
     } catch (error: any) {
-      alert(error.message || 'Failed to register student');
+      alert(error.response?.data?.detail || error.message || 'Failed to register student');
     } finally {
       setIsSubmitting(false);
     }
