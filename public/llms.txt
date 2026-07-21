@@ -14,6 +14,7 @@
 - [Professional Skills Academy](https://taleem360.online/skills-academy) - Multi-tenant white-label LMS profiles and structured course directories.
 - [About Taleem360](https://taleem360.online/about) - Platform history, values, educational philosophy, and executive leadership.
 - [Contact Support](https://taleem360.online/contact) - Customer support desk and technical inquiry forms.
+- [Favicon Vector Asset](https://taleem360.online/favicon.svg) - Official vector brand-emblem representation.
 
 ## High-Value Technical & Architectural Reference Articles
 

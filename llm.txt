@@ -80,3 +80,5 @@ Developers and LLM editors should preserve these structural constants inside the
 2. **Dual Database Failbacks**: Every backend transaction must verify local file read-and-write streams (`users_db.json`, etc.) if Postgres pools fail to init.
 3. **No Decorative Clutter**: Keep UI margins fully clear of computer-simulated terminal displays, simulated ping counters, or unrequested server ports indicators to honor human-grade minimalism.
 4. **Valid Sitemap Mapping**: All public blog assets are referenced on the live sitemap XML (https://taleem360.online/sitemap.xml) and allowed on the official robotic crawler files (https://taleem360.online/robots.txt).
+5. **Ethical Review Loops**: Prompts users for Google/Trustpilot reviews transparently. For satisfied users, provides instant 15-day trial extension rewards without coercion. For dissatisfied users, automatically spawns prioritized Developer/Support triage tickets to guarantee constant quality improvement.
+
