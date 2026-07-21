@@ -49,7 +49,7 @@ export const PRODUCT_CATALOG: Record<string, PricingTier> = {
     moduleType: 'SchoolERP',
     usdPricePerMonth: 0,
     usdPricePerYear: 0,
-    maxStudents: 30,
+    maxStudents: 100,
     features: ['Basic Student Demographics', 'Single Campus Sheet', 'Attendance Logging'],
   },
   PROD_ERP_TIER1: {

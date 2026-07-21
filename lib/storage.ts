@@ -1,4 +1,4 @@
-import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, TimetableEntry, DayOfWeek, SubscriptionTier, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, TicketMessage, BlogPost, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
+import { School, User, Student, Class, Enrollment, Attendance, UserRole, DashboardStats, AuthResponse, ParentDashboardData, FeeCategory, StudentFee, Payment, TimetableEntry, DayOfWeek, SubscriptionTier, SchoolType, Staff, Subject, Exam, ExamResult, SupportTicket, TicketStatus, TicketPriority, TicketMessage, BlogPost, StaffSalary, SalaryStatus, LeaveRequest, ReportCard, ReportCardSubject, Book, LibraryTransaction, Assignment, Submission, Vehicle, Route, PickupPoint, StudentTransportAllocation, TransportStats } from '../types';
 import { ai } from './ai';
 import { BLOG_POSTS_DATA, RichBlogPost } from './blogContent';
 
@@ -35,7 +35,7 @@ const INITIAL_SCHOOLS: School[] = [
     is_active: true,
     subscription_tier: SubscriptionTier.PILOT,
     student_count: 2,
-    max_students: 30,
+    max_students: 100,
     created_at: '2023-02-01T00:00:00Z',
     contact_email: 'contact@westspringfield.edu',
     onboarded: true
@@ -57,6 +57,18 @@ const INITIAL_USERS: User[] = [
   { id: 'u4', email: 'admin@b-school.com', name: 'Superintendent Chalmers', password: 'admin', role: UserRole.ADMIN, school_id: SCHOOL_B_ID, onboarded: true },
   { id: 'u5', email: 'teacher@b-school.com', name: 'Elizabeth Hoover', password: 'teacher', role: UserRole.TEACHER, school_id: SCHOOL_B_ID, onboarded: true },
 ];
+
+const checkTrialStatus = (school: School) => {
+  if (school.subscription_tier !== SubscriptionTier.PILOT) return;
+  if (!school.created_at) return;
+  const createdDate = new Date(school.created_at);
+  const today = new Date();
+  const diffTime = today.getTime() - createdDate.getTime();
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+  if (diffDays > 30) {
+    throw new Error("Your 30-day free trial has expired. To continue using Taleem360 and unlock unlimited access, please upgrade to a paid subscription.");
+  }
+};
 
 const INITIAL_CLASSES: DBClass[] = [
   // School A
@@ -561,10 +573,53 @@ export const db = {
     
     if (!school) throw new Error("School not found");
     
+    // Check 30-day free trial expiration
+    checkTrialStatus(school);
+
+    // Enforce Student Age Restrictions based on Institution Type for PILOT tier
+    if (school.subscription_tier === SubscriptionTier.PILOT) {
+      const type = school.institution_type || SchoolType.SCHOOL_COLLEGE;
+      
+      let age: number | undefined;
+      if (data.date_of_birth) {
+        const dob = new Date(data.date_of_birth);
+        const today = new Date();
+        let calculatedAge = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+          calculatedAge--;
+        }
+        age = calculatedAge;
+      }
+
+      if (age !== undefined) {
+        if (type === SchoolType.DAYCARE && age >= 5) {
+          throw new Error("Daycare registration policy restriction: Only students under 5 years of age are permitted to enroll in Daycare programs.");
+        }
+        if (type === SchoolType.SCHOOL_COLLEGE && (age < 5 || age > 10)) {
+          throw new Error("School/College registration policy restriction: For primary pilot schools (Grades 1-5), students must be between 5 and 10 years of age.");
+        }
+        if (type === SchoolType.VOCATIONAL && age < 15) {
+          throw new Error("Vocational Training registration policy restriction: Students must be at least 15 years of age to enroll in vocational training courses.");
+        }
+      } else {
+        throw new Error("To enforce age-based policy compliance for your institution type, the Student Date of Birth is mandatory during Pilot trial registration.");
+      }
+    }
+
     const students = load<DBStudent>(KEYS.STUDENTS);
     const schoolStudents = students.filter(s => s.school_id === user.school_id);
     
-    const limit = school.max_students || (school.subscription_tier === 'PILOT' ? 100 : (school.subscription_tier === 'TIER_1' ? 200 : 500));
+    let limit = school.max_students;
+    if (school.subscription_tier === SubscriptionTier.PILOT) {
+      const type = school.institution_type || SchoolType.SCHOOL_COLLEGE;
+      if (type === SchoolType.SCHOOL_COLLEGE) limit = 30;
+      else if (type === SchoolType.DAYCARE) limit = 10;
+      else if (type === SchoolType.VOCATIONAL) limit = 5;
+      else if (type === SchoolType.PRIVATE_TUTOR) limit = 5;
+    } else {
+      limit = school.max_students || (school.subscription_tier === SubscriptionTier.TIER_1 ? 200 : 500);
+    }
     
     if (schoolStudents.length >= limit) {
       throw new Error(`Student limit reached for your subscription tier (${limit} students). Please upgrade your plan.`);
@@ -619,6 +674,11 @@ export const db = {
 
   addClass: async (user: User, data: Omit<Class, 'id'>) => {
     await delay();
+    const schools = load<School>(KEYS.SCHOOLS);
+    const school = schools.find(s => s.id === user.school_id);
+    if (school) {
+      checkTrialStatus(school);
+    }
     const classes = load<DBClass>(KEYS.CLASSES);
     const newClass: DBClass = {
       ...data,
@@ -718,6 +778,8 @@ export const db = {
     const schools = load<School>(KEYS.SCHOOLS);
     const school = schools.find(s => s.id === user.school_id);
     if (!school) throw new Error("School not found");
+    const allStudents = load<DBStudent>(KEYS.STUDENTS);
+    school.student_count = allStudents.filter(s => s.school_id === school.id).length;
     return school;
   },
 
@@ -937,6 +999,11 @@ export const db = {
 
   addStaff: async (user: User, data: Omit<Staff, 'id'>) => {
     await delay();
+    const schools = load<School>(KEYS.SCHOOLS);
+    const school = schools.find(s => s.id === user.school_id);
+    if (school) {
+      checkTrialStatus(school);
+    }
     const staff = load<Staff>(KEYS.STAFF);
     const newStaff: Staff = {
       ...data,
@@ -974,6 +1041,11 @@ export const db = {
 
   addSubject: async (user: User, data: Omit<Subject, 'id'>) => {
     await delay();
+    const schools = load<School>(KEYS.SCHOOLS);
+    const school = schools.find(s => s.id === user.school_id);
+    if (school) {
+      checkTrialStatus(school);
+    }
     const subjects = load<Subject>(KEYS.SUBJECTS);
     const newSubject: Subject = {
       ...data,
@@ -1798,7 +1870,7 @@ export const db = {
     };
   },
 
-  onboard: async (user: User, data: { school_name: string; address: string; phone: string; plan: SubscriptionTier }) => {
+  onboard: async (user: User, data: { school_name: string; address: string; phone: string; plan: SubscriptionTier; institution_type?: SchoolType; client_ip?: string }) => {
     await delay();
     const users = load<User>(KEYS.USERS);
     const schools = load<School>(KEYS.SCHOOLS);
@@ -1807,6 +1879,30 @@ export const db = {
     if (userIdx === -1) {
       console.error(`[Onboard] User ${user.id} not found in database.`);
       throw new Error("User session invalid. Please log in again.");
+    }
+
+    // Anti-Abuse Check: Registered IP block for free Pilot trials in last 365 days
+    if (data.plan === SubscriptionTier.PILOT && data.client_ip) {
+      const duplicateSchool = schools.find(s => 
+        s.subscription_tier === SubscriptionTier.PILOT && 
+        s.client_ip === data.client_ip &&
+        s.created_at &&
+        (new Date().getTime() - new Date(s.created_at).getTime()) < (365 * 24 * 60 * 60 * 1000)
+      );
+      if (duplicateSchool) {
+        throw new Error(`Registration Blocked: To prevent platform abuse, our trial policy restricts registration to only one free Pilot Trial per 365 days per network IP address / client profile. (Linked to active trial: ${duplicateSchool.name})`);
+      }
+    }
+
+    const type = data.institution_type || SchoolType.SCHOOL_COLLEGE;
+    let maxStudents = 100;
+    if (data.plan === SubscriptionTier.PILOT) {
+      if (type === SchoolType.SCHOOL_COLLEGE) maxStudents = 30;
+      else if (type === SchoolType.DAYCARE) maxStudents = 10;
+      else if (type === SchoolType.VOCATIONAL) maxStudents = 5;
+      else if (type === SchoolType.PRIVATE_TUTOR) maxStudents = 5;
+    } else {
+      maxStudents = data.plan === SubscriptionTier.TIER_1 ? 200 : 500;
     }
 
     // Create or update school
@@ -1819,7 +1915,9 @@ export const db = {
         code: `SCH-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
         contact_email: users[userIdx].email,
         subscription_tier: data.plan,
-        max_students: data.plan === SubscriptionTier.PILOT ? 30 : (data.plan === SubscriptionTier.TIER_1 ? 200 : 500),
+        institution_type: type,
+        client_ip: data.client_ip,
+        max_students: maxStudents,
         student_count: 0,
         is_active: true,
         timezone: 'UTC',
@@ -1839,7 +1937,9 @@ export const db = {
           address: data.address,
           phone: data.phone,
           subscription_tier: data.plan,
-          max_students: data.plan === SubscriptionTier.PILOT ? 30 : (data.plan === SubscriptionTier.TIER_1 ? 200 : 500),
+          institution_type: type,
+          client_ip: data.client_ip || schools[schoolIdx].client_ip,
+          max_students: maxStudents,
           onboarded: true
         };
       }

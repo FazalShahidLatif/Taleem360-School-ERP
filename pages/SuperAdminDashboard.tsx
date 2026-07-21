@@ -37,7 +37,7 @@ interface SchoolStats {
 }
 
 const TIER_CONFIG = {
-  [SubscriptionTier.PILOT]: { label: 'Pilot Project', max: 30, price: 'Free' },
+  [SubscriptionTier.PILOT]: { label: 'Pilot Project', max: 100, price: 'Free' },
   [SubscriptionTier.TIER_1]: { label: 'Tier 1 (0-200)', max: 200, price: '$49/mo' },
   [SubscriptionTier.TIER_2]: { label: 'Tier 2 (0-500)', max: 500, price: '$129/mo' },
   [SubscriptionTier.TIER_3]: { label: 'Tier 3 (501+)', max: 5000, price: 'Custom' },

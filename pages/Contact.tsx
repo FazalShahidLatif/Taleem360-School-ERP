@@ -186,7 +186,7 @@ export const Contact: React.FC = () => {
                         <option value="academy">Skills Academies & Bootcamps</option>
                         <option value="daycare">Daycare Center ERP</option>
                         <option value="tutors">Private Tutor Spaces</option>
-                        <option value="billing">Paddle Billings & Refund Requests</option>
+                        <option value="billing">Billing & Manual Activation Requests</option>
                       </select>
                     </div>
                   </div>

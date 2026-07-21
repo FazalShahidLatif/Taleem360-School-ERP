@@ -239,10 +239,10 @@ export const About: React.FC = () => {
             <div className="space-y-2">
               <h4 className="text-sm font-bold text-slate-900 flex items-center">
                 <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
-                PCI DSS Compliant Billing
+                Manual Admin Verification
               </h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Fee payments and monthly SaaS checkout schedules are processed through Paddle, guaranteeing secure, certified tokenization for card transactions.
+                All paid licenses are authorized manually. We do not support direct online checkouts to ensure maximum transparent billing verification for educational boards.
               </p>
             </div>
             <div className="space-y-2">

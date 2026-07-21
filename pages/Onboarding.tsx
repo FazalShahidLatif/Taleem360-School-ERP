@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import api from '../lib/api';
-import { SubscriptionTier } from '../types';
+import { SubscriptionTier, SchoolType } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   School as SchoolIcon, 
@@ -17,7 +17,6 @@ import {
   Building2,
   Award
 } from 'lucide-react';
-import { initPaddle, openCheckout } from '../lib/paddle';
 import { Footer } from '../components/Footer';
 import { analytics } from '../lib/analytics';
 
@@ -32,7 +31,9 @@ export const Onboarding: React.FC = () => {
     school_name: '',
     address: '',
     phone: '',
-    plan: SubscriptionTier.PILOT
+    plan: SubscriptionTier.PILOT,
+    institution_type: SchoolType.SCHOOL_COLLEGE,
+    client_ip: ''
   });
 
   useEffect(() => {
@@ -46,11 +47,32 @@ export const Onboarding: React.FC = () => {
     }
     metaDescription.setAttribute('content', 'Initiate your custom institutional subdomain, configure your initial database repository, and select your subscription tier to access Taleem360.');
 
-    initPaddle();
     if (user?.onboarded) {
       navigate('/');
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    // Fetch public client IP for anti-abuse 365-day tracking
+    const fetchIp = async () => {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        if (data && data.ip) {
+          setFormData(prev => ({ ...prev, client_ip: data.ip }));
+        }
+      } catch (err) {
+        console.warn('Failed to retrieve public IP address, falling back to persistent client footprint.', err);
+        let fingerprint = localStorage.getItem('t360_device_fingerprint');
+        if (!fingerprint) {
+          fingerprint = 'fp-' + Math.random().toString(36).substring(2, 15) + '-' + Math.random().toString(36).substring(2, 15);
+          localStorage.setItem('t360_device_fingerprint', fingerprint);
+        }
+        setFormData(prev => ({ ...prev, client_ip: fingerprint }));
+      }
+    };
+    fetchIp();
+  }, []);
 
   const handleNext = () => setStep(s => s + 1);
   const handleBack = () => setStep(s => s - 1);
@@ -64,8 +86,7 @@ export const Onboarding: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // In a real app, we'd call Paddle checkout here if it's a paid plan
-      // For sandbox demo, we'll just simulate it
+      // Subscriptions are managed manually by the Super Admin after approval.
       
       const res = await api.post('/onboard/', formData);
       
@@ -88,23 +109,13 @@ export const Onboarding: React.FC = () => {
   };
 
   const handlePayment = (plan: SubscriptionTier) => {
-    // Mock price IDs for Paddle sandbox
-    const priceIds: Record<string, string> = {
-      [SubscriptionTier.PILOT]: 'pri_pilot_123',
-      [SubscriptionTier.TIER_1]: 'pri_tier1_456',
-      [SubscriptionTier.TIER_2]: 'pri_tier2_789',
-      [SubscriptionTier.TIER_3]: 'pri_tier3_012'
-    };
-
     if (plan === SubscriptionTier.PILOT) {
       // Free plan, skip payment
       handlePlanSelect(plan);
       return;
     }
 
-    openCheckout(priceIds[plan], user?.email || '', () => {
-      handlePlanSelect(plan);
-    });
+    alert(`Direct paid onboarding for ${plan} is restricted on this workspace. Please select the 'Pilot Trial' for a free 30-day evaluation, or contact accts.pak@gmail.com to request manual activation & administrative approval.`);
   };
 
   return (
@@ -198,12 +209,38 @@ export const Onboarding: React.FC = () => {
                       />
                     </div>
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">Institution Type</label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {[
+                        { type: SchoolType.SCHOOL_COLLEGE, label: 'School / College', desc: 'Max 30 students limit. Grade 1-5 (age 5-10 years only)' },
+                        { type: SchoolType.DAYCARE, label: 'Daycare Center', desc: 'Max 10 students limit. Age under 5 years only' },
+                        { type: SchoolType.VOCATIONAL, label: 'Vocational Training', desc: 'Max 5 students limit. Age 15+ years only' },
+                        { type: SchoolType.PRIVATE_TUTOR, label: 'Private Tutor', desc: 'Max 3-5 students limit. No age restrictions' },
+                      ].map((item) => (
+                        <button
+                          key={item.type}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, institution_type: item.type })}
+                          className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                            formData.institution_type === item.type 
+                              ? 'border-indigo-600 bg-indigo-50/40 text-indigo-900 shadow-sm' 
+                              : 'border-gray-200 hover:border-indigo-200 text-gray-700 bg-white'
+                          }`}
+                        >
+                          <span className="font-bold text-sm block">{item.label}</span>
+                          <span className="text-xs text-gray-500 block mt-1 leading-relaxed">{item.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="mt-10 flex justify-end">
                   <button
                     onClick={handleNext}
-                    disabled={!formData.school_name || !formData.address || !formData.phone}
+                    disabled={!formData.school_name || !formData.address || !formData.phone || !formData.institution_type}
                     className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center shadow-lg shadow-indigo-200"
                   >
                     Continue to Plans
@@ -230,9 +267,11 @@ export const Onboarding: React.FC = () => {
                   {[
                     { 
                       tier: SubscriptionTier.PILOT, 
-                      name: 'Pilot', 
-                      price: 'Free', 
-                      profiles: 'Up to 30', 
+                      name: 'Pilot Trial', 
+                      price: 'Free (30 days)', 
+                      profiles: formData.institution_type === SchoolType.SCHOOL_COLLEGE ? 'Up to 30' :
+                                formData.institution_type === SchoolType.DAYCARE ? 'Up to 10' :
+                                formData.institution_type === SchoolType.VOCATIONAL ? 'Up to 5' : 'Up to 5', 
                       icon: Building2,
                       color: 'bg-gray-50 text-gray-600 border-gray-200'
                     },
@@ -296,7 +335,7 @@ export const Onboarding: React.FC = () => {
                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
                       >
-                        {plan.price === 'Free' ? 'Select Plan' : plan.price === 'Custom' ? 'Contact Sales' : 'Pay & Select'}
+                        {plan.tier === SubscriptionTier.PILOT ? 'Select Pilot' : 'Manual Upgrade Only'}
                       </button>
                     </motion.div>
                   ))}

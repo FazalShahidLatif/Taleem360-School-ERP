@@ -94,13 +94,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (event.data?.type === 'OAUTH_AUTH_SUCCESS') {
         console.debug("[Auth] OAuth login success:", event.data.user);
+        const email = (event.data.user.email || '').trim().toLowerCase();
+        
+        if (email === 'support@taleem360.online') {
+          alert('This administrative account (support@taleem360.online) has been suspended because no custom email server is attached. Please direct all queries to accts.pak@gmail.com.');
+          return;
+        }
+
+        const isSuperAdmin = email === 'accts.pak@gmail.com';
+        
         // In a real app, we would receive a real JWT token here
         // For this demo, we'll simulate a token and update the user
         const payload = {
-          user_id: 'google_' + Date.now(),
-          email: event.data.user.email,
-          name: event.data.user.name,
-          role: event.data.user.role,
+          user_id: isSuperAdmin ? 'u0' : ('google_' + Date.now()),
+          email: email,
+          name: event.data.user.name || (isSuperAdmin ? 'Super Admin' : email.split('@')[0]),
+          role: isSuperAdmin ? 'SUPER_ADMIN' : (event.data.user.role || 'ADMIN'),
+          school_id: isSuperAdmin ? 'school-1' : (event.data.user.school_id || null),
+          school_name: isSuperAdmin ? 'Springfield Elementary' : (event.data.user.school_name || null),
           onboarded: true
         };
         const header = btoa(unescape(encodeURIComponent(JSON.stringify({ alg: "HS256", typ: "JWT" }))));

@@ -75,7 +75,7 @@ export const FAQ: React.FC = () => {
       id: 'gen-3',
       category: 'general',
       question: 'Does the system integrate with existing third-party platforms?',
-      answer: 'Yes. Taleem360 provides built-in RESTful gateway wrappers, webhook receivers, and API endpoints for WhatsApp (automated fee alerts), Paddle.com (Merchant of Record merchant portals), and Ethereum-compatible EVM transaction chains for modular ledger validation operations.'
+      answer: 'Yes. Taleem360 provides built-in RESTful gateway wrappers, webhook receivers, and API endpoints for WhatsApp (automated fee alerts), local bookkeeping platforms, and Ethereum-compatible EVM transaction chains for modular ledger validation operations.'
     },
 
     // Play-to-Earn Quiz (Nexus)
@@ -117,13 +117,13 @@ export const FAQ: React.FC = () => {
       id: 'bill-1',
       category: 'billing',
       question: 'How are recurring subscriptions and checkouts handled?',
-      answer: 'All institutional plan checkout operations and renewals are executed securely via our official online Merchant of Record, Paddle.com. They handle processing gateways, local VAT or sales taxes, and secure charge pipelines. Taleem360 never hosts or holds raw card credentials.'
+      answer: 'All institutional plan registrations and custom packages are handled on a manual verification and administrative approval model directly via the Super Admin at accts.pak@gmail.com. We do not support direct online checkouts or credit card processing on this workspace.'
     },
     {
       id: 'bill-2',
       category: 'billing',
       question: 'What is the refund policy for active school plans?',
-      answer: 'For first-time subscription orders, we operate a 100% money-back guarantee for 14 continuous days. To lodge a formal refund or cancellation claim, administrators can email our support managers at support@taleem360.online. Custom enterprise tiers are bound by personalized Master Service Agreements (MSAs).'
+      answer: 'Taleem360 operates on a manual administrative approval model. Refund requests or custom licensing adjustments are processed manually. To submit a billing query, please email the Super Admin at accts.pak@gmail.com. The previous support@taleem360.online email has been suspended.'
     },
     {
       id: 'bill-3',

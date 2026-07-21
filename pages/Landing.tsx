@@ -33,7 +33,7 @@ const Landing: React.FC = () => {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Taleem360 ERP Ecosystem is a high-performance educational management suite. Features integrated modules for modern schools, academies, daycares, and independent tutors, powered by dual-persistence and Paddle.');
+    metaDescription.setAttribute('content', 'Taleem360 ERP Ecosystem is a high-performance educational management suite. Features integrated modules for modern schools, academies, daycares, and independent tutors, powered by dual-persistence.');
   }, []);
 
   return (

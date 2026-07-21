@@ -14,7 +14,6 @@
     "test:coverage": "jest --coverage",
     "build:v2-check": "cd taleem360-core-v2 && tsc --noEmit",
     "validate-assets": "node scripts/check-pdf-links.js",
-    "sync-products": "tsx scripts/syncCreemProducts.ts",
     "export-pricing": "tsx scripts/generatePricingZip.ts"
   },
   "dependencies": {

@@ -6,10 +6,17 @@ export enum UserRole {
 }
 
 export enum SubscriptionTier {
-  PILOT = 'PILOT', // 0-30 active profiles
+  PILOT = 'PILOT', // 0-100 active profiles
   TIER_1 = 'TIER_1', // 0-200 active profiles
   TIER_2 = 'TIER_2', // 0-500 active profiles
   TIER_3 = 'TIER_3'  // 501+ active profiles
+}
+
+export enum SchoolType {
+  SCHOOL_COLLEGE = 'SCHOOL_COLLEGE',
+  DAYCARE = 'DAYCARE',
+  VOCATIONAL = 'VOCATIONAL',
+  PRIVATE_TUTOR = 'PRIVATE_TUTOR'
 }
 
 export interface School {
@@ -20,6 +27,7 @@ export interface School {
   locale: string;
   is_active: boolean;
   subscription_tier: SubscriptionTier;
+  institution_type?: SchoolType;
   student_count: number;
   max_students: number;
   created_at: string;
@@ -27,6 +35,7 @@ export interface School {
   phone?: string;
   address?: string;
   onboarded?: boolean;
+  client_ip?: string;
 }
 
 export interface User {

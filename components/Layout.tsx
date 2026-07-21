@@ -41,6 +41,7 @@ import {
 import { UserRole } from '../types';
 import { AIChatbot } from './AIChatbot';
 import { Footer } from './Footer';
+import { EthicalReviewCollector } from './EthicalReviewCollector';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -292,6 +293,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             
             <Footer />
             <AIChatbot />
+            <EthicalReviewCollector />
           </div>
         </main>
       </div>

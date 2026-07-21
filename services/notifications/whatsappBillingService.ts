@@ -37,7 +37,7 @@ export async function sendWhatsAppBillingAlert(payload: InvoiceNotificationPaylo
               { type: "text", text: payload.studentName || "Learner" },
               { type: "text", text: payload.tutorName },
               { type: "text", text: `${payload.amount} ${payload.currency}` },
-              { type: "text", text: payload.paymentLink } // Simple one-click Paddle checkout path link
+              { type: "text", text: payload.paymentLink } // Simple direct invoice download link
             ]
           }
         ]

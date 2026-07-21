@@ -13,7 +13,6 @@ import {
   Trash2,
   Lock
 } from 'lucide-react';
-import { initPaddle, openCheckout } from '../lib/paddle';
 
 interface AvailabilitySlot {
   id: string;
@@ -33,11 +32,6 @@ const INITIAL_SLOTS: AvailabilitySlot[] = [
 ];
 
 export const PrivateTutors: React.FC = () => {
-  // Initialize Paddle Sandbox Environment
-  useEffect(() => {
-    initPaddle();
-  }, []);
-
   // Slots State
   const [slots, setSlots] = useState<AvailabilitySlot[]>(INITIAL_SLOTS);
   const [selectedSlotForBooking, setSelectedSlotForBooking] = useState<string | null>(null);
@@ -123,7 +117,7 @@ export const PrivateTutors: React.FC = () => {
             Taleem360 <span className="text-emerald-600 font-extrabold">Private Tutor</span> Mini-Websites
           </h1>
           <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Run an independent tutoring agency with pixel-perfect personal landing profiles. Streamline client schedules, handle Paddle checkouts directly, and manage student attendance logs cleanly from one simple screen.
+            Run an independent tutoring agency with pixel-perfect personal landing profiles. Streamline client schedules, record student fees manually, and manage student attendance logs cleanly from one simple screen.
           </p>
         </div>
 
@@ -365,21 +359,16 @@ export const PrivateTutors: React.FC = () => {
                   <span className="font-black text-emerald-600 font-mono">${financials.monthlyNet}</span>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200/60 flex justify-end">
+                <div className="pt-3 border-t border-slate-200/60 flex flex-col gap-2">
                   <button
                     onClick={() => {
-                      openCheckout(
-                        `pri_tutor_gross_${financials.weekly}`,
-                        'parent@tutorclient.com',
-                        () => {
-                          alert(`TUTOR TUITION SECURED\nSimulated weekly tuition payment of $${financials.weekly} collected via Paddle. Escrow processing fee applied.`);
-                        }
-                      );
+                      alert(`TUITION RECEIPT LOGGED\nWeekly tuition payment of $${financials.weekly} recorded successfully. A copy has been filed in the local student ledger.`);
                     }}
-                    className="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-[10px] tracking-wider uppercase transition-all duration-200 active:scale-95 cursor-pointer shadow-sm flex items-center justify-center gap-1"
+                    className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-[10px] tracking-wider uppercase transition-all duration-200 active:scale-95 cursor-pointer shadow-sm flex items-center justify-center gap-1"
                   >
-                    Collect Tuition via Paddle Sandbox
+                    Log Direct Tuition Collection
                   </button>
+                  <p className="text-[10px] text-center text-slate-400 mt-1">To request custom automated merchant routing, contact accts.pak@gmail.com</p>
                 </div>
               </div>
             </div>

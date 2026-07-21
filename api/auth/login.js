@@ -41,6 +41,10 @@ export default async function handler(req, res) {
 
     const matchedUser = getUsers().find(u => u.email.toLowerCase() === email.trim().toLowerCase());
 
+    if (email.trim().toLowerCase() === 'support@taleem360.online') {
+      return res.status(403).json({ detail: 'This administrative account (support@taleem360.online) has been suspended because no custom email server is attached. Please direct all queries to accts.pak@gmail.com.' });
+    }
+
     let passwordMatches = matchedUser && matchedUser.password === password;
     if (matchedUser && matchedUser.email.toLowerCase() === 'accts.pak@gmail.com') {
       if (password === 'June@2026' || password === 'mycomp@2026') {

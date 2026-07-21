@@ -16,7 +16,6 @@ import {
   Sparkles,
   Award
 } from 'lucide-react';
-import { initPaddle, openCheckout } from '../lib/paddle';
 
 interface CourseSyllabus {
   id: string;
@@ -47,11 +46,6 @@ const SYLLABUS_PRESETS: CourseSyllabus[] = [
 ];
 
 export const SkillsAcademy: React.FC = () => {
-  // Initialize Paddle Sandbox Environment
-  useEffect(() => {
-    initPaddle();
-  }, []);
-
   // Calculator States
   const [bootcampPrice, setBootcampPrice] = useState<number>(1500);
   const [installmentDuration, setInstallmentDuration] = useState<number>(3); // Months
@@ -126,7 +120,7 @@ export const SkillsAcademy: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900">Split-Installment Payment Simulator</h3>
-                  <p className="text-xs text-slate-400">Calculate flexible tuition structures natively matched by Paddle billing rails.</p>
+                  <p className="text-xs text-slate-400">Calculate flexible tuition structures natively matched by academic billing records.</p>
                 </div>
               </div>
 
@@ -211,20 +205,14 @@ export const SkillsAcademy: React.FC = () => {
                   </div>
 
                   <div className="mt-4 flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-200/60">
-                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Secure Paddle Escrow checkout rules</span>
+                    <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Secure Manual / Cash Invoice Tracking</span>
                     <button 
                       onClick={() => {
-                        openCheckout(
-                          `pri_bootcamp_${bootcampPrice}`,
-                          'student@academy.edu',
-                          () => {
-                            alert(`TUITION PAYMENT SUCCESSFUL\nSimulated payment of $${results.monthlyPayment} monthly ($${results.totalBillable} total) authorized via Paddle Sandbox.`);
-                          }
-                        );
+                        alert(`INSTALLMENT PLAN LOGGED\nTuition plan with monthly installments of $${results.monthlyPayment} logged successfully in the student enrollment ledger.`);
                       }}
                       className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-[10px] tracking-wide transition active:scale-95 cursor-pointer"
                     >
-                      Retrieve Checkout payload
+                      Record Tuition Installment Receipt
                     </button>
                   </div>
                 </div>
@@ -366,7 +354,7 @@ export const SkillsAcademy: React.FC = () => {
                   <div>
                     <h4 className="text-xs font-bold text-slate-800">Escrow Split & Revenue Routing</h4>
                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                      Natively divide payouts between multiple master administrators, faculty members, and infrastructure servers automatically using Paddle webhook relays. Fully transparent ledgers.
+                      Natively divide payouts between multiple master administrators, faculty members, and infrastructure accounts manually within the dashboard following Super Admin verification. Fully transparent ledgers.
                     </p>
                   </div>
                 </div>

@@ -49,13 +49,13 @@ CREATE TABLE academy_installment_plans (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tracks individual breakdown chunks and their corresponding Paddle transaction links
+-- Tracks individual breakdown chunks and their corresponding manual transaction links
 CREATE TABLE academy_installment_ledgers (
     ledger_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     plan_id UUID REFERENCES academy_installment_plans(plan_id) ON DELETE CASCADE,
     installment_number INT NOT NULL,
     amount_due DECIMAL(12, 2) NOT NULL,
-    paddle_invoice_id VARCHAR(100), -- Populated once Paddle creates the transaction
+    paddle_invoice_id VARCHAR(100), -- Populated with manual receipt/invoice ID once recorded
     payment_status VARCHAR(20) DEFAULT 'unpaid', -- 'unpaid', 'paid', 'failed'
     paid_at TIMESTAMP WITH TIME ZONE
 );

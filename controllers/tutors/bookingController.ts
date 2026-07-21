@@ -87,7 +87,7 @@ export async function processPrivateSessionBooking(req: Request, res: Response) 
       // Fire-and-Forget Notification Step completely isolated from client screen renders
       process.nextTick(async () => {
         try {
-          // Generate a dynamic checkout path link pointing directly to your isolated Paddle payment modules
+          // Generate a dynamic payment link pointing directly to your isolated payment ledger modules
           const targetPaymentLink = `https://${(req as any).tenant?.subdomain_mapping || 'tutor'}.taleem360.online/pay/checkout?id=${appointmentResult.rows[0].appointment_id}`;
           
           // Resolve clean student phone metadata profile structures securely via api adapters

@@ -26,16 +26,16 @@ export const TaleemEcosystemRoadmap = () => {
     {
       title: "Solo Pro & Private Tutors",
       status: "Active & Deployed",
-      desc: "Personal tutor mini-websites, instant availability matrices, automatic Paddle checkouts, and student logs tracking.",
+      desc: "Personal tutor mini-websites, instant availability matrices, manual student fee logging, and student logs tracking.",
       icon: <Users className="w-6 h-6 text-emerald-600" />,
-      badgeColor: "bg-emerald-100 text-emerald-800 font-bold ring-2 ring-emerald-500/10",
+      badgeColor: "bg-emerald-100 text-emerald-800 font-bold",
       route: "/private-tutors",
       actionText: "Launch Tutor Space Sandbox"
     },
     {
       title: "Skills Academies & Bootcamps",
       status: "Active & Deployed",
-      desc: "White-label multi-tenant LMS for IT, technical, and vocational institutes with Paddle split-installment plans.",
+      desc: "White-label multi-tenant LMS for IT, technical, and vocational institutes with manual installment trackers.",
       icon: <GraduationCap className="w-6 h-6 text-purple-600" />,
       badgeColor: "bg-purple-100 text-purple-800 font-bold ring-2 ring-purple-500/10",
       route: "/skills-academy",

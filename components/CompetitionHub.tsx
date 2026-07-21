@@ -173,7 +173,7 @@ export const CompetitionHub: React.FC = () => {
 
     setIsSubmitting(true);
     
-    // Simulate payment merchant verification (Paddle / PCI compliance mock flow)
+    // Simulate payment merchant verification (Manual ledger compliance mock flow)
     setTimeout(() => {
       const generatedTxn = '0x' + Array.from({length: 16}, () => Math.floor(Math.random()*16).toString(16)).join('');
       const generatedId = 'sub-comp-' + Math.random().toString(36).substring(2, 9);

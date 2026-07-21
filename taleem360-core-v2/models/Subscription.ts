@@ -39,9 +39,9 @@ interface ISchemaQuotas {
  */
 export interface ISubscription extends Document {
   tenantId: string;                 // Linked Tenant reference (accountId)
-  paddleSubscriptionId: string;     // Raw ID from Paddle Billing Dashboard
-  paddleCustomerId: string;         // Customer ID mapped in Paddle systems
-  priceId: string;                  // Mapped Price/Product Rate ID in Paddle
+  paddleSubscriptionId?: string;    // Optional ID from billing Dashboard
+  paddleCustomerId?: string;        // Optional customer ID
+  priceId?: string;                 // Optional price ID
   tier: SubscriptionTier;
   status: SubscriptionStatus;
   
@@ -71,17 +71,13 @@ const SubscriptionSchema: Schema<ISubscription> = new Schema(
     },
     paddleSubscriptionId: {
       type: String,
-      required: true,
-      unique: true,
       index: true,
     },
     paddleCustomerId: {
       type: String,
-      required: true,
     },
     priceId: {
       type: String,
-      required: true,
     },
     tier: {
       type: String,

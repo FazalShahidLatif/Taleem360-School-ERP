@@ -4,7 +4,6 @@ import { Check } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { SubscriptionTier } from '../types';
 import { useAuth } from '../lib/auth';
-import { openCheckout } from '../lib/paddle';
 
 export const Pricing: React.FC = () => {
   const { user } = useAuth();
@@ -42,16 +41,17 @@ export const Pricing: React.FC = () => {
 
   const tiers = [
     {
-      name: 'Pilot',
+      name: 'Pilot Trial',
       id: SubscriptionTier.PILOT,
       price: 'Free',
-      description: 'Perfect for small schools or testing the platform.',
+      description: '30-day free trial for evaluation. Upgrade required after 30 days.',
       features: [
-        'Up to 30 active profiles',
-        'Basic student management',
-        'Attendance tracking',
-        'Class management',
-        'Standard support',
+        'School/College: Max 30 students (Grade 1-5, 5-10 years)',
+        'Daycare Center: Max 10 students (under 5 years only)',
+        'Vocational Training: Max 5 students (15+ years only)',
+        'Private Tutor: Max 3-5 students limit',
+        '30-day trial period expiration',
+        'IP-based annual registration anti-abuse block',
       ],
       cta: 'Start for Free',
       mostPopular: false,
@@ -215,31 +215,17 @@ export const Pricing: React.FC = () => {
 
               <Button
                 onClick={() => {
-                  const priceIds: Record<string, string> = {
-                    [SubscriptionTier.PILOT]: 'pri_pilot_123',
-                    [SubscriptionTier.TIER_1]: 'pri_tier1_456',
-                    [SubscriptionTier.TIER_2]: 'pri_tier2_789',
-                    [SubscriptionTier.TIER_3]: 'pri_tier3_012'
-                  };
                   if (tier.id === SubscriptionTier.PILOT) {
                     setNotification({
                       type: 'info',
-                      message: 'Pilot plan selected. This is our Free plan containing all essential administrative rosters setup and timetable controls.'
+                      message: 'Pilot plan selected! Please head over to our Onboarding page to register your free 30-day pilot trial instantly.'
                     });
                     return;
                   }
-                  if (tier.id === SubscriptionTier.TIER_3) {
-                    setNotification({
-                      type: 'info',
-                      message: 'Enterprise proposal requested. Our sales team has received a notification and will connect with your academic director within 2 hours.'
-                    });
-                    return;
-                  }
-                  openCheckout(priceIds[tier.id], user?.email || '', () => {
-                    setNotification({
-                      type: 'success',
-                      message: `Congratulations! Your payment authorized successfully. You are now subscribed to the Taleem360 ${tier.name} Package.`
-                    });
+                  
+                  setNotification({
+                    type: 'info',
+                    message: `Direct online checkout is disabled. Paid subscriptions require manual approval and academic verification. Please contact the Super Admin at accts.pak@gmail.com to activate your ${tier.name} license.`
                   });
                 }}
                 className={`mt-8 w-full ${
@@ -265,11 +251,11 @@ export const Pricing: React.FC = () => {
             <div>
               <h4 className="text-lg font-bold text-slate-900">Multi-School & Multi-Campus Networks</h4>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                For complete educational conglomerates and multi-campus institutes, a dedicated <strong>Custom Subscription Model</strong> is designed. This model can be negotiated directly before generating any binding contract or charging any subscription fee, ensuring a customized budget alignment for your board of directors.
+                For complete educational conglomerates and multi-campus institutes, a dedicated <strong>Custom Subscription Model</strong> is designed. This model can be negotiated directly before generating any binding contract, ensuring a customized budget alignment for your board of directors.
               </p>
               <div className="mt-4 flex items-center space-x-2 text-xs font-semibold text-indigo-700">
                 <span className="bg-indigo-100 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-wider">Note</span>
-                <span>Single-campus institutions with up to 1000 active student records can instantly subscribe online to Tier 3.</span>
+                <span>All paid licenses are issued manually following verification of academic credentials. Please connect with our super-admin desk at accts.pak@gmail.com.</span>
               </div>
             </div>
           </div>
@@ -297,7 +283,7 @@ export const Pricing: React.FC = () => {
               <tbody className="divide-y divide-slate-200">
                 <tr>
                   <td className="px-6 py-4 font-bold text-slate-800">Max Student Directory Capacity</td>
-                  <td className="px-6 py-4 text-slate-600">Up to 30 active profiles</td>
+                  <td className="px-6 py-4 text-slate-600">Up to 100 active profiles</td>
                   <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 200 active profiles</td>
                   <td className="px-6 py-4 text-indigo-600 font-semibold">Up to 500 active profiles</td>
                   <td className="px-6 py-4 text-emerald-600 font-bold">501+ active profiles</td>
@@ -385,7 +371,7 @@ export const Pricing: React.FC = () => {
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
               <h4 className="font-bold text-slate-900">Is there a free school management software Pakistan tier available?</h4>
               <p className="mt-2 text-xs text-slate-600 leading-relaxed">
-                Yes, our Pilot tier is a completely free school management software Pakistan platform. It supports up to 30 student profiles and includes daily attendance sheets, grade structures, and parent notifications to support startups and low-income community branches.
+                Yes, our Pilot tier is a completely free school management software Pakistan platform. It supports up to 100 student profiles and includes daily attendance sheets, grade structures, and parent notifications to support startups and low-income community branches.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-slate-50/50 border border-slate-100 hover:bg-slate-50 transition-colors">
