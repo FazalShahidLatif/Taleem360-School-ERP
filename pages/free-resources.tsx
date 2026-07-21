@@ -19,6 +19,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { jsPDF } from "jspdf";
+import { useSEO } from "../lib/seo";
 
 // ==========================================
 // DATA STRUCTURES & DEFINITIONS
@@ -1040,6 +1041,27 @@ export const FreeResources: React.FC = () => {
   const [previewPage, setPreviewPage] = useState(1);
   const [isCompiling, setIsCompiling] = useState(false);
   const [tracingLineStyle, setTracingLineStyle] = useState<"dotted" | "solid" | "light">("dotted");
+  const [copiedText, setCopiedText] = useState("");
+
+  const resourceSchema = {
+    "@type": "EducationalOccupationalCredential",
+    "name": activePack ? activePack.title : "Taleem360 Free Educational Resources",
+    "description": activePack ? activePack.description : "High-quality printable phonic tracing, number sheets, spelling workbooks, and math resources for Pre-K, kindergarten, and daycare institutions in Pakistan.",
+    "educationalLevel": activePack ? activePack.ageGroup : "Early childhood education",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "PKR",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
+  useSEO({
+    title: activePack ? `Free PDF: ${activePack.title}` : "Free Printable Worksheets & Educational Resources Packs",
+    description: activePack ? `${activePack.description} Download free PDF worksheets for schools and home learning.` : "Download 100% free high-quality printable workbooks, phonic templates, number tracers, and coloring books for early school education in Pakistan.",
+    keywords: "free worksheets, printable pdf school, pre-k workbook, download free worksheets pakistan, kindergarten syllabus pdf",
+    schemaMarkup: resourceSchema
+  });
 
   const filteredPacks = RESOURCE_PACKS.filter((pack) => {
     const matchesSearch = 
@@ -1612,6 +1634,95 @@ export const FreeResources: React.FC = () => {
                     Next Page
                     <ChevronRight className="w-4 h-4" />
                   </button>
+                </div>
+
+                {/* VIRAL SHARE & LINK BUILDING CODES */}
+                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 mt-4 text-left">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-4.5 h-4.5 text-emerald-400" />
+                    <h4 className="text-xs font-black uppercase tracking-wider text-white">
+                      Support Underprivileged Schools & Parents
+                    </h4>
+                  </div>
+                  
+                  <p className="text-[11px] text-slate-400 leading-relaxed mb-4">
+                    Earn permanent premium trial rewards! Share this high-value worksheet drive on your blog, school portal, or social platforms. Copy the ready-made embed codes below to link directly to this resource vault.
+                  </p>
+
+                  <div className="space-y-3">
+                    {/* HTML EMBED */}
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">HTML Embed Snippet</span>
+                        <button
+                          onClick={() => {
+                            const snippet = `<a href="https://taleem360.online/free-resources">Free Printable Kids Workbooks & Math Tracers - Taleem360 ERP</a>`;
+                            navigator.clipboard.writeText(snippet);
+                            setCopiedText("html");
+                            setTimeout(() => setCopiedText(""), 2000);
+                          }}
+                          className="text-[9px] font-bold text-emerald-400 hover:text-emerald-300 transition-colors uppercase"
+                        >
+                          {copiedText === "html" ? "Copied!" : "Copy Code"}
+                        </button>
+                      </div>
+                      <div className="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-[10px] font-mono text-slate-300 overflow-x-auto whitespace-nowrap select-all scrollbar-thin">
+                        &lt;a href="https://taleem360.online/free-resources"&gt;Free Printable Kids Workbooks - Taleem360 ERP&lt;/a&gt;
+                      </div>
+                    </div>
+
+                    {/* MARKDOWN EMBED */}
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Markdown Link</span>
+                        <button
+                          onClick={() => {
+                            const snippet = `[Free Printable Kids Workbooks - Taleem360 ERP](https://taleem360.online/free-resources)`;
+                            navigator.clipboard.writeText(snippet);
+                            setCopiedText("md");
+                            setTimeout(() => setCopiedText(""), 2000);
+                          }}
+                          className="text-[9px] font-bold text-emerald-400 hover:text-emerald-300 transition-colors uppercase"
+                        >
+                          {copiedText === "md" ? "Copied!" : "Copy Link"}
+                        </button>
+                      </div>
+                      <div className="bg-slate-950 border border-slate-800 rounded-xl p-2.5 text-[10px] font-mono text-slate-300 overflow-x-auto whitespace-nowrap select-all scrollbar-thin">
+                        [Free Printable Kids Workbooks - Taleem360 ERP](https://taleem360.online/free-resources)
+                      </div>
+                    </div>
+
+                    {/* QUICK SOCIAL SHARE */}
+                    <div className="pt-2 border-t border-slate-800/60">
+                      <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block mb-2">Instant Viral Broadcast</span>
+                      <div className="grid grid-cols-3 gap-2">
+                        <a
+                          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out these incredible 100% free printable early learning tracing workbooks for Pre-K, Nursery and Kindergarten! Complete and customizable PDF books: https://taleem360.online/free-resources #Taleem360`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-slate-950 border border-slate-800 hover:border-slate-700 hover:text-white rounded-xl text-[10px] font-bold text-center text-slate-300 transition-colors"
+                        >
+                          Share on X
+                        </a>
+                        <a
+                          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://taleem360.online/free-resources')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-slate-950 border border-slate-800 hover:border-slate-700 hover:text-white rounded-xl text-[10px] font-bold text-center text-slate-300 transition-colors"
+                        >
+                          Facebook
+                        </a>
+                        <a
+                          href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`Download free high-quality alphabet and phonic tracing packets for early childhood education directly at https://taleem360.online/free-resources`)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 bg-emerald-950/40 border border-emerald-900/40 hover:border-emerald-800 text-emerald-400 rounded-xl text-[10px] font-bold text-center transition-colors"
+                        >
+                          WhatsApp
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
               </div>

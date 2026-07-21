@@ -36,6 +36,7 @@ import { Madrasa } from './pages/Madrasa';
 import { Onboarding } from './pages/Onboarding';
 import { WhiteLabel } from './pages/WhiteLabel';
 import { APIDocs } from './pages/APIDocs';
+import { Compare } from './pages/Compare';
 import { NotFound } from './pages/NotFound';
 import { AdminPortal } from './pages/AdminPortal';
 import { LessonPlanning } from './pages/LessonPlanning';
@@ -128,6 +129,7 @@ const CitySEOPage = () => <CitySEO />;
 const MadrasaPage = () => <Madrasa />;
 const WhiteLabelPage = () => <WhiteLabel />;
 const APIDocsPage = () => <APIDocs />;
+const ComparePage = () => <Compare />;
 const SupportPage = () => <Layout><Support /></Layout>;
 const FAQPage = () => <Layout><FAQ /></Layout>;
 const NotFoundPage = () => <NotFound />;
@@ -540,6 +542,11 @@ const App: React.FC = () => {
           <Route 
             path="/api" 
             element={<APIDocsPage />} 
+          />
+
+          <Route 
+            path="/compare" 
+            element={<ComparePage />} 
           />
 
           <Route 

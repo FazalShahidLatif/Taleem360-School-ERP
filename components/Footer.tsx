@@ -34,6 +34,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/about" className="text-gray-600 hover:text-indigo-600 text-sm">About Us</Link></li>
               <li><Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm">Pricing</Link></li>
               <li><Link to="/free-resources" className="text-gray-600 hover:text-indigo-600 text-sm">Free Printable Packs</Link></li>
+              <li><Link to="/compare" className="text-gray-600 hover:text-indigo-600 text-sm">Taleem360 vs Others</Link></li>
               <li><Link to="/blog" className="text-gray-600 hover:text-indigo-600 text-sm">Blog</Link></li>
               <li><Link to="/contact" className="text-gray-600 hover:text-indigo-600 text-sm">Contact Us</Link></li>
             </ul>

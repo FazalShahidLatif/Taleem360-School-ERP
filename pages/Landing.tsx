@@ -20,21 +20,16 @@ import {
 import { Footer } from '../components/Footer';
 import { TaleemEcosystemRoadmap } from '../components/TaleemEcosystemRoadmap';
 import { ReviewsSection } from '../components/ReviewsSection';
+import { useSEO } from '../lib/seo';
 
 const Landing: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  React.useEffect(() => {
-    document.title = 'Taleem360 - Complete Educational ERP Ecosystem & School Cloud Suite';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', 'Taleem360 ERP Ecosystem is a high-performance educational management suite. Features integrated modules for modern schools, academies, daycares, and independent tutors, powered by dual-persistence.');
-  }, []);
+  useSEO({
+    title: 'Complete Educational ERP Ecosystem & School Cloud Suite',
+    description: 'Taleem360 ERP Ecosystem is Pakistan\'s leading educational management suite. Unified cloud database automating K-12 attendance tracking, student fee collection, daycare PIN check-ins, and parent messaging portals, backed by PostgreSQL and offline JSON storage.',
+    keywords: 'school erp, school management software pakistan, white label lms, offline student tracker, daycare daily log, quran tracker madrasa',
+  });
 
   return (
     <div className="min-h-screen bg-white">
