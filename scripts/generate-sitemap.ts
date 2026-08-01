@@ -2,12 +2,13 @@ import fs from 'fs';
 import path from 'path';
 import { BLOG_POSTS_DATA } from '../lib/blogContent';
 
-const BASE_URL = 'https://taleem360.online';
+const BASE_URL = 'https://www.taleem360.online';
 
 const corePages = [
   { url: '/', changefreq: 'daily', priority: '1.0', lastmod: '2026-06-21' },
   { url: '/blog', changefreq: 'daily', priority: '0.9', lastmod: '2026-06-21' },
   { url: '/free-resources', changefreq: 'daily', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/compare', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
   { url: '/pricing', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
   { url: '/daycare', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
   { url: '/skills-academy', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
@@ -30,10 +31,10 @@ const corePages = [
   { url: '/contact', changefreq: 'monthly', priority: '0.6', lastmod: '2026-06-21' },
   { url: '/faq', changefreq: 'weekly', priority: '0.6', lastmod: '2026-06-21' },
   { url: '/support', changefreq: 'monthly', priority: '0.5', lastmod: '2026-06-21' },
-  { url: '/privacy', changefreq: 'monthly', priority: '0.4', lastmod: '2026-06-21' },
-  { url: '/terms', changefreq: 'monthly', priority: '0.4', lastmod: '2026-06-21' },
-  { url: '/cookies', changefreq: 'monthly', priority: '0.4', lastmod: '2026-06-21' },
-  { url: '/refund-policy', changefreq: 'monthly', priority: '0.4', lastmod: '2026-06-21' }
+  { url: '/privacy', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' },
+  { url: '/terms', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' },
+  { url: '/cookies', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' },
+  { url: '/refund-policy', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' }
 ];
 
 let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';

@@ -7,6 +7,7 @@ interface SEOProps {
   canonicalUrl?: string;
   ogType?: string;
   schemaMarkup?: object;
+  noindex?: boolean;
 }
 
 export const useSEO = ({
@@ -16,6 +17,7 @@ export const useSEO = ({
   canonicalUrl,
   ogType = 'website',
   schemaMarkup,
+  noindex = false,
 }: SEOProps) => {
   useEffect(() => {
     // 1. Update document title
@@ -39,23 +41,33 @@ export const useSEO = ({
       setMetaTag('name', 'keywords', keywords);
     }
 
-    // 3. Set OpenGraph tags
+    // 3. Set Robots tag (noindex for legal/admin pages, aggressive indexing for commercial pages)
+    setMetaTag(
+      'name',
+      'robots',
+      noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    );
+
+    // 4. Set OpenGraph tags
+    const normalizedUrl = canonicalUrl || `https://www.taleem360.online${window.location.pathname}${window.location.search}`;
     setMetaTag('property', 'og:title', fullTitle);
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:type', ogType);
-    setMetaTag('property', 'og:url', canonicalUrl || window.location.href);
+    setMetaTag('property', 'og:url', normalizedUrl);
     setMetaTag('property', 'og:image', 'https://www.taleem360.online/logo.png');
 
-    // 4. Set Canonical tag
+    // 5. Set Canonical tag (enforcing www. domain to prevent GSC impression splitting)
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', canonicalUrl || window.location.href);
+    canonical.setAttribute('href', normalizedUrl);
 
-    // 5. Handle JSON-LD Schema markup injection
+    // 6. Handle JSON-LD Schema markup injection
     let schemaScript = document.getElementById('dynamic-json-ld');
     if (schemaMarkup) {
       if (!schemaScript) {
@@ -82,5 +94,5 @@ export const useSEO = ({
         currentSchema.remove();
       }
     };
-  }, [title, description, keywords, canonicalUrl, ogType, schemaMarkup]);
+  }, [title, description, keywords, canonicalUrl, ogType, schemaMarkup, noindex]);
 };

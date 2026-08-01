@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-white border-t border-gray-200 py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <div className="bg-indigo-600 p-2 rounded-xl flex items-center justify-center">
@@ -35,12 +35,27 @@ export const Footer: React.FC = () => {
               <li><Link to="/pricing" className="text-gray-600 hover:text-indigo-600 text-sm">Pricing</Link></li>
               <li><Link to="/free-resources" className="text-gray-600 hover:text-indigo-600 text-sm">Free Printable Packs</Link></li>
               <li><Link to="/compare" className="text-gray-600 hover:text-indigo-600 text-sm">Taleem360 vs Others</Link></li>
+              <li><Link to="/madrasa" className="text-gray-600 hover:text-indigo-600 text-sm">Madrasa &amp; Quran ERP</Link></li>
+              <li><Link to="/white-label" className="text-gray-600 hover:text-indigo-600 text-sm">White-Label Portal</Link></li>
+              <li><Link to="/skills-academy" className="text-gray-600 hover:text-indigo-600 text-sm">Skills Academy LMS</Link></li>
               <li><Link to="/blog" className="text-gray-600 hover:text-indigo-600 text-sm">Blog</Link></li>
               <li><Link to="/contact" className="text-gray-600 hover:text-indigo-600 text-sm">Contact Us</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Support</h4>
+            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Regional &amp; Local Hubs</h4>
+            <ul className="space-y-2">
+              <li><Link to="/karachi" className="text-gray-600 hover:text-indigo-600 text-sm">Karachi School ERP</Link></li>
+              <li><Link to="/lahore" className="text-gray-600 hover:text-indigo-600 text-sm">Lahore Academy Software</Link></li>
+              <li><Link to="/islamabad" className="text-gray-600 hover:text-indigo-600 text-sm">Islamabad School Cloud</Link></li>
+              <li><Link to="/uae" className="text-gray-600 hover:text-indigo-600 text-sm">UAE &amp; Middle East ERP</Link></li>
+              <li><Link to="/nigeria" className="text-gray-600 hover:text-indigo-600 text-sm">Nigeria Educational Cloud</Link></li>
+              <li><Link to="/bangladesh" className="text-gray-600 hover:text-indigo-600 text-sm">Bangladesh School System</Link></li>
+              <li><Link to="/private-tutors" className="text-gray-600 hover:text-indigo-600 text-sm">Private Tutor Tracker</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Support &amp; Legal</h4>
             <ul className="space-y-2">
               <li><Link to="/support" className="text-gray-600 hover:text-indigo-600 text-sm">Support Hub</Link></li>
               <li><Link to="/faq" className="text-gray-600 hover:text-indigo-600 text-sm">FAQs</Link></li>

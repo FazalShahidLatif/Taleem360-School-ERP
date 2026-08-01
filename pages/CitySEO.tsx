@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -19,6 +19,7 @@ import {
   X
 } from 'lucide-react';
 import { Footer } from '../components/Footer';
+import { useSEO } from '../lib/seo';
 
 interface CityData {
   name: string;
@@ -279,97 +280,71 @@ export const CitySEO: React.FC = () => {
   const normalizedCity = (city || path || 'karachi').toLowerCase();
   const data = CITY_DETAILS[normalizedCity] || CITY_DETAILS.karachi;
 
-  useEffect(() => {
-    // Dynamic page title update
-    document.title = data.title;
-    
-    // Dynamic meta description update
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', data.metaDesc);
+  const getCountryCode = (c: string) => {
+    if (c === 'nigeria') return 'NG';
+    if (c === 'bangladesh') return 'BD';
+    if (c === 'uae') return 'AE';
+    return 'PK';
+  };
 
-    // Dynamic schema markup generation for local SEO ranking
-    const schemaScriptId = `jsonld-seo-local-${normalizedCity}`;
-    let schemaScript = document.getElementById(schemaScriptId);
-    if (!schemaScript) {
-      schemaScript = document.createElement('script');
-      schemaScript.setAttribute('id', schemaScriptId);
-      schemaScript.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(schemaScript);
-    }
+  const getCoordinates = (c: string) => {
+    if (c === 'nigeria') return { lat: '6.5244', lng: '3.3792' };
+    if (c === 'bangladesh') return { lat: '23.8103', lng: '90.4125' };
+    if (c === 'uae') return { lat: '25.2048', lng: '55.2708' };
+    if (c === 'karachi') return { lat: '24.8607', lng: '67.0011' };
+    if (c === 'lahore') return { lat: '31.5204', lng: '74.3587' };
+    return { lat: '33.6844', lng: '73.0479' };
+  };
 
-    const getCountryCode = (c: string) => {
-      if (c === 'nigeria') return 'NG';
-      if (c === 'bangladesh') return 'BD';
-      if (c === 'uae') return 'AE';
-      return 'PK';
-    };
+  const coords = getCoordinates(normalizedCity);
 
-    const getCoordinates = (c: string) => {
-      if (c === 'nigeria') return { lat: '6.5244', lng: '3.3792' };
-      if (c === 'bangladesh') return { lat: '23.8103', lng: '90.4125' };
-      if (c === 'uae') return { lat: '25.2048', lng: '55.2708' };
-      if (c === 'karachi') return { lat: '24.8607', lng: '67.0011' };
-      if (c === 'lahore') return { lat: '31.5204', lng: '74.3587' };
-      return { lat: '33.6844', lng: '73.0479' }; // Islamabad & default
-    };
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": `Taleem360 - ${data.name} School ERP Office`,
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80",
+    "telephone": normalizedCity === 'nigeria' ? "+234-1-1234567" : normalizedCity === 'uae' ? "+971-4-1234567" : normalizedCity === 'bangladesh' ? "+880-2-1234567" : "+92-300-1234567",
+    "email": "support@taleem360.online",
+    "url": `https://www.taleem360.online/${normalizedCity}`,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": data.schemaLocalAddress.street,
+      "addressLocality": data.schemaLocalAddress.locality,
+      "addressRegion": data.schemaLocalAddress.region,
+      "postalCode": data.schemaLocalAddress.postalCode,
+      "addressCountry": getCountryCode(normalizedCity)
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": coords.lat,
+      "longitude": coords.lng
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/taleem360",
+      "https://twitter.com/taleem360"
+    ]
+  };
 
-    const coords = getCoordinates(normalizedCity);
-
-    const localBusinessSchema = {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": `Taleem360 - ${data.name} School ERP Office`,
-      "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80",
-      "telephone": normalizedCity === 'nigeria' ? "+234-1-1234567" : normalizedCity === 'uae' ? "+971-4-1234567" : normalizedCity === 'bangladesh' ? "+880-2-1234567" : "+92-300-1234567",
-      "email": "support@taleem360.online",
-      "url": `https://www.taleem360.online/${normalizedCity}`,
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": data.schemaLocalAddress.street,
-        "addressLocality": data.schemaLocalAddress.locality,
-        "addressRegion": data.schemaLocalAddress.region,
-        "postalCode": data.schemaLocalAddress.postalCode,
-        "addressCountry": getCountryCode(normalizedCity)
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": coords.lat,
-        "longitude": coords.lng
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "09:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/taleem360",
-        "https://twitter.com/taleem360"
-      ]
-    };
-
-    schemaScript.innerHTML = JSON.stringify(localBusinessSchema);
-
-    return () => {
-      // Cleanup script on unmount
-      const scriptToRemove = document.getElementById(schemaScriptId);
-      if (scriptToRemove) {
-        scriptToRemove.remove();
-      }
-    };
-  }, [data, normalizedCity]);
+  useSEO({
+    title: data.title,
+    description: data.metaDesc,
+    keywords: [data.headKeyword, ...data.additionalKeywords].join(', '),
+    canonicalUrl: `https://www.taleem360.online/${normalizedCity}`,
+    schemaMarkup: localBusinessSchema
+  });
 
   return (
     <div className="bg-slate-900 text-slate-100 min-h-screen relative overflow-hidden">
@@ -392,6 +367,7 @@ export const CitySEO: React.FC = () => {
             <div className="hidden md:flex items-center gap-8">
               <Link to="/about" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">About</Link>
               <Link to="/pricing" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Pricing</Link>
+              <Link to="/compare" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Compare</Link>
               <Link to="/free-resources" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Free Printables</Link>
               <Link to="/blog" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Blog</Link>
               <Link to="/support" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Support</Link>
@@ -443,6 +419,13 @@ export const CitySEO: React.FC = () => {
                   className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors"
                 >
                   Pricing Packages
+                </Link>
+                <Link 
+                  to="/compare" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors"
+                >
+                  Compare ERP Suite
                 </Link>
                 <Link 
                   to="/free-resources" 
