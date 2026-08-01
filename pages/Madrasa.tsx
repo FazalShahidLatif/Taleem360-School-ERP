@@ -103,8 +103,6 @@ export const Madrasa: React.FC = () => {
             <div className="hidden md:flex items-center gap-8">
               <Link to="/about" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">About</Link>
               <Link to="/pricing" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Pricing</Link>
-              <Link to="/free-resources" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Free Printables</Link>
-              <Link to="/blog" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Blog</Link>
               <Link to="/support" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Support</Link>
             </div>
             
@@ -154,20 +152,6 @@ export const Madrasa: React.FC = () => {
                   className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors"
                 >
                   Pricing Packages
-                </Link>
-                <Link 
-                  to="/free-resources" 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors"
-                >
-                  Free Worksheets
-                </Link>
-                <Link 
-                  to="/blog" 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors"
-                >
-                  Educational Blog
                 </Link>
                 <Link 
                   to="/support" 

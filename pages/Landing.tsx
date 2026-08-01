@@ -48,8 +48,6 @@ const Landing: React.FC = () => {
             <div className="hidden md:flex items-center gap-8">
               <Link to="/about" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">About</Link>
               <Link to="/pricing" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Pricing</Link>
-              <Link to="/free-resources" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Free Printables</Link>
-              <Link to="/blog" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Blog</Link>
               <Link to="/support" className="text-sm font-semibold text-slate-600 hover:text-indigo-600 transition-colors">Support</Link>
             </div>
             
@@ -99,20 +97,6 @@ const Landing: React.FC = () => {
                   className="text-base font-semibold text-slate-700 hover:text-indigo-600 py-2 border-b border-slate-50 transition-colors"
                 >
                   Pricing Plans
-                </Link>
-                <Link 
-                  to="/free-resources" 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-semibold text-slate-700 hover:text-indigo-600 py-2 border-b border-slate-50 transition-colors"
-                >
-                  Free Learning Printables
-                </Link>
-                <Link 
-                  to="/blog" 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-semibold text-slate-700 hover:text-indigo-600 py-2 border-b border-slate-50 transition-colors"
-                >
-                  Knowledge Blog &amp; Case Studies
                 </Link>
                 <Link 
                   to="/support" 

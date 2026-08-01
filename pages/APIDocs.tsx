@@ -124,8 +124,6 @@ app.post('/webhooks/taleem-payments', express.json(), (req, res) => {
             <div className="hidden md:flex items-center gap-8">
               <Link to="/about" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">About</Link>
               <Link to="/pricing" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Pricing</Link>
-              <Link to="/free-resources" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Free Printables</Link>
-              <Link to="/blog" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Blog</Link>
               <Link to="/support" className="text-sm font-semibold text-slate-300 hover:text-emerald-400 transition-colors">Support</Link>
             </div>
             
@@ -161,8 +159,6 @@ app.post('/webhooks/taleem-payments', express.json(), (req, res) => {
               <div className="px-4 py-6 space-y-4 flex flex-col">
                 <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors">About Taleem360</Link>
                 <Link to="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors">Pricing Packages</Link>
-                <Link to="/free-resources" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors">Free Worksheets</Link>
-                <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors">Educational Blog</Link>
                 <Link to="/support" onClick={() => setIsMobileMenuOpen(false)} className="text-base font-semibold text-slate-300 hover:text-emerald-400 py-2 border-b border-slate-900 transition-colors">Support Center</Link>
                 <Link to="/onboarding" onClick={() => setIsMobileMenuOpen(false)} className="w-full text-center bg-emerald-600 text-white py-3 rounded-xl text-base font-bold hover:bg-emerald-500 transition-all shadow-lg">Get Started Free</Link>
               </div>
