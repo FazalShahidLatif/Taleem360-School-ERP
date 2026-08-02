@@ -55,21 +55,30 @@ export const Onboarding: React.FC = () => {
   useEffect(() => {
     // Fetch public client IP for anti-abuse 365-day tracking
     const fetchIp = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 3000);
+
       try {
-        const response = await fetch('https://api.ipify.org?format=json');
+        const response = await fetch('https://api.ipify.org?format=json', { signal: controller.signal });
         const data = await response.json();
         if (data && data.ip) {
           setFormData(prev => ({ ...prev, client_ip: data.ip }));
+          clearTimeout(timeoutId);
+          return;
         }
       } catch (err) {
         console.warn('Failed to retrieve public IP address, falling back to persistent client footprint.', err);
-        let fingerprint = localStorage.getItem('t360_device_fingerprint');
-        if (!fingerprint) {
-          fingerprint = 'fp-' + Math.random().toString(36).substring(2, 15) + '-' + Math.random().toString(36).substring(2, 15);
-          localStorage.setItem('t360_device_fingerprint', fingerprint);
-        }
-        setFormData(prev => ({ ...prev, client_ip: fingerprint }));
+      } finally {
+        clearTimeout(timeoutId);
       }
+      
+      // Fallback
+      let fingerprint = localStorage.getItem('t360_device_fingerprint');
+      if (!fingerprint) {
+        fingerprint = 'fp-' + Math.random().toString(36).substring(2, 15) + '-' + Math.random().toString(36).substring(2, 15);
+        localStorage.setItem('t360_device_fingerprint', fingerprint);
+      }
+      setFormData(prev => ({ ...prev, client_ip: fingerprint }));
     };
     fetchIp();
   }, []);

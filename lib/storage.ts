@@ -1877,12 +1877,13 @@ export const db = {
     
     const userIdx = users.findIndex(u => u.id === user.id);
     if (userIdx === -1) {
-      console.error(`[Onboard] User ${user.id} not found in database.`);
+      console.error(`[Onboard] User ${user.id} not found in database. Users:`, users.map(u => u.id));
       throw new Error("User session invalid. Please log in again.");
     }
 
     // Anti-Abuse Check: Registered IP block for free Pilot trials in last 365 days
-    if (data.plan === SubscriptionTier.PILOT && data.client_ip) {
+    const isLocal = typeof window !== 'undefined' && window.location.hostname === 'localhost';
+    if (data.plan === SubscriptionTier.PILOT && data.client_ip && !isLocal) {
       const duplicateSchool = schools.find(s => 
         s.subscription_tier === SubscriptionTier.PILOT && 
         s.client_ip === data.client_ip &&
@@ -1949,8 +1950,13 @@ export const db = {
     users[userIdx].school_id = schoolId;
     users[userIdx].school_name = data.school_name;
 
-    save(KEYS.USERS, users);
-    save(KEYS.SCHOOLS, schools);
+    try {
+      save(KEYS.USERS, users);
+      save(KEYS.SCHOOLS, schools);
+    } catch (err) {
+      console.error('[Onboard] Storage write failure:', err);
+      throw err;
+    }
 
     console.log(`[Onboard] Success for user ${users[userIdx].email}, school: ${data.school_name}`);
 

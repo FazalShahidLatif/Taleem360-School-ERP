@@ -117,6 +117,19 @@ async function startServer() {
   app.post('/api/auth/register', handleRegister);
   app.post('/api/auth/register/', handleRegister);
 
+  const handleOnboard = async (req, res) => {
+    try {
+      const { default: handler } = await import('./api/auth/onboard.js');
+      await handler(req, res);
+    } catch (err) {
+      console.error('[server.js] Error routing to /api/auth/onboard.js:', err);
+      res.status(500).json({ detail: 'Internal Server Error' });
+    }
+  };
+
+  app.post('/api/onboard/', handleOnboard);
+  app.post('/api/onboard', handleOnboard);
+
   app.get('/api/auth/google/url', (req, res) => {
     const redirectUri = getRedirectUri(req);
     
