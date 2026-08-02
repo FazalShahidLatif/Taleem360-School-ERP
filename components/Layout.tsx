@@ -205,7 +205,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
           )}
           <div className="mt-6 flex-1 flex flex-col overflow-y-auto">
-            <nav className="flex-1 px-2 space-y-1">
+            <nav className="flex-1 px-2 space-y-1 overflow-y-auto">
                {navigation.map((item) => (
                  <Link
                    key={item.name}
