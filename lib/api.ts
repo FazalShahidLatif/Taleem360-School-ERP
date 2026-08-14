@@ -622,7 +622,7 @@ api.defaults.adapter = async (config) => {
     console.error("Mock API Error", error);
     return Promise.reject({
       response: {
-        status: error.message.includes("Permission") ? 403 : 400,
+        status: error.message.includes("Permission") ? 403 : (error.message.includes("token") || error.message.includes("expired") ? 401 : 400),
         data: { detail: error.message }
       }
     });

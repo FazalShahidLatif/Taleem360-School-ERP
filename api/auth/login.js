@@ -69,7 +69,7 @@ export default async function handler(req, res) {
       onboarded: matchedUser.onboarded
     };
 
-    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '24h' });
+    const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '30d' });
 
     return res.status(200).json({
       access: token,

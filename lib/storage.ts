@@ -311,7 +311,7 @@ const generateToken = (user: User, schoolName?: string) => {
     school_name: schoolName || user.school_name || 'Unknown School',
     student_id: user.student_id,
     onboarded: user.onboarded,
-    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24) // 24 hours
+    exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 30) // 30 days
   };
 
   const header = toBase64Url(JSON.stringify({ alg: "HS256", typ: "JWT" }));
@@ -470,7 +470,30 @@ export const db = {
         // Check Expiry (JWT exp is in seconds or ms if old)
         if (payload.exp) {
           const expTime = payload.exp > 9999999999 ? payload.exp : payload.exp * 1000;
-          if (Date.now() >= expTime) throw new Error('Token expired');
+          if (Date.now() >= expTime) {
+            // Auto-renew expired token if user exists in database or is super admin
+            const users = load<User>(KEYS.USERS);
+            const user = users.find(u => u.id === payload.user_id || (u.email && payload.email && u.email.toLowerCase() === payload.email.toLowerCase()));
+            if (user) {
+              const renewedToken = generateToken(user, payload.school_name);
+              localStorage.setItem("access_token", renewedToken);
+              localStorage.setItem("refresh_token", renewedToken);
+              console.log(`[Storage] Expired token auto-renewed for ${user.email}`);
+            } else if (payload.email === 'accts.pak@gmail.com' || payload.role === 'SUPER_ADMIN') {
+              const renewedToken = generateToken({
+                id: payload.user_id || 'u0',
+                email: payload.email || 'accts.pak@gmail.com',
+                name: payload.name || 'Super Admin',
+                role: UserRole.SUPER_ADMIN,
+                onboarded: true
+              });
+              localStorage.setItem("access_token", renewedToken);
+              localStorage.setItem("refresh_token", renewedToken);
+              console.log(`[Storage] Super Admin token auto-renewed`);
+            } else {
+              throw new Error('Token expired');
+            }
+          }
         }
 
         let schoolId = payload.school_id;
