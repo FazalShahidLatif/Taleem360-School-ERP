@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { 
   Sparkles, 
@@ -278,9 +279,9 @@ export const DaycareSummary: React.FC = () => {
               <Sparkles className="w-3.5 h-3.5 text-indigo-600" /> Daycare Parent Portal Pakistan
             </span>
           </div>
-          <h2 className="text-3xl font-black text-gray-900 tracking-tight sm:truncate">
-            Daycare Management Software & Preschool App Pakistan
-          </h2>
+          <h1 className="text-3xl font-black text-gray-900 tracking-tight sm:truncate">
+            Daycare Management Software &amp; Preschool App
+          </h1>
           <p className="mt-1 text-sm text-gray-500 max-w-2xl">
             Taleem360's elite early childhood education software pakistan module. Empower caregivers to auto-translate brief, raw logs into warm, calming, and structured digital summaries for parents.
           </p>
@@ -693,6 +694,40 @@ export const DaycareSummary: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Cross-Linking to Other Educational Modules */}
+      <div className="mt-16 pt-12 border-t border-gray-200">
+        <div className="text-center mb-8">
+          <h2 className="text-xl font-bold text-gray-900">Explore Additional Taleem360 Educational Portals</h2>
+          <p className="text-xs text-gray-500 mt-1">Discover purpose-built management suites for every educational format.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <Link to="/pricing" className="p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+            <h3 className="text-xs font-bold text-gray-900">K-12 School &amp; College ERP →</h3>
+            <p className="text-[11px] text-gray-500 mt-1">Full-featured fee challans, biometrics, and report cards.</p>
+          </Link>
+          <Link to="/madrasa" className="p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+            <h3 className="text-xs font-bold text-gray-900">Islamic Seminaries &amp; Madrasa ERP →</h3>
+            <p className="text-[11px] text-gray-500 mt-1">Hifz Sabaq/Sabqi progress logs and Waqf/Zakat ledgers.</p>
+          </Link>
+          <Link to="/skills-academy" className="p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+            <h3 className="text-xs font-bold text-gray-900">Coaching &amp; Skills Academies →</h3>
+            <p className="text-[11px] text-gray-500 mt-1">Batch timetables, revenue splits, and certificates.</p>
+          </Link>
+          <Link to="/private-tutors" className="p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+            <h3 className="text-xs font-bold text-gray-900">Private Tutors &amp; Solo Educators →</h3>
+            <p className="text-[11px] text-gray-500 mt-1">Hourly student billing and WhatsApp fee reminders.</p>
+          </Link>
+          <Link to="/white-label" className="p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+            <h3 className="text-xs font-bold text-gray-900">White Label Agency Program →</h3>
+            <p className="text-[11px] text-gray-500 mt-1">Rebrand Taleem360 with your own logo and domain.</p>
+          </Link>
+          <Link to="/free-resources" className="p-4 rounded-xl bg-white border border-gray-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+            <h3 className="text-xs font-bold text-gray-900">Free Worksheets &amp; Syllabi →</h3>
+            <p className="text-[11px] text-gray-500 mt-1">Free printable tracing sheets, flashcards, and workbooks.</p>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

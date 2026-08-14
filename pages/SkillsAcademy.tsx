@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   GraduationCap, 
   Layers, 
@@ -98,13 +99,13 @@ export const SkillsAcademy: React.FC = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 rounded-full text-purple-800 text-xs font-bold mb-4">
             <GraduationCap className="w-3.5 h-3.5" />
-            <span>WHITE-LABEL LMS PAKISTAN</span>
+            <span>VOCATIONAL &amp; SKILLS ERP</span>
           </div>
           <h1 className="text-3.5xl font-black text-slate-900 tracking-tight sm:text-4xl">
-            Taleem360 <span className="text-indigo-600 font-extrabold">Skills Academy Management Software</span>
+            Skills Academy Management Software &amp; Coaching ERP
           </h1>
           <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            The premier IT institute management software Pakistan. Empower your center with a modern vocational training management system, coaching academy software pakistan, online tutor management software, integrated tutor booking system pakistan, and a fully customizable white label lms pakistan.
+            The premier IT institute management software in Pakistan. Empower your center with a modern vocational training management system, coaching academy software, batch timetabling, and instructor revenue splits.
           </p>
         </div>
 
@@ -404,6 +405,40 @@ export const SkillsAcademy: React.FC = () => {
 
           </div>
 
+        </div>
+
+        {/* Dedicated Educational Portals Interlinks */}
+        <div className="mt-16 pt-12 border-t border-slate-200">
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-bold text-slate-900">Explore Additional Taleem360 Management Platforms</h2>
+            <p className="text-xs text-slate-500 mt-1">Specialized workflows designed for schools, madrasas, daycares, and agencies.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <Link to="/pricing" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">K-12 School &amp; College ERP →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Fee challans, biometrics, report cards, and parent apps.</p>
+            </Link>
+            <Link to="/daycare" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Early Childhood &amp; Daycare App →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Nap logs, diaper charts, pickup PINs, and preschool fees.</p>
+            </Link>
+            <Link to="/madrasa" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Islamic Seminaries &amp; Madrasa ERP →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Hifz Sabaq/Sabqi progress logs and Waqf/Zakat ledgers.</p>
+            </Link>
+            <Link to="/private-tutors" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Private Tutors &amp; Solo Educators →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Hourly student billing and WhatsApp fee reminders.</p>
+            </Link>
+            <Link to="/white-label" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">White Label Agency Program →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Rebrand Taleem360 with your own logo and domain.</p>
+            </Link>
+            <Link to="/free-resources" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-indigo-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Free Worksheets &amp; Syllabi →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Free downloadable phonics, math workbooks, and syllabus guides.</p>
+            </Link>
+          </div>
         </div>
 
       </div>

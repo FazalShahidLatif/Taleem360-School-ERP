@@ -133,51 +133,15 @@ export const Pricing: React.FC = () => {
       )}
 
       <div className="text-center">
-        <h2 className="text-base font-semibold text-indigo-600 tracking-wide uppercase">Pricing</h2>
-        <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
-          Plans for every school size
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 rounded-full text-indigo-700 text-xs font-bold uppercase tracking-wider mb-4">
+          Transparent K-12 &amp; Multi-Campus ERP Pricing
+        </div>
+        <h1 className="text-4xl font-extrabold text-slate-900 sm:text-5xl sm:tracking-tight lg:text-6xl tracking-tight">
+          School Management Software &amp; ERP Pricing
+        </h1>
+        <p className="max-w-2xl mt-4 mx-auto text-base sm:text-lg text-slate-600 leading-relaxed">
+          Predictable, transparent plans engineered for independent schools, college campuses, and multi-branch educational networks with zero hidden activation fees.
         </p>
-        <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-          Choose the perfect plan to streamline your school operations and enhance learning experiences.
-        </p>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
       </div>
 
       <div className="mt-16 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-8">
@@ -352,6 +316,92 @@ export const Pricing: React.FC = () => {
             <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider">REFUND PLEDGE AVAILABLE</span>
             <span className="text-xs text-slate-400">|</span>
             <Link to="/refund-policy" className="text-xs text-indigo-600 font-bold hover:underline">Read Refund Rules</Link>
+          </div>
+        </div>
+
+        {/* Dedicated Vertical Solutions Interlinks */}
+        <div className="mt-20 max-w-5xl mx-auto border-t border-slate-200 pt-16">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Looking for Specialized Institution Solutions?
+            </h2>
+            <p className="text-sm text-slate-600 mt-2">
+              Explore dedicated features customized for your specific institutional format.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link
+              to="/daycare"
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 transition-all group block text-left"
+            >
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                Early Childhood &amp; Daycare App →
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                Nap logs, diaper charts, pickup PINs, and automated guardian invoices for nurseries.
+              </p>
+            </Link>
+
+            <Link
+              to="/madrasa"
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 transition-all group block text-left"
+            >
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                Islamic Seminaries &amp; Madrasa ERP →
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                Hifz Sabaq/Sabqi progress logs, hostel beds, Waqf donations, and Zakat ledger records.
+              </p>
+            </Link>
+
+            <Link
+              to="/skills-academy"
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 transition-all group block text-left"
+            >
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                Coaching &amp; Skills Academies →
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                Batch timetables, instructor revenue splitting, and computerized course certificates.
+              </p>
+            </Link>
+
+            <Link
+              to="/private-tutors"
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 transition-all group block text-left"
+            >
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                Private Tutors &amp; Solo Educators →
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                Hourly student billing, slot scheduling, and direct WhatsApp payment reminders.
+              </p>
+            </Link>
+
+            <Link
+              to="/white-label"
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 transition-all group block text-left"
+            >
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                White Label Resellers &amp; Agencies →
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                Launch your own SaaS EdTech brand with custom domains, subdomains, and tailored portals.
+              </p>
+            </Link>
+
+            <Link
+              to="/free-resources"
+              className="p-5 rounded-2xl bg-slate-50 hover:bg-emerald-50/50 border border-slate-200 hover:border-emerald-300 transition-all group block text-left"
+            >
+              <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                Free Downloadable Worksheets &amp; Syllabi →
+              </h3>
+              <p className="text-xs text-slate-500 mt-1">
+                100% free downloadable phonics tracers, math workbooks, and syllabus guides.
+              </p>
+            </Link>
           </div>
         </div>
 

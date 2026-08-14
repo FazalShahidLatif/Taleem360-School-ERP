@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSEO } from '../lib/seo';
 import { 
   MessageCircle, 
   Send, 
@@ -14,7 +15,8 @@ import {
   Search,
   Filter,
   Plus,
-  Bot
+  Bot,
+  Zap
 } from 'lucide-react';
 
 interface BroadcastLog {
@@ -33,6 +35,12 @@ const mockLogs: BroadcastLog[] = [
 ];
 
 export const WhatsApp: React.FC = () => {
+  useSEO({
+    title: 'WhatsApp Automated Alerts School Software | Instant Parent SMS & Broadcasts',
+    description: 'Broadcast circulars, fee reminders, daily attendance alerts, and emergency notifications to parents via automated WhatsApp messaging.',
+    keywords: 'whatsapp automated alerts school software, school whatsapp integration pakistan, parent whatsapp alerts school, automated school messaging software',
+  });
+
   const [activeTab, setActiveTab] = useState<'broadcast' | 'birthday'>('broadcast');
   const [isAgentEnabled, setIsAgentEnabled] = useState(true);
   const [broadcastType, setBroadcastType] = useState<'Circular' | 'Announcement' | 'Event'>('Announcement');
@@ -43,8 +51,12 @@ export const WhatsApp: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">WhatsApp Messaging</h1>
-          <p className="text-gray-500">Broadcast announcements and manage automated messaging agents</p>
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-[11px] font-bold uppercase tracking-wider mb-2">
+            <Zap className="w-3 h-3" />
+            WhatsApp Automated Alerts School Software
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900">WhatsApp &amp; SMS Broadcast Engine</h1>
+          <p className="text-gray-500 text-xs sm:text-sm">Broadcast circulars, fee reminders, emergency announcements, and manage automated AI agents</p>
         </div>
       </div>
 

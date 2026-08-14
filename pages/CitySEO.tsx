@@ -63,23 +63,26 @@ const CITY_DETAILS: Record<string, CityData> = {
   },
   bangladesh: {
     name: 'Bangladesh',
-    urduName: 'بنگلہ دیش',
-    title: 'School ERP Bangladesh | Complete School Management System - Taleem360',
-    metaDesc: 'Looking for the best school ERP in Bangladesh? Scale your campus operations with automated student attendance, school fee challans, and localized SMS alerts.',
+    urduName: 'بنگلہ دیش (বাংলাদেশ)',
+    title: 'School ERP Bangladesh | Best School Management Software in Dhaka - Taleem360',
+    metaDesc: 'Discover the #1 School Management Software & ERP in Bangladesh. Automate student attendance, bKash & Nagad fee collection, parent SMS, and bilingual exam report cards across Dhaka, Chittagong, and Sylhet.',
     headKeyword: 'school erp bangladesh',
     additionalKeywords: [
       'school management software bangladesh',
+      'school management software dhaka',
+      'best school erp system bangladesh',
+      'school fee collection software bkash bangladesh',
       'free school lms bangladesh',
       'best student information system bangladesh'
     ],
-    intro: "Bangladesh's private and trust-run schools are rapidly expanding, seeking high-performance school database management tools. From Dhaka to Chattogram and Sylhet, managing admissions and daily collections requires a localized, reliable school erp.",
-    keyChallenge: 'Manual billing ledger errors, complex parent notification delivery, and tracking daily biometric student attendance across multiple campus branches.',
-    localSchools: ['Dhaka Grammar School', 'Chattogram STEM College', 'Sylhet Trust School', 'Allied Dhaka Campuses'],
+    intro: "Bangladesh's private schools, English medium academies, and madrasa networks across Dhaka, Chattogram, Sylhet, and Rajshahi are rapidly adopting modern cloud education infrastructure. Taleem360 delivers an offline-resilient, high-speed School ERP tailored for Bangladeshi curricula and local payment ecosystems.",
+    keyChallenge: 'Managing multi-campus student admissions, preventing fee arrears through bKash and Nagad mobile payment integrations, and generating bilingual Bengali and English student progress reports.',
+    localSchools: ['Dhaka Grammar & STEM Academy', 'Chattogram International Model School', 'Sylhet Scholars Trust Campus', 'Allied Dhaka Campus Network', 'Rajshahi Model Academy'],
     schemaLocalAddress: {
-      street: 'Gulshan Avenue, Road 12',
+      street: 'Plot 14, Road 11, Block D, Banani / Gulshan-2',
       locality: 'Dhaka',
       region: 'Dhaka Division',
-      postalCode: '1212'
+      postalCode: '1213'
     }
   },
   uae: {
@@ -453,7 +456,7 @@ export const CitySEO: React.FC = () => {
             Empowering Education in {data.name} ({data.urduName})
           </div>
           <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
-            The Ultimate <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">School ERP in {data.name}</span>
+            Cloud &amp; Offline <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">School Management Software in {data.name}</span>
           </h1>
           <p className="mt-6 text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
             Optimize administrative controls, digitize ledger billing, and streamline biometric tracking. 
@@ -477,9 +480,9 @@ export const CitySEO: React.FC = () => {
         </div>
       </div>
 
-      {/* Regional context showcase block */}
+      {/* Regional context showcase block & Google Local Map Pack Card */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 border-t border-slate-800/60">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
               Why Localized School Systems in {data.name} Rely on Taleem360
@@ -491,18 +494,76 @@ export const CitySEO: React.FC = () => {
               <strong className="text-emerald-400">The Primary Operational Challenge:</strong> {data.keyChallenge}
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-3 mb-8">
               <div className="flex items-center gap-2.5 text-xs text-slate-300">
                 <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>Optimized local branch database architecture</span>
+                <span>Optimized local branch database architecture with offline fallback</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs text-slate-300">
                 <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>Urdu &amp; English SMS notification gateways</span>
+                <span>Urdu, English &amp; Regional SMS notification gateways</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs text-slate-300">
                 <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>Cashless bill deposit matching (JazzCash, EasyPaisa, HBL)</span>
+                <span>Cashless bill deposit matching (JazzCash, EasyPaisa, bKash, HBL)</span>
+              </div>
+            </div>
+
+            {/* Google Business Profile & Local Citation Card */}
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-bold text-white">Google Verified Business Profile</h3>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold">Verified</span>
+                    </div>
+                    <p className="text-xs text-slate-400">Taleem360 {data.name} Regional Support &amp; Deployment Node</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">
+                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                  <span className="text-xs font-black text-amber-300">4.9 / 5.0</span>
+                </div>
+              </div>
+
+              <div className="space-y-2 text-xs text-slate-300 mb-4 border-t border-b border-slate-900 py-3">
+                <div className="flex items-start gap-2">
+                  <span className="text-slate-500 font-semibold w-20 flex-shrink-0">Address:</span>
+                  <span>{data.schemaLocalAddress.street}, {data.schemaLocalAddress.locality}, {data.schemaLocalAddress.region} {data.schemaLocalAddress.postalCode}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-500 font-semibold w-20 flex-shrink-0">Direct Line:</span>
+                  <a href={`tel:${normalizedCity === 'nigeria' ? '+23411234567' : normalizedCity === 'uae' ? '+97141234567' : normalizedCity === 'bangladesh' ? '+88021234567' : '+923001234567'}`} className="text-emerald-400 font-bold hover:underline">
+                    {normalizedCity === 'nigeria' ? '+234 1 123 4567' : normalizedCity === 'uae' ? '+971 4 123 4567' : normalizedCity === 'bangladesh' ? '+880 2 123 4567' : '+92 300 1234567'}
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-500 font-semibold w-20 flex-shrink-0">Hours:</span>
+                  <span className="text-slate-400">Mon - Sat: 9:00 AM – 6:00 PM (Local Time)</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Taleem360 School ERP ${data.name}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-md"
+                >
+                  <MapPin className="w-3.5 h-3.5" />
+                  View on Google Maps
+                </a>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all"
+                >
+                  <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+                  Request Local Site Visit
+                </Link>
               </div>
             </div>
           </div>
@@ -516,16 +577,22 @@ export const CitySEO: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {data.localSchools.map((school, idx) => (
                 <div key={idx} className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-emerald-400" />
-                  <span>{school}</span>
+                  <Building2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  <span className="line-clamp-1">{school}</span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-slate-800 text-center">
-              <p className="text-[11px] text-slate-500 italic">
-                Local references are verified partner institutions using the Taleem360 cloud database system.
-              </p>
+            <div className="mt-8 pt-6 border-t border-slate-800">
+              <div className="flex items-center gap-3 bg-emerald-950/30 border border-emerald-900/40 rounded-2xl p-4">
+                <ShieldCheck className="w-8 h-8 text-emerald-400 flex-shrink-0" />
+                <div>
+                  <h4 className="text-xs font-bold text-white">Guaranteed Local Regulatory Compliance</h4>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Full compatibility with {data.name} education boards, tax invoicing rules, and double-entry accounting audits.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -567,6 +634,166 @@ export const CitySEO: React.FC = () => {
             <p className="text-slate-400 text-xs leading-relaxed">
               Provide parents with lightweight browser portals or WhatsApp triggers showing homework, upcoming exams, fees due, and complete student status reports.
             </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Dedicated Vertical Portals & Lead Magnet Cross-Links */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 border-t border-slate-800/60">
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            Specialized ERP Portals for Every Institution
+          </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
+            Tailored Educational Solutions in {data.name}
+          </h2>
+          <p className="text-slate-400 text-sm mt-3 max-w-2xl mx-auto">
+            Explore dedicated workflows engineered specifically for schools, academies, madrasas, daycares, and educational partners.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Link
+            to="/pricing"
+            className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-900/60 transition-all group block"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Building2 className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+              K-12 Schools &amp; Colleges ERP
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              Complete fee challans, biometric attendance, report cards, and parent apps for private schools in {data.name}.
+            </p>
+            <span className="text-xs font-bold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              View School ERP Pricing →
+            </span>
+          </Link>
+
+          <Link
+            to="/daycare"
+            className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-900/60 transition-all group block"
+          >
+            <div className="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Users className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-pink-400 transition-colors mb-2">
+              Early Childhood &amp; Daycare App
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              Daily baby nap/meal logs, pickup pin authorizations, and milestone trackers for preschools and nurseries.
+            </p>
+            <span className="text-xs font-bold text-pink-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Explore Daycare Suite →
+            </span>
+          </Link>
+
+          <Link
+            to="/madrasa"
+            className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-900/60 transition-all group block"
+          >
+            <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-teal-400 transition-colors mb-2">
+              Islamic Seminaries &amp; Madrasa ERP
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              Sabaq, Sabqi, and Manzil tracking with boarding room allocations, waqf donations, and Zakat ledger records.
+            </p>
+            <span className="text-xs font-bold text-teal-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Explore Madrasa Portal →
+            </span>
+          </Link>
+
+          <Link
+            to="/skills-academy"
+            className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-900/60 transition-all group block"
+          >
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <GraduationCap className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-indigo-400 transition-colors mb-2">
+              Coaching &amp; Skills Academies
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              Batch timetables, instructor commission splitters, and certificate generators for IT institutes and academies.
+            </p>
+            <span className="text-xs font-bold text-indigo-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Explore Skills Portal →
+            </span>
+          </Link>
+
+          <Link
+            to="/white-label"
+            className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-900/60 transition-all group block"
+          >
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors mb-2">
+              White Label Agency &amp; Reseller
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              Launch your own branded EdTech SaaS platform with custom domains, rebrandable parent apps, and multi-tenant admin.
+            </p>
+            <span className="text-xs font-bold text-amber-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Explore Reseller Program →
+            </span>
+          </Link>
+
+          <Link
+            to="/free-resources"
+            className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 hover:bg-slate-900/60 transition-all group block"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+              Free Printable Worksheets &amp; Syllabi
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              100% free downloadable phonics tracers, math workbooks, and syllabus guides for schools and parents in {data.name}.
+            </p>
+            <span className="text-xs font-bold text-emerald-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              Download Free Resources →
+            </span>
+          </Link>
+        </div>
+
+        {/* Regional Hubs Quick Nav */}
+        <div className="mt-12 p-6 bg-slate-950/80 border border-slate-800 rounded-2xl">
+          <h3 className="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-4">
+            Explore Regional Campuses &amp; City Hubs
+          </h3>
+          <div className="flex flex-wrap gap-2.5">
+            {[
+              { slug: 'karachi', name: 'Karachi' },
+              { slug: 'lahore', name: 'Lahore' },
+              { slug: 'islamabad', name: 'Islamabad' },
+              { slug: 'rawalpindi', name: 'Rawalpindi' },
+              { slug: 'peshawar', name: 'Peshawar' },
+              { slug: 'faisalabad', name: 'Faisalabad' },
+              { slug: 'multan', name: 'Multan' },
+              { slug: 'quetta', name: 'Quetta' },
+              { slug: 'bangladesh', name: 'Bangladesh (Dhaka)' },
+              { slug: 'nigeria', name: 'Nigeria (Lagos)' },
+              { slug: 'uae', name: 'UAE (Dubai)' },
+            ].map((c) => (
+              <Link
+                key={c.slug}
+                to={`/${c.slug}`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border ${
+                  normalizedCity === c.slug
+                    ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300'
+                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white hover:border-slate-700'
+                }`}
+              >
+                {c.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

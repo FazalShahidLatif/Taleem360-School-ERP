@@ -6,35 +6,50 @@ const BASE_URL = 'https://www.taleem360.online';
 
 const corePages = [
   { url: '/', changefreq: 'daily', priority: '1.0', lastmod: '2026-06-21' },
-  { url: '/blog', changefreq: 'daily', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/pricing', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/daycare', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/madrasa', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/skills-academy', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/private-tutors', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/white-label', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
   { url: '/free-resources', changefreq: 'daily', priority: '0.9', lastmod: '2026-06-21' },
   { url: '/compare', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
-  { url: '/pricing', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/daycare', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/skills-academy', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/private-tutors', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/madrasa', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/white-label', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
+  { url: '/blog', changefreq: 'daily', priority: '0.9', lastmod: '2026-06-21' },
   { url: '/api', changefreq: 'weekly', priority: '0.9', lastmod: '2026-06-21' },
-  { url: '/nigeria', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/bangladesh', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/uae', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/karachi', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/lahore', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/islamabad', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/rawalpindi', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/peshawar', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/faisalabad', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/multan', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
-  { url: '/quetta', changefreq: 'weekly', priority: '0.8', lastmod: '2026-06-21' },
   { url: '/about', changefreq: 'monthly', priority: '0.6', lastmod: '2026-06-21' },
   { url: '/contact', changefreq: 'monthly', priority: '0.6', lastmod: '2026-06-21' },
   { url: '/faq', changefreq: 'weekly', priority: '0.6', lastmod: '2026-06-21' },
   { url: '/support', changefreq: 'monthly', priority: '0.5', lastmod: '2026-06-21' },
+  { url: '/onboarding', changefreq: 'monthly', priority: '0.7', lastmod: '2026-06-21' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' },
   { url: '/terms', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' },
   { url: '/cookies', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' },
   { url: '/refund-policy', changefreq: 'yearly', priority: '0.2', lastmod: '2026-06-21' }
+];
+
+const CITIES = [
+  'karachi',
+  'lahore',
+  'islamabad',
+  'rawalpindi',
+  'faisalabad',
+  'multan',
+  'peshawar',
+  'quetta',
+  'sialkot',
+  'gujranwala',
+  'hyderabad',
+  'bahawalpur',
+  'sargodha',
+  'sukkur',
+  'abbottabad',
+  'nigeria',
+  'bangladesh',
+  'dhaka',
+  'chittagong',
+  'sylhet',
+  'rajshahi',
+  'uae'
 ];
 
 let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
@@ -47,6 +62,25 @@ for (const page of corePages) {
   sitemap += `    <lastmod>${page.lastmod}</lastmod>\n`;
   sitemap += `    <changefreq>${page.changefreq}</changefreq>\n`;
   sitemap += `    <priority>${page.priority}</priority>\n`;
+  sitemap += '  </url>\n';
+}
+
+sitemap += '\n  <!-- Regional & City Landing Pages -->\n';
+for (const city of CITIES) {
+  // Shorthand route: e.g. /lahore or /bangladesh
+  sitemap += '  <url>\n';
+  sitemap += `    <loc>${BASE_URL}/${city}</loc>\n`;
+  sitemap += `    <lastmod>2026-06-21</lastmod>\n`;
+  sitemap += `    <changefreq>weekly</changefreq>\n`;
+  sitemap += `    <priority>0.8</priority>\n`;
+  sitemap += '  </url>\n';
+
+  // Canonical Location path: /location/:city
+  sitemap += '  <url>\n';
+  sitemap += `    <loc>${BASE_URL}/location/${city}</loc>\n`;
+  sitemap += `    <lastmod>2026-06-21</lastmod>\n`;
+  sitemap += `    <changefreq>weekly</changefreq>\n`;
+  sitemap += `    <priority>0.8</priority>\n`;
   sitemap += '  </url>\n';
 }
 
@@ -65,4 +99,4 @@ sitemap += '</urlset>\n';
 
 const outputPath = path.resolve(process.cwd(), 'public', 'sitemap.xml');
 fs.writeFileSync(outputPath, sitemap, 'utf8');
-console.log(`Sitemap generated successfully with ${corePages.length} core pages and ${BLOG_POSTS_DATA.length} blog posts at ${outputPath}`);
+console.log(`Sitemap generated successfully with ${corePages.length} core pages, ${CITIES.length * 2} regional city pages, and ${BLOG_POSTS_DATA.length} blog posts at ${outputPath}`);

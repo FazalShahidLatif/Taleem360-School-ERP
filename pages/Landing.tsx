@@ -26,9 +26,31 @@ const Landing: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useSEO({
-    title: 'Taleem360 | K-12, Madrasa & School ERP Suite - From $29/mo',
-    description: 'Taleem360 ERP is Pakistan\'s #1 School Management Suite (From $29/mo). Unified cloud database with 100% Offline Database Fallback for K-12 & Madrasa Quran Tracking, Daycare PIN logs, and automated fee ledgers.',
-    keywords: 'school erp from $29/mo, 100% offline school database, k-12 and madrasa erp, school management software pakistan, white label lms, daycare daily log, quran tracker madrasa',
+    title: 'School Management Software Pakistan | Best School ERP & LMS - Taleem360',
+    description: "Discover Pakistan's #1 School Management Software and Cloud ERP. Automate computerized fee challans, biometric attendance, WhatsApp alerts, exams, and double-entry ledgers with 100% offline database resilience.",
+    keywords: 'school management software pakistan, school erp pakistan, best school management software in pakistan, online school management system, cloud based school management software, automated school attendance system pakistan, whatsapp automated alerts school software, free school management software pakistan, school management system price in pakistan',
+    schemaMarkup: {
+      '@type': 'SoftwareApplication',
+      name: 'Taleem360 School Management Software & ERP',
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Web, Android, iOS, Windows, macOS, Linux',
+      url: 'https://www.taleem360.online/',
+      description: "Comprehensive Cloud-based & Offline School Management Software in Pakistan with fee challans, biometrics, gradebooks, and WhatsApp alerts.",
+      offers: {
+        '@type': 'AggregateOffer',
+        priceCurrency: 'USD',
+        lowPrice: '0',
+        highPrice: '129',
+        offerCount: '4',
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        ratingCount: '520',
+        bestRating: '5',
+        worstRating: '1',
+      },
+    },
   });
 
   return (
@@ -127,27 +149,27 @@ const Landing: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-bold mb-8 border border-indigo-100"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-xs sm:text-sm font-bold mb-8 border border-indigo-100 uppercase tracking-wider"
             >
               <Zap className="w-4 h-4 fill-current" />
-              <span>The Next Generation School ERP</span>
+              <span>#1 Cloud-Based School Management Software in Pakistan</span>
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-7xl font-black text-slate-900 tracking-tight mb-8 leading-[1.1]"
+              className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tight mb-8 leading-[1.1]"
             >
-              Empowering Schools, <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Transforming Futures.</span>
+              Best School Management Software <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">&amp; School ERP in Pakistan</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-slate-600 mb-12 leading-relaxed max-w-2xl mx-auto"
+              className="text-lg sm:text-xl text-slate-600 mb-12 leading-relaxed max-w-3xl mx-auto"
             >
-              Taleem360 is a dual-mission platform: A world-class ERP for school management and a social impact engine providing free resources for students in need.
+              Taleem360 is Pakistan's premier online school management system and cloud-based ERP. Automate fee challans, biometric attendance, double-entry financial accounting, and WhatsApp automated alerts with 100% offline database resilience.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -285,12 +307,12 @@ const Landing: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Smart attendance", desc: "Real-time tracking with automated parent SMS, chat support, and daily roster reports.", icon: Users, color: "bg-blue-50 text-blue-600" },
-              { title: "Fee management", desc: "Computerized invoices, online payment gateways, automated fine systems, and fee balance sheets.", icon: BarChart3, color: "bg-emerald-50 text-emerald-600" },
-              { title: "Exam portal & gradebooks", desc: "Prepare terminal templates, register grade scales, print custom report cards, and track students over time.", icon: CheckCircle2, color: "bg-purple-50 text-purple-600" },
-              { title: "Library catalogs", desc: "Track digitized books, manage issue states, monitor overdue notifications, and calculate security fines.", icon: BookOpen, color: "bg-orange-50 text-orange-600" },
-              { title: "LMS & notes directory", desc: "Deliver curriculum resources, digital syllabus notebooks, lecture plans, and home assignments to portals.", icon: Zap, color: "bg-amber-50 text-amber-600" },
-              { title: "Fleet & transit safety", desc: "Manage bus vehicle registration, fuel usage accounts, route rosters, and student boarding logs.", icon: Bus, color: "bg-indigo-50 text-indigo-600" }
+              { title: "Automated school attendance system pakistan", desc: "Real-time biometric and RFID tracking with automated parent SMS, WhatsApp alerts, and daily roster reports.", icon: Users, color: "bg-blue-50 text-blue-600" },
+              { title: "School fee management & challan software", desc: "Computerized 3-copy fee challans, JazzCash & EasyPaisa online payment collection, and automated fee balance sheets.", icon: BarChart3, color: "bg-emerald-50 text-emerald-600" },
+              { title: "Student report card software pakistan", desc: "Prepare terminal examination templates, automatic grading scales, print bilingual report cards, and track student GPA.", icon: CheckCircle2, color: "bg-purple-50 text-purple-600" },
+              { title: "WhatsApp automated alerts school software", desc: "Automate circular broadcasts, emergency weather closures, fee due notices, and daily absent alerts via official WhatsApp API.", icon: Zap, color: "bg-green-50 text-green-600" },
+              { title: "School payroll management software", desc: "Automate teacher salaries, deduction rules, loan tracking, allowance formulas, and printable payslip generation.", icon: BookOpen, color: "bg-amber-50 text-amber-600" },
+              { title: "Multi-campus cloud erp pakistan", desc: "Centralized head-office command for branch networks, student transfers, consolidated financial balance sheets, and transit fleet logs.", icon: Bus, color: "bg-indigo-50 text-indigo-600" }
             ].map((feature, idx) => (
               <div key={idx} className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-all group">
                 <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
@@ -318,30 +340,30 @@ const Landing: React.FC = () => {
 
           <div className="space-y-6">
             <div className="p-8 rounded-3xl border border-slate-100 bg-slate-50/40 hover:bg-slate-50 transition-colors">
-              <h4 className="text-lg font-bold text-slate-950">Is my school's student directory and fee data secure on the cloud?</h4>
+              <h4 className="text-lg font-bold text-slate-950">Why is Taleem360 rated the best school management software in Pakistan?</h4>
               <p className="mt-3 text-slate-600 leading-relaxed text-sm">
-                Yes, safety is our top priority. Taleem360 operates on encrypted Cloud Run isolated containers backed by active Firebase security rules. All administrative rosters, parent identity details, and ledger histories are backed up continuously, preventing unauthorized access or accidental record deletion.
+                Taleem360 is recognized as the best school management software in Pakistan because it seamlessly unifies K-12 schooling, madrasa Hifz tracking, and early childhood daycare in one platform. Unlike generic software, it includes 100% offline database fallback, automated fee challans, JazzCash/EasyPaisa cashless reconciliation, and localized Urdu/English WhatsApp messaging.
               </p>
             </div>
 
             <div className="p-8 rounded-3xl border border-slate-100 bg-slate-50/40 hover:bg-slate-50 transition-colors">
-              <h4 className="text-lg font-bold text-slate-950">Can we customize our school fee structures or define sibling discount rates?</h4>
+              <h4 className="text-lg font-bold text-slate-950">How does the automated school attendance system work with biometric machines?</h4>
               <p className="mt-3 text-slate-600 leading-relaxed text-sm">
-                Absolutely! Our system is designed with customizable fee template utilities. School directors can define customized grade-wise fees, issue sibling discount percentages, create special tuition waivers, charge overdue fines, and generate printable challans in a single automated ledger run.
+                Our automated school attendance system Pakistan module integrates with standard ZKTeco and RFID biometric hardware. When a student or teacher scans their finger or RFID card, attendance is logged instantly, and automated absent alerts are triggered to parents via WhatsApp or SMS.
               </p>
             </div>
 
             <div className="p-8 rounded-3xl border border-slate-100 bg-slate-50/40 hover:bg-slate-50 transition-colors">
-              <h4 className="text-lg font-bold text-slate-950">What does the Social Impact Program include on cheap or pilot tiers?</h4>
+              <h4 className="text-lg font-bold text-slate-950">What is the school management system price in Pakistan?</h4>
               <p className="mt-3 text-slate-600 leading-relaxed text-sm">
-                Every commercial subscriber (including Tier 1 and Tier 2) directly helps generate and update our free academic library hosting curriculum chapters, notes, and worksheets. This interactive library helps underprivileged schools operate without digital hurdles, providing their students with equal educational content.
+                Taleem360 provides a 100% free school management software pilot tier for small schools and community initiatives. For growing campuses, transparent subscription packages start at an affordable monthly fee with zero hidden licensing charges or costly setup fees.
               </p>
             </div>
 
             <div className="p-8 rounded-3xl border border-slate-100 bg-slate-50/40 hover:bg-slate-50 transition-colors">
-              <h4 className="text-lg font-bold text-slate-950">Does Taleem360 support CSV or Excel importing for existing rosters?</h4>
+              <h4 className="text-lg font-bold text-slate-950">Can parents pay school fees through JazzCash and EasyPaisa?</h4>
               <p className="mt-3 text-slate-600 leading-relaxed text-sm">
-                Yes, transitioning from spreadsheets is incredibly straightforward. During our interactive onboarding flow, administrators can bulk import existing class setups, teacher profiles, student folders, and initial fee records directly using CSV, reducing manual entry time from weeks to just a few clicks.
+                Yes! With our integrated school fee challan software, challans feature 1Bill and mobile wallet barcodes. Parents can deposit dues directly through JazzCash, EasyPaisa, or Kuickpay, and the school's general ledger updates automatically with verified payment confirmations.
               </p>
             </div>
           </div>

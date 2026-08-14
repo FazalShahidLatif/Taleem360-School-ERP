@@ -302,6 +302,40 @@ export const WhiteLabel: React.FC = () => {
         </div>
       </div>
 
+      {/* Educational Verticals & Free Resources Interlinks */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 border-t border-slate-800/60">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold text-white">Explore Purpose-Built Vertical Engines You Can Resell</h2>
+          <p className="text-slate-400 text-xs mt-2">Every portal can be re-skinned, rebranded, and deployed under your own subdomains.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Link to="/pricing" className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all block">
+            <h3 className="text-sm font-bold text-white mb-2">K-12 School &amp; College ERP →</h3>
+            <p className="text-xs text-slate-400">Complete computerized fee challans, biometrics, report cards, and parent apps.</p>
+          </Link>
+          <Link to="/daycare" className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all block">
+            <h3 className="text-sm font-bold text-white mb-2">Early Childhood &amp; Daycare App →</h3>
+            <p className="text-xs text-slate-400">Daily baby nap/meal logs, pickup pin authorizations, and milestone trackers.</p>
+          </Link>
+          <Link to="/madrasa" className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all block">
+            <h3 className="text-sm font-bold text-white mb-2">Islamic Seminaries &amp; Madrasa ERP →</h3>
+            <p className="text-xs text-slate-400">Hifz Sabaq/Sabqi progress logs and Waqf/Zakat ledgers.</p>
+          </Link>
+          <Link to="/skills-academy" className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all block">
+            <h3 className="text-sm font-bold text-white mb-2">Coaching &amp; Skills Academies →</h3>
+            <p className="text-xs text-slate-400">Batch timetables, instructor commission splitters, and certificate generators.</p>
+          </Link>
+          <Link to="/private-tutors" className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all block">
+            <h3 className="text-sm font-bold text-white mb-2">Private Tutors &amp; Solo Educators →</h3>
+            <p className="text-xs text-slate-400">Hourly student billing, slot scheduling, and direct WhatsApp reminders.</p>
+          </Link>
+          <Link to="/free-resources" className="p-6 bg-slate-950/60 border border-slate-800 rounded-2xl hover:border-emerald-500/40 transition-all block">
+            <h3 className="text-sm font-bold text-white mb-2">Free Worksheets &amp; Syllabi →</h3>
+            <p className="text-xs text-slate-400">100% free downloadable phonics tracers, math workbooks, and syllabus guides.</p>
+          </Link>
+        </div>
+      </div>
+
       {/* Footer CTA */}
       <div className="bg-gradient-to-r from-emerald-950/60 to-indigo-950/40 border-t border-slate-800 py-16 relative z-10 text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">

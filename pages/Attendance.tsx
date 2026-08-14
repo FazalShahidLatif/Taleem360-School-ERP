@@ -3,9 +3,16 @@ import api from '../lib/api';
 import { useAuth } from '../lib/auth';
 import { Class, Student, AttendanceStatus, UserRole } from '../types';
 import { Button } from '../components/ui/Button';
-import { Check, X, AlertCircle } from 'lucide-react';
+import { Check, X, AlertCircle, Users, Sparkles } from 'lucide-react';
+import { useSEO } from '../lib/seo';
 
 export const Attendance: React.FC = () => {
+  useSEO({
+    title: 'Automated School Attendance System Pakistan | Biometric & RFID',
+    description: 'Track daily student and staff attendance with real-time biometric integration, automated WhatsApp parent alerts, and offline database fallback.',
+    keywords: 'automated school attendance system pakistan, biometric school attendance pakistan, student attendance software, school rfid attendance pakistan',
+  });
+
   const { user } = useAuth();
   const [classes, setClasses] = useState<Class[]>([]);
   const [selectedClass, setSelectedClass] = useState<string>('');
@@ -110,7 +117,14 @@ export const Attendance: React.FC = () => {
   return (
     <div>
       <div className="md:flex md:items-center md:justify-between mb-6">
-        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">Mark Attendance</h2>
+        <div>
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-[11px] font-bold uppercase tracking-wider mb-2">
+            <Users className="w-3 h-3" />
+            Automated School Attendance System Pakistan
+          </div>
+          <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">Class &amp; Biometric Attendance</h1>
+          <p className="text-xs text-gray-500 mt-1">Real-time attendance logging with automatic WhatsApp &amp; SMS parent notifications.</p>
+        </div>
         <div className="mt-4 md:mt-0 flex space-x-3">
           <input 
             type="date" 

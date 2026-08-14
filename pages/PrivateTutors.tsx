@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Users, 
   Calendar, 
@@ -111,10 +112,10 @@ export const PrivateTutors: React.FC = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 rounded-full text-emerald-800 text-xs font-bold mb-4">
             <Users className="w-3.5 h-3.5 text-emerald-700" />
-            <span>SOLO PROFESSIONALS & PRIVATE TUTORS</span>
+            <span>SOLO PROFESSIONALS &amp; PRIVATE TUTORS</span>
           </div>
           <h1 className="text-3.5xl font-black text-slate-900 tracking-tight sm:text-4xl">
-            Taleem360 <span className="text-emerald-600 font-extrabold">Private Tutor</span> Mini-Websites
+            Private Tutor Management Software &amp; Booking Portal
           </h1>
           <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             Run an independent tutoring agency with pixel-perfect personal landing profiles. Streamline client schedules, record student fees manually, and manage student attendance logs cleanly from one simple screen.
@@ -400,6 +401,40 @@ export const PrivateTutors: React.FC = () => {
 
           </div>
 
+        </div>
+
+        {/* Dedicated Educational Portals Interlinks */}
+        <div className="mt-16 pt-12 border-t border-slate-200">
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-bold text-slate-900">Explore Additional Taleem360 Management Platforms</h2>
+            <p className="text-xs text-slate-500 mt-1">Specialized workflows designed for schools, madrasas, daycares, and agencies.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <Link to="/pricing" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">K-12 School &amp; College ERP →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Fee challans, biometrics, report cards, and parent apps.</p>
+            </Link>
+            <Link to="/daycare" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Early Childhood &amp; Daycare App →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Nap logs, diaper charts, pickup PINs, and preschool fees.</p>
+            </Link>
+            <Link to="/madrasa" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Islamic Seminaries &amp; Madrasa ERP →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Hifz Sabaq/Sabqi progress logs and Waqf/Zakat ledgers.</p>
+            </Link>
+            <Link to="/skills-academy" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Coaching &amp; Skills Academies →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Batch timetables, revenue splits, and certificates.</p>
+            </Link>
+            <Link to="/white-label" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">White Label Agency Program →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Rebrand Taleem360 with your own logo and domain.</p>
+            </Link>
+            <Link to="/free-resources" className="p-4 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-sm transition-all block">
+              <h3 className="text-xs font-bold text-slate-900">Free Worksheets &amp; Syllabi →</h3>
+              <p className="text-[11px] text-slate-500 mt-1">Free downloadable phonics, math workbooks, and syllabus guides.</p>
+            </Link>
+          </div>
         </div>
 
       </div>
