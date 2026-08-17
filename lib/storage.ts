@@ -324,12 +324,12 @@ const generateToken = (user: User, schoolName?: string) => {
 // API Layer
 export const db = {
   init: () => {
-    const isInit = localStorage.getItem(KEYS.INIT) === 'true_v24';
+    const isInit = localStorage.getItem(KEYS.INIT) === 'true_v25';
     const hasUsers = load<User>(KEYS.USERS).length > 0;
 
     // Re-initialize if version mismatch OR if data is unexpectedly empty
     if (!isInit || !hasUsers) {
-      console.log('Initializing Mock Database (v24)...');
+      console.log('Initializing Mock Database (v25)...');
       localStorage.setItem(KEYS.USERS, JSON.stringify(INITIAL_USERS));
       localStorage.setItem(KEYS.STUDENTS, JSON.stringify(INITIAL_STUDENTS));
       localStorage.setItem(KEYS.CLASSES, JSON.stringify(INITIAL_CLASSES));
@@ -367,7 +367,7 @@ export const db = {
       localStorage.setItem(KEYS.VEHICLES, JSON.stringify(INITIAL_VEHICLES));
       localStorage.setItem(KEYS.ROUTES, JSON.stringify(INITIAL_ROUTES));
       localStorage.setItem(KEYS.TRANSPORT_ALLOCATIONS, JSON.stringify([]));
-      localStorage.setItem(KEYS.INIT, 'true_v24');
+      localStorage.setItem(KEYS.INIT, 'true_v25');
       console.log('Database Initialized.');
     } else {
       console.log('Database already initialized.');
@@ -1761,13 +1761,35 @@ export const db = {
   // Blog Methods
   getBlogPosts: async (): Promise<RichBlogPost[]> => {
     await delay();
-    return load<RichBlogPost>(KEYS.BLOG_POSTS).filter(p => p.is_published);
+    const stored = load<RichBlogPost>(KEYS.BLOG_POSTS);
+    const postMap = new Map<string, RichBlogPost>();
+    // Priority 1: Built-in verified knowledge archive
+    BLOG_POSTS_DATA.forEach(p => {
+      if (p.is_published) postMap.set(p.slug.toLowerCase(), p);
+    });
+    // Priority 2: Any dynamic user-authored posts in storage
+    stored.forEach(p => {
+      if (p.is_published) postMap.set(p.slug.toLowerCase(), p);
+    });
+    return Array.from(postMap.values());
   },
 
   getBlogPostBySlug: async (slug: string): Promise<RichBlogPost | null> => {
     await delay();
+    if (!slug) return null;
+    const cleanSlug = decodeURIComponent(slug).trim().toLowerCase().replace(/\/+$/, '');
+    
+    // 1. Check authoritative code-compiled articles
+    const staticPost = BLOG_POSTS_DATA.find(
+      p => p.slug.toLowerCase() === cleanSlug && p.is_published
+    );
+    if (staticPost) return staticPost;
+
+    // 2. Check local persistence
     const posts = load<RichBlogPost>(KEYS.BLOG_POSTS);
-    return posts.find(p => p.slug === slug && p.is_published) || null;
+    return posts.find(
+      p => p.slug.toLowerCase() === cleanSlug && p.is_published
+    ) || null;
   },
 
   // --- Transport Methods ---

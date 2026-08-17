@@ -32,11 +32,18 @@ export const Blog: React.FC = () => {
 
     const fetchPosts = async () => {
       try {
-        const res = await api.get('/blog/posts/');
-        setPosts(res.data);
-        setFilteredPosts(res.data);
+        const res = await api.get('/blog/posts');
+        if (res && res.data && Array.isArray(res.data) && res.data.length > 0) {
+          setPosts(res.data);
+          setFilteredPosts(res.data);
+        } else {
+          setPosts(BLOG_POSTS_DATA);
+          setFilteredPosts(BLOG_POSTS_DATA);
+        }
       } catch (error) {
-        console.error('Failed to fetch blog posts:', error);
+        console.warn('API error in Blog index, using static catalog:', error);
+        setPosts(BLOG_POSTS_DATA);
+        setFilteredPosts(BLOG_POSTS_DATA);
       } finally {
         setLoading(false);
       }

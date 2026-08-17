@@ -576,9 +576,10 @@ api.defaults.adapter = async (config) => {
       responseData = await db.getTransportStats(user);
     }
     // Blog Routes
-    else if (url?.startsWith("/blog/posts/") && method === "get") {
-      const parts = url.substring(1).split('/');
-      const slug = parts[2]; // /blog/posts/slug-name -> parts = ["blog", "posts", "slug-name"]
+    else if (url?.startsWith("/blog/posts") && method === "get") {
+      const cleanUrl = url.split("?")[0].replace(/\/+$/, '');
+      const parts = cleanUrl.split("/").filter(Boolean); // ["blog", "posts"] or ["blog", "posts", "slug-name"]
+      const slug = parts[2];
       if (slug && slug !== "") {
         responseData = await db.getBlogPostBySlug(slug);
       } else {

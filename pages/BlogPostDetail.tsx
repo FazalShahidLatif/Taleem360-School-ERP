@@ -23,21 +23,36 @@ export const BlogPostDetail: React.FC = () => {
     const fetchPostDetail = async () => {
       if (!slug) return;
       setLoading(true);
+      const cleanSlug = decodeURIComponent(slug).trim().toLowerCase().replace(/\/+$/, '');
       try {
-        const res = await api.get(`/blog/posts/${slug}`);
-        if (res.data) {
-          const fetchedPost = res.data as RichBlogPost;
+        let fetchedPost: RichBlogPost | null = null;
+        try {
+          const res = await api.get(`/blog/posts/${cleanSlug}`);
+          if (res && res.data) {
+            fetchedPost = res.data as RichBlogPost;
+          }
+        } catch (apiErr) {
+          console.warn('API lookup error, checking static catalog fallback:', apiErr);
+        }
+
+        // Direct static fallback guarantee
+        if (!fetchedPost) {
+          fetchedPost = BLOG_POSTS_DATA.find(
+            p => p.slug.toLowerCase() === cleanSlug && p.is_published
+          ) || null;
+        }
+
+        if (fetchedPost) {
           setPost(fetchedPost);
           
           // Seed related articles from the same cluster
           const allPosts = BLOG_POSTS_DATA;
           const related = allPosts
-            .filter(p => p.category === fetchedPost.category && p.slug !== fetchedPost.slug)
+            .filter(p => p.category === fetchedPost!.category && p.slug.toLowerCase() !== cleanSlug)
             .slice(0, 3);
           setRelatedPosts(related);
 
           // --- SEO ENGINE: INJECT CANONICALS & SCHEMAS ---
-          // Coordinate dynamic title and meta descriptions
           document.title = `${fetchedPost.title} | Taleem360 Knowledge Vault`;
 
           let metaDesc = document.querySelector('meta[name="description"]');
@@ -54,14 +69,17 @@ export const BlogPostDetail: React.FC = () => {
           let ogD = document.querySelector('meta[property="og:description"]');
           if (ogD) ogD.setAttribute('content', fetchedPost.excerpt);
 
-          // 1. Dynamic Canonical
+          // 1. Dynamic Canonical (Strict www. destination)
           let canonicalLink = document.querySelector('link[rel="canonical"]');
           if (!canonicalLink) {
             canonicalLink = document.createElement('link');
             canonicalLink.setAttribute('rel', 'canonical');
             document.head.appendChild(canonicalLink);
           }
-          const formattedCanonical = fetchedPost.canonical.replace('https://taleem360.online', 'https://www.taleem360.online');
+          const rawCanonical = fetchedPost.canonical || `https://www.taleem360.online/blog/${fetchedPost.slug}`;
+          const formattedCanonical = rawCanonical.startsWith('https://www.taleem360.online')
+            ? rawCanonical
+            : rawCanonical.replace('https://taleem360.online', 'https://www.taleem360.online');
           canonicalLink.setAttribute('href', formattedCanonical);
 
           // 2. Dynamic JSON-LD (Web schemas: BlogPosting, Breadcrumb, FAQ)
@@ -96,7 +114,7 @@ export const BlogPostDetail: React.FC = () => {
               "name": "Taleem360",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://taleem360.online/logo.png"
+                "url": "https://www.taleem360.online/logo.png"
               }
             }
           };
@@ -105,17 +123,17 @@ export const BlogPostDetail: React.FC = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Institutional Portal", "item": "https://taleem360.online/" },
-              { "@type": "ListItem", "position": 2, "name": "Knowledge Vault", "item": "https://taleem360.online/blog" },
-              { "@type": "ListItem", "position": 3, "name": fetchedPost.category, "item": `https://taleem360.online/blog` },
-              { "@type": "ListItem", "position": 4, "name": fetchedPost.title, "item": fetchedPost.canonical }
+              { "@type": "ListItem", "position": 1, "name": "Institutional Portal", "item": "https://www.taleem360.online/" },
+              { "@type": "ListItem", "position": 2, "name": "Knowledge Vault", "item": "https://www.taleem360.online/blog" },
+              { "@type": "ListItem", "position": 3, "name": fetchedPost.category, "item": "https://www.taleem360.online/blog" },
+              { "@type": "ListItem", "position": 4, "name": fetchedPost.title, "item": formattedCanonical }
             ]
           };
 
           const faqSchema = {
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            "mainEntity": fetchedPost.faqs.map(faq => ({
+            "mainEntity": (fetchedPost.faqs || []).map(faq => ({
               "@type": "Question",
               "name": faq.question,
               "acceptedAnswer": {
