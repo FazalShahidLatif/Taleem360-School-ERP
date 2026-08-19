@@ -77,7 +77,7 @@ export const Blog: React.FC = () => {
       <div className="flex justify-center items-center py-32 bg-slate-50 min-h-screen">
         <div className="flex flex-col items-center space-y-4">
           <div className="animate-spin rounded-full h-14 w-14 border-t-2 border-b-2 border-indigo-600"></div>
-          <p className="text-slate-500 font-medium">Indexing semantic research archive...</p>
+          <p className="text-slate-500 font-medium">Loading articles...</p>
         </div>
       </div>
     );
@@ -87,18 +87,18 @@ export const Blog: React.FC = () => {
 
   return (
     <div className="bg-slate-50 min-h-screen pb-20">
-      {/* Search Engine Optimized Header */}
+      {/* Header */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-indigo-900/40 relative">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center">
             <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-4 tracking-wide uppercase">
-              Taleem360 Knowledge Vault
+              Taleem360 Knowledge Hub
             </span>
             <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl tracking-tight leading-none bg-gradient-to-r from-white via-indigo-100 to-indigo-200 bg-clip-text text-transparent">
-              Topical Educational ERP Archive
+              Educational Insights & ERP Guides
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-300">
-              {posts.length || BLOG_POSTS_DATA.length} comprehensive, research-backed guides built to optimize operations, improve student success, simplify billing compliance, and streamline school logistics.
+              {posts.length || BLOG_POSTS_DATA.length} comprehensive guides to help schools optimize daily administration, enhance student learning, and streamline campus operations.
             </p>
           </div>
 
@@ -111,7 +111,7 @@ export const Blog: React.FC = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search by keyword, author, or research topic..."
+              placeholder="Search by topic, keyword, or author..."
               className="block w-full pl-12 pr-4 py-4 border border-slate-700 rounded-2xl bg-slate-900/50 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-base"
             />
           </div>
@@ -120,11 +120,11 @@ export const Blog: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-        {/* Topical Clusters Filter Bar */}
+        {/* Categories Filter Bar */}
         <div className="mb-8">
           <h2 className="text-xs font-bold text-slate-400 tracking-wider uppercase mb-3 flex items-center">
             <Network className="w-4 h-4 mr-1.5 text-indigo-500" />
-            Topical Semantic Categories
+            Explore by Category
           </h2>
           <div className="flex flex-wrap gap-2">
             {clustersList.map((cluster) => (
@@ -137,7 +137,7 @@ export const Blog: React.FC = () => {
                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 shadow-sm'
                 }`}
               >
-                {cluster === 'ALL' ? 'Show All Areas' : cluster}
+                {cluster === 'ALL' ? 'Show All' : cluster}
               </button>
             ))}
           </div>
@@ -146,11 +146,11 @@ export const Blog: React.FC = () => {
         {/* Results Counter */}
         <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-200">
           <p className="text-sm text-slate-500 font-medium">
-            Showing <span className="text-slate-800 font-bold">{filteredPosts.length}</span> of <span className="text-slate-800 font-bold">{posts.length}</span> optimized research articles
+            Showing <span className="text-slate-800 font-bold">{filteredPosts.length}</span> of <span className="text-slate-800 font-bold">{posts.length}</span> articles
           </p>
           <div className="hidden sm:flex items-center space-x-1.5 text-xs text-indigo-600 bg-indigo-50 font-semibold px-2.5 py-1 rounded-md">
             <CheckCircle className="w-3.5 h-3.5" />
-            <span>SEO Checked & Ready</span>
+            <span>Verified Guides</span>
           </div>
         </div>
 

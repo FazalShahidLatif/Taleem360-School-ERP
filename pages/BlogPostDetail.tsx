@@ -207,7 +207,7 @@ export const BlogPostDetail: React.FC = () => {
       <div className="flex justify-center items-center py-32 bg-slate-50 min-h-screen">
         <div className="flex flex-col items-center space-y-4">
           <div className="animate-spin rounded-full h-14 w-14 border-t-2 border-b-2 border-indigo-600"></div>
-          <p className="text-slate-500 font-semibold text-sm">Compiling semantic content nodes...</p>
+          <p className="text-slate-500 font-semibold text-sm">Loading article...</p>
         </div>
       </div>
     );
@@ -218,9 +218,9 @@ export const BlogPostDetail: React.FC = () => {
       <div className="bg-slate-50 min-h-screen py-24 px-4 text-center flex flex-col items-center justify-center">
         <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm max-w-md">
           <HelpCircle className="w-16 h-16 text-indigo-500 mx-auto mb-4 animate-pulse" />
-          <h2 className="text-2xl font-black text-slate-800">Research Article Not Indexed</h2>
+          <h2 className="text-2xl font-black text-slate-800">Article Not Found</h2>
           <p className="text-slate-500 text-sm mt-3 leading-relaxed">
-            The requested technical operational resource doesn't exist or hasn't completed audit validation under our semantic map schemas.
+            The requested article could not be found. Please browse our educational directory to explore our latest guides and updates.
           </p>
           <button
             onClick={() => navigate('/blog')}
@@ -244,9 +244,9 @@ export const BlogPostDetail: React.FC = () => {
             Back to Directory
           </Link>
           <div className="flex items-center space-x-3 text-xs text-slate-400 font-semibold">
-            <span>READABILITY SCORE: <span className="text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">{post.readability_score}+</span></span>
+            <span>Category: <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded">{post.category}</span></span>
             <span className="hidden md:inline">|</span>
-            <span className="hidden md:inline">WORD COUNT: <span className="text-indigo-600 font-bold">{post.word_count} WORDS</span></span>
+            <span className="hidden md:inline">Read Time: <span className="text-emerald-700 font-bold">{Math.round(post.word_count / 250)} min read</span></span>
           </div>
         </div>
       </div>
@@ -267,7 +267,7 @@ export const BlogPostDetail: React.FC = () => {
                     onClick={() => handleScrollToSection('intro-node')}
                     className="text-xs text-left font-semibold text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer"
                   >
-                    ● Executive Introduction
+                    ● Introduction
                   </button>
                 </li>
                 {post.subSections.map((sec, idx) => (
@@ -285,7 +285,7 @@ export const BlogPostDetail: React.FC = () => {
                     onClick={() => handleScrollToSection('case-node')}
                     className="text-xs text-left font-semibold text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer"
                   >
-                    ● Case Study Assessment
+                    ● Practical Implementation
                   </button>
                 </li>
                 <li>
@@ -293,7 +293,7 @@ export const BlogPostDetail: React.FC = () => {
                     onClick={() => handleScrollToSection('faq-node')}
                     className="text-xs text-left font-semibold text-slate-600 hover:text-indigo-600 transition-colors cursor-pointer"
                   >
-                    ● Schema FAQ Block
+                    ● Frequently Asked Questions
                   </button>
                 </li>
               </ul>
@@ -303,17 +303,17 @@ export const BlogPostDetail: React.FC = () => {
             <div className="bg-gradient-to-br from-indigo-950 to-indigo-900 text-white rounded-2xl p-5 border border-indigo-900 relative overflow-hidden shadow-sm">
               <div className="absolute top-0 right-0 -mt-8 -mr-8 w-24 h-24 bg-indigo-500/20 rounded-full blur-xl"></div>
               <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-extrabold bg-indigo-500/30 text-indigo-300 uppercase tracking-widest mb-3">
-                Sponsor Highlight
+                Featured Solution
               </span>
-              <h4 className="text-sm font-black mb-1.5 leading-snug">ERP Software Implementation</h4>
+              <h4 className="text-sm font-black mb-1.5 leading-snug">School ERP Implementation</h4>
               <p className="text-[11px] text-slate-300 leading-normal mb-4">
-                Deploy Taleem360 and claim up to $500 in onboarding credits. Unify attendance, invoicing, and reporting today.
+                Explore how Taleem360 simplifies attendance, fee collection, gradebooks, and parent communication for modern institutions.
               </p>
               <Link 
                 to="/pricing" 
                 className="inline-flex items-center text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 px-3 py-2 rounded-lg transition-all"
               >
-                Claim Credits
+                Learn More
                 <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
               </Link>
             </div>
@@ -347,7 +347,7 @@ export const BlogPostDetail: React.FC = () => {
                   </div>
                   <div>
                     <span className="font-bold text-slate-800 block text-[11px]">{post.author}</span>
-                    <span className="text-[10px] text-slate-400">Chief Education Policy Audit Lead</span>
+                    <span className="text-[10px] text-slate-400">Education Consultant</span>
                   </div>
                 </div>
                 <div className="flex items-center bg-slate-50 px-2.5 py-1.5 rounded">
@@ -356,7 +356,7 @@ export const BlogPostDetail: React.FC = () => {
                 </div>
                 <div className="flex items-center bg-slate-50 px-2.5 py-1.5 rounded">
                   <Award className="w-3.5 h-3.5 mr-1.5 text-emerald-600" />
-                  <span>Flesch score: <strong className="text-emerald-700">{post.readability_score} (Accessible)</strong></span>
+                  <span>Topic: <strong className="text-emerald-700">{post.category}</strong></span>
                 </div>
               </div>
 
@@ -373,21 +373,17 @@ export const BlogPostDetail: React.FC = () => {
                 />
               </div>
 
-              <span className="text-xs text-slate-400 block -mt-6 mb-8 text-center bg-slate-50 py-1.5 rounded-b-xl border-x border-b border-slate-200">
-                Figure 1.1: {post.alt_text}
-              </span>
-
               {/* Introduction Segment */}
               <div id="intro-node" className="space-y-4">
                 <h2 className="text-lg font-bold text-slate-800 flex items-center">
                   <Sparkles className="w-4 h-4 mr-2 text-indigo-600" />
-                  1.0 Executive Introduction & Thesis Overview
+                  Introduction & Overview
                 </h2>
                 <p className="text-slate-600 leading-relaxed text-sm antialiased text-justify">
                   {post.introduction}
                 </p>
                 <p className="text-slate-600 leading-relaxed text-sm antialiased text-justify font-normal pl-4 border-l-2 border-indigo-600 italic bg-indigo-50/20 py-1">
-                  "Administrative complexity acts as an operational bottleneck. To unlock maximum focus, modern academics should unify their daily record matrices under a secure and centralized relational framework."
+                  "Administrative complexity acts as an operational bottleneck. To unlock maximum focus, modern academics should unify their daily record systems under a secure and centralized framework."
                 </p>
               </div>
 
@@ -396,7 +392,7 @@ export const BlogPostDetail: React.FC = () => {
                 {post.subSections.map((section, idx) => (
                   <section id={`sec-node-${idx}`} key={idx} className="space-y-4 pt-4 border-t border-slate-100">
                     <h3 className="text-base font-extrabold text-slate-800">
-                      2.{idx + 1} {section.title}
+                      {idx + 1}. {section.title}
                     </h3>
                     
                     {section.paragraphs.map((p, pIdx) => (
@@ -418,11 +414,11 @@ export const BlogPostDetail: React.FC = () => {
 
                     {section.callout && (
                       <div className="bg-amber-50/50 border-l-4 border-amber-500 rounded-r-xl p-4 text-xs text-amber-900 leading-relaxed">
-                        <strong>Operational Insight:</strong> {section.callout}
+                        <strong>Key Takeaway:</strong> {section.callout}
                       </div>
                     )}
 
-                    {/* INTERLINKS ROOT: Contextual cluster alignment */}
+                    {/* INTERLINKS ROOT: Contextual related guide */}
                     {section.interlinkTitle && section.interlinkSlug && (
                       <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 flex items-center justify-between text-xs my-2">
                         <div className="flex items-center space-x-2">
@@ -433,25 +429,25 @@ export const BlogPostDetail: React.FC = () => {
                           to={`/blog/${section.interlinkSlug}`} 
                           className="text-indigo-600 font-bold hover:underline ml-3 flex-shrink-0 flex items-center"
                         >
-                          Access Guide
+                          Read Guide
                           <ChevronRight className="w-3.5 h-3.5 ml-0.5" />
                         </Link>
                       </div>
                     )}
 
-                    {/* Native Display Ad Injections inside paragraph streams (In-Article Unit) */}
+                    {/* In-Article Solution Spotlight */}
                     {idx === 1 && (
                       <div className="my-6 p-5 bg-slate-50 border border-slate-200 rounded-xl text-center relative">
-                        <span className="absolute top-1 right-2 text-[8px] tracking-widest text-slate-400 font-bold">NATIVE AD DESK</span>
-                        <h4 className="text-slate-800 font-extrabold text-xs mb-1">Recommended SaaS: Taleem360 ERP</h4>
+                        <span className="absolute top-1 right-2 text-[8px] tracking-widest text-slate-400 font-bold">PLATFORM SPOTLIGHT</span>
+                        <h4 className="text-slate-800 font-extrabold text-xs mb-1">Taleem360 School Management Platform</h4>
                         <p className="text-slate-500 text-[10px] max-w-sm mx-auto mb-3">
-                          Automate your school fee schedules and protect database security with high-performance software. Rated 4.9/5 by global superintendents.
+                          Automate fee structures, manage daily attendance, and enhance academic records with reliable, easy-to-use software.
                         </p>
                         <Link 
                           to="/pricing" 
                           className="inline-flex items-center px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-[10px] rounded"
                         >
-                          Book Demo Setup
+                          Explore Plans & Demo
                         </Link>
                       </div>
                     )}
@@ -459,11 +455,11 @@ export const BlogPostDetail: React.FC = () => {
                 ))}
               </div>
 
-              {/* Standard Case study Modules */}
+              {/* Case Study Section */}
               <section id="case-node" className="mt-12 pt-8 border-t border-slate-100 space-y-4">
                 <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-6 sm:p-8">
                   <span className="inline-flex items-center px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded mb-2">
-                    Case Study Analysis
+                    Case Study
                   </span>
                   <h3 className="text-base font-bold text-slate-800 mb-2">
                     {post.caseStudy.title}
@@ -474,7 +470,7 @@ export const BlogPostDetail: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {post.caseStudy.metrics.map((met, mIdx) => (
                       <div key={mIdx} className="bg-white p-3.5 rounded-xl border border-emerald-100 flex flex-col justify-center">
-                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Metrics 0{mIdx+1}</span>
+                        <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Result {mIdx+1}</span>
                         <span className="text-xs font-semibold text-emerald-800 leading-tight mt-1">{met}</span>
                       </div>
                     ))}
@@ -482,11 +478,11 @@ export const BlogPostDetail: React.FC = () => {
                 </div>
               </section>
 
-              {/* Micro Schema FAQ Accordion widgets */}
+              {/* FAQ Accordion widgets */}
               <section id="faq-node" className="mt-12 pt-8 border-t border-slate-100 space-y-4">
                 <h3 className="text-base font-bold text-slate-800 flex items-center">
                   <HelpCircle className="w-5 h-5 text-indigo-500 mr-2" />
-                  3.0 Educational Audit FAQ (Schema-Markup Validated)
+                  Frequently Asked Questions
                 </h3>
                 <div className="space-y-3">
                   {post.faqs.map((faq, fIdx) => (
@@ -543,7 +539,7 @@ export const BlogPostDetail: React.FC = () => {
               </section>
 
               <div className="mt-12 pt-6 border-t border-slate-100 space-y-4">
-                <h3 className="text-sm font-bold text-slate-800">4.0 Definitive Conclusion</h3>
+                <h3 className="text-sm font-bold text-slate-800">Summary & Conclusion</h3>
                 <p className="text-slate-600 text-sm leading-relaxed antialiased text-justify">
                   {post.conclusion}
                 </p>
@@ -552,17 +548,17 @@ export const BlogPostDetail: React.FC = () => {
             </article>
           </main>
 
-          {/* RIGHT COLUMN: SHARED SS (SHARED SIDEBARS & SECTIONS) */}
+          {/* RIGHT COLUMN: SIDEBAR */}
           <aside className="space-y-8 sticky top-24 lg:col-span-1">
             
-            {/* Lead capture magnet card (Shared Sidebar) */}
+            {/* Consultation Request card */}
             <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
               <div className="flex items-center space-x-2 text-indigo-600 font-bold text-xs uppercase">
                 <ShieldCheck className="w-4.5 h-4.5 text-indigo-600" />
-                <span>Free ERP Workspace Audit</span>
+                <span>Request a Consultation</span>
               </div>
               <p className="text-[11px] text-slate-500 leading-relaxed">
-                Provide your details below to schedule a custom administrative diagnostic audit for your school franchise.
+                Provide your details below to connect with an education technology advisor for your school.
               </p>
               <form onSubmit={submitLead} className="space-y-3">
                 <input 
@@ -586,16 +582,16 @@ export const BlogPostDetail: React.FC = () => {
                   className="w-full px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5 mr-1.5" />
-                  Request Audit Phone Call
+                  Request a Callback
                 </button>
               </form>
             </div>
 
-            {/* Structured SS: Related Posts interlinks sidebar */}
+            {/* Related Articles */}
             <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
               <h3 className="text-xs font-bold text-slate-400 tracking-wider uppercase pb-2 border-b border-slate-100 flex items-center">
                 <Sparkles className="w-4 h-4 text-indigo-600 mr-1.5" />
-                Related Research
+                Related Articles
               </h3>
               <div className="space-y-4">
                 {relatedPosts.length > 0 ? (
