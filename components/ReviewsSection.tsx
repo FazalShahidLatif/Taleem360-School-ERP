@@ -91,7 +91,19 @@ export const ReviewsSection: React.FC = () => {
   });
 
   return (
-    <section id="reviews-feedback-section" className="py-24 bg-slate-900 text-slate-100 relative overflow-hidden">
+    <section 
+      id="reviews-feedback-section" 
+      className="py-24 bg-slate-900 text-slate-100 relative overflow-hidden"
+      itemScope
+      itemType="https://schema.org/SoftwareApplication"
+    >
+      {/* Hidden microdata metadata for SoftwareApplication & AggregateRating */}
+      <meta itemProp="name" content="Taleem 360" />
+      <meta itemProp="applicationCategory" content="EducationalApplication" />
+      <meta itemProp="operatingSystem" content="Web, Android, iOS, Windows, macOS, Linux" />
+      <meta itemProp="url" content="https://www.taleem360.online/" />
+      <meta itemProp="image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80" />
+
       {/* Background radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.08),transparent_50%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(79,70,229,0.05),transparent_50%)] pointer-events-none" />
@@ -115,15 +127,21 @@ export const ReviewsSection: React.FC = () => {
         {/* Rating Grid Summary */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch mb-20">
           
-          {/* Column 1: Core Aggregate Rating Card */}
-          <div className="bg-slate-950/60 border border-slate-800/80 p-8 rounded-3xl flex flex-col justify-between shadow-2xl">
+          {/* Column 1: Core Aggregate Rating Card with Microdata */}
+          <div 
+            className="bg-slate-950/60 border border-slate-800/80 p-8 rounded-3xl flex flex-col justify-between shadow-2xl"
+            itemProp="aggregateRating"
+            itemScope
+            itemType="https://schema.org/AggregateRating"
+          >
             <div>
               <h3 className="text-xl font-bold text-white mb-2">Aggregate Score</h3>
               <p className="text-sm text-slate-400">Calculated from verified platform subscribers.</p>
               
               <div className="flex items-baseline gap-2 my-6">
-                <span className="text-6xl font-black text-white font-mono">4.9</span>
-                <span className="text-lg text-slate-500">/ 5.0</span>
+                <span className="text-6xl font-black text-white font-mono" itemProp="ratingValue">4.9</span>
+                <span className="text-lg text-slate-500">/ <span itemProp="bestRating">5.0</span></span>
+                <meta itemProp="worstRating" content="1" />
               </div>
 
               <div className="flex items-center gap-1 mb-2">
@@ -131,7 +149,9 @@ export const ReviewsSection: React.FC = () => {
                   <Star key={star} className="w-6 h-6 fill-emerald-400 text-emerald-400" />
                 ))}
               </div>
-              <p className="text-xs text-slate-400 mt-2 font-semibold">187+ Verified Institutional Reviews</p>
+              <p className="text-xs text-slate-400 mt-2 font-semibold">
+                <span itemProp="reviewCount">187</span>+ Verified Reviews (<span itemProp="ratingCount">520</span> Institutional Ratings)
+              </p>
             </div>
 
             <div className="pt-6 border-t border-slate-800 mt-6 space-y-3">
@@ -318,20 +338,29 @@ export const ReviewsSection: React.FC = () => {
               </div>
             ) : (
               filteredReviews.map((rev) => (
-                <div key={rev.id} className="p-8 hover:bg-slate-900/10 transition-colors">
+                <div 
+                  key={rev.id} 
+                  className="p-8 hover:bg-slate-900/10 transition-colors"
+                  itemProp="review"
+                  itemScope
+                  itemType="https://schema.org/Review"
+                >
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-emerald-950 border border-emerald-800/50 flex items-center justify-center font-bold text-sm text-emerald-400">
                         {rev.author.charAt(0)}
                       </div>
-                      <div>
-                        <h5 className="font-bold text-white text-sm">{rev.author}</h5>
+                      <div itemProp="author" itemScope itemType="https://schema.org/Person">
+                        <h5 className="font-bold text-white text-sm" itemProp="name">{rev.author}</h5>
                         <p className="text-[11px] text-slate-400">{rev.institution}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <div className="flex gap-0.5">
+                      <div className="flex gap-0.5" itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                        <meta itemProp="ratingValue" content={String(rev.rating)} />
+                        <meta itemProp="bestRating" content="5" />
+                        <meta itemProp="worstRating" content="1" />
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star
                             key={i}
@@ -343,7 +372,7 @@ export const ReviewsSection: React.FC = () => {
                       </div>
 
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] text-slate-500 font-mono">{rev.date}</span>
+                        <span className="text-[10px] text-slate-500 font-mono" itemProp="datePublished">{rev.date}</span>
                         <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
                           rev.source === 'Google'
                             ? 'bg-blue-950 border border-blue-800 text-blue-400'
@@ -362,7 +391,7 @@ export const ReviewsSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed font-sans pl-1">
+                  <p className="text-xs text-slate-300 leading-relaxed font-sans pl-1" itemProp="reviewBody">
                     "{rev.content}"
                   </p>
                 </div>
