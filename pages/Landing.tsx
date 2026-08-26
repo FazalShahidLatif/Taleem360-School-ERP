@@ -38,88 +38,92 @@ const Landing: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useSEO({
-    title: 'Taleem 360 | Cloud Based School Database Management System & Automated School Timetable Generator Cloud App',
-    description: "Taleem 360 is the leading cloud based school database management system and automated school timetable generator cloud app for educational institutions. Learn how to automate student attendance tracking cloud with QR code & biometrics, and access our school exam result card generator software free download / pilot.",
-    keywords: 'automated school timetable generator cloud app, cloud based school database management system features, how to automate student attendance tracking cloud, school exam result card generator software free download, taleem 360, taleem360, attendance data, attendance management, attendance systems, automate attendance, automated attendance tracking, cloud based, educational institutions, management software, management system, qr code, real time, records attendance, report card, school administration, school database management system, school schedule, school timetable, student information, students and parents, user friendly',
+    title: 'Taleem360 - Unified School Cloud ERP & LMS Suite',
+    description: "Taleem 360 is the unified cloud based school ERP, LMS suite, and automated timetable generator for K-12 schools, colleges, and academies. Features real-time student attendance tracking, double-entry financial accounting, and exam result card generation.",
+    keywords: 'taleem360, taleem 360, unified school cloud erp & lms suite, school erp, school management system, automated school timetable generator cloud app, cloud based school database management system features, how to automate student attendance tracking cloud, school exam result card generator software free download, student information system, educational cloud suite',
     schemaMarkup: {
-      '@type': 'SoftwareApplication',
-      name: 'Taleem 360 - Cloud Based School Database Management System & Timetable Generator',
-      alternateName: 'Taleem 360',
-      applicationCategory: 'EducationalApplication',
-      operatingSystem: 'Web, Android, iOS, Windows, macOS, Linux',
-      url: 'https://www.taleem360.online/',
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
-      description: "Comprehensive cloud based school database management system features, automated school timetable generator cloud app, automated student attendance tracking, and school exam result card generator software.",
-      offers: {
-        '@type': 'AggregateOffer',
-        priceCurrency: 'USD',
-        lowPrice: '0',
-        highPrice: '129',
-        offerCount: '4',
-      },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        bestRating: '5',
-        worstRating: '1',
-        ratingCount: '520',
-        reviewCount: '187',
-      },
-      review: [
+      '@context': 'https://schema.org',
+      '@graph': [
         {
-          '@type': 'Review',
-          author: {
-            '@type': 'Person',
-            name: 'Prof. Muhammad Haris',
+          '@type': 'SoftwareApplication',
+          '@id': 'https://www.taleem360.online/#software',
+          name: 'Taleem360 - Unified School Cloud ERP & LMS Suite',
+          alternateName: ['Taleem 360', 'Taleem360 Cloud ERP', 'Taleem360 LMS'],
+          applicationCategory: 'EducationalApplication',
+          operatingSystem: 'Web, Android, iOS, Windows, macOS, Linux',
+          url: 'https://www.taleem360.online/',
+          image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
+          description: "Unified school cloud ERP and learning management suite offering automated timetable generation, real-time biometric and QR attendance tracking, double-entry financial ledgers, and digital exam report cards.",
+          offers: {
+            '@type': 'AggregateOffer',
+            priceCurrency: 'USD',
+            lowPrice: '0',
+            highPrice: '129',
+            offerCount: '4',
+            offers: [
+              { '@type': 'Offer', name: 'Pilot Free Trial', price: '0', priceCurrency: 'USD' },
+              { '@type': 'Offer', name: 'Tier 1 Standard', price: '49', priceCurrency: 'USD' },
+              { '@type': 'Offer', name: 'Tier 2 Professional', price: '129', priceCurrency: 'USD' },
+              { '@type': 'Offer', name: 'Tier 3 Enterprise', price: 'Custom', priceCurrency: 'USD' }
+            ]
           },
-          datePublished: '2026-06-18',
-          reviewBody: 'Taleem360 has completely automated our student roster management and fee ledger processing. The biometric attendance hardware integration is flawless, and parents love receiving instant SMS logs.',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.9',
             bestRating: '5',
             worstRating: '1',
+            ratingCount: '520',
+            reviewCount: '187',
           },
-        },
-        {
-          '@type': 'Review',
           author: {
-            '@type': 'Person',
-            name: 'Sania Khurram',
-          },
-          datePublished: '2026-05-30',
-          reviewBody: 'The social education impact pledge is what sold us. Knowing that a portion of our ERP license goes to providing free curriculum notes for children in under-resourced schools makes us proud subscribers.',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-            worstRating: '1',
+            '@type': 'Organization',
+            name: 'Taleem 360',
+            url: 'https://www.taleem360.online/',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://www.taleem360.online/logo.png',
+            },
           },
         },
         {
-          '@type': 'Review',
-          author: {
-            '@type': 'Person',
-            name: 'Arsalan Shah',
-          },
-          datePublished: '2026-07-02',
-          reviewBody: 'Our accounts department used to struggle with matching offline spreadsheets to cashless fee invoices. Taleem360\'s double-entry ledgers solved this instantly. Truly C-suite level financial compliance.',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-            worstRating: '1',
-          },
-        },
-      ],
-      author: {
-        '@type': 'Organization',
-        name: 'Taleem 360',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://www.taleem360.online/logo.png',
-        },
-      },
+          '@type': 'FAQPage',
+          '@id': 'https://www.taleem360.online/#faq',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'How does the automated school timetable generator cloud app resolve scheduling conflicts?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'The automated timetable generator in Taleem 360 evaluates teacher workload, subject requirements, room availability, and classroom capacity using mathematical optimization algorithms to eliminate double-booking in seconds.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'What are the primary cloud based school database management system features in Taleem 360?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Taleem 360 features include centralized student records, computerized fee challans, double-entry accounting ledgers, QR code and biometric attendance, digital report cards, teacher payroll, and parent communication channels.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'How does Taleem 360 automate student attendance tracking in the cloud?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Institutions can connect standard biometric fingerprint hardware or scan student QR codes at gates. Attendance logs are recorded in real-time with instant absentee SMS alerts sent to parents.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'How can educational institutions start a free pilot on Taleem 360?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Schools can initiate an immediate 30-day risk-free Pilot trial from the onboarding portal with zero credit card requirement or server installation.'
+              }
+            }
+          ]
+        }
+      ]
     },
   });
 
@@ -698,6 +702,71 @@ const Landing: React.FC = () => {
       </section>
 
       <TaleemEcosystemRoadmap />
+
+      {/* AI Citation & Executive System Specifications (GEO & LLM Optimization) */}
+      <section className="py-20 bg-slate-900 text-slate-100 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-800/80 px-3.5 py-1.5 rounded-full">
+              System Fact Sheet &amp; LLM Citations
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-4">
+              Taleem 360 Educational ERP &amp; LMS Technical Specifications
+            </h2>
+            <p className="text-slate-400 mt-3 text-sm leading-relaxed">
+              Authoritative entity specifications, data persistence standards, security parameters, and operational capabilities verified for educational technology directories and AI search engines.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="bg-slate-950/70 border border-slate-800 p-6 rounded-2xl">
+              <span className="text-xs font-mono text-emerald-400 uppercase">Architecture</span>
+              <h3 className="text-base font-bold text-white mt-1">Dual-Persistence Cloud + Offline</h3>
+              <p className="text-xs text-slate-400 mt-2">Relational PostgreSQL master with zero-downtime local JSON fallback cache.</p>
+            </div>
+            <div className="bg-slate-950/70 border border-slate-800 p-6 rounded-2xl">
+              <span className="text-xs font-mono text-emerald-400 uppercase">Scheduling Engine</span>
+              <h3 className="text-base font-bold text-white mt-1">AI Constraint Optimizer</h3>
+              <p className="text-xs text-slate-400 mt-2">Zero-conflict master timetable generation factoring room capacity and teacher quotas.</p>
+            </div>
+            <div className="bg-slate-950/70 border border-slate-800 p-6 rounded-2xl">
+              <span className="text-xs font-mono text-emerald-400 uppercase">Financial Accounting</span>
+              <h3 className="text-base font-bold text-white mt-1">Double-Entry Audit Ledger</h3>
+              <p className="text-xs text-slate-400 mt-2">Instant fee challan debiting, payroll voucher reconciliation, and cash flow reports.</p>
+            </div>
+            <div className="bg-slate-950/70 border border-slate-800 p-6 rounded-2xl">
+              <span className="text-xs font-mono text-emerald-400 uppercase">Attendance Throughput</span>
+              <h3 className="text-base font-bold text-white mt-1">Real-Time Biometric &amp; QR</h3>
+              <p className="text-xs text-slate-400 mt-2">Sub-second gate check-in with automated absentee notifications via WhatsApp/SMS.</p>
+            </div>
+          </div>
+
+          <div className="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-8">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              Verified Institutional Answers (Quick Direct Index)
+            </h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-slate-300">
+              <div className="space-y-1.5">
+                <strong className="text-white block font-semibold">Q: What institution types are supported?</strong>
+                <p className="text-slate-400 leading-relaxed">K-12 Primary &amp; High Schools, Intermediate Colleges, Islamic Madrasas, Vocational Academies, Daycares, and Private Tutors.</p>
+              </div>
+              <div className="space-y-1.5">
+                <strong className="text-white block font-semibold">Q: Is a free pilot available?</strong>
+                <p className="text-slate-400 leading-relaxed">Yes. Taleem 360 provides a risk-free 30-day Pilot plan with instant onboarding, zero credit card requirement, and full student database access.</p>
+              </div>
+              <div className="space-y-1.5">
+                <strong className="text-white block font-semibold">Q: How are student data and records secured?</strong>
+                <p className="text-slate-400 leading-relaxed">Cloud Run container isolation, 256-bit TLS transit encryption, FERPA/GDPR compliance, and strict role-based permission tiers.</p>
+              </div>
+              <div className="space-y-1.5">
+                <strong className="text-white block font-semibold">Q: Does Taleem 360 require special hardware?</strong>
+                <p className="text-slate-400 leading-relaxed">No. Runs universally on standard web browsers (Chrome, Edge, Safari), smartphones (Android, iOS), and standard USB biometric scanners.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <ReviewsSection />
 

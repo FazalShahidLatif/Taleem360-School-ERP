@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { analytics } from '../lib/analytics';
+import { useSEO } from '../lib/seo';
 
 export const Onboarding: React.FC = () => {
   const { user, refreshUser } = useAuth();
@@ -36,17 +37,25 @@ export const Onboarding: React.FC = () => {
     client_ip: ''
   });
 
-  useEffect(() => {
-    document.title = 'Establish Your School Cloud Portal | Taleem360 Onboarding';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+  useSEO({
+    title: 'Establish Your School Cloud Portal | Taleem360 Onboarding',
+    description: "Initiate your custom institutional subdomain, configure your initial database repository, and select your subscription tier to access Taleem360.",
+    keywords: 'establish your school cloud portal, taleem360 onboarding, school registration, institutional cloud setup, school erp cloud pilot, k12 onboarding',
+    canonicalUrl: 'https://www.taleem360.online/onboarding',
+    schemaMarkup: {
+      '@type': 'WebPage',
+      name: 'Establish Your School Cloud Portal | Taleem360 Onboarding',
+      description: 'Institutional onboarding workflow to provision a dedicated school database and select deployment tier.',
+      url: 'https://www.taleem360.online/onboarding',
+      potentialAction: {
+        '@type': 'RegisterAction',
+        target: 'https://www.taleem360.online/onboarding',
+        name: 'Provision School Cloud Instance'
+      }
     }
-    metaDescription.setAttribute('content', 'Initiate your custom institutional subdomain, configure your initial database repository, and select your subscription tier to access Taleem360.');
+  });
 
+  useEffect(() => {
     if (user?.onboarded) {
       navigate('/');
     }

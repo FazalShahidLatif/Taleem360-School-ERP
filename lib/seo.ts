@@ -6,6 +6,7 @@ interface SEOProps {
   keywords?: string;
   canonicalUrl?: string;
   ogType?: string;
+  ogImage?: string;
   schemaMarkup?: object;
   noindex?: boolean;
 }
@@ -16,12 +17,15 @@ export const useSEO = ({
   keywords,
   canonicalUrl,
   ogType = 'website',
+  ogImage = 'https://www.taleem360.online/logo.png',
   schemaMarkup,
   noindex = false,
 }: SEOProps) => {
   useEffect(() => {
     // 1. Update document title
-    const fullTitle = `${title} | Taleem360 Unified Education Suite`;
+    const fullTitle = title.toLowerCase().includes('taleem') 
+      ? title 
+      : `${title} | Taleem 360 Unified Education Suite`;
     document.title = fullTitle;
 
     // Helper to query or create meta tags
@@ -56,9 +60,16 @@ export const useSEO = ({
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:type', ogType);
     setMetaTag('property', 'og:url', normalizedUrl);
-    setMetaTag('property', 'og:image', 'https://www.taleem360.online/logo.png');
+    setMetaTag('property', 'og:image', ogImage);
+    setMetaTag('property', 'og:site_name', 'Taleem 360');
 
-    // 5. Set Canonical tag (enforcing www. domain to prevent GSC impression splitting)
+    // 5. Set Twitter Card tags
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
+    setMetaTag('name', 'twitter:title', fullTitle);
+    setMetaTag('name', 'twitter:description', description);
+    setMetaTag('name', 'twitter:image', ogImage);
+
+    // 6. Set Canonical tag (enforcing www. domain to prevent GSC impression splitting)
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
@@ -67,7 +78,7 @@ export const useSEO = ({
     }
     canonical.setAttribute('href', normalizedUrl);
 
-    // 6. Handle JSON-LD Schema markup injection
+    // 7. Handle JSON-LD Schema markup injection
     let schemaScript = document.getElementById('dynamic-json-ld');
     if (schemaMarkup) {
       if (!schemaScript) {
@@ -76,10 +87,10 @@ export const useSEO = ({
         schemaScript.setAttribute('type', 'application/ld+json');
         document.head.appendChild(schemaScript);
       }
-      schemaScript.innerHTML = JSON.stringify({
-        '@context': 'https://schema.org',
-        ...schemaMarkup,
-      });
+      const schemaData = ('@context' in schemaMarkup)
+        ? schemaMarkup
+        : { '@context': 'https://schema.org', ...schemaMarkup };
+      schemaScript.innerHTML = JSON.stringify(schemaData);
     } else {
       if (schemaScript) {
         schemaScript.remove();
@@ -88,11 +99,10 @@ export const useSEO = ({
 
     // Clean up on unmount or change if necessary
     return () => {
-      // Keep main tags but remove dynamic schema to avoid leaks
       const currentSchema = document.getElementById('dynamic-json-ld');
       if (currentSchema) {
         currentSchema.remove();
       }
     };
-  }, [title, description, keywords, canonicalUrl, ogType, schemaMarkup, noindex]);
+  }, [title, description, keywords, canonicalUrl, ogType, ogImage, schemaMarkup, noindex]);
 };

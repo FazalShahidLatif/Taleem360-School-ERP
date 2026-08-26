@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { GraduationCap } from 'lucide-react';
 import api from '../lib/api';
 import { Footer } from '../components/Footer';
+import { useSEO } from '../lib/seo';
 
 export const Login: React.FC = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -27,17 +28,18 @@ export const Login: React.FC = () => {
   const navigate = useNavigate();
   const isLiveWebsite = false;
 
-  React.useEffect(() => {
-    document.title = 'Sign In & Access Cloud Portal | Taleem360 ERP Suite';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+  useSEO({
+    title: 'Sign In & Access Cloud Portal | Taleem360 ERP Suite',
+    description: "Sign in securely to your Taleem360 multi-tenant school portal. Check academic grades, student attendance, parent dashboards, and process billing checkout payments.",
+    keywords: 'sign in school portal, taleem360 erp login, student cloud access, teacher portal login, school administration login, parent gradebook sign in',
+    canonicalUrl: 'https://www.taleem360.online/login',
+    schemaMarkup: {
+      '@type': 'WebPage',
+      name: 'Sign In & Access Cloud Portal | Taleem360 ERP Suite',
+      description: 'Single sign-on authentication portal for school principals, teachers, students, and bursars across Taleem360 educational cloud nodes.',
+      url: 'https://www.taleem360.online/login'
     }
-    metaDescription.setAttribute('content', 'Sign in securely to your Taleem360 multi-tenant school portal. Check academic grades, student attendance, parent dashboards, and process billing checkout payments.');
-  }, []);
+  });
 
   const handleResetSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

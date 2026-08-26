@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   MessageSquare, 
@@ -9,71 +9,90 @@ import {
   Video, 
   FileText,
   ChevronRight,
-  LifeBuoy
+  LifeBuoy,
+  ShieldCheck,
+  Clock,
+  ArrowRight
 } from 'lucide-react';
+import { useSEO } from '../lib/seo';
 
 export const Support: React.FC = () => {
-  useEffect(() => {
-    document.title = 'Institutional Cloud Support Center | Taleem360 School Cloud ERP';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+  useSEO({
+    title: 'Institutional Cloud Support Center | Taleem360 School Cloud ERP',
+    description: "Institutional cloud support center for Taleem360 school ERP. Access 24/7 priority SLA ticket dispatch, technical knowledge base, user setup guides, and administrative onboarding assistance.",
+    keywords: 'institutional cloud support center, taleem360 school cloud erp support, school erp help desk, school database technical assistance, automated timetable troubleshooting',
+    canonicalUrl: 'https://www.taleem360.online/support',
+    schemaMarkup: {
+      '@type': 'ContactPage',
+      name: 'Institutional Cloud Support Center | Taleem360 School Cloud ERP',
+      description: 'Dedicated institutional help desk and SLA response portal for Taleem360 school management software administrators.',
+      url: 'https://www.taleem360.online/support',
+      mainEntity: {
+        '@type': 'EducationalOrganization',
+        name: 'Taleem 360',
+        url: 'https://www.taleem360.online/',
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: '+92-332-213-7898',
+            contactType: 'technical support',
+            email: 'support@taleem360.online',
+            availableLanguage: ['English', 'Urdu'],
+            hoursAvailable: {
+              '@type': 'OpeningHoursSpecification',
+              dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+              opens: '09:00',
+              closes: '18:00'
+            }
+          }
+        ]
+      }
     }
-    metaDescription.setAttribute('content', 'Need assistance with your Taleem360 school management dashboards? Browse our knowledge base articles, video guides, and direct support SLA contacts.');
-
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/support');
-  }, []);
+  });
 
   const supportCategories = [
     {
-      title: 'Support Tickets',
-      description: 'Open a new ticket or track existing ones.',
+      title: 'Support Tickets & Helpdesk',
+      description: 'Submit priority inquiries, bug reports, or database restoration requests.',
       icon: MessageSquare,
       link: '/tickets',
       color: 'bg-indigo-50 text-indigo-600'
     },
     {
-      title: 'Knowledge Base',
-      description: 'Browse articles and guides on how to use Taleem360.',
+      title: 'Knowledge Vault & Docs',
+      description: 'Step-by-step documentation on fee challans, timetable optimization, and SIS configuration.',
       icon: Book,
       link: '/blog',
       color: 'bg-emerald-50 text-emerald-600'
     },
     {
-      title: 'Video Tutorials',
-      description: 'Watch step-by-step videos for quick onboarding.',
+      title: 'Institutional Onboarding',
+      description: 'Fast-track cloud instance provisioning and campus subdomain mapping.',
       icon: Video,
       link: '/onboarding',
       color: 'bg-rose-50 text-rose-600'
     },
     {
-      title: 'FAQs',
-      description: 'Quick answers to common questions.',
+      title: 'Subscription & Invoicing',
+      description: 'Review SLA tier allowances, seat additions, and multi-campus agreements.',
       icon: HelpCircle,
-      link: '/faq',
+      link: '/pricing',
       color: 'bg-amber-50 text-amber-600'
     }
   ];
 
   return (
-    <div className="space-y-8 max-w-5xl mx-auto">
-      <div className="text-center space-y-4">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 mb-4">
+    <div className="space-y-12 max-w-5xl mx-auto pb-12">
+      <div className="text-center space-y-4 pt-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-indigo-50 text-indigo-600 shadow-sm border border-indigo-100/60 mb-2">
           <LifeBuoy className="w-8 h-8" />
         </div>
-        <h1 className="text-3xl font-bold text-gray-900">How can we help you?</h1>
-        <p className="text-gray-500 max-w-2xl mx-auto">
-          Our support team is here to help you get the most out of Taleem360. 
-          Choose a category below to get started.
+        <div className="inline-block px-3 py-1 bg-emerald-50 border border-emerald-100 rounded-full text-emerald-700 text-xs font-bold uppercase tracking-wider block mx-auto w-fit">
+          24/7 SLA Institutional Assistance
+        </div>
+        <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Institutional Cloud Support Center</h1>
+        <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          Our dedicated educational solutions engineering team is on standby to support school principals, IT coordinators, and bursars with zero-latency resolution.
         </p>
       </div>
 
@@ -82,51 +101,94 @@ export const Support: React.FC = () => {
           <Link 
             key={i} 
             to={category.link}
-            className="group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-indigo-500 hover:shadow-md transition-all flex items-start space-x-4"
+            className="group bg-white p-6 rounded-3xl shadow-xs border border-slate-200/80 hover:border-indigo-500 hover:shadow-md transition-all flex items-start space-x-4"
           >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${category.color}`}>
+            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${category.color}`}>
               <category.icon className="w-6 h-6" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">{category.title}</h3>
-              <p className="text-sm text-gray-500 mt-1">{category.description}</p>
+              <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-base">{category.title}</h3>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed">{category.description}</p>
             </div>
-            <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-indigo-500 transition-colors" />
+            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-indigo-500 transition-colors self-center" />
           </Link>
         ))}
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-6">Direct Contact</h2>
+      {/* SLA Matrix Table (GEO Citation & Commercial Trust Factor) */}
+      <div className="bg-slate-950 text-white rounded-3xl p-8 border border-slate-800 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-slate-800 pb-4">
+          <div>
+            <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider">Service Level Agreements</span>
+            <h3 className="text-xl font-bold text-white mt-1">Guaranteed Response Commitments</h3>
+          </div>
+          <Link 
+            to="/tickets" 
+            className="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl transition-colors w-fit"
+          >
+            Open Ticket <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left text-xs">
+          <div className="p-4 bg-slate-900/80 rounded-2xl border border-slate-800">
+            <div className="flex items-center gap-2 text-emerald-400 font-bold mb-1">
+              <Clock className="w-4 h-4" />
+              Critical (Campus Down)
+            </div>
+            <p className="text-slate-300 font-semibold text-sm">&lt; 1 Hour Response</p>
+            <p className="text-slate-400 mt-1">Immediate direct engineering intervention for fee collections or gate attendance lockouts.</p>
+          </div>
+          <div className="p-4 bg-slate-900/80 rounded-2xl border border-slate-800">
+            <div className="flex items-center gap-2 text-indigo-300 font-bold mb-1">
+              <Clock className="w-4 h-4" />
+              Standard Inquiries
+            </div>
+            <p className="text-slate-300 font-semibold text-sm">&lt; 6 Hours Response</p>
+            <p className="text-slate-400 mt-1">Grade sheet adjustments, timetable re-runs, and student roster imports.</p>
+          </div>
+          <div className="p-4 bg-slate-900/80 rounded-2xl border border-slate-800">
+            <div className="flex items-center gap-2 text-amber-300 font-bold mb-1">
+              <ShieldCheck className="w-4 h-4" />
+              Dedicated Account Manager
+            </div>
+            <p className="text-slate-300 font-semibold text-sm">Tier 3 Enterprise</p>
+            <p className="text-slate-400 mt-1">Direct private telephone and WhatsApp VIP channel for multi-branch administrators.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-3xl shadow-xs border border-slate-200/80 p-8">
+        <h2 className="text-lg font-bold text-slate-900 mb-6">Direct Institutional Contact Points</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-2">
-            <div className="flex items-center text-indigo-600 font-bold mb-2">
+            <div className="flex items-center text-indigo-600 font-bold mb-2 text-sm">
               <Mail className="w-5 h-5 mr-2" />
-              Email Support
+              Email Helpdesk
             </div>
-            <p className="text-sm text-gray-500">Response within 24 hours</p>
-            <a href="mailto:support@taleem360.online" className="text-sm font-medium text-gray-900 hover:text-indigo-600">
+            <p className="text-xs text-slate-500">Official written correspondence &amp; ticket logging</p>
+            <a href="mailto:support@taleem360.online" className="text-xs font-semibold text-slate-900 hover:text-indigo-600 block">
               support@taleem360.online
             </a>
           </div>
           <div className="space-y-2">
-            <div className="flex items-center text-emerald-600 font-bold mb-2">
+            <div className="flex items-center text-emerald-600 font-bold mb-2 text-sm">
               <Phone className="w-5 h-5 mr-2" />
-              Phone Support
+              Institutional Hotline
             </div>
-            <p className="text-sm text-gray-500">Mon-Fri, 9am - 6pm</p>
-            <a href="tel:+923322137898" className="text-sm font-medium text-gray-900 hover:text-indigo-600">
+            <p className="text-xs text-slate-500">Mon-Sat, 9:00 AM – 6:00 PM PKT</p>
+            <a href="tel:+923322137898" className="text-xs font-semibold text-slate-900 hover:text-indigo-600 block">
               +92 (332) 213 7898
             </a>
           </div>
           <div className="space-y-2">
-            <div className="flex items-center text-rose-600 font-bold mb-2">
+            <div className="flex items-center text-rose-600 font-bold mb-2 text-sm">
               <FileText className="w-5 h-5 mr-2" />
-              Documentation
+              Research Knowledge Base
             </div>
-            <p className="text-sm text-gray-500">Read our full documentation</p>
-            <Link to="/blog" className="text-sm font-medium text-gray-900 hover:text-indigo-600">
-              View Docs
+            <p className="text-xs text-slate-500">Deep architectural articles and guides</p>
+            <Link to="/blog" className="text-xs font-semibold text-slate-900 hover:text-indigo-600 block">
+              Explore Articles →
             </Link>
           </div>
         </div>

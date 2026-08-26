@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, User, ChevronRight, Tag, BookOpen, Search, CheckCircle, Network, HelpCircle } from 'lucide-react';
 import { TOPICAL_CLUSTERS, BLOG_POSTS_DATA, RichBlogPost } from '../lib/blogContent';
 import api from '../lib/api';
+import { useSEO } from '../lib/seo';
 
 export const Blog: React.FC = () => {
   const [posts, setPosts] = useState<RichBlogPost[]>([]);
@@ -11,25 +12,29 @@ export const Blog: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCluster, setSelectedCluster] = useState<string>('ALL');
 
+  useSEO({
+    title: 'Taleem360 - Educational ERP Knowledge Vault & Research Archive',
+    description: "Explore our comprehensive, research-backed guides built to optimize K-12 operations, improve student success, automate fees, and simplify school payroll compliance with Taleem360 ERP.",
+    keywords: 'educational erp knowledge vault, taleem360 research archive, school management guides, timetable optimization research, student attendance tracking guides, school financial ledger whitepaper',
+    canonicalUrl: 'https://www.taleem360.online/blog',
+    schemaMarkup: {
+      '@type': 'CollectionPage',
+      name: 'Taleem360 - Educational ERP Knowledge Vault & Research Archive',
+      description: 'Authoritative research archive and operational guides for school administrators, principals, and academic bursars.',
+      url: 'https://www.taleem360.online/blog',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: BLOG_POSTS_DATA.slice(0, 10).map((post, idx) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          url: `https://www.taleem360.online/blog/${post.slug}`,
+          name: post.title
+        }))
+      }
+    }
+  });
+
   useEffect(() => {
-    document.title = 'Taleem360 - Educational ERP Knowledge Vault & Research Archive';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
-    }
-    metaDescription.setAttribute('content', 'Explore our comprehensive, research-backed guides built to optimize K-12 operations, improve student success, automate fees, and simplify school payroll compliance with Taleem360 ERP.');
-
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/blog');
-
     const fetchPosts = async () => {
       try {
         const res = await api.get('/blog/posts');

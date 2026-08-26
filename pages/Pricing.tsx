@@ -1,33 +1,108 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Check } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Check, HelpCircle, ArrowRight, ShieldCheck, Sparkles, Building2, Users } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { SubscriptionTier } from '../types';
 import { useAuth } from '../lib/auth';
+import { useSEO } from '../lib/seo';
 
 export const Pricing: React.FC = () => {
   const { user } = useAuth();
-  const [notification, setNotification] = React.useState<{ type: 'success' | 'info'; message: string } | null>(null);
+  const navigate = useNavigate();
+  const [notification, setNotification] = useState<{ type: 'success' | 'info'; message: string } | null>(null);
+  const [calculatorStudents, setCalculatorStudents] = useState<number>(150);
 
-  React.useEffect(() => {
-    document.title = 'Taleem360 ERP Suite Pricing Plans - K-12 Cloud Portal';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+  useSEO({
+    title: 'Taleem360 ERP Suite Pricing Plans - K-12 Cloud Portal',
+    description: "Compare Taleem360 ERP Suite pricing plans for K-12 schools, colleges, and academies. Free 30-day Pilot, $49/mo Essential, $129/mo Professional, and custom Enterprise portals with automated timetables and financial ledgers.",
+    keywords: 'taleem360 erp suite pricing plans, k-12 cloud portal pricing, school erp price, school management software cost, automated timetable generator pricing, attendance tracking software plans',
+    canonicalUrl: 'https://www.taleem360.online/pricing',
+    schemaMarkup: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Product',
+          '@id': 'https://www.taleem360.online/pricing#product',
+          name: 'Taleem360 Educational ERP Suite Subscription',
+          description: 'Comprehensive K-12 and collegiate school management cloud subscription including timetable generation, biometric attendance, double-entry accounting, and report cards.',
+          image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
+          offers: {
+            '@type': 'AggregateOffer',
+            priceCurrency: 'USD',
+            lowPrice: '0',
+            highPrice: '129',
+            offerCount: '4',
+            offers: [
+              {
+                '@type': 'Offer',
+                name: 'Pilot Trial (30-day Free)',
+                price: '0',
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+                url: 'https://www.taleem360.online/onboarding',
+                description: 'Free 30-day institutional pilot for evaluation with core SIS features.'
+              },
+              {
+                '@type': 'Offer',
+                name: 'Tier 1 Essential',
+                price: '49',
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+                url: 'https://www.taleem360.online/pricing',
+                description: 'Full ERP access for schools up to 200 active student profiles.'
+              },
+              {
+                '@type': 'Offer',
+                name: 'Tier 2 Professional',
+                price: '129',
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+                url: 'https://www.taleem360.online/pricing',
+                description: 'Advanced analytics, AI scheduling, and examination grading for up to 500 students.'
+              },
+              {
+                '@type': 'Offer',
+                name: 'Tier 3 Enterprise',
+                price: 'Custom',
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+                url: 'https://www.taleem360.online/tickets',
+                description: 'Multi-campus institutional governance for networks with 501+ students.'
+              }
+            ]
+          },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.9',
+            ratingCount: '520',
+            reviewCount: '187'
+          }
+        },
+        {
+          '@type': 'FAQPage',
+          '@id': 'https://www.taleem360.online/pricing#faq',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'Can schools start with a free trial on Taleem 360?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Yes. Taleem 360 offers a 30-day full feature Pilot Trial with zero upfront payment or credit card requirement.'
+              }
+            },
+            {
+              '@type': 'Question',
+              name: 'How are paid subscriptions activated?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Paid subscriptions require academic verification and manual activation by our institutional accounts team to ensure transparent governance and customized onboarding.'
+              }
+            }
+          ]
+        }
+      ]
     }
-    metaDescription.setAttribute('content', 'Choose the perfect Taleem360 pricing package for your institute. Pilot plan is free, with Premium Tier 1 and Tier 2 plans offering K-12 gradebook software, cashless billing, attendance, and support.');
-
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/pricing');
-  }, []);
+  });
 
   // Auto-dismiss notification after 6 seconds
   React.useEffect(() => {
@@ -142,6 +217,55 @@ export const Pricing: React.FC = () => {
         <p className="max-w-2xl mt-4 mx-auto text-base sm:text-lg text-slate-600 leading-relaxed">
           Predictable, transparent plans engineered for independent schools, college campuses, and multi-branch educational networks with zero hidden activation fees.
         </p>
+
+        {/* Dynamic Plan Matcher for Commercial SERP Intent */}
+        <div className="mt-10 max-w-xl mx-auto p-6 bg-slate-900 text-white rounded-3xl border border-slate-800 shadow-xl text-left">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4" />
+              Instant Plan Recommender
+            </span>
+            <span className="text-xs font-mono text-slate-400 bg-slate-800 px-2.5 py-1 rounded-full">
+              {calculatorStudents} Students
+            </span>
+          </div>
+          <label className="block text-xs font-bold text-slate-300 mb-2">
+            Select Your Total Active Student Enrollment:
+          </label>
+          <input 
+            type="range" 
+            min="10" 
+            max="1000" 
+            step="10"
+            value={calculatorStudents}
+            onChange={(e) => setCalculatorStudents(Number(e.target.value))}
+            className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-400"
+          />
+          <div className="flex justify-between text-[11px] text-slate-500 font-mono mt-1">
+            <span>10 Students</span>
+            <span>200 (Tier 1)</span>
+            <span>500 (Tier 2)</span>
+            <span>1000+ (Enterprise)</span>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+            <div>
+              <p className="text-xs text-slate-400 font-semibold">Recommended Package:</p>
+              <p className="text-base font-black text-emerald-400">
+                {calculatorStudents <= 30 ? 'Pilot Trial (Free 30-Day Evaluation)' :
+                 calculatorStudents <= 200 ? 'Tier 1 Essential ($49/mo)' :
+                 calculatorStudents <= 500 ? 'Tier 2 Professional ($129/mo)' :
+                 'Tier 3 Enterprise (Custom Multi-Campus)'}
+              </p>
+            </div>
+            <Link 
+              to="/onboarding"
+              className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-bold transition-colors inline-flex items-center gap-1.5"
+            >
+              Start Pilot <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
       </div>
 
       <div className="mt-16 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-8">

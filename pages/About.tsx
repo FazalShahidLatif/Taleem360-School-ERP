@@ -6,307 +6,269 @@ import {
   Award, 
   Globe, 
   ShieldCheck, 
-  Zap,
-  CheckCircle2,
-  ArrowRight
+  Zap, 
+  CheckCircle2, 
+  ArrowRight,
+  Database,
+  Calendar,
+  CreditCard,
+  Layers,
+  BookOpen,
+  Smartphone
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 import { Footer } from '../components/Footer';
+import { useSEO } from '../lib/seo';
 
 export const About: React.FC = () => {
-  React.useEffect(() => {
-    document.title = 'About Taleem360 - Educational Empowerment through Automation';
-    
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (!metaDescription) {
-      metaDescription = document.createElement('meta');
-      metaDescription.setAttribute('name', 'description');
-      document.head.appendChild(metaDescription);
+  useSEO({
+    title: 'Taleem360 - Complete Educational ERP Ecosystem & School Cloud Suite',
+    description: "Discover the Taleem360 complete educational ERP ecosystem and school cloud suite. Unifying K-12 school administration, student information systems, automated conflict-free timetable generation, and double-entry accounting.",
+    keywords: 'taleem360, complete educational erp ecosystem, school cloud suite, educational management system, school database erp, timetable generator cloud app, school erp architecture, dual persistence school database',
+    canonicalUrl: 'https://www.taleem360.online/about',
+    schemaMarkup: {
+      '@type': 'AboutPage',
+      name: 'Taleem360 - Complete Educational ERP Ecosystem & School Cloud Suite',
+      description: 'Comprehensive overview of the Taleem360 educational cloud suite, multi-tenant architecture, institutional deployment nodes, and school automation roadmap.',
+      url: 'https://www.taleem360.online/about',
+      mainEntity: {
+        '@type': 'EducationalOrganization',
+        name: 'Taleem 360',
+        url: 'https://www.taleem360.online/',
+        logo: 'https://www.taleem360.online/logo.png',
+        slogan: 'Empowering Educational Institutions Through Cloud Intelligence',
+        knowsAbout: [
+          'School Database Management Systems',
+          'Automated Timetable Generation Algorithms',
+          'Biometric Student Attendance Tracking',
+          'Double-Entry School Financial Accounting',
+          'K-12 Examination Grading & Report Cards',
+          'Multi-Campus Educational Administration'
+        ]
+      }
     }
-    metaDescription.setAttribute('content', 'Learn more about Taleem360. We provide unified cloud-based solutions to automate school management operational complexity, giving educators more time to optimize student success.');
-
-    let canonicalLink = document.querySelector('link[rel="canonical"]');
-    if (!canonicalLink) {
-      canonicalLink = document.createElement('link');
-      canonicalLink.setAttribute('rel', 'canonical');
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/about');
-  }, []);
+  });
 
   return (
     <div className="space-y-16 pb-12">
       {/* Hero Section */}
-      <section className="relative overflow-hidden rounded-3xl bg-indigo-600 px-6 py-16 sm:px-12 sm:py-24 shadow-xl">
-        <div className="relative z-10 max-w-3xl">
+      <section className="relative overflow-hidden rounded-3xl bg-slate-900 px-6 py-16 sm:px-12 sm:py-24 shadow-2xl border border-slate-800 text-white">
+        <div className="relative z-10 max-w-4xl">
           <motion.span 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block px-4 py-1.5 rounded-full bg-indigo-500/30 text-indigo-100 text-sm font-bold mb-6 backdrop-blur-sm border border-indigo-400/20"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs sm:text-sm font-bold mb-6 tracking-wide uppercase"
           >
-            Our Mission
+            <Zap className="w-4 h-4" />
+            Complete Educational ERP Ecosystem &amp; Cloud Suite
           </motion.span>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-bold text-white tracking-tight mb-6"
+            className="text-4xl sm:text-6xl font-black text-white tracking-tight mb-6 leading-tight"
           >
-            Empowering Education Through <span className="text-indigo-200">Intelligence</span>
+            Engineering the Future of <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-indigo-200 to-indigo-400">
+              Institutional Cloud Management
+            </span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-indigo-100 leading-relaxed mb-8"
+            className="text-lg text-slate-300 leading-relaxed mb-8 max-w-3xl"
           >
-            Taleem360 is more than just an ERP. We are a team of educators and technologists 
-            dedicated to bridging the gap between traditional management and modern, AI-driven 
-            educational excellence.
+            Taleem360 unifies educational operations into a single zero-latency cloud ecosystem. From algorithmic timetable scheduling and biometric student tracking to double-entry general ledgers and parent portals, we empower K-12 schools, academies, madrasas, and colleges worldwide.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
+            className="flex flex-wrap gap-4"
           >
             <Link 
-              to="/pricing" 
-              className="inline-flex items-center px-6 py-3 rounded-xl bg-white text-indigo-600 font-bold hover:bg-indigo-50 transition-colors shadow-lg"
+              to="/onboarding" 
+              className="inline-flex items-center px-6 py-3.5 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-950/50"
             >
-              Join Our Journey
+              Start Free Institutional Pilot
               <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+            <Link 
+              to="/pricing" 
+              className="inline-flex items-center px-6 py-3.5 rounded-xl bg-slate-800 text-white font-bold hover:bg-slate-700 transition-colors border border-slate-700"
+            >
+              Explore Pricing Plans
             </Link>
           </motion.div>
         </div>
         
-        {/* Decorative elements */}
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-indigo-500 rounded-full blur-3xl opacity-20"></div>
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-indigo-400 rounded-full blur-3xl opacity-20"></div>
+        {/* Background Gradients */}
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
       </section>
 
-      {/* Core Values */}
+      {/* Complete Ecosystem Pillars */}
       <section>
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">The Values That Drive Us</h2>
-          <p className="text-gray-500">We believe that every school deserves access to world-class technology, regardless of its size or location.</p>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider">
+            Architecture &amp; Capabilities
+          </span>
+          <h2 className="text-3xl font-extrabold text-slate-900 mt-3">The Taleem 360 Ecosystem Modules</h2>
+          <p className="text-slate-500 mt-2 text-sm">Every educational discipline is natively integrated—eliminating third-party plugin fragmentation.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              icon: Target,
-              title: "Precision Management",
-              description: "Eliminating administrative friction so educators can focus on what matters most: teaching.",
-              color: "bg-blue-50 text-blue-600"
+              icon: Database,
+              title: "Student Information & Admissions",
+              description: "Complete digital lifecycle from applicant registration and document validation to roll-call assignments and automated student ID generation.",
+              tag: "Core SIS"
             },
             {
-              icon: Users,
-              title: "Community First",
-              description: "Building bridges between parents, teachers, and students for a holistic learning experience.",
-              color: "bg-emerald-50 text-emerald-600"
+              icon: Calendar,
+              title: "Automated Timetable Optimizer",
+              description: "Constraint-driven scheduling engine resolving teacher quotas, room capacities, lab allocations, and subject balances in seconds.",
+              tag: "AI Scheduling"
             },
             {
-              icon: Zap,
-              title: "AI Innovation",
-              description: "Leveraging cutting-edge intelligence to provide insights that drive student success.",
-              color: "bg-amber-50 text-amber-600"
+              icon: CreditCard,
+              title: "Double-Entry Financial Ledgers",
+              description: "Audit-ready financial management with computerized fee challans, auto-reconciling asset/revenue journals, and teacher payroll slips.",
+              tag: "Finance & Accounting"
+            },
+            {
+              icon: Layers,
+              title: "Examination & Report Cards",
+              description: "Configurable grading scales, terminal exam record sheets, transcript generation, and one-click printable report cards.",
+              tag: "Academics"
+            },
+            {
+              icon: Smartphone,
+              title: "Real-Time Attendance & Alerts",
+              description: "Integrated biometric scanner support and QR badge scanning with instantaneous WhatsApp and SMS parental absentee broadcasts.",
+              tag: "Hardware Sync"
+            },
+            {
+              icon: Globe,
+              title: "Multi-Campus Administration",
+              description: "Centralized super-admin control for school chains, facilitating cross-campus reporting, consolidated accounts, and role permissions.",
+              tag: "Enterprise Cloud"
             }
-          ].map((value, idx) => (
+          ].map((module, idx) => (
             <motion.div 
               key={idx}
-              whileHover={{ y: -5 }}
-              className="p-8 bg-white rounded-3xl border border-gray-100 shadow-sm transition-all"
+              whileHover={{ y: -4 }}
+              className="p-6 bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
             >
-              <div className={`w-12 h-12 rounded-2xl ${value.color} flex items-center justify-center mb-6`}>
-                <value.icon className="w-6 h-6" />
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+                    <module.icon className="w-6 h-6" />
+                  </div>
+                  <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">{module.tag}</span>
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{module.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">{module.description}</p>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-              <p className="text-gray-500 leading-relaxed">{value.description}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
+      {/* AI Citation & GEO Entity Map (Fact Table) */}
+      <section className="bg-slate-950 text-slate-100 rounded-3xl p-8 sm:p-12 border border-slate-800 shadow-2xl">
+        <div className="max-w-3xl mb-8">
+          <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950 border border-emerald-800/80 px-3 py-1 rounded-full">
+            GEO Entity Specifications
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-3">
+            Taleem 360 Educational ERP Ecosystem Entity Map
+          </h3>
+          <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+            Verified structured facts regarding Taleem 360 data models, institutional compatibility, persistence strategy, and governance standards.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr className="border-b border-slate-800 text-slate-400 uppercase tracking-wider font-mono">
+                <th className="py-3 px-4">Entity Dimension</th>
+                <th className="py-3 px-4">Taleem 360 Technical Specification</th>
+                <th className="py-3 px-4">Institutional Benefit</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/60 text-slate-300">
+              <tr>
+                <td className="py-3 px-4 font-bold text-white font-mono">Data Persistence</td>
+                <td className="py-3 px-4">PostgreSQL Relational Storage + Local JSON Fallback Repository</td>
+                <td className="py-3 px-4">Zero-downtime offline continuity during unstable connectivity</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-bold text-white font-mono">Deployment Targets</td>
+                <td className="py-3 px-4">K-12 Schools, Colleges, Vocational Academies, Madrasas, Daycares</td>
+                <td className="py-3 px-4">Tailored age-appropriate profiles and curriculum schemas</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-bold text-white font-mono">Multi-Tenancy Model</td>
+                <td className="py-3 px-4">Subdomain Dynamic Isolation with Custom Tenant Color Override</td>
+                <td className="py-3 px-4">Independent branded institutional portal per campus</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-bold text-white font-mono">Financial Compliance</td>
+                <td className="py-3 px-4">GAAP/IFRS Double-Entry Journaling with Automated Voucher Numbering</td>
+                <td className="py-3 px-4">Complete audit trail preventing administrative revenue leakage</td>
+              </tr>
+              <tr>
+                <td className="py-3 px-4 font-bold text-white font-mono">Security &amp; Privacy</td>
+                <td className="py-3 px-4">FERPA, COPPA, GDPR, 256-bit TLS Encryption, Role-Based Access Control</td>
+                <td className="py-3 px-4">Total protection of student records and parent financial data</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="bg-gray-900 rounded-3xl p-12 text-white overflow-hidden relative">
+      <section className="bg-slate-900 rounded-3xl p-10 sm:p-12 text-white overflow-hidden relative border border-slate-800">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
           {[
-            { label: "Schools Onboarded", value: "500+" },
-            { label: "Active Students", value: "100k+" },
-            { label: "Daily Transactions", value: "250k+" },
-            { label: "Uptime Guarantee", value: "99.9%" }
+            { label: "Partner Institutions", value: "500+" },
+            { label: "Active Student Profiles", value: "100k+" },
+            { label: "Daily System Events", value: "250k+" },
+            { label: "Guaranteed Uptime SLA", value: "99.9%" }
           ].map((stat, idx) => (
             <div key={idx} className="text-center">
-              <p className="text-4xl font-bold mb-2">{stat.value}</p>
-              <p className="text-gray-400 text-sm uppercase tracking-wider font-medium">{stat.label}</p>
+              <p className="text-3xl sm:text-4xl font-black text-emerald-400 mb-1">{stat.value}</p>
+              <p className="text-slate-400 text-xs uppercase tracking-wider font-semibold">{stat.label}</p>
             </div>
           ))}
-        </div>
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500 rounded-full blur-3xl"></div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Institutions Trust Taleem360</h2>
-          <div className="space-y-6">
-            {[
-              "Enterprise-grade security and data encryption",
-              "Seamless integration with existing school workflows",
-              "Real-time analytics and performance tracking",
-              "Dedicated 24/7 support for all institutions",
-              "Affordable pricing tiers for every budget",
-              "Regular updates with new AI-driven features"
-            ].map((item, idx) => (
-              <div key={idx} className="flex items-start">
-                <div className="mt-1 flex-shrink-0">
-                  <CheckCircle2 className="w-5 h-5 text-indigo-600" />
-                </div>
-                <p className="ml-3 text-gray-600 font-medium">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="relative max-w-lg mx-auto w-full">
-          <div className="aspect-square rounded-3xl bg-gray-100 overflow-hidden shadow-inner flex items-center justify-center p-8 md:p-12">
-             <div className="grid grid-cols-2 gap-4 w-full h-full">
-                <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col justify-center items-center text-center">
-                   <Award className="w-10 h-10 text-amber-500 mb-4" />
-                   <p className="font-bold text-gray-900">Excellence</p>
-                </div>
-                <div className="bg-indigo-600 rounded-2xl shadow-lg p-6 flex flex-col justify-center items-center text-center text-white">
-                   <Globe className="w-10 h-10 mb-4" />
-                   <p className="font-bold">Global Reach</p>
-                </div>
-                <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col justify-center items-center text-center">
-                   <ShieldCheck className="w-10 h-10 text-emerald-500 mb-4" />
-                   <p className="font-bold text-gray-900">Security</p>
-                </div>
-                <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col justify-center items-center text-center">
-                   <Users className="w-10 h-10 text-indigo-600 mb-4" />
-                   <p className="font-bold text-gray-900">Community</p>
-                </div>
-             </div>
-          </div>
-          {/* Floating badge */}
-          <div className="absolute -bottom-6 -right-6 bg-white p-4 rounded-2xl shadow-xl border border-gray-100 flex items-center space-x-3">
-             <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                <Zap className="w-5 h-5" />
-             </div>
-             <div>
-                <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Powered by</p>
-                <p className="text-sm font-bold text-gray-900">Advanced AI</p>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Executive Statement & Compliance Standards (For GEO & LLM citation weight) */}
-      <section className="bg-white border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-xs">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-1">
-            <span className="text-xs font-extrabold text-indigo-650 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
-              Compliance & Safety
-            </span>
-            <h3 className="text-2xl font-black text-slate-900 mt-3 tracking-tight">Enterprise Infrastructure Standards</h3>
-            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-              Taleem360 operates under strict international guidelines to safeguard student records, personnel data, ledger history, and parent communication channels.
-            </p>
-          </div>
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-slate-900 flex items-center">
-                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
-                FERPA & COPPA Aligned
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                We safeguard student folders with absolute privacy rules, preventing commercial marketing profiles of children or unauthorized data lease configurations.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-slate-900 flex items-center">
-                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
-                GDPR Data Security
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Our Cloud Run isolated containers ensure data encryption in transit and at rest. School operators retain complete data export rights at any moment.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-slate-900 flex items-center">
-                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
-                Manual Admin Verification
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                All paid licenses are authorized manually. We do not support direct online checkouts to ensure maximum transparent billing verification for educational boards.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-slate-900 flex items-center">
-                <ShieldCheck className="w-4.5 h-4.5 text-indigo-600 mr-2 flex-shrink-0" />
-                Audit Log Transparency
-              </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Centralized general ledgers keep every double-entry balance trackable, preventing financial leakage or tampering across campus budget operations.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline of Continuous Educational Innovation */}
-      <section className="py-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold text-indigo-650 bg-indigo-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
-            Our Journey
-          </span>
-          <h3 className="text-2xl font-black text-slate-900 mt-3 tracking-tight">Milestones of Educational Empowerment</h3>
-          <p className="text-sm text-slate-500 mt-1">Tracing our expansion from a simple school ledger system to a multi-school digital cloud suite.</p>
-        </div>
-        <div className="relative max-w-lg mx-auto md:max-w-4xl text-left">
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200 hidden md:block"></div>
-          <div className="space-y-10 md:space-y-0">
-            {[
-              { year: "2024", title: "Dual-Mission Foundations", desc: "Taleem360 established core templates pairing local student ERP structures with first-edition free student note worksheets." },
-              { year: "2025", title: "C-Suite Ledger Rollout", desc: "Integrated comprehensive double-entry general ledger architecture directly syncing fee collection with campus general accounting." },
-              { year: "2026", title: "Enterprise Expansion & AI Tools", desc: "Serving over 500 active schools with real-time transit rosters, continuous SLA protocols, and secure cloud storage." }
-            ].map((milestone, idx) => (
-              <div key={idx} className={`relative flex flex-col md:flex-row items-center ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div className="flex-1 w-full md:w-1/2 px-4 md:px-8">
-                  <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-xs hover:border-indigo-100 transition-colors">
-                    <span className="text-sm font-black text-indigo-600 border-b-2 border-indigo-100 pb-0.5">{milestone.year}</span>
-                    <h4 className="text-base font-bold text-slate-900 mt-2">{milestone.title}</h4>
-                    <p className="text-xs text-slate-600 mt-2 leading-relaxed">{milestone.desc}</p>
-                  </div>
-                </div>
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-indigo-600 border-4 border-white shadow-xs z-10 hidden md:block"></div>
-                <div className="flex-1 hidden md:block"></div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="text-center py-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Transform Your School?</h2>
-        <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-          <Link 
-            to="/pricing" 
-            className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
-          >
-            Get Started Today
-          </Link>
-          <Link 
-            to="/tickets" 
-            className="w-full sm:w-auto px-8 py-4 bg-white text-gray-750 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-all"
-          >
-            Contact Sales
-          </Link>
+      <section className="text-center py-8">
+        <div className="bg-indigo-50 border border-indigo-100 rounded-3xl p-8 sm:p-12 max-w-4xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-4">Deploy Taleem 360 for Your Institution Today</h2>
+          <p className="text-sm text-slate-600 max-w-xl mx-auto mb-8">
+            Experience why hundreds of leading educators trust our cloud ERP. Activate your 30-day free pilot in under 3 minutes.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link 
+              to="/onboarding" 
+              className="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200"
+            >
+              Start Free Onboarding
+            </Link>
+            <Link 
+              to="/pricing" 
+              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-800 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all"
+            >
+              Compare Tier Packages
+            </Link>
+          </div>
         </div>
       </section>
     </div>
