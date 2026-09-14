@@ -314,7 +314,15 @@ const Landing: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-3 capitalize">{feature.title}</h3>
                 <p className="text-slate-500 leading-relaxed text-sm">{feature.desc}</p>
-              </div>
+                {feature.title === "Smart attendance" && (
+                  <Link 
+                    to="/biometric-attendance" 
+                    className="inline-flex items-center gap-1 mt-3 text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors"
+                  >
+                    Learn about biometric & QR attendance →
+                  </Link>
+                )}
+                </div>
             ))}
           </div>
         </div>

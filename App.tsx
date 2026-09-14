@@ -8,6 +8,7 @@ import { Login } from './pages/Login';
 import { Students } from './pages/Students';
 import { Classes } from './pages/Classes';
 import { Attendance } from './pages/Attendance';
+import { BiometricAttendance } from './pages/BiometricAttendance';
 import { Finance } from './pages/Finance';
 import { PrivacyPolicy } from './pages/legal/PrivacyPolicy';
 import { TermsOfService } from './pages/legal/TermsOfService';
@@ -618,6 +619,10 @@ const App: React.FC = () => {
           <Route 
             path="/faq" 
             element={<FAQPage />} 
+          />
+          <Route 
+            path="/biometric-attendance" 
+            element={<BiometricAttendance />} 
           />
           
           <Route 

@@ -24,7 +24,7 @@ interface FAQItem {
 
 export const FAQ: React.FC = () => {
   useEffect(() => {
-    document.title = 'Frequently Asked Questions (FAQ) | Taleem360 ERP Cloud';
+    document.title = 'Taleem360 FAQ — School ERP Questions & Answers Pakistan';
     
     // Set meta tags for high-quality SEO presence
     let metaDescription = document.querySelector('meta[name="description"]');
@@ -33,8 +33,8 @@ export const FAQ: React.FC = () => {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Explore our comprehensive frequently asked questions. Learn how Taleem360 manages AI diagnostics, Web3 reward distributions, private tutor scheduling, and institutional daycare billing systems.');
-
+    metaDescription.setAttribute('content', 'Common questions about Taleem360 school ERP: attendance tracking, fee management, timetable generation, pricing, free pilot, security, and onboarding. Find your answer fast.');
+    
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
@@ -316,5 +316,21 @@ export const FAQ: React.FC = () => {
       </div>
 
     </div>
+
+    {/* FAQPage JSON-LD Schema for rich snippets */}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqData.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      })}
+    </script>
   );
 };

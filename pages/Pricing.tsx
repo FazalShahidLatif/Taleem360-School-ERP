@@ -10,7 +10,7 @@ export const Pricing: React.FC = () => {
   const [notification, setNotification] = React.useState<{ type: 'success' | 'info'; message: string } | null>(null);
 
   React.useEffect(() => {
-    document.title = 'Taleem360 ERP Suite Pricing Plans - K-12 Cloud Portal';
+    document.title = 'Taleem360 Pricing — School ERP Plans Pakistan (Free Pilot) | Taleem360';
     
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
@@ -18,8 +18,8 @@ export const Pricing: React.FC = () => {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Choose the perfect Taleem360 pricing package for your institute. Pilot plan is free, with Premium Tier 1 and Tier 2 plans offering K-12 gradebook software, cashless billing, attendance, and support.');
-
+    metaDescription.setAttribute('content', 'Transparent school ERP pricing for Pakistani schools: attendance, fees, result cards, payroll, and double-entry accounting. Start with a 30-day free pilot — no credit card required. View plans and start free.');
+    
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');

@@ -79,6 +79,26 @@ const PRESET_CHILDREN: ChildProfile[] = [
 
 export const DaycareSummary: React.FC = () => {
   const { user } = useAuth();
+  
+  useEffect(() => {
+    document.title = 'Daycare Management Software Pakistan — Child Tracking & Auto-Billing | Taleem360';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Run your daycare or nursery with Taleem360: real-time child check-in, guardian kiosk security, automated fee billing, and parent notifications. PKR-friendly plans. Start your free trial today.');
+    
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', 'https://www.taleem360.online/daycare');
+  }, []);
   const [selectedChildId, setSelectedChildId] = useState<string>('zain');
   const [rawNotes, setRawNotes] = useState<string>(PRESET_CHILDREN[0].defaultNotes);
   const [childName, setChildName] = useState<string>(PRESET_CHILDREN[0].name);

@@ -12,7 +12,7 @@ export const Blog: React.FC = () => {
   const [selectedCluster, setSelectedCluster] = useState<string>('ALL');
 
   useEffect(() => {
-    document.title = 'Taleem360 - Educational ERP Knowledge Vault & Research Archive';
+    document.title = 'Taleem360 Blog — School ERP, Attendance & EdTech Guides Pakistan';
     
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
@@ -20,8 +20,8 @@ export const Blog: React.FC = () => {
       metaDescription.setAttribute('name', 'description');
       document.head.appendChild(metaDescription);
     }
-    metaDescription.setAttribute('content', 'Explore our comprehensive, research-backed guides built to optimize K-12 operations, improve student success, automate fees, and simplify school payroll compliance with Taleem360 ERP.');
-
+    metaDescription.setAttribute('content', 'Practical guides for school administrators: automated attendance, fee management, timetable generation, payroll compliance, and EdTech trends for Pakistani schools. Updated weekly.');
+    
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (!canonicalLink) {
       canonicalLink = document.createElement('link');
