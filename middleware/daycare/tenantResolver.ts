@@ -44,7 +44,7 @@ export async function resolveTenantContext(req: Request, res: Response, next: Ne
     branding: {
       theme: 'ocean',
       primary_color: '#3b82f6',
-      logo_url: '/logo.png',
+      logo_url: '/taleem_logo.png',
       custom_domain: sanitizedHost || 'localhost'
     }
   };

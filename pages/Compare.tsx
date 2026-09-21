@@ -83,7 +83,7 @@ export const Compare: React.FC = () => {
   const pageSchema = {
     "@type": "Product",
     "name": "Taleem360 ERP vs Competitors",
-    "image": "https://www.taleem360.online/logo.png",
+    "image": "https://www.taleem360.online/taleem_logo.png",
     "description": "Programmatic side-by-side technical comparison of Taleem360 against conventional school platforms (Fedena, Procare, Brightwheel, and ClassDojo) highlighting offline resilience and white-label pricing.",
     "brand": {
       "@type": "Brand",

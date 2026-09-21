@@ -55,7 +55,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-2">
               <li className="text-gray-600 text-sm font-medium">Taleem360</li>
-              <li className="text-gray-600 text-xs">26/792 Cantt Bazar, Drigh Road, Karaci -75350</li>
+              <li className="text-gray-600 text-xs">26/792 Cantt Bazar, Drigh Road, Karachi -75350</li>
               <li className="text-gray-600 text-sm">support@taleem360.online</li>
               <li className="text-gray-600 text-sm">+92 (332) 213 7898</li>
             </ul>
@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
           <p className="text-center md:text-left">
-            &copy; 2026 Taleem360-School ERP. Open, collaborative, and built with transparency as a core guiding principal. No proprietary registered trademark claims.
+            &copy; 2026 Taleem360-School ERP. Open, collaborative, and built with transparency as a core guiding principle. No proprietary registered trademark claims.
           </p>
           <p className="mt-4 md:mt-0">
             Powered by <a href="https://saasskul.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 font-bold">SaaSSkul</a>

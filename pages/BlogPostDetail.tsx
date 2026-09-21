@@ -96,7 +96,7 @@ export const BlogPostDetail: React.FC = () => {
               "name": "Taleem360",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://taleem360.online/logo.png"
+                "url": "https://taleem360.online/taleem_logo.png"
               }
             }
           };

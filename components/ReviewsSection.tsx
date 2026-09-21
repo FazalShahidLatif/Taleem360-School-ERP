@@ -157,7 +157,7 @@ export const ReviewsSection: React.FC = () => {
               <div className="space-y-4">
                 {/* Google review direct link */}
                 <a
-                  href="https://g.page/r/taleem360/review"
+                  href="https://g.page/taleem360"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/80 transition-all group min-h-[52px]"
@@ -174,7 +174,7 @@ export const ReviewsSection: React.FC = () => {
 
                 {/* Trustpilot review direct link */}
                 <a
-                  href="https://www.trustpilot.com/evaluate/taleem360.online"
+                  href="https://www.trustpilot.com/review/taleem360.online"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between p-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-900/80 transition-all group min-h-[52px]"
