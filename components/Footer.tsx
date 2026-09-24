@@ -23,9 +23,9 @@ export const Footer: React.FC = () => {
               Empowering educational institutions with modern, AI-driven management tools.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/fazalsl/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-600 hover:text-indigo-600 transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="https://x.com/FazalShahid66" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-600 hover:text-indigo-600 transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="https://www.linkedin.com/in/fazal-shahid-b5981011b/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-600 hover:text-indigo-600 transition-colors"><Linkedin className="w-5 h-5" /></a>
+              <a href="https://www.facebook.com/Taleem360PK" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-600 hover:text-indigo-600 transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="https://x.com/Taleem360PK" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-gray-600 hover:text-indigo-600 transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="https://www.linkedin.com/company/taleem360-pk" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-gray-600 hover:text-indigo-600 transition-colors"><Linkedin className="w-5 h-5" /></a>
             </div>
           </div>
           <div>
@@ -37,6 +37,26 @@ export const Footer: React.FC = () => {
               <li><Link to="/compare" className="text-gray-600 hover:text-indigo-600 text-sm">Taleem360 vs Others</Link></li>
               <li><Link to="/blog" className="text-gray-600 hover:text-indigo-600 text-sm">Blog</Link></li>
               <li><Link to="/contact" className="text-gray-600 hover:text-indigo-600 text-sm">Contact Us</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Modules</h4>
+            <ul className="space-y-2">
+              <li><Link to="/daycare" className="text-gray-600 hover:text-indigo-600 text-sm">Daycare Center</Link></li>
+              <li><Link to="/skills-academy" className="text-gray-600 hover:text-indigo-600 text-sm">Skills Academy</Link></li>
+              <li><Link to="/private-tutors" className="text-gray-600 hover:text-indigo-600 text-sm">Private Tutors</Link></li>
+              <li><Link to="/madrasa" className="text-gray-600 hover:text-indigo-600 text-sm">Madrasa Management</Link></li>
+              <li><Link to="/white-label" className="text-gray-600 hover:text-indigo-600 text-sm">White Label</Link></li>
+              <li><Link to="/api" className="text-gray-600 hover:text-indigo-600 text-sm">API Documentation</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Resources</h4>
+            <ul className="space-y-2">
+              <li><Link to="/ai-resource-studio" className="text-gray-600 hover:text-indigo-600 text-sm">AI Resource Studio</Link></li>
+              <li><Link to="/compare" className="text-gray-600 hover:text-indigo-600 text-sm">Compare &amp; Review</Link></li>
+              <li><Link to="/free-resources" className="text-gray-600 hover:text-indigo-600 text-sm">Free Printable Packs</Link></li>
+              <li><Link to="/blog" className="text-gray-600 hover:text-indigo-600 text-sm">Blog</Link></li>
             </ul>
           </div>
           <div>

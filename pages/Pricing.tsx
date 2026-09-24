@@ -60,6 +60,7 @@ export const Pricing: React.FC = () => {
       name: 'Tier 1',
       id: SubscriptionTier.TIER_1,
       price: '$49',
+      pkrPrice: '13,500',
       description: 'Ideal for growing primary schools.',
       features: [
         'Up to 200 active profiles',
@@ -76,6 +77,7 @@ export const Pricing: React.FC = () => {
       name: 'Tier 2',
       id: SubscriptionTier.TIER_2,
       price: '$129',
+      pkrPrice: '35,800',
       description: 'Comprehensive features for mid-sized institutions.',
       features: [
         'Up to 500 active profiles',
@@ -202,6 +204,11 @@ export const Pricing: React.FC = () => {
                   )}
                 </p>
                 <p className="mt-6 text-gray-500">{tier.description}</p>
+              {tier.id !== 'pilot' && tier.id !== 'custom' && (
+                <p className="mt-1 text-xs text-slate-400">
+                  ≈ PKR {tier.pkrPrice}/month (approx.)
+                </p>
+              )}
  
                 <ul className="mt-6 space-y-4">
                   {tier.features.map((feature) => (

@@ -75,14 +75,19 @@ export const Contact: React.FC = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 rounded-full text-emerald-800 text-xs font-bold mb-4 ring-2 ring-emerald-500/10">
             <Sparkles className="w-3.5 h-3.5 text-emerald-700 animate-pulse" />
-            <span>CONNECT WITH OUR GLOBAL TEAMS</span>
+            <span>KARACHI-BASED — SERVING SCHOOLS ACROSS PAKISTAN</span>
           </div>
           <h1 className="text-3.5xl font-black text-slate-900 tracking-tight sm:text-4xl">
             Let's Start a <span className="text-emerald-600 font-extrabold">Conversation</span>
           </h1>
           <p className="mt-3 text-slate-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Have questions about our multi-tenant structures, custom subdomains, or integrated billing gates? Reach out below and our support coordinators will resolve your inquiries promptly.
+            Whether you run a K-12 school in Karachi, a daycare in Lahore, an academy in Islamabad, or a private tutoring setup anywhere in Pakistan — our support team is ready to walk you through the right Taleem360 module for your institution.
           </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs text-slate-500">
+            <span className="bg-slate-100 px-3 py-1 rounded-full">support@taleem360.online</span>
+            <span className="bg-slate-100 px-3 py-1 rounded-full">+92 (332) 213 7898</span>
+            <span className="bg-slate-100 px-3 py-1 rounded-full">26/792 Cantt Bazar, Drigh Road, Karachi</span>
+          </div>
         </div>
 
         {/* 2-Column Main Contact & Map Showcase */}
