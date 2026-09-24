@@ -127,7 +127,7 @@ const FEATURES = [
 ];
 
 // ─── Component ───────────────────────────────────────────────
-const BiometricAttendance: React.FC = () => {
+export const BiometricAttendance: React.FC = () => {
   useEffect(() => {
     document.title = 'Biometric Attendance System for Schools Pakistan | Taleem360';
     

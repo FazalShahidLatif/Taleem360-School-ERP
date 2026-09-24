@@ -8,7 +8,6 @@ import {
   GraduationCap, 
   ShieldCheck, 
   Coins, 
-  Wrench, 
   LifeBuoy,
   MessageSquare,
   Sparkles,
@@ -21,6 +20,96 @@ interface FAQItem {
   answer: string;
   category: string;
 }
+
+const faqData: FAQItem[] = [
+  // General & Setup
+  {
+    id: 'gen-1',
+    category: 'general',
+    question: 'What is Taleem360 and who is it designed for?',
+    answer: 'Taleem360 is a fully enterprise-grade, integrated School ERP and Learning Management System designed for modern educational institutions, private academies, childcare centers, and online tutoring cooperatives. It brings administrative automation (admissions, attendance, payroll, lesson planning, timetable optimization), academic workflows, and sandbox environments under one unified roof.'
+  },
+  {
+    id: 'gen-2',
+    category: 'general',
+    question: 'How do users transition between role-specific dashboards?',
+    answer: 'Taleem360 enforces safe, rule-based authentication protocols. Permissions are partitioned into granular roles: Super Admin, School Admin, Teacher, Student, Parent, and Daycare Assistant. Upon login, our centralized dashboard middleware dynamically evaluates role hierarchies to configure custom menu panels, security rules, and workspace tools.'
+  },
+  {
+    id: 'gen-3',
+    category: 'general',
+    question: 'Can multi-campus schools run on a single institutional account?',
+    answer: 'Yes. Taleem360 natively supports multi-tenant configurations. District administrators or franchise owners can supervise multiple campuses across cities, isolate localized tuition ledgers, and consolidate overall performance metrics in a centralized view.'
+  },
+  {
+    id: 'gen-4',
+    category: 'general',
+    question: 'How does automated timetable generation work in Taleem360?',
+    answer: 'Our cloud timetable generator resolves scheduling conflicts automatically. It factors in teacher availability constraints, subject hour distributions, room capacities, and lab schedules to generate optimal weekly timetables with zero human calculation errors.'
+  },
+
+  // Play-to-Earn Quiz
+  {
+    id: 'nex-1',
+    category: 'nexus',
+    question: 'What is the Taleem360 Play-to-Earn Educational Quiz?',
+    answer: 'The Nexus Quiz Sandbox is a gamified educational module where students test their academic knowledge in subject battles (e.g., Mathematics, Physics, World History, Coding). Top performers earn in-platform educational tokens redeemable for verified digital achievement certificates and academic supplies.'
+  },
+  {
+    id: 'nex-2',
+    category: 'nexus',
+    question: 'Are there age limits or parental controls on gamified modules?',
+    answer: 'Yes. School administrators and parents can set daily usage caps, restrict access during formal school hours, or disable gamified features entirely from the administrative portal.'
+  },
+
+  // Tutor Booking
+  {
+    id: 'tut-1',
+    category: 'tutor-booking',
+    question: 'How does the Private Tutor Marketplace work?',
+    answer: 'Parents and independent learners can browse verified educators by subject specialization, regional curriculum (Cambridge O/A Levels, Federal Board, Matriculation, IB), hourly rates, and validated student reviews. Sessions can be booked with integrated video classroom invitations.'
+  },
+  {
+    id: 'tut-2',
+    category: 'tutor-booking',
+    question: 'How are tutor credentials verified?',
+    answer: 'Every registered tutor undergoes administrative verification of educational degrees, identity records, and background checks before their profile is marked active on the public discovery registry.'
+  },
+
+  // Billing & Refund
+  {
+    id: 'bil-1',
+    category: 'billing',
+    question: 'What billing methods are supported for tuition fee collection?',
+    answer: 'Taleem360 supports standard 1Link bank challans, credit/debit card processing, Kuickpay, JazzCash, EasyPaisa, and manual cash receipt reconciliation with automated WhatsApp fee reminder dispatches.'
+  },
+  {
+    id: 'bil-2',
+    category: 'billing',
+    question: 'Is there a free trial or pilot period available?',
+    answer: 'Yes! We provide schools and academies with a 30-day risk-free pilot deployment, complete with student data migration assistance and complimentary staff onboarding sessions.'
+  },
+  {
+    id: 'bil-3',
+    category: 'billing',
+    question: 'What is your subscription cancellation and refund policy?',
+    answer: 'Institutions can modify or cancel their subscription tier at any time before the upcoming billing cycle. Unused prepaid annual subscription balances are prorated and refunded according to our enterprise service agreements.'
+  },
+
+  // Security & Enterprise SLAs
+  {
+    id: 'sec-1',
+    category: 'security',
+    question: 'How does Taleem360 protect institutional databases?',
+    answer: 'We configure rigorous security boundary conditions. API routes filter sensitive payload blocks, database parameters utilize parameterized queries to prohibit SQL injections, and sensitive data relies on industry-standard TLS encryption protocols.'
+  },
+  {
+    id: 'sec-2',
+    category: 'security',
+    question: 'Where can I access operational platform status tracking?',
+    answer: 'We maintain reliable system operational state metrics under the Taleem360 support matrix. For urgent inquiries or custom Service Level Agreement (SLA) tickets, our dedicated team is reachable 24/7 at support@taleem360.online.'
+  }
+];
 
 export const FAQ: React.FC = () => {
   useEffect(() => {
@@ -42,6 +131,39 @@ export const FAQ: React.FC = () => {
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.setAttribute('href', 'https://www.taleem360.online/faq');
+
+    // Dynamic schema markup generation for FAQ rich snippets
+    const schemaScriptId = 'jsonld-seo-faq';
+    let schemaScript = document.getElementById(schemaScriptId) as HTMLScriptElement;
+    if (!schemaScript) {
+      schemaScript = document.createElement('script');
+      schemaScript.setAttribute('id', schemaScriptId);
+      schemaScript.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(schemaScript);
+    }
+
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    schemaScript.innerHTML = JSON.stringify(faqSchema);
+
+    return () => {
+      // Cleanup script on unmount
+      const scriptToRemove = document.getElementById(schemaScriptId);
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
   }, []);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,96 +179,6 @@ export const FAQ: React.FC = () => {
     { id: 'security', label: 'Security & Role SLA', icon: ShieldCheck }
   ];
 
-  const faqData: FAQItem[] = [
-    // General & Setup
-    {
-      id: 'gen-1',
-      category: 'general',
-      question: 'What is Taleem360 and who is it designed for?',
-      answer: 'Taleem360 is a fully enterprise-grade, integrated School ERP and Learning Management System designed for modern educational institutions, private academies, childcare centers, and online tutoring cooperatives. It brings administrative automation (admissions, attendance, payroll, lesson planning, timetable optimization), academic workflows, and sandbox environments under one unified roof.'
-    },
-    {
-      id: 'gen-2',
-      category: 'general',
-      question: 'How do users transition between role-specific dashboards?',
-      answer: 'Taleem360 enforces safe, rule-based authentication protocols. Permissions are partitioned into granular roles: Super Admin, School Admin, Teacher, Student, Parent, and Daycare Assistant. Upon login, our centralized dashboard middleware dynamically evaluates role hierarchies to configure custom menu panels, security rules, and workspace tools.'
-    },
-    {
-      id: 'gen-3',
-      category: 'general',
-      question: 'Does the system integrate with existing third-party platforms?',
-      answer: 'Yes. Taleem360 provides built-in RESTful gateway wrappers, webhook receivers, and API endpoints for WhatsApp (automated fee alerts), local bookkeeping platforms, and Ethereum-compatible EVM transaction chains for modular ledger validation operations.'
-    },
-
-    // Play-to-Earn Quiz (Nexus)
-    {
-      id: 'nx-1',
-      category: 'nexus',
-      question: 'What is the Nexus Play-to-Earn Quiz Hub?',
-      answer: 'The Nexus Hub is our dedicated GameFi educational training lounge. Registered users or guests who authenticate themselves using Web3 EVM wallets can answer conceptual technical questions on CS, blockchain, smart contracts, and Web3 security. Correct answers reward the player with $NEXUS micro-incentives.'
-    },
-    {
-      id: 'nx-2',
-      category: 'nexus',
-      question: 'Are there strict limits on daily play earnings?',
-      answer: 'Yes. To protect the economy against algorithmic bot spam, each authenticated wallet address is capped at a maximum of 10 played quizzes per solar 24-hour cycle. When you exceed this daily count, the payout router will decline further allocation records.'
-    },
-    {
-      id: 'nx-3',
-      category: 'nexus',
-      question: 'How do I submit my own custom questions?',
-      answer: 'Any educator or ecosystem enthusiast can contribute to our decentralized knowledge warehouse! Navigate to the "Ingest Q&A" tab inside the Nexus dashboard, define your topic, formulation text, correct answer choice, and secondary distractors. Once saved, our schema generator compiles custom long-tail SEO URL endpoints automatically to raise organic search exposure.'
-    },
-
-    // Tutor Booking
-    {
-      id: 'tb-1',
-      category: 'tutor-booking',
-      question: 'How does the private tutor booking calendar execute bookings without conflicts?',
-      answer: 'Our scheduler implements precise transaction locking mechanism boundaries. When a student requests a session, the system queries the target tutor’s state using in-memory caches and SQL constraint triggers. If another reservation transaction overlaps, a soft-lock rollback triggers immediately, preventing double-bookings.'
-    },
-    {
-      id: 'tb-2',
-      category: 'tutor-booking',
-      question: 'Are parents and students notified when lesson slots are confirmed?',
-      answer: 'Absolutely. On confirmation, our event emitter dispatches an offline simulated sandbox API ping to the registered WhatsApp numbers, logging complete metadata alerts containing schedule timestamps and tuition billing figures.'
-    },
-
-    // Billing & Refunds
-    {
-      id: 'bill-1',
-      category: 'billing',
-      question: 'How are recurring subscriptions and checkouts handled?',
-      answer: 'All institutional plan registrations and custom packages are handled on a manual verification and administrative approval model directly via the Super Admin at accts.pak@gmail.com. We do not support direct online checkouts or credit card processing on this workspace.'
-    },
-    {
-      id: 'bill-2',
-      category: 'billing',
-      question: 'What is the refund policy for active school plans?',
-      answer: 'Taleem360 operates on a manual administrative approval model. Refund requests or custom licensing adjustments are processed manually. To submit a billing query, please email the Super Admin at accts.pak@gmail.com. The previous support@taleem360.online email has been suspended.'
-    },
-    {
-      id: 'bill-3',
-      category: 'billing',
-      question: 'How do daycare billing schemas handle late checkout penalty events?',
-      answer: 'Center parents are allocated custom checkout grace periods in the kiosk configuration. If a pickup timestamp occurs past authorization hours, our kiosk database logic automatically injects flat late-pickup penalty ledgers (e.g., 150 units) to the master child account immediately.'
-    },
-
-    // Security & Enterprise SLAs
-    {
-      id: 'sec-1',
-      category: 'security',
-      question: 'How does Taleem360 protect institutional databases?',
-      answer: 'We configure rigorous security boundary conditions. API routes filter sensitive payload blocks, database parameters utilize parameterized queries to prohibit SQL injections, and sensitive data relies on industry-standard TLS encryption protocols.'
-    },
-    {
-      id: 'sec-2',
-      category: 'security',
-      question: 'Where can I access operational platform status tracking?',
-      answer: 'We maintain reliable system operational state metrics under the Taleem360 support matrix. For urgent inquiries or custom Service Level Agreement (SLA) tickets, our dedicated team is reachable 24/7 at support@taleem360.online.'
-    }
-  ];
-
   // Filtering criteria
   const filteredFAQs = faqData.filter((item) => {
     const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
@@ -160,28 +192,8 @@ export const FAQ: React.FC = () => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  // Build JSON-LD FAQ Schema Markup dynamically
-  const schemaMarkup = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': faqData.map((faq) => ({
-      '@type': 'Question',
-      'name': faq.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': faq.answer
-      }
-    }))
-  };
-
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 lg:px-8 bg-slate-50 min-h-screen">
-      
-      {/* Dynamic SEO JSON-LD Script Injected */}
-      <script type="application/ld+json">
-        {JSON.stringify(schemaMarkup)}
-      </script>
-
       {/* FAQ Landing Page Header */}
       <div className="bg-slate-900 rounded-3xl p-8 mb-8 text-white relative overflow-hidden shadow-2xl border-b-4 border-indigo-600">
         <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -mr-20 -mt-20"></div>
@@ -213,7 +225,7 @@ export const FAQ: React.FC = () => {
                 setSearchQuery(e.target.value);
                 setActiveCategory('all'); // Expand search across categories
               }}
-              className="bg-white text-slate-800 placeholder-slate-400 block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-full text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-lg text-sm"
+              className="bg-white text-slate-800 placeholder-slate-400 block w-full pl-10 pr-4 py-3 border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 shadow-lg text-sm"
             />
           </div>
         </div>
@@ -253,7 +265,7 @@ export const FAQ: React.FC = () => {
           </div>
         ) : (
           <div className="divide-y divide-slate-100">
-            {filteredFAQs.map((item, index) => {
+            {filteredFAQs.map((item) => {
               const isExpanded = expandedId === item.id;
               return (
                 <div key={item.id} className="py-4 first:pt-0 last:pb-0">
@@ -314,23 +326,6 @@ export const FAQ: React.FC = () => {
           </a>
         </div>
       </div>
-
     </div>
-
-    {/* FAQPage JSON-LD Schema for rich snippets */}
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqData.map((faq) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer
-          }
-        }))
-      })}
-    </script>
   );
 };
