@@ -713,7 +713,6 @@ export const DaycareSummary: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
 
     {/* Related Taleem360 Modules */}
     <div className="mt-12 bg-slate-50 border-t border-slate-200 py-8">
