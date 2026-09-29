@@ -26,8 +26,8 @@ const Landing: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useSEO({
-    title: 'Complete Educational ERP Ecosystem & School Cloud Suite',
-    description: 'Taleem360 ERP Ecosystem is Pakistan\'s leading educational management suite. Unified cloud database automating K-12 attendance tracking, student fee collection, daycare PIN check-ins, and parent messaging portals, backed by PostgreSQL and offline JSON storage.',
+    title: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
+    description: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
     keywords: 'school erp, school management software pakistan, white label lms, offline student tracker, daycare daily log, quran tracker madrasa',
   });
 
