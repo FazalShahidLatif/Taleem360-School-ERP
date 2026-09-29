@@ -40,14 +40,14 @@ const SEO_MAP: Record<string, {
   additionalMeta?: Record<string, string>; // any extra <meta> tags
 }> = {
   '/': {
-    title: 'Taleem360 - Unified School Cloud ERP & LMS Suite Pakistan',
-    description: 'Manage K-12 registration, student attendance tracking, double-entry accounting, fee collection, and report cards with Taleem360, a unified Cloud School ERP & LMS platform built for Pakistani educational institutions.',
+    title: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
+    description: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
     canonical: `${SITEMAP_URL}/`,
-    ogTitle: 'Taleem360 - Unified School Cloud ERP & LMS Suite Pakistan',
-    ogDescription: 'Streamline operations and drive student outcomes with Taleem360 School Cloud ERP. Track automated attendance, manage cashless online fee invoicing, secure double-entry ledgers, and deploy parent notifications across Pakistan and global campuses.',
+    ogTitle: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
+    ogDescription: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
     ogImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
-    twitterTitle: 'Taleem360 - Unified School Cloud ERP & LMS Suite Pakistan',
-    twitterDescription: 'Streamline operations and drive student outcomes with Taleem360 School Cloud ERP. Track automated attendance, manage cashless online fee invoicing, secure double-entry ledgers, and deploy parent notifications across Pakistan and global campuses.',
+    twitterTitle: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
+    twitterDescription: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
     twitterImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
     schema: [
       {
@@ -677,6 +677,7 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
     <meta name="title" content="{TITLE}" />
     <meta name="description" content="{DESCRIPTION}" />
     <meta name="robots" content="index, follow" />
+    <meta name="article:published_time" content="2026-06-21" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="bingbot" content="index, follow" />
     <link rel="canonical" href="{CANONICAL}" />
