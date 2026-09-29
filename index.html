@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <script>
-      // Gracefully prevent cross-origin tracking or utility script load issues from polluting logs as uncaught errors
       window.addEventListener('error', function(e) {
         if (e && (e.message === 'Script error.' || e.message === 'Script error' || !e.message)) {
           console.warn('Suppressed cross-origin Script error from external provider (GTag/Extensions):', e);
@@ -18,7 +17,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'GTM-WJ5D4CWG');
     </script>
 
@@ -55,15 +53,15 @@
     <meta name="twitter:description" content="Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot." />
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80" />
 
-    <!-- JSON-LD Structured Data for Organization and Software Application -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Taleem360",
         "url": "https://taleem360.online/",
-        "logo": "https://taleem360.online/taleem_logo.png",
-        "description": "Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals.",
+        "logo": "https://taleem360.online/teach_logo.png",
+        "description": "Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.",
         "foundingDate": "2026",
         "contactPoint": {
           "@type": "ContactPoint",
@@ -92,7 +90,7 @@
         "@context": "https://schema.org",
         "@type": "Product",
         "name": "Taleem360",
-        "image": "https://taleem360.online/taleem_logo.png",
+        "image": "https://taleem360.online/teach_logo.png",
         "description": "Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.",
         "brand": {
           "@type": "Brand",
@@ -121,8 +119,8 @@
         "@type": "SoftwareApplication",
         "name": "Taleem360 School ERP Suite",
         "url": "https://taleem360.online/",
-        "image": "https://taleem360.online/taleem_logo.png",
-        "description": "Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals.",
+        "image": "https://taleem360.online/teach_logo.png",
+        "description": "Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "All",
         "offers": {
@@ -141,7 +139,7 @@
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",
-          "ratingCount": "187",
+          "reviewCount": "187",
           "bestRating": "5",
           "worstRating": "1"
         },
@@ -165,9 +163,23 @@
           "name": "Taleem360",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://taleem360.online/taleem_logo.png"
+            "url": "https://taleem360.online/teach_logo.png"
           }
         }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://taleem360.online/"
+          }
+        ]
       }
     </script>
     <script type="application/ld+json">

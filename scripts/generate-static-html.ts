@@ -56,7 +56,7 @@ const SEO_MAP: Record<string, {
         name: 'Taleem360',
         url: `${SITEMAP_URL}/`,
         logo: `${SITEMAP_URL}/teach_logo.png`,
-        description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals.',
+        description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         foundingDate: '2026',
         contactPoint: {
           '@type': 'ContactPoint',
@@ -83,7 +83,7 @@ const SEO_MAP: Record<string, {
         '@type': 'Product',
         name: 'Taleem360',
         image: `${SITEMAP_URL}/teach_logo.png`,
-        description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals.',
+        description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         brand: { '@type': 'Brand', name: 'Taleem360' },
         aggregateRating: {
           '@type': 'AggregateRating',
@@ -107,7 +107,7 @@ const SEO_MAP: Record<string, {
         name: 'Taleem360 School ERP Suite',
         url: `${SITEMAP_URL}/`,
         image: `${SITEMAP_URL}/teach_logo.png`,
-        description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals.',
+        description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         applicationCategory: 'EducationalApplication',
         operatingSystem: 'All',
         offers: {
@@ -161,6 +161,18 @@ const SEO_MAP: Record<string, {
           },
           queryInput: 'required name=search_term_string'
         }
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: `${SITEMAP_URL}/`
+          }
+        ]
       }
     ]
   },
