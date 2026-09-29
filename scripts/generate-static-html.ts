@@ -692,6 +692,7 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
     <meta name="twitter:title" content="{TWITTER_TITLE}" />
     <meta name="twitter:description" content="{TWITTER_DESCRIPTION}" />
 {TWITTER_IMAGE_META}
+{OG_IMAGE_META}
 {SCHEMA_SCRIPTS}
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 110' fill='none'><defs><linearGradient id='emerald-grad' x1='0%' y1='0%' x2='100%' y2='0%'><stop offset='0%' stop-color='%23059669' /><stop offset='100%' stop-color='%2310B981' /></linearGradient><linearGradient id='accent-white-grad' x1='0%' y1='0%' x2='0%' y2='100%'><stop offset='0%' stop-color='%23FFFFFF' /><stop offset='100%' stop-color='%23E2E8F0' /></linearGradient></defs><ellipse cx='55' cy='55' rx='50' ry='18' fill='none' stroke='url(%23emerald-grad)' stroke-width='4.5' transform='rotate(-25 55 55)' opacity='0.85' /><polygon points='55,20 92,38 55,56 18,38' fill='url(%23accent-white-grad)' stroke='%23059669' stroke-width='1.5' /><path d='M55,38 L32,48 L32,62' fill='none' stroke='%2310B981' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' /><circle cx='32' cy='62' r='3' fill='%2310B981' /><path d='M30,46 L30,68 C30,73 50,78 55,78 C60,78 80,73 80,68 L80,46' fill='none' stroke='url(%23accent-white-grad)' stroke-width='4.5' stroke-linecap='round' /><path d='M30,46 L30,65 C30,70 50,75 55,75 C60,75 80,70 80,65 L80,46' fill='none' stroke='%23emerald-grad' stroke-width='1.5' /></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -804,17 +805,17 @@ function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
     : '';
 
   const html = HTML_HEAD_TEMPLATE
-    .replace('{TITLE}', jsonEscape(title))
-    .replace('{DESCRIPTION}', jsonEscape(description))
-    .replace('{CANONICAL}', jsonEscape(canonical))
-    .replace('{OG_TITLE}', jsonEscape(ogTitle))
-    .replace('{OG_DESCRIPTION}', jsonEscape(ogDescription))
-    .replace('{TECH_DATA_URI}', ogImageUrlMeta)
-    .replace('{TWITTER_TITLE}', jsonEscape(twitterTitle))
-    .replace('{TWITTER_DESCRIPTION}', jsonEscape(twitterDescription))
-    .replace('{TWITTER_IMAGE_META}', twitterImageMeta)
-    .replace('{SCHEMA_SCRIPTS}', schemaScripts)
-    .replace('{ACCESSIBILITY_NOTE}', jsonEscape(renderAccessibilityNote(route)));
+    .replaceAll('{TITLE}', jsonEscape(title))
+    .replaceAll('{DESCRIPTION}', jsonEscape(description))
+    .replaceAll('{CANONICAL}', jsonEscape(canonical))
+    .replaceAll('{OG_TITLE}', jsonEscape(ogTitle))
+    .replaceAll('{OG_DESCRIPTION}', jsonEscape(ogDescription))
+    .replaceAll('{OG_IMAGE_META}', ogImageUrlMeta)
+    .replaceAll('{TWITTER_TITLE}', jsonEscape(twitterTitle))
+    .replaceAll('{TWITTER_DESCRIPTION}', jsonEscape(twitterDescription))
+    .replaceAll('{TWITTER_IMAGE_META}', twitterImageMeta)
+    .replaceAll('{SCHEMA_SCRIPTS}', schemaScripts)
+    .replaceAll('{ACCESSIBILITY_NOTE}', jsonEscape(renderAccessibilityNote(route)));
 
   ensureDir(STATIC_DIR);
   fs.writeFileSync(filePath, html, 'utf8');
