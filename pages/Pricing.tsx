@@ -204,11 +204,11 @@ export const Pricing: React.FC = () => {
                   )}
                 </p>
                 <p className="mt-6 text-gray-500">{tier.description}</p>
-              {tier.id !== 'pilot' && tier.id !== 'custom' && (
-                <p className="mt-1 text-xs text-slate-400">
-                  ≈ PKR {tier.pkrPrice}/month (approx.)
-                </p>
-              )}
+                {tier.pkrPrice && (
+                  <p className="mt-1 text-xs text-slate-400">
+                    ≈ PKR {tier.pkrPrice}/month (approx.)
+                  </p>
+                )}
  
                 <ul className="mt-6 space-y-4">
                   {tier.features.map((feature) => (
