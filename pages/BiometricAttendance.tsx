@@ -464,6 +464,9 @@ export const BiometricAttendance: React.FC = () => {
             <Link to="/attendance" className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-medium px-6 py-3 rounded-xl text-base transition-all border border-slate-200">
               Explore Full Attendance Module
             </Link>
+            <Link to="/daycare" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-6 py-3 rounded-xl text-base transition-all border border-slate-200 ml-3">
+              Daycare Management
+            </Link>
           </div>
         </div>
       </section>
