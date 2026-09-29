@@ -135,6 +135,18 @@ export const Compare: React.FC = () => {
               Pricing
             </Link>
             <Link 
+              to="/blog" 
+              className="text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+            >
+              Blog
+            </Link>
+            <Link 
+              to="/faq" 
+              className="text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+            >
+              FAQs
+            </Link>
+            <Link 
               to="/free-resources" 
               className="text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
