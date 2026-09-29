@@ -327,7 +327,7 @@ export const CitySEO: React.FC = () => {
       "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80",
       "telephone": normalizedCity === 'nigeria' ? "+234-1-1234567" : normalizedCity === 'uae' ? "+971-4-1234567" : normalizedCity === 'bangladesh' ? "+880-2-1234567" : "+92-300-1234567",
       "email": "support@taleem360.online",
-      "url": `https://www.taleem360.online/${normalizedCity}`,
+      "url": `https://taleem360.online/${normalizedCity}`,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": data.schemaLocalAddress.street,

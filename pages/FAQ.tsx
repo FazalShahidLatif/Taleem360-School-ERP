@@ -130,7 +130,7 @@ export const FAQ: React.FC = () => {
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/faq');
+    canonicalLink.setAttribute('href', 'https://taleem360.online/faq');
 
     // Dynamic schema markup generation for FAQ rich snippets
     const schemaScriptId = 'jsonld-seo-faq';

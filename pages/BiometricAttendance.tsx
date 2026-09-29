@@ -156,7 +156,7 @@ export const BiometricAttendance: React.FC = () => {
     setOG('og:title', 'Biometric Attendance System for Schools — Pakistan | Taleem360');
     setOG('og:description', 'Automate student attendance with biometric scanners, QR codes, and RFID. Sub-second check-in, instant parent alerts via WhatsApp/SMS. 30-day free pilot.');
     setOG('og:type', 'website');
-    setOG('og:url', 'https://www.taleem360.online/biometric-attendance');
+    setOG('og:url', 'https://taleem360.online/biometric-attendance');
     setOG('og:image', 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80');
     
     const setTwitter = (name: string, content: string) => {
@@ -181,7 +181,7 @@ export const BiometricAttendance: React.FC = () => {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', 'https://www.taleem360.online/biometric-attendance');
+    canonical.setAttribute('href', 'https://taleem360.online/biometric-attendance');
     
     // FAQPage Schema
     const schemaScript = document.createElement('script');

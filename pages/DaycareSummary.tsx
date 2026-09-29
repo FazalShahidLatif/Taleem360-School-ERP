@@ -99,7 +99,7 @@ export const DaycareSummary: React.FC = () => {
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/daycare');
+    canonicalLink.setAttribute('href', 'https://taleem360.online/daycare');
   }, []);
   const [selectedChildId, setSelectedChildId] = useState<string>('zain');
   const [rawNotes, setRawNotes] = useState<string>(PRESET_CHILDREN[0].defaultNotes);

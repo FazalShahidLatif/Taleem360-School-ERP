@@ -61,7 +61,7 @@ export const BlogPostDetail: React.FC = () => {
             canonicalLink.setAttribute('rel', 'canonical');
             document.head.appendChild(canonicalLink);
           }
-          const formattedCanonical = fetchedPost.canonical.replace('https://taleem360.online', 'https://www.taleem360.online');
+          const formattedCanonical = fetchedPost.canonical.replace('https://taleem360.online', 'https://taleem360.online');
           canonicalLink.setAttribute('href', formattedCanonical);
 
           // 2. Dynamic JSON-LD (Web schemas: BlogPosting, Breadcrumb, FAQ)

@@ -18,7 +18,7 @@ export const RefundPolicy: React.FC = () => {
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/refund-policy');
+    canonicalLink.setAttribute('href', 'https://taleem360.online/refund-policy');
   }, []);
 
   return (

@@ -48,7 +48,7 @@ export const Madrasa: React.FC = () => {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Taleem360 Madrasa ERP & Islamic Education Suite",
-      "url": "https://www.taleem360.online/madrasa",
+      "url": "https://taleem360.online/madrasa",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "All",
       "description": "Unified cloud-based Madrasa management software in Pakistan designed to automate Hifz tracking, Islamic curriculum mapping, and donor funding channels.",

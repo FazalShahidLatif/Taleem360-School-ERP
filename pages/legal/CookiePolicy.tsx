@@ -18,7 +18,7 @@ export const CookiePolicy: React.FC = () => {
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', 'https://www.taleem360.online/cookies');
+    canonicalLink.setAttribute('href', 'https://taleem360.online/cookies');
   }, []);
 
   return (
