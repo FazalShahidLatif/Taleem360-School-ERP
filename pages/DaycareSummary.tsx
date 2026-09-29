@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { 
   Sparkles, 
@@ -20,7 +21,8 @@ import {
   ArrowRight,
   ClipboardCheck,
   Send,
-  Download
+  Download,
+  Fingerprint
 } from 'lucide-react';
 
 interface DailySummaryData {
@@ -713,48 +715,48 @@ export const DaycareSummary: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
 
-    {/* Related Taleem360 Modules */}
-    <div className="mt-12 bg-slate-50 border-t border-slate-200 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
-          <Compass className="w-5 h-5 text-indigo-600" />
-          Explore More Taleem360 Modules
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white border border-slate-100 rounded-2xl p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center">
-                <Baby className="w-5 h-5 text-emerald-600" />
+      {/* Related Taleem360 Modules */}
+      <div className="mt-12 bg-slate-50 border-t border-slate-200 py-8 rounded-2xl">
+        <div className="max-w-4xl mx-auto px-4">
+          <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+            <Compass className="w-5 h-5 text-indigo-600" />
+            Explore More Taleem360 Modules
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-white border border-slate-100 rounded-2xl p-4 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center">
+                  <Baby className="w-5 h-5 text-emerald-600" />
+                </div>
+                <h4 className="font-bold text-slate-900 text-sm">Daycare Management</h4>
               </div>
-              <h4 className="font-bold text-slate-900 text-sm">Daycare Management</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">Full daycare operation: child profiles, daily logs, guardian kiosk, billing, parent notifications.</p>
+              <p className="text-xs font-bold text-indigo-600 mt-2">Opened from this page</p>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">Full daycare operation: child profiles, daily logs, guardian kiosk, billing, parent notifications.</p>
-            <p className="text-xs font-bold text-indigo-600 mt-2">Opened from this page</p>
-          </div>
-          <div className="bg-white border border-slate-100 rounded-2xl p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center">
-                <Fingerprint className="w-5 h-5 text-sky-600" />
+            <div className="bg-white border border-slate-100 rounded-2xl p-4 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center">
+                  <Fingerprint className="w-5 h-5 text-sky-600" />
+                </div>
+                <h4 className="font-bold text-slate-900 text-sm">Biometric Attendance</h4>
               </div>
-              <h4 className="font-bold text-slate-900 text-sm">Biometric Attendance</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">QR, biometric, or RFID attendance with automated WhatsApp/SMS parent alerts.</p>
+              <Link to="/biometric-attendance" className="text-xs font-bold text-indigo-600 hover:text-indigo-800 mt-2 inline-block">Learn about attendance →</Link>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">QR, biometric, or RFID attendance with automated WhatsApp/SMS parent alerts.</p>
-            <Link to="/biometric-attendance" className="text-xs font-bold text-indigo-600 hover:text-indigo-800 mt-2 inline-block">Learn about attendance →</Link>
-          </div>
-          <div className="bg-white border border-slate-100 rounded-2xl p-4 hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
-                <FileDown className="w-5 h-5 text-indigo-600" />
+            <div className="bg-white border border-slate-100 rounded-2xl p-4 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
+                  <FileDown className="w-5 h-5 text-indigo-600" />
+                </div>
+                <h4 className="font-bold text-slate-900 text-sm">Pricing & Plans</h4>
               </div>
-              <h4 className="font-bold text-slate-900 text-sm">Pricing & Plans</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">Free 30-day pilot + paid tiers. PKR pricing now available.</p>
+              <Link to="/pricing" className="text-xs font-bold text-indigo-600 hover:text-indigo-800 mt-2 inline-block">View plans &amp; pricing →</Link>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">Free 30-day pilot + paid tiers. PKR pricing now available.</p>
-            <Link to="/pricing" className="text-xs font-bold text-indigo-600 hover:text-indigo-800 mt-2 inline-block">View plans &amp; pricing →</Link>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
