@@ -18,8 +18,17 @@ import nexusRoutes from './routes/academy/nexusRoutes.ts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '13089760026-fbr88j41r7is0r8suer5dq02arcines4.apps.googleusercontent.com';
+// Google OAuth credentials come from the environment only (GitHub repo secrets /
+// Vercel env vars). No hardcoded fallback: a missing ID must fail loudly rather
+// than silently authenticating against an unowned Google Cloud project.
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+
+if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+  console.warn(
+    '[auth] Google OAuth disabled: set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in the environment to enable it.'
+  );
+}
 
 const SUPER_ADMIN_EMAILS = ['accts.pak@gmail.com', 'support@taleem360.online'];
 
@@ -118,58 +127,39 @@ async function startServer() {
   app.post('/api/auth/register/', handleRegister);
 
   app.get('/api/auth/google/url', (req, res) => {
-    const redirectUri = getRedirectUri(req);
-    
-    const client = new OAuth2Client(GOOGLE_CLIENT_ID);
-    const url = client.generateAuthUrl({
-      access_type: 'offline',
-      scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'],
-      redirect_uri: redirectUri,
-    });
+      if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+        console.error('[auth] /api/auth/google/url called but Google OAuth is not configured.');
+        return res.status(503).json({ detail: 'Google sign-in is not configured on this server.' });
+      }
 
-    res.json({ url });
-  });
+      const redirectUri = getRedirectUri(req);
+
+      const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+      const url = client.generateAuthUrl({
+        access_type: 'offline',
+        scope: ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'],
+        redirect_uri: redirectUri,
+      });
+
+      res.json({ url });
+    });
 
   app.get('/auth/google/callback', async (req, res) => {
     const { code } = req.query;
     const redirectUri = getRedirectUri(req);
 
     try {
-      if (!GOOGLE_CLIENT_SECRET) {
-        // If no secret is provided, we'll simulate a successful auth for demo purposes
-        // In a real app, this would fail.
-        console.warn('GOOGLE_CLIENT_SECRET is missing. Simulating successful authentication.');
-        const testEmail = 'accts.pak@gmail.com';
-        const testRole = getRoleForEmail(testEmail);
-        return res.send(`
-          <html>
-            <body>
-              <script>
-                if (window.opener) {
-                  window.opener.postMessage({ 
-                    type: 'OAUTH_AUTH_SUCCESS',
-                    user: {
-                      email: '${testEmail}',
-                      name: 'Super Admin (Demo)',
-                      role: '${testRole}'
-                    }
-                  }, '*');
-                  window.close();
-                } else {
-                  window.location.href = '/';
-                }
-              </script>
-              <div style="font-family: sans-serif; text-align: center; padding-top: 50px;">
-                <h2>Demo Mode Active</h2>
-                <p>Authentication successful (Simulated). This window should close automatically.</p>
-                <p style="color: #666; font-size: 0.9em;">To use "Real Mode", please set <b>GOOGLE_CLIENT_SECRET</b> in Settings > Environment Variables.</p>
-              </div>
-            </body>
-          </html>
-        `);
-      }
+        if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+          // Fail closed. Previously this fell through to a "demo mode" that
+          // fabricated a SUPER_ADMIN session for any visitor, which meant a missing
+          // secret silently granted full admin access in production.
+          console.error(
+            '[auth] /auth/google/callback called but Google OAuth is not configured (GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET missing).'
+          );
+          return res.status(503).send('Google sign-in is not configured on this server.');
+        }
 
-      const client = new OAuth2Client(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, redirectUri);
+        const client = new OAuth2Client(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, redirectUri);
       const { tokens } = await client.getToken(code);
       const ticket = await client.verifyIdToken({
         idToken: tokens.id_token,
@@ -183,20 +173,20 @@ async function startServer() {
         <html>
           <body>
             <script>
-              if (window.opener) {
-                window.opener.postMessage({ 
-                  type: 'OAUTH_AUTH_SUCCESS',
-                  user: {
-                    email: "${payload.email}",
-                    name: "${payload.name}",
-                    role: "${role}"
-                  }
-                }, '*');
-                window.close();
-              } else {
-                window.location.href = '/';
-              }
-            </script>
+                            if (window.opener) {
+                              window.opener.postMessage({
+                                type: 'OAUTH_AUTH_SUCCESS',
+                                user: {
+                                  email: "${payload.email}",
+                                  name: "${payload.name}",
+                                  role: "${role}"
+                                }
+                              }, window.location.origin);
+                              window.close();
+                            } else {
+                              window.location.href = '/';
+                            }
+                        </script>
             <p>Authentication successful. This window should close automatically.</p>
           </body>
         </html>

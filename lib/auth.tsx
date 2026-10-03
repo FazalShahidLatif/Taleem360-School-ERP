@@ -86,14 +86,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // OAuth Message Listener
     const handleMessage = (event: MessageEvent) => {
-      // Validate origin is from AI Studio preview or localhost
-      const origin = event.origin;
-      if (!origin.endsWith('.run.app') && !origin.includes('localhost')) {
+      // Only accept auth results from this exact origin. Previously this allowed
+      // any *.run.app host, which let a third-party preview origin inject a session.
+      if (event.origin !== window.location.origin) {
         return;
       }
 
       if (event.data?.type === 'OAUTH_AUTH_SUCCESS') {
-        console.debug("[Auth] OAuth login success:", event.data.user);
+        console.debug('[Auth] OAuth login success:', event.data.user);
         const email = (event.data.user.email || '').trim().toLowerCase();
         
         if (email === 'support@taleem360.online') {
