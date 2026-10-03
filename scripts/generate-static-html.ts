@@ -55,7 +55,7 @@ const SEO_MAP: Record<string, {
         '@type': 'Organization',
         name: 'Taleem360',
         url: `${SITEMAP_URL}/`,
-        logo: `${SITEMAP_URL}/teach_logo.png`,
+        logo: `${SITEMAP_URL}/taleem_logo.png`,
         description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         foundingDate: '2026',
         contactPoint: {
@@ -82,7 +82,7 @@ const SEO_MAP: Record<string, {
         '@context': 'https://schema.org',
         '@type': 'Product',
         name: 'Taleem360',
-        image: `${SITEMAP_URL}/teach_logo.png`,
+        image: `${SITEMAP_URL}/taleem_logo.png`,
         description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         brand: { '@type': 'Brand', name: 'Taleem360' },
         aggregateRating: {
@@ -106,7 +106,7 @@ const SEO_MAP: Record<string, {
         '@type': 'SoftwareApplication',
         name: 'Taleem360 School ERP Suite',
         url: `${SITEMAP_URL}/`,
-        image: `${SITEMAP_URL}/teach_logo.png`,
+        image: `${SITEMAP_URL}/taleem_logo.png`,
         description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         applicationCategory: 'EducationalApplication',
         operatingSystem: 'All',
@@ -145,7 +145,7 @@ const SEO_MAP: Record<string, {
         author: {
           '@type': 'Organization',
           name: 'Taleem360',
-          logo: { '@type': 'ImageObject', url: `${SITEMAP_URL}/teach_logo.png` }
+          logo: { '@type': 'ImageObject', url: `${SITEMAP_URL}/taleem_logo.png` }
         }
       },
       {
@@ -361,7 +361,7 @@ const SEO_MAP: Record<string, {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: 'Taleem360 ERP vs Competitors',
-      image: `${SITEMAP_URL}/teach_logo.png`,
+      image: `${SITEMAP_URL}/taleem_logo.png`,
       description: 'Programmatic side-by-side technical comparison of Taleem360 against conventional school platforms (Fedena, Procare, Brightwheel, and ClassDojo) highlighting offline resilience and white-label pricing.',
       brand: { '@type': 'Brand', name: 'Taleem360' }
     }
@@ -685,6 +685,7 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="google2cbad101865766ce.html" />
     <title>{TITLE}</title>
     <meta name="title" content="{TITLE}" />
     <meta name="description" content="{DESCRIPTION}" />

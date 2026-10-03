@@ -44,7 +44,7 @@ export const useSEO = ({
     setMetaTag('property', 'og:description', description);
     setMetaTag('property', 'og:type', ogType);
     setMetaTag('property', 'og:url', canonicalUrl || window.location.href);
-    setMetaTag('property', 'og:image', 'https://taleem360.online/teach_logo.png');
+    setMetaTag('property', 'og:image', 'https://taleem360.online/taleem_logo.png');
 
     // 4. Set Canonical tag
     let canonical = document.querySelector('link[rel="canonical"]');
