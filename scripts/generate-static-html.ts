@@ -786,6 +786,18 @@ function ensureDir(dir: string): void {
   }
 }
 
+/** Build a human-readable crumb label from a route (e.g. /biometric-attendance → "Biometric Attendance") */
+function routeNameForCrumb(route: string): string {
+  const last = route.split('/').filter(Boolean).pop() || 'Home';
+  return last
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .replace(/\bErp\b/, 'ERP')
+    .replace(/\bLms\b/, 'LMS')
+    .replace(/\bApi\b/, 'API')
+    .replace(/\bFaq\b/, 'FAQ');
+}
+
 /** Generate a static HTML file for one route */
 function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
   // For blog posts (/blog/slug), strip the /blog/ prefix from the filename
@@ -809,7 +821,43 @@ function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
   const twitterDescription = meta.twitterDescription || description;
   const twitterImage = meta.twitterImage;
 
-  const schemaScripts = renderSchemaScripts(meta.schema);
+  // Every page gets a BreadcrumbList so Google can render breadcrumb rich results.
+  // Replaces any hand-authored BreadcrumbList in SEO_MAP (the homepage has a
+  // 1-item Home-only entry that was too sparse to be a valid trail).
+  const breadcrumbItems: object[] = [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITEMAP_URL}/` }
+  ];
+  let segmentPos = 2;
+  if (route.startsWith('/blog/')) {
+    breadcrumbItems.push({ '@type': 'ListItem', position: segmentPos++, name: 'Blog', item: `${SITEMAP_URL}/blog` });
+  }
+  // Final crumb uses the route's last path segment; on the homepage the Home
+  // crumb alone is the complete valid trail (a 1-item list is accepted by Google).
+  if (route !== '/') {
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: segmentPos,
+      name: routeNameForCrumb(route),
+      item: canonical
+    });
+  }
+  const breadcrumbList = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbItems
+  };
+
+  const existing = meta.schema
+    ? (Array.isArray(meta.schema) ? meta.schema : [meta.schema])
+    : [];
+  // Drop any hand-authored BreadcrumbList (homepage has a sparse 1-item entry)
+  // so we never emit two BreadcrumbList blocks on one page.
+  const withoutStaleBreadcrumb = existing.filter(
+    (s) => (s as { '@type'?: string })['@type'] !== 'BreadcrumbList'
+  );
+  const pageSchema = [...withoutStaleBreadcrumb, breadcrumbList];
+
+  const schemaScripts = renderSchemaScripts(pageSchema);
   const ogImageMeta = renderOgImage(ogImage);
   const twitterImageMeta = renderTwitterImage(twitterImage);
 
