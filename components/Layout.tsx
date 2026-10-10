@@ -39,7 +39,7 @@ import {
   Phone
 } from 'lucide-react';
 import { UserRole } from '../types';
-import { AIChatbot } from './AIChatbot';
+import { CTA } from './CTA';
 import { Footer } from './Footer';
 import { EthicalReviewCollector } from './EthicalReviewCollector';
 
@@ -292,7 +292,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             
             <Footer />
-            <AIChatbot />
+            <CTA />
             <EthicalReviewCollector />
           </div>
         </main>
