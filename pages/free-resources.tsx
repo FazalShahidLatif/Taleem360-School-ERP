@@ -18,7 +18,7 @@ import {
   CheckCircle2,
   RefreshCw
 } from "lucide-react";
-import { jsPDF } from "jspdf";
+// jsPDF is dynamically imported in generatePDF() to keep it out of the main bundle
 import { useSEO } from "../lib/seo";
 
 // ==========================================
@@ -666,7 +666,8 @@ const OutlineIllustrator: React.FC<{ type: string; name: string }> = ({ type, na
 // DYNAMIC WORKBOOK COMPILER (jsPDF BUILDER)
 // ==========================================
 
-function compileWorkbookPDF(pack: ResourcePack, childName: string) {
+async function compileWorkbookPDF(pack: ResourcePack, childName: string) {
+  const { jsPDF } = await import("jspdf");
   const doc = new jsPDF({
     orientation: "portrait",
     unit: "mm",
@@ -1079,11 +1080,11 @@ export const FreeResources: React.FC = () => {
     setPreviewPage(1); // Reset page selection on workbook switch
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!activePack) return;
     setIsCompiling(true);
     try {
-      compileWorkbookPDF(activePack, childName);
+      await compileWorkbookPDF(activePack, childName);
     } catch (err) {
       console.error("PDF Compilation failed", err);
     } finally {

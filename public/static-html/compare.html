@@ -76,9 +76,10 @@
     </noscript>
     <style>
       /* Critical CSS: render page shell while JS loads */
-      body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #1e293b; }
+      body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #1e293b; padding-bottom: 60px; }
       #root { min-height: 100vh; }
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+      #cookie-consent-placeholder { min-height: 80px; }
     </style>
   </style>
   +
@@ -105,6 +106,7 @@
   </head>
 
 
+  <div id="cookie-consent-placeholder"></div>
   <body>
     <div id="root">
       <div class="sr-only" aria-live="polite">

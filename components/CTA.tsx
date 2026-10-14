@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const CTA: React.FC = () => (
-  <div className="fixed bottom-0 inset-x-0 bg-indigo-600 text-white py-3 px-4 flex items-center justify-between shadow-lg z-50">
+  <div id="cta-placeholder" className="fixed bottom-0 inset-x-0 bg-indigo-600 text-white py-3 px-4 flex items-center justify-between shadow-lg z-50 min-h-[60px]">
     <span className="text-sm font-medium">Free 30‑day Pilot – Start now</span>
     <Link
       to="/pricing"
