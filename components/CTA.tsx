@@ -7,6 +7,14 @@ export const CTA: React.FC = () => (
     <Link
       to="/pricing"
       className="bg-white text-indigo-600 hover:bg-gray-100 font-bold py-1 px-3 rounded"
+      onClick={() => {
+        if (window.gtag) {
+          window.gtag('event', 'cta_click', {
+            event_category: 'CTA',
+            event_label: 'FreePilot'
+          });
+        }
+      }}
     >
       Get Started
     </Link>

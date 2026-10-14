@@ -730,7 +730,31 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
       #root { min-height: 100vh; }
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
     </style>
+  </style>
+  +
+  +    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+  +    <script>
+  +    window.addEventListener("load", function(){
+  +      window.cookieconsent.initialise({
+  +        palette: {popup: {background: "#000"}, button: {background: "#f1d600"}},
+  +        theme: "classic",
+  +        content: {message: "This site uses cookies to improve your experience.", dismiss: "Got it!", link: "Learn more", href: "/privacy"}
+  +      });
+  +    });
+  +    </script>
+  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      palette: {popup: {background: "#000"}, button: {background: "#f1d600"}},
+      theme: "classic",
+      content: {message: "This site uses cookies to improve your experience.", dismiss: "Got it!", link: "Learn more", href: "/privacy"}
+    });
+  });
+  </script>
   </head>
+
+
   <body>
     <div id="root">
       <div class="sr-only" aria-live="polite">
