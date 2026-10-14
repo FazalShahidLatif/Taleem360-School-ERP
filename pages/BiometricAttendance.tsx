@@ -157,7 +157,7 @@ export const BiometricAttendance: React.FC = () => {
     setOG('og:description', 'Automate student attendance with biometric scanners, QR codes, and RFID. Sub-second check-in, instant parent alerts via WhatsApp/SMS. 30-day free pilot.');
     setOG('og:type', 'website');
     setOG('og:url', 'https://taleem360.online/biometric-attendance');
-    setOG('og:image', 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80');
+    setOG('og:image', 'https://taleem360.online/hero.webp');
     
     const setTwitter = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`);
@@ -172,7 +172,7 @@ export const BiometricAttendance: React.FC = () => {
     setTwitter('twitter:card', 'summary_large_image');
     setTwitter('twitter:title', 'Biometric Attendance System for Schools — Pakistan | Taleem360');
     setTwitter('twitter:description', 'Automate student attendance with biometric scanners, QR codes, and RFID. Sub-second check-in, instant parent alerts via WhatsApp/SMS.');
-    setTwitter('twitter:image', 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80');
+    setTwitter('twitter:image', 'https://taleem360.online/hero.webp');
     
     // Canonical
     let canonical = document.querySelector('link[rel="canonical"]');

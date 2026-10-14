@@ -45,10 +45,10 @@ const SEO_MAP: Record<string, {
     canonical: `${SITEMAP_URL}/`,
     ogTitle: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
     ogDescription: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
-    ogImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
+    ogImage: 'https://taleem360.online/hero.webp',
     twitterTitle: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
     twitterDescription: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
-    twitterImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80',
+    twitterImage: 'https://taleem360.online/hero.webp',
     schema: [
       {
         '@context': 'https://schema.org',
