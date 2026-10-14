@@ -31,3 +31,6 @@ dist-ssr
 # Screenshots / local images
 image_*.png
 436fe7.png
+
+# Runtime database
+users_db.json
