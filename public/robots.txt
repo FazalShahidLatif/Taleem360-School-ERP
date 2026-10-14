@@ -1,33 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /about
-Allow: /blog
-Allow: /pricing
-Allow: /free-resources
-Allow: /daycare
-Allow: /skills-academy
-Allow: /private-tutors
-Allow: /madrasa
-Allow: /white-label
-Allow: /api
-Allow: /nigeria
-Allow: /bangladesh
-Allow: /uae
-Allow: /karachi
-Allow: /lahore
-Allow: /islamabad
-Allow: /rawalpindi
-Allow: /peshawar
-Allow: /faisalabad
-Allow: /multan
-Allow: /quetta
-Allow: /faq
-Allow: /privacy
-Allow: /terms
-Allow: /cookies
-Allow: /refund-policy
-
-# Do not index administrative or authenticated segments
+Disallow: /api/
+Disallow: /auth/
 Disallow: /login
 Disallow: /onboarding
 Disallow: /dashboard
@@ -56,5 +30,32 @@ Disallow: /finance
 Disallow: /tickets
 Disallow: /support
 Disallow: /admin-portal
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 Sitemap: https://taleem360.online/sitemap.xml

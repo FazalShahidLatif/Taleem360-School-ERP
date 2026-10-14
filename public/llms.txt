@@ -1,25 +1,34 @@
-# Taleem360 (Taleem360.online) - Universal Educational ERP & Multi-Tenant Ecosystem
+# Taleem360 - School Cloud ERP & LMS Suite Pakistan
 
-> Official discovery and routing map for AI search assistants, crawlers, and LLM-powered coding agents.
+> Taleem360 is a unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals for schools across Pakistan, the Middle East, South Asia, and Africa. Every subscription funds free curriculum notes for a child in need.
 
-[Taleem360](https://taleem360.online) is a high-performance, unified, multi-tenant administrative suite and educational platform serving K-12 school boards, ECE daycare networks, private tutors, and professional skill academies.
+## Key Pages
 
-## Core Resource Directory
+- [Home](https://taleem360.online/) - School Cloud ERP & LMS Suite Pakistan
+- [Pricing](https://taleem360.online/pricing) - Free 30-day pilot, then PKR 49-499/month
+- [Blog](https://taleem360.online/blog) - Educational technology articles and guides
+- [FAQ](https://taleem360.online/faq) - Frequently asked questions
+- [About](https://taleem360.online/about) - About Taleem360
+- [Contact](https://taleem360.online/contact) - Contact support
+- [Support](https://taleem360.online/support) - Help center
+- [Compare](https://taleem360.online/compare) - Compare with competitors
+- [Free Resources](https://taleem360.online/free-resources) - Free printable worksheets
+- [Skills Academy](https://taleem360.online/skills-academy) - Professional development
+- [White Label](https://taleem360.online/white-label) - White-label solutions
+- [Madrasa](https://taleem360.online/madrasa) - Madrasa management
+- [Daycare](https://taleem360.online/daycare) - Daycare management
+- [Biometric Attendance](https://taleem360.online/biometric-attendance) - Attendance tracking
 
-- [Full LLM Profile Details](/llm.txt) - Deep-dive technical systems profile, repository layouts, and dual-persistence patterns.
-- [Homepage](https://taleem360.online/) - Main landing hub and multi-tenant portal routing page.
-- [Free Learning Printables](https://taleem360.online/free-resources) - 100% free educational workbooks, phonics sheets, numbers tracing, and customizable parent-classroom learning packs.
-- [Pricing & Subscription Packages](https://taleem360.online/pricing) - Standard, advanced, and white-labeled SaaS subscription plans.
-- [Institutional Daycare Center Hub](https://taleem360.online/daycare) - Smart secure ECE daycare check-in kiosk portals and automated late-pickup billing calculators.
-- [Professional Skills Academy](https://taleem360.online/skills-academy) - Multi-tenant white-label LMS profiles and structured course directories.
-- [About Taleem360](https://taleem360.online/about) - Platform history, values, educational philosophy, and executive leadership.
-- [Contact Support](https://taleem360.online/contact) - Customer support desk and technical inquiry forms.
-- [Favicon Vector Asset](https://taleem360.online/favicon.svg) - Official vector brand-emblem representation.
+## City Pages
 
-## High-Value Technical & Architectural Reference Articles
-
-- [Ultimate Unified ERP Solutions](https://taleem360.online/blog/taleem360-definitive-multi-tenant-educational-erp-solution) - Explains how Taleem360 resolves traditional school admin bottlenecks using a unified dual-persistence schema fallback.
-- [ECE Daycare Security & Smart Kiosk Gates](https://taleem360.online/blog/ece-daycare-early-childhood-kiosk-guardian-security) - Detailed analysis of ECE gate pick-up safety protocols,CNIC verification, and penalty fee micro-matrices.
-- [Scaling White-Labeled SaaS Networks](https://taleem360.online/blog/white-labeled-educational-growth-vercel-subdomains-branding) - Guide on leveraging Vercel wildcard routing and client-side subdomain injection in Node applications.
-- [Interactive System Sitemap](https://taleem360.online/sitemap.xml) - Full machine-readable route registry index.
-- [Robotic Crawling Configuration](https://taleem360.online/robots.txt) - Search engine access declarations and paths.
+- [Karachi](https://taleem360.online/karachi)
+- [Lahore](https://taleem360.online/lahore)
+- [Islamabad](https://taleem360.online/islamabad)
+- [Rawalpindi](https://taleem360.online/rawalpindi)
+- [Faisalabad](https://taleem360.online/faisalabad)
+- [Multan](https://taleem360.online/multan)
+- [Peshawar](https://taleem360.online/peshawar)
+- [Quetta](https://taleem360.online/quetta)
+- [Nigeria](https://taleem360.online/nigeria)
+- [UAE](https://taleem360.online/uae)
+- [Bangladesh](https://taleem360.online/bangladesh)

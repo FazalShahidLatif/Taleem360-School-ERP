@@ -1,0 +1,29 @@
+{
+  "name": "Taleem360",
+  "description": "School Cloud ERP & LMS Suite for Pakistan, Middle East, South Asia, and Africa",
+  "url": "https://taleem360.online",
+  "logo": "https://taleem360.online/taleem_logo.png",
+  "content": "https://taleem360.online",
+  "pages": [
+    {
+      "name": "Pricing",
+      "url": "https://taleem360.online/pricing",
+      "description": "Free 30-day pilot, then PKR 49-499/month per school"
+    },
+    {
+      "name": "Blog",
+      "url": "https://taleem360.online/blog",
+      "description": "Educational technology articles and guides"
+    },
+    {
+      "name": "FAQ",
+      "url": "https://taleem360.online/faq",
+      "description": "Frequently asked questions about school ERP"
+    },
+    {
+      "name": "Free Resources",
+      "url": "https://taleem360.online/free-resources",
+      "description": "Free printable worksheets and educational resources"
+    }
+  ]
+}
