@@ -91,7 +91,7 @@ export const Footer: React.FC = () => {
             &copy; 2026 Taleem360-School ERP. Open, collaborative, and built with transparency as a core guiding principle. No proprietary registered trademark claims.
           </p>
           <p className="mt-4 md:mt-0">
-            Powered by <a href="https://saasskul.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 font-bold">SaaSSkul</a>
+            Powered by <a href="https://saasskul.com" target="_blank" rel="nofollow noopener noreferrer" aria-label="Visit SaaSSkul — SaaS development, technical SEO and MQL5 automation" className="text-indigo-600 hover:text-indigo-700 font-bold">SaaSSkul</a>
           </p>
         </div>
       </div>
