@@ -69,7 +69,7 @@ CREATE TABLE academy_submissions_isolated (
     assignment_title VARCHAR(150) NOT NULL,
     student_submission_payload TEXT NOT NULL, -- Raw content (code block, text essay, etc.)
     ai_evaluation_status VARCHAR(20) DEFAULT 'pending', -- 'pending', 'evaluated', 'failed'
-    ai_raw_feedback JSONB,        -- Clean structured breakdown from Google AI Studio
+    ai_raw_feedback JSONB,        -- Clean structured breakdown from AI model platform
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 

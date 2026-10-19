@@ -475,7 +475,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
     }, 400);
   };
 
-  // Run Google AI Studio Prompt via Gemini API
+  // Run AI model platform Prompt via Gemini API
   const runAIPromptEngine = async () => {
     setIsProcessingAI(true);
     setPipelineState(prev => ({ ...prev, 4: 'active', 5: 'idle' }));
@@ -683,7 +683,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
             }`} />
           </div>
 
-          {/* Node 4: Google AI Studio Prompt */}
+          {/* Node 4: AI model platform Prompt */}
           <div 
             onClick={() => pipelineState[4] !== 'idle' && setActiveStep(4)}
             className={`flex flex-col items-center transition-all duration-300 z-10 ${
@@ -943,7 +943,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                   <Settings className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800">Step 4: Google AI Studio Prompt</h3>
+                  <h3 className="font-bold text-slate-800">Step 4: AI model platform Prompt</h3>
                   <p className="text-xs text-gray-400">Configure system instructions and parameters for Gemini model.</p>
                 </div>
               </div>
@@ -978,7 +978,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
               <div className="mb-5">
                 <div className="flex justify-between items-center mb-1.5">
                   <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">System Instructions</label>
-                  <span className="text-[10px] font-mono text-gray-400">Editable (Google AI Studio IDE Style)</span>
+                  <span className="text-[10px] font-mono text-gray-400">Editable (AI model platform IDE Style)</span>
                 </div>
                 <textarea
                   value={systemPromptText}
@@ -1272,7 +1272,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                       <div className="flex gap-3">
                         <Sparkles className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
                         <div>
-                          <h4 className="font-black text-sm text-slate-800">Google AI Studio Simulation Console</h4>
+                          <h4 className="font-black text-sm text-slate-800">AI model platform Simulation Console</h4>
                           <p className="text-xs text-gray-500 mt-1 leading-relaxed">
                             The Cleaned Text and JSON structures will be injected as the main payload, matching the exact prompt guidelines defined in the System Prompt.
                           </p>

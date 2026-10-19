@@ -45,7 +45,7 @@ interface SubmissionRecord {
 const memorySubmissions: SubmissionRecord[] = [];
 
 /**
- * Handles the logic of evaluating student assignments with Google AI Studio
+ * Handles the logic of evaluating student assignments with AI model platform
  */
 export async function submitAssignment(req: Request, res: Response) {
   const { enrollment_id, course_id, assignment_title, student_submission_payload } = req.body;

@@ -204,7 +204,7 @@ async function startServer() {
       const apiKey = getApiKey();
       if (!apiKey) {
         return res.json({ 
-          text: "I am ready and online to assist you! However, the **GEMINI_API_KEY** secret has not been configured in your environment variables yet. \n\nPlease configure it in Google AI Studio under **Settings > Secrets**. After that, I will be fully functional to answer questions and analyze your school data!"
+          text: "I am ready and online to assist you! However, the **GEMINI_API_KEY** secret has not been configured in your environment variables yet. \n\nPlease configure it in AI model platform under **Settings > Secrets**. After that, I will be fully functional to answer questions and analyze your school data!"
         });
       }
 
