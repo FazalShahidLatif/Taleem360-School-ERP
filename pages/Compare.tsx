@@ -96,11 +96,7 @@ export const Compare: React.FC = () => {
       "highPrice": "199",
       "offerCount": "3"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "124"
-    }
+
   };
 
   useSEO({
@@ -217,10 +213,10 @@ export const Compare: React.FC = () => {
               </div>
               <div className="flex items-center gap-4 text-xs font-semibold">
                 <span className="px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800 text-emerald-400">
-                  Taleem360 (4.9★)
+                  Taleem360
                 </span>
                 <span className="px-3 py-1 rounded-full bg-slate-800 text-slate-400">
-                  {activeComp.name} ({activeComp.rating}★)
+                  {activeComp.name}
                 </span>
               </div>
             </div>

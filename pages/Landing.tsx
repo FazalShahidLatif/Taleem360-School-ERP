@@ -244,8 +244,8 @@ const Landing: React.FC = () => {
               </div>
               {/* Floating Stats */}
               <div className="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 hidden md:block">
-                <p className="text-3xl font-black text-indigo-600">500+</p>
-                <p className="text-sm font-bold text-slate-500 uppercase tracking-wider">Schools Trusted Us</p>
+                <p className="text-3xl font-black text-indigo-600">30 days</p>
+                <p className="text-sm font-bold text-slate-500 uppercase tracking-wider">Free pilot, no card</p>
               </div>
             </div>
           </div>

@@ -56,14 +56,6 @@ export const Madrasa: React.FC = () => {
         "@type": "Brand",
         "name": "Taleem360"
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "124",
-        "ratingCount": "124",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
       "offers": {
         "@type": "Offer",
         "price": "0",

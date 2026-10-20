@@ -427,7 +427,7 @@ export const BlogPostDetail: React.FC = () => {
                         <span className="absolute top-1 right-2 text-[8px] tracking-widest text-slate-400 font-bold">NATIVE AD DESK</span>
                         <h4 className="text-slate-800 font-extrabold text-xs mb-1">Recommended SaaS: Taleem360 ERP</h4>
                         <p className="text-slate-500 text-[10px] max-w-sm mx-auto mb-3">
-                          Automate your school fee schedules and protect database security with high-performance software. Rated 4.9/5 by global superintendents.
+                          Automate your school fee schedules and protect student records with a single cloud database.
                         </p>
                         <Link 
                           to="/pricing" 

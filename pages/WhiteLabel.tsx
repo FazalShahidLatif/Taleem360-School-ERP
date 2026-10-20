@@ -50,11 +50,6 @@ export const WhiteLabel: React.FC = () => {
       "name": "Taleem360 White-Label School ERP",
       "operatingSystem": "All Cloud Platforms",
       "applicationCategory": "EducationalBusinessApplication",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "84"
-      },
       "offers": {
         "@type": "Offer",
         "price": "129.00",

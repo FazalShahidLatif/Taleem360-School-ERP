@@ -132,10 +132,10 @@ export const About: React.FC = () => {
       <section className="bg-gray-900 rounded-3xl p-12 text-white overflow-hidden relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
           {[
-            { label: "Schools Onboarded", value: "500+" },
-            { label: "Active Students", value: "100k+" },
-            { label: "Daily Transactions", value: "250k+" },
-            { label: "Uptime Guarantee", value: "99.9%" }
+            { label: "Institution Types", value: "5" },
+            { label: "Core Modules", value: "12" },
+            { label: "Free Pilot", value: "30 days" },
+            { label: "Contract Lock-in", value: "None" }
           ].map((stat, idx) => (
             <div key={idx} className="text-center">
               <p className="text-4xl font-bold mb-2">{stat.value}</p>

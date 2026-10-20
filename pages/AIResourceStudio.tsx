@@ -475,7 +475,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
     }, 400);
   };
 
-  // Run AI model platform Prompt via Gemini API
+  // Run the Taleem360 AI prompt through the server-side AI service
   const runAIPromptEngine = async () => {
     setIsProcessingAI(true);
     setPipelineState(prev => ({ ...prev, 4: 'active', 5: 'idle' }));
@@ -538,7 +538,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
       setActiveStep(5);
 
     } catch (err: any) {
-      console.error("AI Studio Processing Error:", err);
+      console.error("Taleem360 AI processing error:", err);
       setAiError(err.message || "An unexpected issue occurred while querying Gemini.");
       setPipelineState(prev => ({ ...prev, 4: 'idle' }));
     } finally {
@@ -683,7 +683,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
             }`} />
           </div>
 
-          {/* Node 4: AI model platform Prompt */}
+          {/* Node 4: Taleem360 AI Prompt */}
           <div 
             onClick={() => pipelineState[4] !== 'idle' && setActiveStep(4)}
             className={`flex flex-col items-center transition-all duration-300 z-10 ${
@@ -702,7 +702,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
               <Settings className="w-6 h-6" />
             </div>
             <span className="text-xs font-bold mt-2.5 text-slate-800">4. System Prompt</span>
-            <span className="text-[10px] font-mono text-gray-400">AI Studio Playground</span>
+            <span className="text-[10px] font-mono text-gray-400">Prompt Playground</span>
           </div>
 
           {/* Connection 4-5 */}
@@ -943,7 +943,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                   <Settings className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800">Step 4: AI model platform Prompt</h3>
+                  <h3 className="font-bold text-slate-800">Step 4: Taleem360 AI Prompt</h3>
                   <p className="text-xs text-gray-400">Configure system instructions and parameters for Gemini model.</p>
                 </div>
               </div>
@@ -978,7 +978,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
               <div className="mb-5">
                 <div className="flex justify-between items-center mb-1.5">
                   <label className="text-xs font-bold text-slate-600 uppercase tracking-wider">System Instructions</label>
-                  <span className="text-[10px] font-mono text-gray-400">Editable (AI model platform IDE Style)</span>
+                  <span className="text-[10px] font-mono text-gray-400">Editable (code editor style)</span>
                 </div>
                 <textarea
                   value={systemPromptText}
@@ -1272,7 +1272,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                       <div className="flex gap-3">
                         <Sparkles className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
                         <div>
-                          <h4 className="font-black text-sm text-slate-800">AI model platform Simulation Console</h4>
+                          <h4 className="font-black text-sm text-slate-800">Taleem360 AI Simulation Console</h4>
                           <p className="text-xs text-gray-500 mt-1 leading-relaxed">
                             The Cleaned Text and JSON structures will be injected as the main payload, matching the exact prompt guidelines defined in the System Prompt.
                           </p>

@@ -133,7 +133,7 @@ describe('🎓 Taleem360 Skills Academy Assignment Evaluator System tests', () =
   });
 
   it('⚡ Should execute the full evaluation stream and return valid JSON when GEMINI_API_KEY is available', async () => {
-    process.env.GEMINI_API_KEY = 'valid-aistudio-key-xxx';
+    process.env.GEMINI_API_KEY = 'valid-test-key-xxx';
 
     // Declarative query dispatcher to bypass txn keywords safely
     (global as any)._mockQuery.mockImplementation((sql: string) => {

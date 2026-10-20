@@ -20,7 +20,7 @@ function getAiClient() {
       apiKey,
       httpOptions: {
         headers: {
-          'User-Agent': 'aistudio-build'
+          'User-Agent': 'taleem360-server'
         }
       }
     });

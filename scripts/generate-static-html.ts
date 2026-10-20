@@ -14,6 +14,19 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  BRAND,
+  esc,
+  renderCriticalCss,
+  renderHeader,
+  renderBreadcrumbs,
+  renderMain,
+  renderFooter,
+  renderJsonLd,
+  routeLabel,
+} from './static-content.js';
+import { buildRouteContent } from './static-route-content.js';
+import { BLOG_POSTS_DATA } from '../lib/blogContent.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.resolve(__dirname, '../public');
@@ -85,14 +98,6 @@ const SEO_MAP: Record<string, {
         image: `${SITEMAP_URL}/taleem_logo.png`,
         description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         brand: { '@type': 'Brand', name: 'Taleem360' },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '187',
-          ratingCount: '187',
-          bestRating: '5',
-          worstRating: '1'
-        },
         offers: {
           '@type': 'AggregateOffer',
           lowPrice: '49',
@@ -121,25 +126,6 @@ const SEO_MAP: Record<string, {
             price: '49',
             priceCurrency: 'USD',
             valueAddedTaxIncluded: 'false'
-          }
-        },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          ratingCount: '187',
-          bestRating: '5',
-          worstRating: '1'
-        },
-        review: {
-          '@type': 'Review',
-          author: { '@type': 'Person', name: 'Muhammad Ali' },
-          datePublished: '2026-03-15',
-          reviewBody: 'Taleem360 completely transformed how our academy handles fee split payouts and registration. Outstanding platform!',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-            worstRating: '1'
           }
         },
         author: {
@@ -406,6 +392,15 @@ const SEO_MAP: Record<string, {
     }
   },
 
+  '/private-tutors': {
+    title: 'Private Tutor Management Software Pakistan — Students, Fees & Scheduling | Taleem360',
+    description: 'Run a tutoring business on Taleem360: student records, fee collection, class scheduling, attendance and parent updates for private tutors, home tuition teachers and coaching centres.',
+    canonical: `${SITEMAP_URL}/private-tutors`,
+    ogTitle: 'Private Tutor Management Software Pakistan | Taleem360',
+    ogDescription: 'Student records, fee collection, scheduling and parent updates for tutors and coaching centres.',
+    twitterTitle: 'Private Tutor Management Software Pakistan | Taleem360',
+    twitterDescription: 'Student records, fee collection, scheduling and parent updates for tutors and coaching centres.',
+  },
   '/white-label': {
     title: 'White Label School ERP Pakistan — Custom Branded Platform for Schools | Taleem360',
     description: 'Taleem360 White Label School ERP: customize the platform with your school brand, logo, colors, and domain. Perfect for school chains, academies, and educational networks wanting their own branded ERP system.',
@@ -678,6 +673,31 @@ const SEO_MAP: Record<string, {
   },
 };
 
+// ─── Blog routes derived from the single source of truth ──────────────────────
+// lib/blogContent.ts is what the sitemap generator reads. Deriving the static
+// HTML routes from the same array guarantees the sitemap and the prerendered
+// pages can never drift apart again — a previous hand-maintained list covered
+// only 20 of 55 published posts, so 35 sitemap URLs served an empty SPA shell
+// and were never indexed. Curated entries already in SEO_MAP are preserved.
+let derivedBlogRoutes = 0;
+for (const post of BLOG_POSTS_DATA) {
+  if (!post.is_published) continue;
+  const route = `/blog/${post.slug}`;
+  if (SEO_MAP[route]) continue;
+  SEO_MAP[route] = {
+    title: post.title,
+    description: post.excerpt,
+    canonical: post.canonical || `${SITEMAP_URL}${route}`,
+    ogTitle: post.title,
+    ogDescription: post.excerpt,
+    ogImage: post.image_url,
+    twitterTitle: post.title,
+    twitterDescription: post.excerpt,
+  };
+  derivedBlogRoutes++;
+}
+console.log(`Derived ${derivedBlogRoutes} blog route(s) from lib/blogContent.ts`);
+
 // ─── HTML Template ────────────────────────────────────────────────────────────
 
 const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
@@ -698,7 +718,6 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
     <meta property="og:url" content="{CANONICAL}" />
     <meta property="og:title" content="{OG_TITLE}" />
     <meta property="og:description" content="{OG_DESCRIPTION}" />
-{TECH_DATA_URI}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Taleem360" />
     <meta name="twitter:creator" content="@Taleem360" />
@@ -724,46 +743,37 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
-    <style>
-      /* Critical CSS: render page shell while JS loads */
-      body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: #fff; color: #1e293b; padding-bottom: 60px; }
-      #root { min-height: 100vh; }
-      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-      #cookie-consent-placeholder { min-height: 80px; }
-    </style>
-  </style>
-  +
-  +    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
-  +    <script>
-  +    window.addEventListener("load", function(){
-  +      window.cookieconsent.initialise({
-  +        palette: {popup: {background: "#000"}, button: {background: "#f1d600"}},
-  +        theme: "classic",
-  +        content: {message: "This site uses cookies to improve your experience.", dismiss: "Got it!", link: "Learn more", href: "/privacy"}
-  +      });
-  +    });
-  +    </script>
-  <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
-  <script>
-  window.addEventListener("load", function(){
-    window.cookieconsent.initialise({
-      palette: {popup: {background: "#000"}, button: {background: "#f1d600"}},
-      theme: "classic",
-      content: {message: "This site uses cookies to improve your experience.", dismiss: "Got it!", link: "Learn more", href: "/privacy"}
-    });
-  });
-  </script>
+{CRITICAL_CSS}
+{ENTRY_CSS}
   </head>
-
-
-  <div id="cookie-consent-placeholder"></div>
   <body>
-    <div id="root">
-      <div class="sr-only" aria-live="polite">
-        {ACCESSIBILITY_NOTE}
-      </div>
-    </div>
-    <script type="module" src="/index.tsx"></script>
+    <a class="t360-skip" href="#main">Skip to main content</a>
+{HEADER}
+{BREADCRUMBS}
+{MAIN}
+{FOOTER}
+    <div id="cookie-consent-placeholder"></div>
+    <script>
+      (function () {
+        var KEY = 't360_cookie_notice_dismissed';
+        try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
+        window.addEventListener('load', function () {
+          var el = document.getElementById('cookie-consent-placeholder');
+          if (!el) return;
+          el.innerHTML =
+            '<div style="position:fixed;left:0;right:0;bottom:0;background:#0F172A;color:#E2E8F0;padding:14px 20px;font:14px/1.5 Inter,system-ui,sans-serif;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:60">' +
+            '<span>This site uses cookies to improve your experience. <a href="/cookies" style="color:#10B981">Learn more</a></span>' +
+            '<button type="button" id="t360-cookie-ok" style="background:#10B981;color:#fff;border:0;border-radius:8px;padding:11px 20px;font-weight:700;min-height:44px;cursor:pointer">Got it!</button>' +
+            '</div>';
+          var btn = document.getElementById('t360-cookie-ok');
+          if (btn) btn.addEventListener('click', function () {
+            try { localStorage.setItem(KEY, '1'); } catch (e) {}
+            el.innerHTML = '';
+          });
+        });
+      })();
+    </script>
+{ENTRY_JS}
   </body>
 </html>`;
 
@@ -900,6 +910,18 @@ function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
     ? `\n    <meta property="og:image" content="${jsonEscape(ogImage)}" />`
     : '';
 
+  // ── Visible page body ───────────────────────────────────────────────────
+  // The marketing pages are complete static HTML: header nav, breadcrumbs,
+  // real per-route content, capability grid, FAQ block, CTA and a full footer
+  // link graph. No React bundle is required, so the page renders instantly and
+  // every route has crawlable text and internal links.
+  const content = buildRouteContent(route, title, description);
+  const header = renderHeader(route);
+  const breadcrumbs = renderBreadcrumbs(route, canonical);
+  const main = renderMain(content, route);
+  const footer = renderFooter();
+  const criticalCss = `    <style>\n${renderCriticalCss().split('\n').map((l) => '      ' + l).join('\n')}\n    </style>`;
+
   const html = HTML_HEAD_TEMPLATE
     .replaceAll('{TITLE}', jsonEscape(title))
     .replaceAll('{DESCRIPTION}', jsonEscape(description))
@@ -911,7 +933,22 @@ function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
     .replaceAll('{TWITTER_DESCRIPTION}', jsonEscape(twitterDescription))
     .replaceAll('{TWITTER_IMAGE_META}', twitterImageMeta)
     .replaceAll('{SCHEMA_SCRIPTS}', schemaScripts)
+    .replaceAll('{CRITICAL_CSS}', criticalCss)
+    .replaceAll('{ENTRY_CSS}', '')
+    .replaceAll('{HEADER}', header)
+    .replaceAll('{BREADCRUMBS}', breadcrumbs)
+    .replaceAll('{MAIN}', main)
+    .replaceAll('{FOOTER}', footer)
+    .replaceAll('{ENTRY_JS}', '')
     .replaceAll('{ACCESSIBILITY_NOTE}', jsonEscape(renderAccessibilityNote(route)));
+
+  // Fail loudly rather than shipping a page with an unfilled placeholder.
+  const leftover = html.match(/\{[A-Z_]{3,}\}/g);
+  if (leftover) {
+    throw new Error(
+      `Unreplaced placeholder(s) in ${filename}: ${[...new Set(leftover)].join(', ')}`
+    );
+  }
 
   ensureDir(STATIC_DIR);
   fs.writeFileSync(filePath, html, 'utf8');

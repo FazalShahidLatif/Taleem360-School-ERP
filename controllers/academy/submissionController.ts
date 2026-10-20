@@ -22,7 +22,7 @@ function getAiClient(): GoogleGenAI {
       apiKey,
       httpOptions: {
         headers: {
-          'User-Agent': 'aistudio-build'
+          'User-Agent': 'taleem360-server'
         }
       }
     });
@@ -45,7 +45,7 @@ interface SubmissionRecord {
 const memorySubmissions: SubmissionRecord[] = [];
 
 /**
- * Handles the logic of evaluating student assignments with AI model platform
+ * Handles the logic of evaluating student assignments with the Taleem360 AI service
  */
 export async function submitAssignment(req: Request, res: Response) {
   const { enrollment_id, course_id, assignment_title, student_submission_payload } = req.body;
