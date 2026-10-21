@@ -423,7 +423,7 @@ const SEO_MAP: Record<string, {
 
   '/ai-resource-studio': {
     title: 'AI Resource Studio — AI-Powered School Tools & Educational Content Generator | Taleem360',
-    description: 'Taleem360 AI Resource Studio: AI-powered tools for schools — generate lesson plans, quiz questions, report card comments, parent notification messages, and educational content. Built on Google Gemini AI.',
+    description: 'Taleem360 AI Resource Studio: AI-powered tools for schools — generate lesson plans, quiz questions, report card comments, parent notification messages, and educational content. Built into the Taleem360 platform.',
     canonical: `${SITEMAP_URL}/ai-resource-studio`,
     ogTitle: 'AI Resource Studio — AI-Powered School Tools & Educational Content Generator | Taleem360',
     ogDescription: 'Taleem360 AI Resource Studio: AI tools for lesson plans, quizzes, report comments, and parent notifications.',

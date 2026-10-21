@@ -653,7 +653,7 @@ export const Nexus: React.FC = () => {
             {isBYOFMode ? (
               <div className="space-y-6">
                 <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 text-xs text-slate-600 leading-relaxed">
-                  <strong className="text-slate-800">Bring Your Own File (BYOF) Method:</strong> Upload or drag-and-drop a lecture note, textbook page, syllabus, or raw syllabus file (.txt, .md, .csv) and let Gemini generate premium, context-specific questions automatically!
+                  <strong className="text-slate-800">Bring Your Own File (BYOF) Method:</strong> Upload or drag-and-drop a lecture note, textbook page, syllabus, or raw syllabus file (.txt, .md, .csv) and let the Taleem360 AI engine generate premium, context-specific questions automatically!
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -740,7 +740,7 @@ export const Nexus: React.FC = () => {
                     ) : (
                       <>
                         <Sparkles className="w-4 h-4" />
-                        Generate 3 Quizzes with Gemini
+                        Generate 3 Quizzes with Taleem360 AI
                       </>
                     )}
                   </button>

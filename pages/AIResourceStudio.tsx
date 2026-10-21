@@ -505,7 +505,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
 
       const data = await response.json();
       
-      // Clean and parse JSON response from Gemini
+      // Clean and parse JSON response from the Taleem360 AI engine
       let parsedJson: any = null;
       try {
         // Strip markdown backticks if returned in text
@@ -518,7 +518,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
         }
         parsedJson = JSON.parse(cleanText.trim());
       } catch (parseErr) {
-        console.warn("Gemini output was not valid JSON, forcing mock adaptation", parseErr);
+        console.warn("AI output was not valid JSON, forcing mock adaptation", parseErr);
         // Fallback structure in case of direct plain text
         parsedJson = {
           title: "Study Summary Explainer",
@@ -539,7 +539,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
 
     } catch (err: any) {
       console.error("Taleem360 AI processing error:", err);
-      setAiError(err.message || "An unexpected issue occurred while querying Gemini.");
+      setAiError(err.message || "An unexpected issue occurred while querying the Taleem360 AI engine.");
       setPipelineState(prev => ({ ...prev, 4: 'idle' }));
     } finally {
       setIsProcessingAI(false);
@@ -562,7 +562,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="px-2.5 py-1 text-xs font-semibold bg-emerald-100 text-emerald-800 rounded-full flex items-center gap-1 animate-pulse">
-                <Sparkles className="w-3 h-3" /> Live Gemini Integrated
+                <Sparkles className="w-3 h-3" /> Taleem360 AI Live
               </span>
               <span className="px-2.5 py-1 text-xs font-semibold bg-indigo-100 text-indigo-800 rounded-full">
                 Taleem360 Core Pipeline
@@ -944,7 +944,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-800">Step 4: Taleem360 AI Prompt</h3>
-                  <p className="text-xs text-gray-400">Configure system instructions and parameters for Gemini model.</p>
+                  <p className="text-xs text-gray-400">Configure system instructions and parameters for the Taleem360 AI engine.</p>
                 </div>
               </div>
 
@@ -1016,7 +1016,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
               >
                 {isProcessingAI ? (
                   <>
-                    <RefreshCw className="w-4 h-4 animate-spin" /> Simulating Gemini Execution...
+                    <RefreshCw className="w-4 h-4 animate-spin" /> Running Taleem360 AI engine...
                   </>
                 ) : (
                   <>
@@ -1097,7 +1097,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                 </div>
                 <div className="flex justify-between text-indigo-300">
                   <span>LLM Provider:</span>
-                  <span>Gemini 3.5 Flash (via Node SDK)</span>
+                  <span>Taleem360 AI Engine (Node SDK)</span>
                 </div>
                 <div className="flex justify-between text-indigo-300">
                   <span>Compliance:</span>
@@ -1145,7 +1145,7 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                     activeStep === 4 ? 'bg-white text-slate-800 shadow-sm' : 'text-gray-500 hover:text-gray-800'
                   }`}
                 >
-                  AI Studio
+                  Taleem360 AI
                 </button>
                 <button 
                   onClick={() => pipelineState[5] === 'completed' && setActiveStep(5)}
@@ -1298,13 +1298,13 @@ ${text.substring(0, 1500) || "CHAPTER 1: Introduction to Educational Digitizatio
                     {isProcessingAI ? (
                       <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-xl flex items-center justify-center gap-3">
                         <RefreshCw className="w-5 h-5 text-indigo-600 animate-spin" />
-                        <span className="text-xs text-indigo-800 font-bold">Querying Google Gemini model and compiling student views...</span>
+                        <span className="text-xs text-indigo-800 font-bold">Querying the Taleem360 AI engine and compiling student views...</span>
                       </div>
                     ) : aiError ? (
                       <div className="bg-rose-50 border border-rose-100 p-4 rounded-xl flex items-start gap-3 text-rose-800">
                         <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0" />
                         <div>
-                          <h5 className="font-bold text-xs">Gemini Model Error</h5>
+                          <h5 className="font-bold text-xs">AI Engine Error</h5>
                           <p className="text-[11px] mt-0.5">{aiError}</p>
                         </div>
                       </div>

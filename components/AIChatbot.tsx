@@ -66,7 +66,7 @@ export const AIChatbot: React.FC = () => {
         If you don't know something specific about their school's private data, ask them to provide context or check the relevant module.
       `;
 
-      // Gemini multi-turn chat MUST start with a 'user' message.
+      // The multi-turn chat MUST start with a 'user' message.
       // Our first message is a 'model' greeting, so we skip it in the history
       // or ensure the first message sent to the API is from the user.
       const history = messages
@@ -224,7 +224,7 @@ export const AIChatbot: React.FC = () => {
                   </button>
                 </div>
                 <p className="text-[10px] text-gray-400 mt-2 text-center">
-                  Powered by Google Gemini AI
+                  Powered by Taleem360 AI
                 </p>
               </form>
             </>

@@ -751,7 +751,7 @@ export const CompetitionHub: React.FC = () => {
               <span>●</span> Double-Blind Evaluation Phase
             </h4>
             <p>
-              To eliminate teacher or network brand bias, all student portfolios are scrubbed of name and school markers when transmitted to our **Automatic AI Evaluation Engine** (powered by Gemini rating schema keys). High-scores are then processed by a human verification jury containing O-Level curriculum checkers based in London and Islamabad to secure final rankings.
+              To eliminate teacher or network brand bias, all student portfolios are scrubbed of name and school markers when transmitted to our **Automatic AI Evaluation Engine** (powered by Taleem360 AI rating schema keys). High-scores are then processed by a human verification jury containing O-Level curriculum checkers based in London and Islamabad to secure final rankings.
             </p>
             <p className="bg-white p-3 rounded-xl border border-slate-100 flex items-start gap-2">
               <Info className="w-4 h-4 text-indigo-600 flex-shrink-0 mt-0.5" />
