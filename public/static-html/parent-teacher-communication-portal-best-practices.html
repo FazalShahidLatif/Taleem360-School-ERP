@@ -23,8 +23,14 @@
     <meta name="twitter:title" content="Bridging the Gap: 7 Best Practices for High-Impact Parent-Teacher Communication Portals" />
     <meta name="twitter:description" content="Tired of endless teacher emails and forgotten notices? Discover 7 design guidelines that maximize parent portal engagement and build school trust." />
 
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
 
     <meta property="og:image" content="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
+    <meta property="og:image:secure_url" content="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&amp;fit=crop&amp;w=800&amp;q=80" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Taleem360 — school cloud ERP and LMS suite: attendance, fee collection, double-entry accounting, report cards and the parent portal in one system." />
     <script type="application/ld+json">
 {
       "@context": "https://schema.org",
@@ -51,7 +57,19 @@
       ]
     }
     </script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 110' fill='none'><defs><linearGradient id='emerald-grad' x1='0%' y1='0%' x2='100%' y2='0%'><stop offset='0%' stop-color='%23059669' /><stop offset='100%' stop-color='%2310B981' /></linearGradient><linearGradient id='accent-white-grad' x1='0%' y1='0%' x2='0%' y2='100%'><stop offset='0%' stop-color='%23FFFFFF' /><stop offset='100%' stop-color='%23E2E8F0' /></linearGradient></defs><ellipse cx='55' cy='55' rx='50' ry='18' fill='none' stroke='url(%23emerald-grad)' stroke-width='4.5' transform='rotate(-25 55 55)' opacity='0.85' /><polygon points='55,20 92,38 55,56 18,38' fill='url(%23accent-white-grad)' stroke='%23059669' stroke-width='1.5' /><path d='M55,38 L32,48 L32,62' fill='none' stroke='%2310B981' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' /><circle cx='32' cy='62' r='3' fill='%2310B981' /><path d='M30,46 L30,68 C30,73 50,78 55,78 C60,78 80,73 80,68 L80,46' fill='none' stroke='url(%23accent-white-grad)' stroke-width='4.5' stroke-linecap='round' /><path d='M30,46 L30,65 C30,70 50,75 55,75 C60,75 80,70 80,65 L80,46' fill='none' stroke='%23emerald-grad' stroke-width='1.5' /></svg>">
+    <!-- Icons — SVG first (best quality, supported by Google and all modern browsers),
+         then PNG fallbacks, then the legacy .ico. Every file exists in public/;
+         none of these may point at a missing asset, because the SPA catch-all
+         would answer with HTML and a 200, which reads as a soft 404. -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0F172A" />
+    <meta name="msapplication-TileColor" content="#0F172A" />
+    <meta name="msapplication-config" content="none" />
     <!-- Google Tag Manager (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GT-TXHQHSRK"></script>
     <script>
@@ -166,7 +184,7 @@
   <header class="t360-header">
     <div class="t360-wrap">
       <a class="t360-brand" href="/">
-        <span class="t360-brand-mark" aria-hidden="true">T360</span>
+        <img class="t360-brand-logo" src="/taleem_logo.png" alt="Taleem360 — school cloud ERP and LMS" width="40" height="40" />
         <span>Taleem360</span>
       </a>
       <nav class="t360-nav" aria-label="Primary">
@@ -194,6 +212,7 @@
       <div class="t360-wrap">
         <h1>Bridging the Gap: 7 Best Practices for High-Impact Parent-Teacher Communication Portals</h1>
         <p>Tired of endless teacher emails and forgotten notices? Discover 7 design guidelines that maximize parent portal engagement and build school trust.</p>
+        
         <div class="t360-actions">
           <a class="t360-cta-btn" href="/contact">Start free pilot</a>
           <a class="t360-btn-ghost" href="/pricing">View pricing</a>

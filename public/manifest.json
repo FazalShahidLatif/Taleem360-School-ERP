@@ -1,0 +1,67 @@
+{
+  "name": "Taleem360 — School Cloud ERP & LMS Suite",
+  "short_name": "Taleem360",
+  "description": "Cloud school ERP and LMS for K-12 schools, daycares, madrasas, academies and private tutors. Attendance, fee collection, double-entry accounting, report cards and the parent portal in one system.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "business", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pricing and free pilot",
+      "short_name": "Pricing",
+      "url": "/pricing"
+    },
+    {
+      "name": "Free school resources",
+      "short_name": "Resources",
+      "url": "/free-resources"
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "url": "/blog"
+    }
+  ]
+}

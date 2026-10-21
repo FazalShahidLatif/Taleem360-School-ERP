@@ -181,6 +181,8 @@ export type Faq = { q: string; a: string };
 export type RouteContent = {
   h1: string;
   lead: string;
+  image?: string;
+  imageAlt?: string;
   sections?: Section[];
   faqs?: Faq[];
   /**
@@ -325,7 +327,7 @@ export function renderHeader(activeRoute: string): string {
   return `  <header class="t360-header">
     <div class="t360-wrap">
       <a class="t360-brand" href="/">
-        <span class="t360-brand-mark" aria-hidden="true">T360</span>
+        <img class="t360-brand-logo" src="/taleem_logo.png" alt="Taleem360 — school cloud ERP and LMS" width="40" height="40" />
         <span>${esc(BRAND.name)}</span>
       </a>
       <nav class="t360-nav" aria-label="Primary">
@@ -605,6 +607,9 @@ ${content.links
       <div class="t360-wrap">
         <h1>${esc(content.h1)}</h1>
         <p>${esc(content.lead)}</p>
+        ${content.image
+          ? `        <img class="t360-hero-img" src="${esc(content.image)}" alt="${esc(content.imageAlt || content.h1)}" width="1200" height="630" loading="eager" />`
+          : ''}
         <div class="t360-actions">
           <a class="t360-cta-btn" href="/contact">Start free pilot</a>
           <a class="t360-btn-ghost" href="/pricing">View pricing</a>

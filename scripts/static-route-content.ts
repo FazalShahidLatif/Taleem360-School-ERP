@@ -29,6 +29,128 @@ const REGIONAL_PRICE_ROWS: string[][] = (['PKR', 'AED', 'SAR', 'BDT', 'NGN'] as 
   `Up to ${INCLUDED_PROFILES}`,
 ]);
 
+/**
+ * Contextual link groups: every page gets a "Explore / related" section at the
+ * end of its content listing the pages that are actually relevant to it. This is
+ * the only in-content linking on the site today; the header, footer and CTA are
+ * all sitewide links, so these entries are what make each page distinct.
+ */
+const RELATED: Record<string, { href: string; label: string; note?: string }[]> = {
+  blog: [
+    { href: '/blog', label: 'Blog index', note: 'Attendance, fee collection, accounting, staffing and parent communication' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/free-resources', label: 'Free resources' },
+    { href: '/contact', label: 'Ask about the pilot' },
+  ],
+  pricing: [
+    { href: '/compare', label: 'Compare', note: 'Where Taleem360 differs from spreadsheets, desktop ERP and per-module SaaS' },
+    { href: '/daycare', label: 'Daycare management' },
+    { href: '/madrasa', label: 'Madrasa management' },
+    { href: '/skills-academy', label: 'Skills academy' },
+    { href: '/private-tutors', label: 'Private tutors' },
+    { href: '/white-label', label: 'White label' },
+    { href: '/api', label: 'API and integrations' },
+    { href: '/biometric-attendance', label: 'Biometric attendance' },
+    { href: '/faq', label: 'FAQ' },
+    { href: '/contact', label: 'Start a pilot' },
+  ],
+  compare: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/daycare', label: 'Daycare management' },
+    { href: '/madrasa', label: 'Madrasa management' },
+    { href: '/skills-academy', label: 'Skills academy' },
+    { href: '/private-tutors', label: 'Private tutors' },
+    { href: '/api', label: 'API and integrations' },
+    { href: '/biometric-attendance', label: 'Biometric attendance' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  about: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/faq', label: 'FAQ' },
+  ],
+  contact: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/faq', label: 'FAQ' },
+    { href: '/about', label: 'About' },
+    { href: '/blog', label: 'Blog' },
+  ],
+  private_tutors: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/skills-academy', label: 'Skills academy' },
+    { href: '/daycare', label: 'Daycare management' },
+    { href: '/madrasa', label: 'Madrasa management' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  biometric_attendance: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/daycare', label: 'Daycare management' },
+    { href: '/madrasa', label: 'Madrasa management' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/api', label: 'API and integrations' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  white_label: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  api: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  daycare: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/skills-academy', label: 'Skills academy' },
+    { href: '/madrasa', label: 'Madrasa management' },
+    { href: '/private-tutors', label: 'Private tutors' },
+    { href: '/biometric-attendance', label: 'Biometric attendance' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  madrasa: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/daycare', label: 'Daycare management' },
+    { href: '/skills-academy', label: 'Skills academy' },
+    { href: '/private-tutors', label: 'Private tutors' },
+    { href: '/biometric-attendance', label: 'Biometric attendance' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  skills_academy: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/daycare', label: 'Daycare management' },
+    { href: '/madrasa', label: 'Madrasa management' },
+    { href: '/private-tutors', label: 'Private tutors' },
+    { href: '/biometric-attendance', label: 'Biometric attendance' },
+    { href: '/compare', label: 'Compare' },
+    { href: '/contact', label: 'Contact' },
+  ],
+  free_resources: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Ask about the pilot' },
+  ],
+  faq: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/blog', label: 'Blog' },
+  ],
+  support: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/faq', label: 'FAQ' },
+  ],
+};
+
 /** City routes get a locally-framed page rather than a generic one. */
 const CITY_META: Record<string, { city: string; province: string; note: string }> = {
   karachi: {
@@ -125,6 +247,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['blog'],
+    linksHeading: 'From the blog',
     faqs: [
       {
         q: 'How much does Taleem360 cost?',
@@ -217,6 +341,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         form: 'quote',
       },
     ],
+    links: RELATED['pricing'],
+    linksHeading: 'Similar pages',
     faqs: [
       {
         q: 'How much does Taleem360 cost?',
@@ -280,6 +406,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['daycare'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Do parents need an app for pickup?',
@@ -322,6 +450,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['madrasa'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Can we track hifz progress by juz and surah?',
@@ -364,6 +494,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['white_label'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Do we get our own domain?',
@@ -400,6 +532,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['skills_academy'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Can students join a batch already in progress?',
@@ -438,6 +572,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['biometric_attendance'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Do we have to buy new hardware?',
@@ -485,6 +621,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['compare'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Can we run a parallel test against our current system?',
@@ -522,6 +660,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['free_resources'],
+    linksHeading: 'More about Taleem360',
     faqs: [
       {
         q: 'Do I need an account to download?',
@@ -559,6 +699,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['api'],
+    linksHeading: 'Explore the platform',
     faqs: [
       {
         q: 'Is API access included in the licence?',
@@ -597,6 +739,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['ai_resource_studio'],
+    linksHeading: 'Explore the studio',
     faqs: [
       {
         q: 'Do teachers need to review the output?',
@@ -632,6 +776,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['about'],
+    linksHeading: 'More about Taleem360',
     faqs: [
       {
         q: 'Where is Taleem360 based?',
@@ -662,6 +808,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['contact'],
+    linksHeading: 'Find out more',
     faqs: [
       {
         q: 'How quickly do you respond?',
@@ -699,6 +847,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['support'],
+    linksHeading: 'More about Taleem360',
     faqs: [
       {
         q: 'Is support included in the licence?',
@@ -737,6 +887,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['blog'],
+    linksHeading: 'From the blog',
     faqs: [
       {
         q: 'Can I republish an article?',
@@ -771,6 +923,8 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
         ],
       },
     ],
+    links: RELATED['faq'],
+    linksHeading: 'More about Taleem360',
     faqs: [
       {
         q: 'How long does implementation take?',
@@ -1040,6 +1194,13 @@ const LEGAL_CONTENT: Record<string, RouteContent> = {
         a: 'No. Personal data is never sold.',
       },
     ],
+    links: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/faq', label: 'FAQ' },
+    ],
+    linksHeading: 'Explore the platform',
   },
   '/terms': {
     h1: 'Terms of Service',
@@ -1086,6 +1247,13 @@ const LEGAL_CONTENT: Record<string, RouteContent> = {
         a: 'Yes. Export is available during the licence period and on termination.',
       },
     ],
+    links: [
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
+    { href: '/faq', label: 'FAQ' },
+    ],
+    linksHeading: 'Explore the region',
   },
   '/cookies': {
     h1: 'Cookie Policy',

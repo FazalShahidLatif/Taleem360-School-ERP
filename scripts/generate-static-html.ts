@@ -40,6 +40,17 @@ const STATIC_DIR = path.resolve(PUBLIC_DIR, 'static-html');
 
 const SITEMAP_URL = 'https://taleem360.online';
 
+/**
+ * Default social share card, used by every route that does not override it.
+ *
+ * 1200x630 is the size Facebook, LinkedIn, X and WhatsApp expect for a large
+ * summary card. Before this default existed, 49 of 51 routes shipped no og:image
+ * at all, so a shared link rendered as a bare URL.
+ */
+const DEFAULT_OG_IMAGE = `${SITEMAP_URL}/og-image.png`;
+const DEFAULT_OG_ALT =
+  'Taleem360 — school cloud ERP and LMS suite: attendance, fee collection, double-entry accounting, report cards and the parent portal in one system.';
+
 const SEO_MAP: Record<string, {
   title: string;
   description: string;
@@ -59,10 +70,10 @@ const SEO_MAP: Record<string, {
     canonical: `${SITEMAP_URL}/`,
     ogTitle: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
     ogDescription: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
-    ogImage: 'https://taleem360.online/hero.webp',
+    ogImage: 'https://taleem360.online/og-image.png',
     twitterTitle: 'Taleem360 - School Cloud ERP & LMS Suite Pakistan',
     twitterDescription: 'Taleem360: cloud ERP for Pakistani schools. Attendance tracking, fee collection, double-entry accounting, report cards, parent alerts. Free 30-day pilot.',
-    twitterImage: 'https://taleem360.online/hero.webp',
+    twitterImage: 'https://taleem360.online/og-image.png',
     schema: [
       {
         '@context': 'https://schema.org',
@@ -735,7 +746,19 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
 {TWITTER_IMAGE_META}
 {OG_IMAGE_META}
 {SCHEMA_SCRIPTS}
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 110 110' fill='none'><defs><linearGradient id='emerald-grad' x1='0%' y1='0%' x2='100%' y2='0%'><stop offset='0%' stop-color='%23059669' /><stop offset='100%' stop-color='%2310B981' /></linearGradient><linearGradient id='accent-white-grad' x1='0%' y1='0%' x2='0%' y2='100%'><stop offset='0%' stop-color='%23FFFFFF' /><stop offset='100%' stop-color='%23E2E8F0' /></linearGradient></defs><ellipse cx='55' cy='55' rx='50' ry='18' fill='none' stroke='url(%23emerald-grad)' stroke-width='4.5' transform='rotate(-25 55 55)' opacity='0.85' /><polygon points='55,20 92,38 55,56 18,38' fill='url(%23accent-white-grad)' stroke='%23059669' stroke-width='1.5' /><path d='M55,38 L32,48 L32,62' fill='none' stroke='%2310B981' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' /><circle cx='32' cy='62' r='3' fill='%2310B981' /><path d='M30,46 L30,68 C30,73 50,78 55,78 C60,78 80,73 80,68 L80,46' fill='none' stroke='url(%23accent-white-grad)' stroke-width='4.5' stroke-linecap='round' /><path d='M30,46 L30,65 C30,70 50,75 55,75 C60,75 80,70 80,65 L80,46' fill='none' stroke='%23emerald-grad' stroke-width='1.5' /></svg>">
+    <!-- Icons — SVG first (best quality, supported by Google and all modern browsers),
+         then PNG fallbacks, then the legacy .ico. Every file exists in public/;
+         none of these may point at a missing asset, because the SPA catch-all
+         would answer with HTML and a 200, which reads as a soft 404. -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0F172A" />
+    <meta name="msapplication-TileColor" content="#0F172A" />
+    <meta name="msapplication-config" content="none" />
     <!-- Google Tag Manager (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GT-TXHQHSRK"></script>
     <script>
@@ -868,10 +891,10 @@ function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
   const canonical = meta.canonical;
   const ogTitle = meta.ogTitle || title;
   const ogDescription = meta.ogDescription || description;
-  const ogImage = meta.ogImage;
+  const ogImage = meta.ogImage || DEFAULT_OG_IMAGE;
   const twitterTitle = meta.twitterTitle || title;
   const twitterDescription = meta.twitterDescription || description;
-  const twitterImage = meta.twitterImage;
+  const twitterImage = meta.twitterImage || ogImage;
 
   // Every page gets a BreadcrumbList so Google can render breadcrumb rich results.
   // Replaces any hand-authored BreadcrumbList in SEO_MAP (the homepage has a
@@ -910,12 +933,18 @@ function generatePage(route: string, meta: typeof SEO_MAP[string]): void {
   const pageSchema = [...withoutStaleBreadcrumb, breadcrumbList];
 
   const schemaScripts = renderSchemaScripts(pageSchema);
-  const ogImageMeta = renderOgImage(ogImage);
   const twitterImageMeta = renderTwitterImage(twitterImage);
 
-  // Use ogImage as the actual og:image URL (crawlers need to fetch it)
+  // One og:image tag, with the dimensions and alt text that social platforms and
+  // AI crawlers use to decide how to render the preview. The previous version
+  // emitted the tag without dimensions, and only for routes that set ogImage.
   const ogImageUrlMeta = ogImage
-    ? `\n    <meta property="og:image" content="${jsonEscape(ogImage)}" />`
+    ? `\n    <meta property="og:image" content="${jsonEscape(ogImage)}" />` +
+      `\n    <meta property="og:image:secure_url" content="${jsonEscape(ogImage)}" />` +
+      `\n    <meta property="og:image:type" content="image/png" />` +
+      `\n    <meta property="og:image:width" content="1200" />` +
+      `\n    <meta property="og:image:height" content="630" />` +
+      `\n    <meta property="og:image:alt" content="${jsonEscape(DEFAULT_OG_ALT)}" />`
     : '';
 
   // ── Visible page body ───────────────────────────────────────────────────

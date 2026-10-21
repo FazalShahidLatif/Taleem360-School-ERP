@@ -1,198 +1,454 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Core Public-Facing Pages -->
   <url>
     <loc>https://taleem360.online/</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/free-resources</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/pricing</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/daycare</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/skills-academy</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/private-tutors</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/madrasa</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/white-label</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/api</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/compare</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/biometric-attendance</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/ai-resource-studio</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/nigeria</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/bangladesh</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/uae</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/karachi</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/lahore</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/islamabad</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/rawalpindi</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/peshawar</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/faisalabad</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/multan</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/quetta</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/about</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/contact</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/faq</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/support</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/privacy</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/terms</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/cookies</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/refund-policy</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
 
   <!-- Dynamic Blog Posts -->
   <url>
@@ -200,329 +456,769 @@
     <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/reducing-school-paperwork-sustainability-digitalization</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/school-it-infrastructure-modernization-cloud-erp</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/maximizing-teacher-time-automated-daily-reporting</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/cloud-based-school-managment-cost-benefit-analysis</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/combating-staff-burnout-smart-school-erp</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/ai-transforming-school-administrative-decision-making</loc>
     <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/predictive-analytics-student-performance-dropouts</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/automated-grading-integrations-next-generation-lms</loc>
     <lastmod>2026-05-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/personalized-learning-paths-ai-classroom-software</loc>
     <lastmod>2026-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/machine-learning-school-timetable-scheduling-conflicts</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/comprehensive-guide-school-fees-automatic-collections</loc>
     <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/school-payroll-byzantine-compliance-simplified</loc>
     <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/auditing-school-accounts-digital-ledgers</loc>
     <lastmod>2026-05-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/b2b-school-sponsorships-monetization-extracurriculars</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/government-grants-compliance-educational-institutes</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/real-time-attendance-tracking-parent-peace-of-mind</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/optimizing-student-report-cards-formative-assessments</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/extracurricular-involvement-student-long-term-academic-success</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/digital-portfolios-transforming-student-career-pathways</loc>
     <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/behavioral-tracking-systems-positive-classroom-psychology</loc>
     <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/parent-teacher-communication-portal-best-practices</loc>
     <lastmod>2026-05-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/digital-gradebooks-increasing-parental-engagement</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/mobile-alerts-announcements-k12-emergency-broadcast</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/optimizing-school-newsletter-community-building</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/parent-portal-onboarding-training-adoption-strategies</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/multi-school-franchise-management-centralized-erp-dashboards</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/data-security-pci-compliance-student-privacy</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/scaling-school-operations-franchise-growth-modules</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/digital-school-libraries-optimizing-book-inventory-turnover</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/pakistani-schools-digital-revolution-cloud-erp</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/saudi-vision-2030-school-administration-transformation</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/overcoming-low-bandwidth-regional-lms-solutions</loc>
     <lastmod>2026-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/simplifying-bise-board-exam-registration-cloud-erp</loc>
     <lastmod>2026-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/biometric-attendance-integration-gcc-academies</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/multilingual-education-middle-east-dual-language-portals</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/punjab-private-education-growth-scalable-saas-erp</loc>
     <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/pakistani-school-fee-payments-mobile-wallets-integration</loc>
     <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/empowering-teachers-pakistan-rural-districts-offline-lms</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/modernization-fbise-federal-board-academies-cloud-erp</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/integrating-sms-gateway-apis-regional-cellular-challenges</loc>
     <lastmod>2026-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/managing-financial-audits-nonprofit-ngo-schools-south-asia</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/stem-curriculum-middle-east-schools-lms-integration</loc>
     <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/student-data-security-framework-south-asia-gcc-regulations</loc>
     <lastmod>2026-06-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/modern-lesson-planners-olevel-alevel-pk-gcc-cie-syllabus</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/stress-free-parents-multi-payment-portals-fee-recovery</loc>
     <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/taleem360-definitive-multi-tenant-educational-erp-solution</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/ece-daycare-early-childhood-kiosk-guardian-security</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/white-labeled-educational-growth-vercel-subdomains-branding</loc>
     <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/ai-driven-lesson-planning-auto-grading-k12-curriculum-mapping</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/school-payroll-automating-teacher-overtime-tax-pakistan</loc>
     <lastmod>2026-07-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/whatsapp-api-sms-gateways-parent-teacher-collaboration</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/optimizing-madrasa-administration-cloud-student-information</loc>
     <lastmod>2026-07-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/biometric-attendance-systems-k12-schools-realtime-synced</loc>
     <lastmod>2026-07-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
   <url>
     <loc>https://taleem360.online/blog/multi-campus-school-franchise-security-saas-ingress</loc>
     <lastmod>2026-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
+
+    <image:image>
+      <image:loc>https://taleem360.online/og-image.png</image:loc>
+      <image:title>Taleem360 — school cloud ERP and LMS suite</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://taleem360.online/taleem_logo.png</image:loc>
+      <image:title>Taleem360 brand mark</image:title>
+    </image:image>  </url>
 </urlset>
