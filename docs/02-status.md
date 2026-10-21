@@ -21,8 +21,6 @@ This session covers **Taleem360 and taleem360.online only**. Nothing in this rep
 
 **One finding, now zero.** The repo is isolated.
 
-**Note on the inverse direction:** PDFF's `project.json` records 7 links from `calcoo.online` and 12 from `linkharrow.xyz` pointing at PDFF. Those are other properties' records and are out of scope for this session — they were not touched.
-
 ---
 
 ## 2. Mandate structure compliance

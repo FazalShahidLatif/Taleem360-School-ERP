@@ -99,6 +99,24 @@
       "status": "OPEN — not fixed"
     },
     {
+      "id": "jwt-secret-has-a-public-fallback",
+      "severity": "CRITICAL — security",
+      "found": "21 Oct 2026",
+      "files": ["api/auth/login.js line 4", "api/auth/register.js line 4"],
+      "bug": "Both files sign session tokens with `process.env.JWT_SECRET || 'taleem360-secure-serverless-jwt-secret-key-2026'`. That fallback string is committed to a public GitHub repository.",
+      "impact": "If JWT_SECRET is not set in the Vercel environment, the signing key is public. Anyone can forge a valid session token carrying any role, including SUPER_ADMIN, without touching the login form at all. This is independent of the client-side bypass above.",
+      "status": "OPEN — not fixed"
+    },
+    {
+      "id": "super-admin-emails-hardcoded-in-registration",
+      "severity": "HIGH — security",
+      "found": "21 Oct 2026",
+      "file": "api/auth/register.js line 61",
+      "bug": "`const SUPER_ADMIN_EMAILS = ['accts.pak@gmail.com', 'support@taleem360.online']` — SUPER_ADMIN is granted by string comparison against two hardcoded addresses in the public source.",
+      "impact": "Super-admin designation lives in code rather than in data. Anyone who registers using one of those addresses on a fresh deployment receives SUPER_ADMIN. Changing who is an administrator requires a code change and a deploy.",
+      "status": "OPEN — not fixed"
+    },
+    {
       "id": "suspended-account-message-leaks-personal-email",
       "severity": "MEDIUM — privacy / professionalism",
       "found": "21 Oct 2026",
