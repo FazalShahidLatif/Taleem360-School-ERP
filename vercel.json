@@ -1,5 +1,6 @@
 {
   "cleanUrls": false,
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/index.html",
