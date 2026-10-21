@@ -26,11 +26,11 @@
     }
   ],
   "routes": [
+    { "src": "/", "dest": "/static-html/index.html" },
     { "handle": "filesystem" },
     { "src": "/api/v2/:path*", "dest": "https://taleem360-api-v2.vercel.app/api/v2/:path*" },
     { "src": "/api/:path*", "dest": "/api/:path*" },
     { "src": "/auth/google/callback", "dest": "/auth/google/callback" },
-    { "src": "/", "dest": "/static-html/index.html" },
     { "src": "/about", "dest": "/static-html/about.html" },
     { "src": "/pricing", "dest": "/static-html/pricing.html" },
     { "src": "/blog", "dest": "/static-html/blog.html" },
