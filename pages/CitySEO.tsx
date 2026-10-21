@@ -29,7 +29,7 @@ interface CityData {
   additionalKeywords: string[];
   intro: string;
   keyChallenge: string;
-  localSchools: string[];
+  localCapabilities: string[];
   schemaLocalAddress: {
     street: string;
     locality: string;
@@ -52,7 +52,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'Nigeria represents one of the fastest-growing and most dynamic education systems in Africa. From Lagos and Abuja to Kano and Ibadan, school owners require scalable, offline-resilient cloud databases and automated school fee collection software to manage high volumes of students.',
     keyChallenge: 'Preventing student tuition debt, managing cashflow receipts across multiple bank branches, and dealing with varying network connectivity in regional cities.',
-    localSchools: ['Lagos STEM Academy', 'Abuja International School', 'Kano Model High School', 'Kwara Community Academy'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Herbert Macaulay Way, Yaba',
       locality: 'Lagos',
@@ -73,7 +78,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: "Bangladesh's private and trust-run schools are rapidly expanding, seeking high-performance school database management tools. From Dhaka to Chattogram and Sylhet, managing admissions and daily collections requires a localized, reliable school erp.",
     keyChallenge: 'Manual billing ledger errors, complex parent notification delivery, and tracking daily biometric student attendance across multiple campus branches.',
-    localSchools: ['Dhaka Grammar School', 'Chattogram STEM College', 'Sylhet Trust School', 'Allied Dhaka Campuses'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Gulshan Avenue, Road 12',
       locality: 'Dhaka',
@@ -94,7 +104,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'The United Arab Emirates hosts some of the most technologically advanced and highly demanding international schools and multi-curriculum academies. From Dubai and Abu Dhabi to Sharjah, school administration mandates seamless parent communication, high-availability data infrastructure, and strict compliance with local financial ledgers.',
     keyChallenge: 'Syncing real-time multi-branch student metrics, managing multi-currency fee schedules, and delivering instant parent-teacher coordination alerts.',
-    localSchools: ['Dubai International Academy', 'Abu Dhabi British School', 'Sharjah Elite Campus', 'Allied Dubai Academy Network'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Sheikh Zayed Road, Al Barsha 1',
       locality: 'Dubai',
@@ -115,7 +130,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'Karachi, the massive financial heart of Pakistan, hosts some of the country\'s largest and most prestigious school networks. Managing thousands of students across multiple campuses in Clifton, Gulshan, Nazimabad, and DHA demands an enterprise-grade cloud database suite.',
     keyChallenge: 'Scaling administration, matching complex cash flow collections, and ensuring high-performance student attendance tracking across massive student bodies.',
-    localSchools: ['Allied School Karachi Campus', 'Pinnacle STEM Academy Clifton', 'Al-Murtaza School Network', 'City School System Sindh Region'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Main Shahrah-e-Faisal, Block 6, PECHS',
       locality: 'Karachi',
@@ -136,7 +156,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'As the cultural and historical capital of Pakistan, Lahore has always been the academic epicenter of the country. From Gulberg to Johar Town, DHA to walled-city hubs, Lahore private schools are leading the charge in digital transformation.',
     keyChallenge: 'Modernizing student information systems, reducing administrative workloads, and shifting traditional manual tuition billing into seamless digital channels.',
-    localSchools: ['Lahore Grammar School Network', 'Beaconhouse Central Region Office', 'Allied Schools Lahore Branch', 'Educators Academy Johar Town'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'M.M. Alam Road, Gulberg III',
       locality: 'Lahore',
@@ -157,7 +182,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'The twin cities of Islamabad and Rawalpindi represent a highly tech-savvy and quality-conscious educational market. Federal schools, international academies, and elite institutions require high-availability cloud infrastructure and premium compliance tools.',
     keyChallenge: 'Maintaining modern communication standards with parents, robust cybersecurity, and advanced academic planning with analytical gradebooks.',
-    localSchools: ['Islamabad Model School System', 'Root Millennium Twin Cities', 'Fazaia Inter College Sector E-9', 'Army Public School Rawalpindi Command'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Jinnah Avenue, Blue Area',
       locality: 'Islamabad',
@@ -178,7 +208,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'Rawalpindi\'s vibrant education landscape features dense, highly active schools in Saddar, Satellite Town, and Bahria Town. Running a successful school here requires optimized administrative flows to handle tight financial turnarounds.',
     keyChallenge: 'Minimizing outstanding tuition fee defaults, sending automated alerts to parents, and maintaining real-time teacher timetables.',
-    localSchools: ['Siddique Public School', 'Army Public School & College Rawalpindi', 'Pinnacle High Rawalpindi Campus', 'Allied School Twin Cities'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Saddar Cantonment Mall Road',
       locality: 'Rawalpindi',
@@ -199,7 +234,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'In the historic city of Peshawar and across Khyber Pakhtunkhwa, educational institutions are quickly upgrading to cloud platforms. Taleem360 provides the region with lightweight, high-availability ERP software that runs beautifully on local internet connections.',
     keyChallenge: 'Providing offline-resilient local caches to ensure continuous billing and attendance even in low-connectivity areas.',
-    localSchools: ['Peshawar Model School System', 'KP Public Schools Consortium', 'Edwardes College Academy', 'Allied Peshawar University Town'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'University Road, Opposite Peshawar University',
       locality: 'Peshawar',
@@ -220,7 +260,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'Faisalabad, Pakistan\'s major industrial hub, is experiencing rapid growth in private education. Schools in Kohinoor City, People\'s Colony, and Madina Town require modern digital accounting and double-entry general ledgers to streamline operations.',
     keyChallenge: 'Transitioning manual, paper-based fee receipt books into digital bank reconciliations, JazzCash, and EasyPaisa networks.',
-    localSchools: ['Faisalabad Grammar School', 'Allied Faisalabad Campuses', 'National Science School', 'D-Ground Educators System'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Susan Road, Madina Town',
       locality: 'Faisalabad',
@@ -241,7 +286,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'Multan serves as the primary educational powerhouse for Southern Punjab. Educational setups here need an affordable, easy-to-use, yet complete system that connects administrators, teachers, and parents.',
     keyChallenge: 'Overcoming technical skill gaps in staff training, providing direct localized customer support, and simplifying exam report card generations.',
-    localSchools: ['Multan Public School System', 'Allied School Multan City Campus', 'LaSalle High School Multan', 'Muslim College Academy'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Boson Road, Near Multan University',
       locality: 'Multan',
@@ -262,7 +312,12 @@ const CITY_DETAILS: Record<string, CityData> = {
     ],
     intro: 'In Balochistan\'s capital, schools face unique challenges including diverse demographics, fluctuating connectivity, and limited local software suppliers. Taleem360 brings premium K-12 school cloud suites to Quetta with direct local database storage.',
     keyChallenge: 'Ensuring continuous software operations without internet reliance and providing localized training materials.',
-    localSchools: ['St. Francis Grammar School Quetta', 'Quetta Public School', 'Allied School Quetta Campus', 'Balochistan Academy System'],
+    localCapabilities: [
+      'Conflict-free timetable generation',
+      'QR, RFID and biometric attendance',
+      'Double-entry fee ledgers and challans',
+      'Printable report cards and marksheets',
+    ],
     schemaLocalAddress: {
       street: 'Jinnah Road, Cantonment Area',
       locality: 'Quetta',
@@ -543,21 +598,21 @@ export const CitySEO: React.FC = () => {
           <div className="bg-slate-950/60 border border-slate-800/80 rounded-3xl p-8 shadow-2xl relative">
             <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
               <Award className="w-5 h-5 text-indigo-400" />
-              Trusted by Premier {data.name} Campuses
+              Built for {data.name} Schools
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {data.localSchools.map((school, idx) => (
+              {data.localCapabilities.map((capability, idx) => (
                 <div key={idx} className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 flex items-center gap-2">
                   <Building2 className="w-4 h-4 text-emerald-400" />
-                  <span>{school}</span>
+                  <span>{capability}</span>
                 </div>
               ))}
             </div>
 
             <div className="mt-8 pt-6 border-t border-slate-800 text-center">
               <p className="text-[11px] text-slate-500 italic">
-                Local references are verified partner institutions using the Taleem360 cloud database system.
+                Taleem360 makes no claim of affiliation with, endorsement by, or partnership with any named educational institution. This page describes the platform's capabilities for schools operating in {data.name}.
               </p>
             </div>
           </div>

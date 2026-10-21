@@ -1,3 +1,0 @@
-# Disavow list
-spammydomain.com
-badlink.net

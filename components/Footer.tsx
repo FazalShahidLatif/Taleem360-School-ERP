@@ -88,10 +88,7 @@ export const Footer: React.FC = () => {
         </div>
         <div className="pt-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
           <p className="text-center md:text-left">
-            &copy; 2026 Taleem360-School ERP. Open, collaborative, and built with transparency as a core guiding principle. No proprietary registered trademark claims.
-          </p>
-          <p className="mt-4 md:mt-0">
-            Powered by <a href="https://saasskul.com" target="_blank" rel="nofollow noopener noreferrer" aria-label="Visit SaaSSkul — SaaS development, technical SEO and MQL5 automation" className="text-indigo-600 hover:text-indigo-700 font-bold">SaaSSkul</a>
+            &copy; 2026 Taleem360 — School ERP &amp; LMS Suite. All rights reserved.
           </p>
         </div>
       </div>
