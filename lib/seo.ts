@@ -18,8 +18,14 @@ export const useSEO = ({
   schemaMarkup,
 }: SEOProps) => {
   useEffect(() => {
-    // 1. Update document title
-    const fullTitle = `${title} | Taleem360 Unified Education Suite`;
+    // 1. Update document title. Match the <title> tag that the static HTML
+    //    generator emits from SEO_MAP (e.g. <title>Taleem360 - School Cloud
+    //    ERP & LMS Suite Pakistan</title>), so the prerendered page sent to
+    //    Google and the title the SPA applies in the browser are identical.
+    //    The old implementation appended "| Taleem360 Unified Education Suite"
+    //    to a title that already contains the brand, producing a duplicate,
+    //    over-long title in every SPA page.
+    const fullTitle = title;
     document.title = fullTitle;
 
     // Helper to query or create meta tags
