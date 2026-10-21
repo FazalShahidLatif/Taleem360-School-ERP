@@ -345,11 +345,12 @@ const SEO_MAP: Record<string, {
     twitterDescription: 'Compare Taleem360 against competitors. Side-by-side feature comparison for Pakistani schools.',
     schema: {
       '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: 'Taleem360 ERP vs Competitors',
+      '@type': 'WebPage',
+      name: 'Taleem360 vs School ERP Competitors — Comparison',
+      url: `${SITEMAP_URL}/compare`,
       image: `${SITEMAP_URL}/taleem_logo.png`,
-      description: 'Programmatic side-by-side technical comparison of Taleem360 against conventional school platforms (Fedena, Procare, Brightwheel, and ClassDojo) highlighting offline resilience and white-label pricing.',
-      brand: { '@type': 'Brand', name: 'Taleem360' }
+      description: 'Side-by-side technical comparison of Taleem360 against conventional school platforms (Fedena, Procare, Brightwheel and ClassDojo), covering offline resilience, double-entry accounting, white-label branding and multi-tenant scope.',
+      about: { '@type': 'SoftwareApplication', name: 'Taleem360 School ERP Suite' }
     }
   },
 
@@ -388,7 +389,15 @@ const SEO_MAP: Record<string, {
       url: `${SITEMAP_URL}/madrasa`,
       applicationCategory: 'EducationalApplication',
       operatingSystem: 'All',
-      description: 'Unified cloud-based Madrasa management software in Pakistan designed to automate Hifz tracking, Islamic curriculum mapping, and donor funding channels.'
+      description: 'Unified cloud-based Madrasa management software in Pakistan designed to automate Hifz tracking, Islamic curriculum mapping, and donor funding channels.',
+      brand: { '@type': 'Brand', name: 'Taleem360' },
+      offers: {
+        '@type': 'Offer',
+        name: '30-day free pilot',
+        price: '0',
+        priceCurrency: 'USD',
+        description: 'Full deployment free for 30 days with no credit card required. Paid licences are priced per active student profile.'
+      }
     }
   },
 

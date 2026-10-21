@@ -182,6 +182,16 @@ export type RouteContent = {
   lead: string;
   sections?: Section[];
   faqs?: Faq[];
+  /**
+   * Optional crawlable link list rendered as its own section.
+   *
+   * Added for the blog index: the 55 published posts were listed in the sitemap
+   * but linked from nowhere, so Google reported them as "Discovered - currently
+   * not indexed". An orphan page in a sitemap is not a ranking candidate; it
+   * needs at least one internal link from a crawlable page.
+   */
+  links?: { href: string; label: string; note?: string }[];
+  linksHeading?: string;
 };
 
 /** Escapes text for safe HTML text-node and attribute insertion. */
@@ -249,6 +259,11 @@ a:hover{text-decoration:underline}
 .t360-section p{margin:0 0 14px;max-width:78ch}
 .t360-section ul{margin:0 0 16px;padding-left:22px}
 .t360-section li{margin:0 0 8px}
+.t360-link-list{list-style:none;padding:0;margin:14px 0 4px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px 22px}
+.t360-link-list li{margin:0;padding:9px 0;border-bottom:1px solid var(--line);line-height:1.45}
+.t360-link-list a{font-weight:600;color:var(--slate-900)}
+.t360-link-list a:hover{color:var(--emerald-700);text-decoration:underline}
+.t360-link-note{display:block;font-size:.82rem;color:var(--slate-500);font-weight:400}
 .t360-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:18px 0 4px}
 .t360-card{border:1px solid var(--line);border-radius:14px;padding:20px;background:#fff}
 .t360-card h3{margin:0 0 8px;font-size:1rem;color:var(--slate-900)}
@@ -410,6 +425,17 @@ ${paras}${bullets}
 
   const faqs = content.faqs && content.faqs.length ? renderFaqs(content.faqs) : '';
 
+  const linkList = content.links && content.links.length
+    ? `      <section class="t360-section">
+        <h2>${esc(content.linksHeading || 'All pages')}</h2>
+        <ul class="t360-link-list">
+${content.links
+  .map((l) => `          <li><a href="${esc(l.href)}">${esc(l.label)}</a>${l.note ? ` <span class="t360-link-note">${esc(l.note)}</span>` : ''}</li>`)
+  .join('\n')}
+        </ul>
+      </section>`
+    : '';
+
   return `    <div class="t360-hero">
       <div class="t360-wrap">
         <h1>${esc(content.h1)}</h1>
@@ -423,6 +449,7 @@ ${paras}${bullets}
     <main id="main" class="t360-main">
       <div class="t360-wrap">
 ${sections}
+${linkList}
 ${renderCapabilities()}
 ${faqs}
 ${renderCta()}

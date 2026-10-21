@@ -81,22 +81,16 @@ export const Compare: React.FC = () => {
   const activeComp = competitors.find(c => c.id === selectedCompetitor) || competitors[0];
 
   const pageSchema = {
-    "@type": "Product",
-    "name": "Taleem360 ERP vs Competitors",
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Taleem360 vs School ERP Competitors — Comparison",
+    "url": "https://taleem360.online/compare",
     "image": "https://taleem360.online/taleem_logo.png",
-    "description": "Programmatic side-by-side technical comparison of Taleem360 against conventional school platforms (Fedena, Procare, Brightwheel, and ClassDojo) highlighting offline resilience and white-label pricing.",
-    "brand": {
-      "@type": "Brand",
-      "name": "Taleem360"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "USD",
-      "lowPrice": "29",
-      "highPrice": "199",
-      "offerCount": "3"
-    },
-
+    "description": "Side-by-side technical comparison of Taleem360 against conventional school platforms (Fedena, Procare, Brightwheel and ClassDojo), covering offline resilience, double-entry accounting, white-label branding and multi-tenant scope.",
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Taleem360 School ERP Suite"
+    }
   };
 
   useSEO({

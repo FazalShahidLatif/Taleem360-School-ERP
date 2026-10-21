@@ -8,6 +8,7 @@
  */
 
 import type { RouteContent, Section, Faq } from './static-content.js';
+import { BLOG_POSTS_DATA } from '../lib/blogContent.js';
 
 /** City routes get a locally-framed page rather than a generic one. */
 const CITY_META: Record<string, { city: string; province: string; note: string }> = {
