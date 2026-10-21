@@ -23,6 +23,7 @@ export const Contact: React.FC = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   React.useEffect(() => {
     document.title = 'Contact Us - Taleem360 ERP Ecosystem';
@@ -49,22 +50,49 @@ export const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
-    
-    // Simulate API storage roundtrip
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        department: 'general',
-        message: ''
+    setSubmitError('');
+
+    // Previously this faked a round trip with a setTimeout and discarded every
+    // enquiry. It now posts to the same lead endpoint the quote form uses, and
+    // reports a real failure rather than a false success.
+    try {
+      const res = await fetch('/api/leads/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'contact',
+          contactName: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: `[${formData.department}] ${formData.message}`,
+        }),
       });
-    }, 1200);
+      const body = await res.json().catch(() => ({}));
+
+      if (res.ok && body?.ok) {
+        setSubmitSuccess(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          department: 'general',
+          message: ''
+        });
+      } else {
+        setSubmitError(
+          body?.detail ||
+            'We could not send your message. Please email support@taleem360.online and we will reply directly.'
+        );
+      }
+    } catch {
+      setSubmitError('Network error. Please email support@taleem360.online and we will reply directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -212,6 +240,11 @@ export const Contact: React.FC = () => {
                   </div>
 
                   <div className="flex justify-end pt-2">
+                    {submitError && (
+                      <p role="status" aria-live="polite" className="mr-auto text-xs font-semibold text-red-700 self-center">
+                        {submitError}
+                      </p>
+                    )}
                     <button
                       type="submit"
                       disabled={isSubmitting}

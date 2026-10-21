@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request received — Taleem360</title>
+    <!--
+      Confirmation page for the quote form's no-JavaScript path. The form POSTs
+      to /api/leads/quote, which redirects here on success. Not indexed: this is
+      a transaction outcome, not a page anyone should arrive at from search.
+    -->
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://taleem360.online/pricing" />
+    <style>
+      :root { --slate-900:#0F172A; --slate-700:#334155; --slate-500:#64748B; --emerald:#059669; }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        padding: 32px 20px; background: #F8FAFC; color: var(--slate-700);
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; line-height: 1.65;
+      }
+      main { max-width: 620px; width: 100%; background: #fff; border: 1px solid #E2E8F0; border-radius: 20px; padding: 40px 36px; }
+      .badge {
+        display: inline-flex; align-items: center; gap: 8px; background: #ECFDF5; color: #065F46;
+        border: 1px solid #A7F3D0; border-radius: 999px; padding: 6px 14px;
+        font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+      }
+      h1 { color: var(--slate-900); font-size: 1.75rem; line-height: 1.25; margin: 20px 0 12px; letter-spacing: -.02em; }
+      p { margin: 0 0 14px; }
+      ul { margin: 0 0 22px; padding-left: 20px; }
+      li { margin-bottom: 6px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+      a.btn {
+        display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+        padding: 13px 24px; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: .95rem;
+      }
+      a.primary { background: var(--emerald); color: #fff; }
+      a.secondary { background: #F1F5F9; color: var(--slate-900); }
+      .note { font-size: .85rem; color: var(--slate-500); margin-top: 24px; padding-top: 20px; border-top: 1px solid #E2E8F0; }
+      a.inline { color: var(--emerald); font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="badge">Request received</span>
+      <h1>Thank you — we have your details.</h1>
+      <p>
+        A member of the Taleem360 team will review your school's numbers and reply by email with a quote,
+        usually within one working day.
+      </p>
+      <p><strong>What happens next:</strong></p>
+      <ul>
+        <li>We confirm the profile count and any campus or white-label requirements.</li>
+        <li>We send your quote in your local currency — PKR, AED, SAR, BDT, NGN or USD.</li>
+        <li>If you would rather evaluate first, we set up your 30-day free pilot, which needs no card.</li>
+      </ul>
+      <div class="actions">
+        <a class="btn primary" href="/pricing">Back to pricing</a>
+        <a class="btn secondary" href="/onboarding">Start the free pilot now</a>
+      </div>
+      <p class="note">
+        Did not receive a reply, or need to add something? Email
+        <a class="inline" href="mailto:support@taleem360.online">support@taleem360.online</a>.
+      </p>
+    </main>
+  </body>
+</html>

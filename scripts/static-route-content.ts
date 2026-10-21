@@ -208,6 +208,14 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
           'There is no setup fee, no per-module charge, no charge for parent accounts, and no charge for onboarding support during the pilot. Annual and term-based billing are both available once you are on a paid licence.',
         ],
       },
+      {
+        h2: 'Request a quote',
+        body: [
+          'Tell us the size of your school and we will send a quote in your local currency, usually within one working day. If you are already inside the published price, the quote simply confirms it.',
+          'Schools above 200 profiles, multi-campus groups and white-label deployments get a per-profile or per-deployment price built around your actual numbers.',
+        ],
+        form: 'quote',
+      },
     ],
     faqs: [
       {

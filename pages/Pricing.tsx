@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { QuoteForm } from '../components/QuoteForm';
 import { SubscriptionTier } from '../types';
 import { useAuth } from '../lib/auth';
 import {
@@ -221,6 +222,17 @@ export const Pricing: React.FC = () => {
               </Button>
             </div>
           ))}
+        </div>
+
+        {/* Quote request */}
+        <div id="quote" className="mt-14 max-w-7xl mx-auto bg-white rounded-2xl border border-slate-200/60 p-6 sm:p-8 shadow-sm">
+          <h3 className="text-2xl font-black text-slate-900 tracking-tight">Request a quote</h3>
+          <p className="mt-2 text-sm text-slate-600 leading-relaxed max-w-2xl">
+            Tell us the size of your school and we will send a quote in your local currency, usually within
+            one working day. Schools above {INCLUDED_PROFILES} profiles, multi-campus groups and white-label
+            deployments get a price built around your actual numbers.
+          </p>
+          <QuoteForm />
         </div>
 
         {/* Multi-School Custom Subscription Notice Box */}

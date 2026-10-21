@@ -175,7 +175,7 @@ export const CORE_FAQS: { q: string; a: string }[] = [
 ];
 
 export type SectionTable = { caption?: string; headers: string[]; rows: string[][] };
-export type Section = { h2: string; body: string[]; bullets?: string[]; table?: SectionTable };
+export type Section = { h2: string; body: string[]; bullets?: string[]; table?: SectionTable; form?: 'quote' };
 export type Faq = { q: string; a: string };
 
 export type RouteContent = {
@@ -263,6 +263,25 @@ a:hover{text-decoration:underline}
 .t360-table thead th{background:var(--slate-50);color:var(--slate-900);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--slate-300)}
 .t360-table tbody tr:last-child td{border-bottom:none}
 .t360-table td:first-child{font-weight:600;color:var(--slate-900);white-space:nowrap}
+.t360-form{margin:18px 0 4px;max-width:720px}
+.t360-form-row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+.t360-field{margin-bottom:16px;min-width:0}
+.t360-field label{display:block;font-size:.82rem;font-weight:600;color:var(--slate-700);margin-bottom:6px}
+.t360-field input,.t360-field select,.t360-field textarea{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid var(--slate-300);border-radius:10px;font:inherit;font-size:.92rem;color:var(--slate-900);background:#fff;min-height:44px}
+.t360-field textarea{min-height:96px;resize:vertical}
+.t360-field input:focus,.t360-field select:focus,.t360-field textarea:focus{outline:2px solid #10B981;outline-offset:1px;border-color:#10B981}
+.t360-check{display:flex;align-items:flex-start;gap:10px}
+.t360-check input{width:auto;min-height:0;margin-top:3px}
+.t360-check label{margin:0;font-weight:500;font-size:.88rem}
+.t360-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.t360-form-note{font-size:.8rem;color:var(--slate-500);margin:4px 0 14px}
+.t360-form-status{font-size:.88rem;margin:0 0 10px;min-height:1.2em}
+.t360-form-status.is-error{color:#B91C1C;font-weight:600}
+.t360-form-done{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;padding:16px 18px;border-radius:12px;font-weight:600;margin:0}
+.t360-form-submit{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 26px;border:0;border-radius:12px;background:#059669;color:#fff;font:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .15s ease}
+.t360-form-submit:hover{background:#047857}
+.t360-form-submit:disabled{opacity:.6;cursor:progress}
+@media(max-width:640px){.t360-form-row{grid-template-columns:1fr}}
 .t360-section h3{font-size:1.06rem;color:var(--slate-900);margin:22px 0 8px;font-weight:700}
 .t360-section p{margin:0 0 14px;max-width:78ch}
 .t360-section ul{margin:0 0 16px;padding-left:22px}
@@ -357,7 +376,135 @@ ${cards}
       </section>`;
 }
 
-/** Renders an FAQ block as an accessible disclosure list. */
+/**
+ * Renders the quote request form.
+ *
+ * Built as a plain HTML form that POSTs to /api/leads/quote, so it works with
+ * JavaScript disabled and is fully crawlable. A small progressive-enhancement
+ * script intercepts the submit for inline feedback; if that script fails to
+ * run, the native POST still delivers the lead and redirects to /thank-you.
+ *
+ * The honeypot field is hidden from humans and from assistive technology. Bots
+ * fill it; the endpoint treats a filled honeypot as success without delivering.
+ */
+export function renderQuoteForm(): string {
+  const types = [
+    'K-12 school',
+    'School group / multi-campus',
+    'Madrasa',
+    'Daycare / early years',
+    'Academy / vocational training',
+    'Private tutor',
+    'Other',
+  ];
+  return `        <form class="t360-form" id="quote" method="post" action="/api/leads/quote" novalidate>
+          <div class="t360-form-row">
+            <div class="t360-field">
+              <label for="qf-institution">School or institution name <span aria-hidden="true">*</span></label>
+              <input id="qf-institution" name="institutionName" type="text" required maxlength="200" autocomplete="organization" />
+            </div>
+            <div class="t360-field">
+              <label for="qf-type">Institution type</label>
+              <select id="qf-type" name="institutionType">
+${types.map((t) => `                <option value="${esc(t)}">${esc(t)}</option>`).join('\n')}
+              </select>
+            </div>
+          </div>
+          <div class="t360-form-row">
+            <div class="t360-field">
+              <label for="qf-students">Active student profiles <span aria-hidden="true">*</span></label>
+              <input id="qf-students" name="studentCount" type="number" min="1" max="200000" required inputmode="numeric" placeholder="e.g. 450" />
+            </div>
+            <div class="t360-field">
+              <label for="qf-campuses">Number of campuses</label>
+              <input id="qf-campuses" name="campusCount" type="number" min="1" max="500" inputmode="numeric" placeholder="e.g. 2" />
+            </div>
+          </div>
+          <div class="t360-form-row">
+            <div class="t360-field">
+              <label for="qf-country">Country</label>
+              <input id="qf-country" name="country" type="text" maxlength="80" autocomplete="country-name" />
+            </div>
+            <div class="t360-field">
+              <label for="qf-city">City</label>
+              <input id="qf-city" name="city" type="text" maxlength="80" autocomplete="address-level2" />
+            </div>
+          </div>
+          <div class="t360-form-row">
+            <div class="t360-field">
+              <label for="qf-name">Your name <span aria-hidden="true">*</span></label>
+              <input id="qf-name" name="contactName" type="text" required maxlength="120" autocomplete="name" />
+            </div>
+            <div class="t360-field">
+              <label for="qf-phone">Phone or WhatsApp</label>
+              <input id="qf-phone" name="phone" type="tel" maxlength="40" autocomplete="tel" />
+            </div>
+          </div>
+          <div class="t360-field">
+            <label for="qf-email">Email <span aria-hidden="true">*</span></label>
+            <input id="qf-email" name="email" type="email" required maxlength="200" autocomplete="email" />
+          </div>
+          <div class="t360-field">
+            <label for="qf-current">What do you use today?</label>
+            <input id="qf-current" name="currentSystem" type="text" maxlength="200" placeholder="Spreadsheets, another ERP, paper registers…" />
+          </div>
+          <div class="t360-field">
+            <label for="qf-message">Anything else we should know?</label>
+            <textarea id="qf-message" name="message" rows="4" maxlength="2000"></textarea>
+          </div>
+          <div class="t360-field t360-check">
+            <input id="qf-white-label" name="whiteLabel" type="checkbox" value="on" />
+            <label for="qf-white-label">I am interested in white label — running the platform under our own brand and domain.</label>
+          </div>
+          <div class="t360-hp" aria-hidden="true">
+            <label for="qf-website">Website</label>
+            <input id="qf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <p class="t360-form-note">We reply with a quote by email. Your details are used only to prepare that quote.</p>
+          <div class="t360-form-status" role="status" aria-live="polite"></div>
+          <button type="submit" class="t360-form-submit">Request a quote</button>
+        </form>
+        <script>
+          (function () {
+            var form = document.getElementById('quote');
+            if (!form || !window.fetch) return;
+            var status = form.querySelector('.t360-form-status');
+            var button = form.querySelector('.t360-form-submit');
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
+              var data = new FormData(form);
+              var payload = {};
+              data.forEach(function (v, k) { payload[k] = v; });
+              payload.whiteLabel = data.get('whiteLabel') === 'on';
+              button.disabled = true;
+              status.textContent = 'Sending…';
+              status.className = 't360-form-status';
+              fetch('/api/leads/quote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              })
+                .then(function (r) { return r.json().then(function (b) { return { ok: r.ok, body: b }; }); })
+                .then(function (res) {
+                  if (res.ok && res.body && res.body.ok) {
+                    form.innerHTML = '<p class="t360-form-done">Thank you — your request has been received. We will reply by email with your quote.</p>';
+                    return;
+                  }
+                  status.textContent = (res.body && res.body.detail) || 'Something went wrong. Please email support@taleem360.online.';
+                  status.className = 't360-form-status is-error';
+                  button.disabled = false;
+                })
+                .catch(function () {
+                  status.textContent = 'Network error. Please email support@taleem360.online.';
+                  status.className = 't360-form-status is-error';
+                  button.disabled = false;
+                });
+            });
+          })();
+        </script>`;
+}
+
+/** Renders the FAQ block for a route. */
 export function renderFaqs(faqs: Faq[]): string {
   const items = faqs
     .map(
@@ -433,9 +580,10 @@ export function renderMain(content: RouteContent, route: string): string {
             .map((r) => `              <tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`)
             .join('\n')}\n            </tbody>\n          </table>\n        </div>`
         : '';
+      const form = s.form === 'quote' ? `\n${renderQuoteForm()}` : '';
       return `      <section class="t360-section">
         <h2>${esc(s.h2)}</h2>
-${paras}${bullets}${table}
+${paras}${bullets}${table}${form}
       </section>`;
     })
     .join('\n');

@@ -107,6 +107,25 @@
       .t360-table thead th{background:var(--slate-50);color:var(--slate-900);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--slate-300)}
       .t360-table tbody tr:last-child td{border-bottom:none}
       .t360-table td:first-child{font-weight:600;color:var(--slate-900);white-space:nowrap}
+      .t360-form{margin:18px 0 4px;max-width:720px}
+      .t360-form-row{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+      .t360-field{margin-bottom:16px;min-width:0}
+      .t360-field label{display:block;font-size:.82rem;font-weight:600;color:var(--slate-700);margin-bottom:6px}
+      .t360-field input,.t360-field select,.t360-field textarea{width:100%;box-sizing:border-box;padding:11px 13px;border:1px solid var(--slate-300);border-radius:10px;font:inherit;font-size:.92rem;color:var(--slate-900);background:#fff;min-height:44px}
+      .t360-field textarea{min-height:96px;resize:vertical}
+      .t360-field input:focus,.t360-field select:focus,.t360-field textarea:focus{outline:2px solid #10B981;outline-offset:1px;border-color:#10B981}
+      .t360-check{display:flex;align-items:flex-start;gap:10px}
+      .t360-check input{width:auto;min-height:0;margin-top:3px}
+      .t360-check label{margin:0;font-weight:500;font-size:.88rem}
+      .t360-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+      .t360-form-note{font-size:.8rem;color:var(--slate-500);margin:4px 0 14px}
+      .t360-form-status{font-size:.88rem;margin:0 0 10px;min-height:1.2em}
+      .t360-form-status.is-error{color:#B91C1C;font-weight:600}
+      .t360-form-done{background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;padding:16px 18px;border-radius:12px;font-weight:600;margin:0}
+      .t360-form-submit{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:13px 26px;border:0;border-radius:12px;background:#059669;color:#fff;font:inherit;font-size:.95rem;font-weight:700;cursor:pointer;transition:background .15s ease}
+      .t360-form-submit:hover{background:#047857}
+      .t360-form-submit:disabled{opacity:.6;cursor:progress}
+      @media(max-width:640px){.t360-form-row{grid-template-columns:1fr}}
       .t360-section h3{font-size:1.06rem;color:var(--slate-900);margin:22px 0 8px;font-weight:700}
       .t360-section p{margin:0 0 14px;max-width:78ch}
       .t360-section ul{margin:0 0 16px;padding-left:22px}
