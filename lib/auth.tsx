@@ -70,6 +70,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Handle the Google OAuth callback token (redirected back from /auth/google/callback)
+    const params = new URLSearchParams(window.location.search);
+    const googleToken = params.get('google_auth_token');
+    const googleEmail = params.get('google_email');
+    if (googleToken && googleEmail && localStorage.getItem('access_token') !== googleToken) {
+      localStorage.setItem('access_token', googleToken);
+      localStorage.setItem('refresh_token', googleToken);
+      // Clear the token from the URL (redirect to clean state)
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+
     const initAuth = () => {
       console.debug("[Auth] Initializing...");
       const userData = getUserFromToken();
