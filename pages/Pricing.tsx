@@ -4,6 +4,15 @@ import { Check } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { SubscriptionTier } from '../types';
 import { useAuth } from '../lib/auth';
+import {
+  PUBLISHED_PRICE_USD,
+  INCLUDED_PROFILES,
+  PILOT_DAYS,
+  INCLUDED_FEATURES,
+  QUOTED_SCOPE,
+  publishedPrice,
+  convert,
+} from '../lib/pricingCatalog';
 
 export const Pricing: React.FC = () => {
   const { user } = useAuth();
@@ -41,70 +50,37 @@ export const Pricing: React.FC = () => {
 
   const tiers = [
     {
-      name: 'Pilot Trial',
+      name: 'Pilot',
       id: SubscriptionTier.PILOT,
       price: 'Free',
-      description: '30-day free trial for evaluation. Upgrade required after 30 days.',
+      description: `Full deployment for ${PILOT_DAYS} days — not a demo. No credit card, no setup fee, onboarding included.`,
       features: [
-        'School/College: Max 30 students (Grade 1-5, 5-10 years)',
-        'Daycare Center: Max 10 students (under 5 years only)',
-        'Vocational Training: Max 5 students (15+ years only)',
-        'Private Tutor: Max 3-5 students limit',
-        '30-day trial period expiration',
-        'IP-based annual registration anti-abuse block',
+        'Every core module included',
+        'Import your real student and staff data',
+        'Run live attendance and fee cycles',
+        'Onboarding support included',
       ],
-      cta: 'Start for Free',
+      cta: 'Start free pilot',
       mostPopular: false,
     },
     {
-      name: 'Tier 1',
+      name: 'Taleem360 Licence',
       id: SubscriptionTier.TIER_1,
-      price: '$49',
-      pkrPrice: '13,500',
-      description: 'Ideal for growing primary schools.',
-      features: [
-        'Up to 200 active profiles',
-        'Everything in Pilot',
-        'Finance & Fee management',
-        'Staff management',
-        'Timetable management',
-        'Priority email support',
-      ],
-      cta: 'Get Started',
+      price: publishedPrice('USD'),
+      pkrPrice: convert(PUBLISHED_PRICE_USD, 'PKR').toLocaleString('en-US'),
+      description: `Up to ${INCLUDED_PROFILES} active student profiles. Priced per profile — unlimited teacher and admin logins.`,
+      features: INCLUDED_FEATURES.slice(0, 6),
+      cta: 'Get a quote',
       mostPopular: true,
     },
     {
-      name: 'Tier 2',
-      id: SubscriptionTier.TIER_2,
-      price: '$129',
-      pkrPrice: '35,800',
-      description: 'Comprehensive features for mid-sized institutions.',
-      features: [
-        'Up to 500 active profiles',
-        'Everything in Tier 1',
-        'Examination module',
-        'AI insights & analytics',
-        'Parent portal access',
-        'Online biometric attendance hardware integrations',
-        'Digital report cards',
-      ],
-      cta: 'Get Started',
-      mostPopular: false,
-    },
-    {
-      name: 'Tier 3',
+      name: 'Larger schools, groups & white label',
       id: SubscriptionTier.TIER_3,
-      price: 'Custom',
-      description: 'Enterprise grade solution for larger campuses.',
-      features: [
-        '501+ active profiles',
-        'Everything in Tier 2',
-        'Multi-school management',
-        'Custom integrations',
-        'Dedicated account manager',
-        'SLA guarantees',
-      ],
-      cta: 'Contact Sales',
+      price: 'Quoted',
+      description:
+        'Above the published profile limit, and for multi-campus groups and white-label deployments, we quote so the price tracks your actual enrolment.',
+      features: QUOTED_SCOPE.map((s) => s.title),
+      cta: 'Request a quote',
       mostPopular: false,
     },
   ];
@@ -232,7 +208,7 @@ export const Pricing: React.FC = () => {
                   
                   setNotification({
                     type: 'info',
-                    message: `Direct online checkout is disabled. Paid subscriptions require manual approval and academic verification. Please contact the Super Admin at accts.pak@gmail.com to activate your ${tier.name} license.`
+                    message: `Online checkout is not open yet. Licences are issued after a quote — use the quote form on this page, or email support@taleem360.online and we will confirm your ${tier.name} pricing.`
                   });
                 }}
                 className={`mt-8 w-full ${
@@ -262,7 +238,7 @@ export const Pricing: React.FC = () => {
               </p>
               <div className="mt-4 flex items-center space-x-2 text-xs font-semibold text-indigo-700">
                 <span className="bg-indigo-100 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-wider">Note</span>
-                <span>All paid licenses are issued manually following verification of academic credentials. Please connect with our super-admin desk at accts.pak@gmail.com.</span>
+                <span>All paid licences are issued following a quote and verification of academic credentials. Use the quote form on this page, or email support@taleem360.online.</span>
               </div>
             </div>
           </div>

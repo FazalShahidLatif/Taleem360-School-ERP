@@ -137,10 +137,10 @@ export const BlogPostDetail: React.FC = () => {
               "name": "Taleem360"
             },
             "offers": {
-              "@type": "AggregateOffer",
-              "lowPrice": "49",
-              "highPrice": "499",
-              "priceCurrency": "USD"
+              "@type": "Offer",
+              "price": "49",
+              "priceCurrency": "USD",
+              "description": "Per month for up to 200 active student profiles. 30-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually."
             }
           };
 

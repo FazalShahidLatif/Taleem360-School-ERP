@@ -174,7 +174,8 @@ export const CORE_FAQS: { q: string; a: string }[] = [
   },
 ];
 
-export type Section = { h2: string; body: string[]; bullets?: string[] };
+export type SectionTable = { caption?: string; headers: string[]; rows: string[][] };
+export type Section = { h2: string; body: string[]; bullets?: string[]; table?: SectionTable };
 export type Faq = { q: string; a: string };
 
 export type RouteContent = {
@@ -255,6 +256,13 @@ a:hover{text-decoration:underline}
 .t360-section{padding:34px 0;border-bottom:1px solid var(--slate-100)}
 .t360-section:last-of-type{border-bottom:0}
 .t360-section h2{font-size:1.4rem;color:var(--slate-900);margin:0 0 14px;letter-spacing:-.02em;font-weight:700}
+.t360-table-wrap{overflow-x:auto;margin:18px 0 4px;-webkit-overflow-scrolling:touch}
+.t360-table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px}
+.t360-table caption{text-align:left;font-size:.82rem;color:var(--slate-500);padding:0 0 10px}
+.t360-table th,.t360-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--slate-200);vertical-align:top}
+.t360-table thead th{background:var(--slate-50);color:var(--slate-900);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--slate-300)}
+.t360-table tbody tr:last-child td{border-bottom:none}
+.t360-table td:first-child{font-weight:600;color:var(--slate-900);white-space:nowrap}
 .t360-section h3{font-size:1.06rem;color:var(--slate-900);margin:22px 0 8px;font-weight:700}
 .t360-section p{margin:0 0 14px;max-width:78ch}
 .t360-section ul{margin:0 0 16px;padding-left:22px}
@@ -416,9 +424,18 @@ export function renderMain(content: RouteContent, route: string): string {
       const bullets = s.bullets?.length
         ? `\n        <ul>\n${s.bullets.map((b) => `          <li>${esc(b)}</li>`).join('\n')}\n        </ul>`
         : '';
+      const table = s.table
+        ? `\n        <div class="t360-table-wrap">\n          <table class="t360-table">${
+            s.table.caption ? `\n            <caption>${esc(s.table.caption)}</caption>` : ''
+          }\n            <thead>\n              <tr>${s.table.headers
+            .map((h) => `<th scope="col">${esc(h)}</th>`)
+            .join('')}</tr>\n            </thead>\n            <tbody>\n${s.table.rows
+            .map((r) => `              <tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`)
+            .join('\n')}\n            </tbody>\n          </table>\n        </div>`
+        : '';
       return `      <section class="t360-section">
         <h2>${esc(s.h2)}</h2>
-${paras}${bullets}
+${paras}${bullets}${table}
       </section>`;
     })
     .join('\n');

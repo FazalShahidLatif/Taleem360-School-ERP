@@ -9,6 +9,25 @@
 
 import type { RouteContent, Section, Faq } from './static-content.js';
 import { BLOG_POSTS_DATA } from '../lib/blogContent.js';
+import {
+  INCLUDED_PROFILES,
+  PILOT_DAYS,
+  INCLUDED_FEATURES,
+  QUOTED_SCOPE,
+  CURRENCIES,
+  publishedPrice,
+} from '../lib/pricingCatalog.js';
+
+/**
+ * Regional price rows for the pricing table, derived from the currency table
+ * so a rate change can never leave the page stale.
+ */
+const REGIONAL_PRICE_ROWS: string[][] = (['PKR', 'AED', 'SAR', 'BDT', 'NGN'] as const).map((code) => [
+  CURRENCIES[code].markets,
+  code,
+  `${publishedPrice(code)} / month`,
+  `Up to ${INCLUDED_PROFILES}`,
+]);
 
 /** City routes get a locally-framed page rather than a generic one. */
 const CITY_META: Record<string, { city: string; province: string; note: string }> = {
@@ -129,13 +148,51 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
   '/pricing': {
     h1: 'Taleem360 pricing for schools',
     lead:
-      'Transparent, per-profile pricing with a 30-day free pilot. No credit card to start, and no per-module upselling — attendance, fees, accounting, exams and the parent portal are included at every tier.',
+      `One price, published openly: ${publishedPrice('USD')} per month for up to ${INCLUDED_PROFILES} active student profiles, or ${publishedPrice('PKR')} per month for schools in Pakistan. A ${PILOT_DAYS}-day free pilot comes first, with no credit card. Larger schools, school groups and white-label deployments are quoted individually so the price tracks your enrolment rather than a bracket you happen to fall into.`,
     sections: [
       {
-        h2: 'How pricing works',
+        h2: 'The price',
         body: [
-          'Licences are priced by the number of active student profiles, not by staff seats or modules. A school with 200 students pays for 200 profiles and can create as many teacher and admin logins as it needs.',
-          'Every tier includes the core suite: attendance, fee management, double-entry accounting, examinations, report cards and the parent portal. Higher tiers add exam workflow depth, analytics and biometric hardware integration.',
+          'Licences are priced by the number of active student profiles, not by staff seats and not by module. A school with 200 students pays for 200 profiles and can create as many teacher and admin logins as it needs.',
+          `The published price is ${publishedPrice('USD')} per month, which covers up to ${INCLUDED_PROFILES} active student profiles and the full core suite listed below. Nothing in that list is a paid extra.`,
+          'We invoice in your local currency. Schools in Pakistan are billed in PKR, the Gulf in AED or SAR, Bangladesh in BDT and Nigeria in NGN. The conversion below is indicative — the amount printed on your quote is the amount you pay.',
+        ],
+        table: {
+          caption: 'Published price by region. Indicative conversion; your quote states the exact amount.',
+          headers: ['Region', 'Currency', 'Per month', 'Profiles included'],
+          rows: [
+            ['International (USD)', 'USD', `${publishedPrice('USD')} / month`, `Up to ${INCLUDED_PROFILES}`],
+            ...REGIONAL_PRICE_ROWS,
+          ],
+        },
+      },
+      {
+        h2: 'What the price includes',
+        body: [
+          'The core suite is never metered and never sold back to you module by module. Everything below is included at the published price:',
+        ],
+        bullets: INCLUDED_FEATURES,
+      },
+      {
+        h2: 'What is quoted instead of published',
+        body: [
+          'Above the published profile limit, and for deployments that are not a single campus on a standard licence, we quote. This is deliberate: a school with 1,200 students and a school with 180 are not the same customer, and a published ladder would either overcharge one or undercharge the other.',
+        ],
+        bullets: QUOTED_SCOPE.map((s) => `${s.title} — ${s.body}`),
+      },
+      {
+        h2: 'White label — run Taleem360 as your own platform',
+        body: [
+          'White label puts your brand on the entire platform: your logo, your colour scheme, your domain, and a branded parent portal that never mentions Taleem360. It is the right model for school chains, franchise networks and education groups that want a single branded system across every branch, and for academies and training providers that resell access to their own students.',
+          'White label is licensed and quoted per deployment, because the scope varies — a two-branch group and a national franchise network need very different things. Tell us your branch count, total student numbers and whether you need your own domain, and we will quote it.',
+          'Everything in the core suite comes with it. The difference is ownership of the surface, not the depth of the product.',
+        ],
+        bullets: [
+          'Your logo, colour scheme and typography across every screen',
+          'Your own domain, including branded parent and staff subdomains',
+          'Parent portal and notifications sent under your name, not ours',
+          'Multi-campus central dashboard with per-branch isolation',
+          'Quoted per deployment — branch count and student numbers decide the price',
         ],
       },
       {
@@ -154,12 +211,28 @@ const SOLUTION_CONTENT: Record<string, RouteContent> = {
     ],
     faqs: [
       {
+        q: 'How much does Taleem360 cost?',
+        a: `The published price is ${publishedPrice('USD')} per month for up to ${INCLUDED_PROFILES} active student profiles, or ${publishedPrice('PKR')} per month for schools in Pakistan. A ${PILOT_DAYS}-day free pilot comes first and requires no credit card. Schools with more than ${INCLUDED_PROFILES} profiles, multi-campus groups and white-label deployments are quoted individually.`,
+      },
+      {
         q: 'Do you charge per teacher or per student?',
-        a: 'Per active student profile. Teacher and admin logins are unlimited at every tier.',
+        a: `Per active student profile. Teacher and admin logins are unlimited at every licence level. The published price covers up to ${INCLUDED_PROFILES} profiles.`,
+      },
+      {
+        q: 'Can we pay in Pakistani rupees?',
+        a: 'Yes. Schools in Pakistan are invoiced in PKR. The Gulf is invoiced in AED or SAR, Bangladesh in BDT and Nigeria in NGN. The conversion shown on this page is indicative; the amount on your quote is the amount you pay.',
+      },
+      {
+        q: 'What happens if we have more than 200 students?',
+        a: 'We quote you per profile. Larger schools are priced on their actual enrolment, so the price grows with the school rather than jumping at a bracket boundary. Send us your student count and campus count and we will quote it.',
+      },
+      {
+        q: 'What is white label and who is it for?',
+        a: 'White label puts your own brand, logo, colours and domain on the whole platform, including the parent portal. It suits school chains, franchise networks, education groups and academies that want one branded system across every branch, or that resell access to their own students. It is licensed and quoted per deployment.',
       },
       {
         q: 'What happens when the pilot ends?',
-        a: 'Nothing is charged automatically. You choose a tier and your existing workspace continues with all data intact. If you do not continue, the workspace is deactivated.',
+        a: 'Nothing is charged automatically. You choose a licence and your existing workspace continues with all data intact. If you do not continue, the workspace is deactivated.',
       },
       {
         q: 'Can we pay term by term instead of annually?',

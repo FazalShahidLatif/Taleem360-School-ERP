@@ -14,6 +14,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { PUBLISHED_PRICE_USD, INCLUDED_PROFILES, PILOT_DAYS, publishedPrice } from '../lib/pricingCatalog.js';
 import {
   BRAND,
   esc,
@@ -99,11 +100,10 @@ const SEO_MAP: Record<string, {
         description: 'Unified cloud database suite automating K-12 attendance tracking, automated student fee collection networks, double-entry ledgers, and parent messaging portals. Every subscription funds free curriculum notes for a child in need.',
         brand: { '@type': 'Brand', name: 'Taleem360' },
         offers: {
-          '@type': 'AggregateOffer',
-          lowPrice: '49',
-          highPrice: '499',
+          '@type': 'Offer',
+          price: String(PUBLISHED_PRICE_USD),
           priceCurrency: 'USD',
-          offerCount: '3'
+          description: `Per month for up to ${INCLUDED_PROFILES} active student profiles. ${PILOT_DAYS}-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually.`
         }
       },
       {
@@ -116,14 +116,13 @@ const SEO_MAP: Record<string, {
         applicationCategory: 'EducationalApplication',
         operatingSystem: 'All',
         offers: {
-          '@type': 'AggregateOffer',
-          lowPrice: '49',
-          highPrice: '499',
+          '@type': 'Offer',
+          price: String(PUBLISHED_PRICE_USD),
           priceCurrency: 'USD',
-          offerCount: '3',
+          description: `Per month for up to ${INCLUDED_PROFILES} active student profiles. ${PILOT_DAYS}-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually.`,
           priceSpecification: {
             '@type': 'PriceSpecification',
-            price: '49',
+            price: String(PUBLISHED_PRICE_USD),
             priceCurrency: 'USD',
             valueAddedTaxIncluded: 'false'
           }
@@ -226,7 +225,7 @@ const SEO_MAP: Record<string, {
           name: 'How much does Taleem360 cost in Pakistan?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Tier 1 starts at $49/month (approx. PKR 13,500/month) for up to 200 active profiles. Tier 2 is $129/month (approx. PKR 35,800/month) for up to 500 profiles with exam modules, AI analytics, parent portals, and biometric hardware integration. Tier 3 is custom pricing for 501+ profiles. All paid licenses require manual approval and academic verification.'
+            text: `Taleem360 has one published price: ${publishedPrice('USD')} per month for up to ${INCLUDED_PROFILES} active student profiles, or ${publishedPrice('PKR')} per month for schools in Pakistan. A ${PILOT_DAYS}-day free pilot comes first and requires no credit card. Schools above ${INCLUDED_PROFILES} profiles, multi-campus groups and white-label deployments are quoted individually so the price tracks actual enrolment.`
           }
         },
         {

@@ -94,6 +94,13 @@
       .t360-section{padding:34px 0;border-bottom:1px solid var(--slate-100)}
       .t360-section:last-of-type{border-bottom:0}
       .t360-section h2{font-size:1.4rem;color:var(--slate-900);margin:0 0 14px;letter-spacing:-.02em;font-weight:700}
+      .t360-table-wrap{overflow-x:auto;margin:18px 0 4px;-webkit-overflow-scrolling:touch}
+      .t360-table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px}
+      .t360-table caption{text-align:left;font-size:.82rem;color:var(--slate-500);padding:0 0 10px}
+      .t360-table th,.t360-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--slate-200);vertical-align:top}
+      .t360-table thead th{background:var(--slate-50);color:var(--slate-900);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--slate-300)}
+      .t360-table tbody tr:last-child td{border-bottom:none}
+      .t360-table td:first-child{font-weight:600;color:var(--slate-900);white-space:nowrap}
       .t360-section h3{font-size:1.06rem;color:var(--slate-900);margin:22px 0 8px;font-weight:700}
       .t360-section p{margin:0 0 14px;max-width:78ch}
       .t360-section ul{margin:0 0 16px;padding-left:22px}
@@ -159,7 +166,7 @@
     <div class="t360-hero">
       <div class="t360-wrap">
         <h1>Taleem360 pricing for schools</h1>
-        <p>Transparent, per-profile pricing with a 30-day free pilot. No credit card to start, and no per-module upselling — attendance, fees, accounting, exams and the parent portal are included at every tier.</p>
+        <p>One price, published openly: $49 per month for up to 200 active student profiles, or 13,647 PKR per month for schools in Pakistan. A 30-day free pilot comes first, with no credit card. Larger schools, school groups and white-label deployments are quoted individually so the price tracks your enrolment rather than a bracket you happen to fall into.</p>
         <div class="t360-actions">
           <a class="t360-cta-btn" href="/contact">Start free pilot</a>
           <a class="t360-btn-ghost" href="/pricing">View pricing</a>
@@ -169,9 +176,63 @@
     <main id="main" class="t360-main">
       <div class="t360-wrap">
       <section class="t360-section">
-        <h2>How pricing works</h2>
-        <p>Licences are priced by the number of active student profiles, not by staff seats or modules. A school with 200 students pays for 200 profiles and can create as many teacher and admin logins as it needs.</p>
-        <p>Every tier includes the core suite: attendance, fee management, double-entry accounting, examinations, report cards and the parent portal. Higher tiers add exam workflow depth, analytics and biometric hardware integration.</p>
+        <h2>The price</h2>
+        <p>Licences are priced by the number of active student profiles, not by staff seats and not by module. A school with 200 students pays for 200 profiles and can create as many teacher and admin logins as it needs.</p>
+        <p>The published price is $49 per month, which covers up to 200 active student profiles and the full core suite listed below. Nothing in that list is a paid extra.</p>
+        <p>We invoice in your local currency. Schools in Pakistan are billed in PKR, the Gulf in AED or SAR, Bangladesh in BDT and Nigeria in NGN. The conversion below is indicative — the amount printed on your quote is the amount you pay.</p>
+        <div class="t360-table-wrap">
+          <table class="t360-table">
+            <caption>Published price by region. Indicative conversion; your quote states the exact amount.</caption>
+            <thead>
+              <tr><th scope="col">Region</th><th scope="col">Currency</th><th scope="col">Per month</th><th scope="col">Profiles included</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>International (USD)</td><td>USD</td><td>$49 / month</td><td>Up to 200</td></tr>
+              <tr><td>Pakistan</td><td>PKR</td><td>13,647 PKR / month</td><td>Up to 200</td></tr>
+              <tr><td>United Arab Emirates</td><td>AED</td><td>180 AED / month</td><td>Up to 200</td></tr>
+              <tr><td>Saudi Arabia</td><td>SAR</td><td>184 SAR / month</td><td>Up to 200</td></tr>
+              <tr><td>Bangladesh</td><td>BDT</td><td>5,978 BDT / month</td><td>Up to 200</td></tr>
+              <tr><td>Nigeria</td><td>NGN</td><td>75,950 NGN / month</td><td>Up to 200</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="t360-section">
+        <h2>What the price includes</h2>
+        <p>The core suite is never metered and never sold back to you module by module. Everything below is included at the published price:</p>
+        <ul>
+          <li>Attendance — biometric, QR/RFID and manual, with per-period registers</li>
+          <li>Fee collection — vouchers, partial payments, sibling discounts and arrears</li>
+          <li>Double-entry accounting — chart of accounts, journals, ledgers, trial balance</li>
+          <li>Examinations and configurable grading schemes</li>
+          <li>Report cards and marksheets</li>
+          <li>Parent portal — attendance, dues, results and announcements</li>
+          <li>Unlimited teacher and admin logins</li>
+          <li>WhatsApp and SMS parent notifications</li>
+        </ul>
+      </section>
+      <section class="t360-section">
+        <h2>What is quoted instead of published</h2>
+        <p>Above the published profile limit, and for deployments that are not a single campus on a standard licence, we quote. This is deliberate: a school with 1,200 students and a school with 180 are not the same customer, and a published ladder would either overcharge one or undercharge the other.</p>
+        <ul>
+          <li>More than 200 active student profiles — Larger schools are quoted per profile, so the price tracks actual enrolment rather than a bracket you happen to fall into.</li>
+          <li>Multi-campus and school groups — Central dashboards, per-campus isolation and cross-branch reporting are quoted per group.</li>
+          <li>White label — Your own brand, logo, colour scheme and domain on the platform — licensed and quoted per deployment.</li>
+          <li>Add-on modules — Daycare Hub, Skills Academy and Solo Pro are priced separately from the school ERP licence.</li>
+        </ul>
+      </section>
+      <section class="t360-section">
+        <h2>White label — run Taleem360 as your own platform</h2>
+        <p>White label puts your brand on the entire platform: your logo, your colour scheme, your domain, and a branded parent portal that never mentions Taleem360. It is the right model for school chains, franchise networks and education groups that want a single branded system across every branch, and for academies and training providers that resell access to their own students.</p>
+        <p>White label is licensed and quoted per deployment, because the scope varies — a two-branch group and a national franchise network need very different things. Tell us your branch count, total student numbers and whether you need your own domain, and we will quote it.</p>
+        <p>Everything in the core suite comes with it. The difference is ownership of the surface, not the depth of the product.</p>
+        <ul>
+          <li>Your logo, colour scheme and typography across every screen</li>
+          <li>Your own domain, including branded parent and staff subdomains</li>
+          <li>Parent portal and notifications sent under your name, not ours</li>
+          <li>Multi-campus central dashboard with per-branch isolation</li>
+          <li>Quoted per deployment — branch count and student numbers decide the price</li>
+        </ul>
       </section>
       <section class="t360-section">
         <h2>The 30-day pilot</h2>
@@ -215,12 +276,28 @@
       <section class="t360-section t360-faq" aria-labelledby="faq-heading">
         <h2 id="faq-heading">Frequently asked questions</h2>
           <details>
+            <summary>How much does Taleem360 cost?</summary>
+            <p>The published price is $49 per month for up to 200 active student profiles, or 13,647 PKR per month for schools in Pakistan. A 30-day free pilot comes first and requires no credit card. Schools with more than 200 profiles, multi-campus groups and white-label deployments are quoted individually.</p>
+          </details>
+          <details>
             <summary>Do you charge per teacher or per student?</summary>
-            <p>Per active student profile. Teacher and admin logins are unlimited at every tier.</p>
+            <p>Per active student profile. Teacher and admin logins are unlimited at every licence level. The published price covers up to 200 profiles.</p>
+          </details>
+          <details>
+            <summary>Can we pay in Pakistani rupees?</summary>
+            <p>Yes. Schools in Pakistan are invoiced in PKR. The Gulf is invoiced in AED or SAR, Bangladesh in BDT and Nigeria in NGN. The conversion shown on this page is indicative; the amount on your quote is the amount you pay.</p>
+          </details>
+          <details>
+            <summary>What happens if we have more than 200 students?</summary>
+            <p>We quote you per profile. Larger schools are priced on their actual enrolment, so the price grows with the school rather than jumping at a bracket boundary. Send us your student count and campus count and we will quote it.</p>
+          </details>
+          <details>
+            <summary>What is white label and who is it for?</summary>
+            <p>White label puts your own brand, logo, colours and domain on the whole platform, including the parent portal. It suits school chains, franchise networks, education groups and academies that want one branded system across every branch, or that resell access to their own students. It is licensed and quoted per deployment.</p>
           </details>
           <details>
             <summary>What happens when the pilot ends?</summary>
-            <p>Nothing is charged automatically. You choose a tier and your existing workspace continues with all data intact. If you do not continue, the workspace is deactivated.</p>
+            <p>Nothing is charged automatically. You choose a licence and your existing workspace continues with all data intact. If you do not continue, the workspace is deactivated.</p>
           </details>
           <details>
             <summary>Can we pay term by term instead of annually?</summary>

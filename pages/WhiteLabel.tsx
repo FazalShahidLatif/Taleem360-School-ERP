@@ -46,16 +46,16 @@ export const WhiteLabel: React.FC = () => {
 
     const whiteLabelSchema = {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
+      "@type": "Service",
       "name": "Taleem360 White-Label School ERP",
-      "operatingSystem": "All Cloud Platforms",
-      "applicationCategory": "EducationalBusinessApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "129.00",
-        "priceCurrency": "USD"
+      "provider": {
+        "@type": "Organization",
+        "name": "Taleem360",
+        "url": "https://taleem360.online"
       },
-      "description": "Premium white-label school management software and rebrandable school ERP platform with custom subdomains, custom logo integration, and specialized developer API support."
+      "serviceType": "White-label school management platform licensing",
+      "areaServed": "Worldwide",
+      "description": "White-label licensing of the Taleem360 school management platform: your own brand, logo, colour scheme and domain, with a branded parent portal, multi-campus central dashboard and per-branch isolation. Licensed and quoted per deployment."
     };
 
     schemaScript.innerHTML = JSON.stringify(whiteLabelSchema);
