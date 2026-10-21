@@ -1,0 +1,186 @@
+{
+  "project": "Taleem360",
+  "slug": "taleem360",
+  "name": "Taleem360",
+  "display_name": "Taleem360 — School Cloud ERP & LMS Suite",
+  "url": "https://taleem360.online",
+  "homepage": "https://taleem360.online",
+  "session": "taleem360",
+  "session_scope": "ISOLATED. This session covers Taleem360 and taleem360.online ONLY. No other portfolio property may be referenced, audited, or cross-shared from this repo.",
+  "repo": "C:/Gitub-Projects/Taleem360-School-ERP",
+  "github": "https://github.com/FazalShahidLatif/Taleem360-School-ERP",
+  "vercel": "auto-deploys from GitHub main",
+  "niche": "Cloud school ERP + LMS suite for K-12 schools, daycares, madrasas, academies and private tutors. Attendance (QR/RFID/biometric), fee collection and challans, double-entry accounting, payroll, report cards and marksheets, timetable generation, parent portal, multi-campus management, WhatsApp/SMS parent alerts.",
+  "markets": ["Pakistan", "UAE / GCC", "Bangladesh", "Nigeria", "Saudi Arabia"],
+  "tech": {
+    "framework": "React + Vite 6 SPA, TypeScript",
+    "backend": "Express (server.js) + Vercel serverless functions under /api",
+    "styling": "Tailwind 4 + brand-kit.css design tokens",
+    "database": "Dual-persistence: PostgreSQL pool with local JSON file fallback (repository/ pattern)",
+    "deployment": "Vercel (auto from GitHub main)",
+    "analytics": "GA4 G-16LML1YX3M, Google Tag Manager GT-TXHQHSRK",
+    "ai": "Taleem360 AI engine (server-side model calls via api/ai/chat.js and server.js)",
+    "static_generation": "scripts/generate-static-html.ts pre-renders 87 pages to public/static-html/; scripts/generate-sitemap.ts emits 87 URLs"
+  },
+  "content": {
+    "static_pages": 87,
+    "sitemap_urls": 87,
+    "blog_posts": 55,
+    "city_pages": 11,
+    "core_marketing_pages": [
+      "/", "/pricing", "/about", "/blog", "/faq", "/contact", "/compare",
+      "/free-resources", "/skills-academy", "/madrasa", "/daycare",
+      "/white-label", "/private-tutors", "/api", "/ai-resource-studio",
+      "/biometric-attendance", "/support"
+    ],
+    "legal_pages": ["/privacy", "/terms", "/cookies", "/refund-policy"],
+    "avg_words_per_static_page": 514,
+    "internal_links_per_page": 32
+  },
+  "brand": {
+    "palette": "Cosmic Slate (#0F172A) canvas + Emerald (#10B981) accent",
+    "fonts": {
+      "sans": "Inter",
+      "display": "Space Grotesk",
+      "mono": "JetBrains Mono"
+    },
+    "touch_target_minimum": "44px",
+    "source_of_truth": "brand-kit.css + README.md + AGENTS.md rule 4",
+    "prohibited": "No Google-brand palette (#0b57d0 Material blue). No Google AI Studio / Gemini vendor branding in visitor-facing copy."
+  },
+  "business_model": {
+    "primary": "SaaS / platform — recurring school subscription or licence",
+    "secondary": [
+      "White-label licensing",
+      "API access",
+      "Institutional pilot conversions",
+      "Social-impact pledge: a percentage of every subscription funds free curriculum notes for underprivileged children"
+    ],
+    "pricing_claim": "30-day free pilot, no credit card; then paid tiers in PKR",
+    "gate": "BUILD -> EARN -> INVEST. Zero cost until earning. No subscriptions or paid services may be purchased until revenue exists."
+  },
+  "gsc": {
+    "property": "https://taleem360.online/",
+    "sitemap_status": "Success — submitted 14 Oct 2026, last read 14 Oct 2026, 84 discovered pages",
+    "indexed": 19,
+    "not_indexed": 65,
+    "not_indexed_reasons": 2,
+    "robots_txt_status": "Fetched OK (984 bytes) as of 14 Oct 2026 23:57"
+  },
+  "pagespeed_mobile": {
+    "measured": "15 Oct 2026 00:06",
+    "performance": 57,
+    "accessibility": 95,
+    "best_practices": 100,
+    "seo": 100,
+    "agentic_browsing": "3/4",
+    "real_user_field_data": "No Data (CrUX has no field data for this origin yet)"
+  },
+  "performance": {
+    "main_chunk_kb": 1497.83,
+    "main_chunk_gzip_kb": 381.04,
+    "largest_vendor_chunks": {
+      "jspdf.es.min": 390.77,
+      "CategoricalChart (recharts)": 301.99,
+      "html2canvas.esm": 202.38,
+      "index.es": 159.64
+    },
+    "css_kb": 125.36
+  },
+  "bugs_found": [
+    {
+      "id": "google-signin-is-a-client-side-auth-bypass",
+      "severity": "CRITICAL — security",
+      "found": "21 Oct 2026",
+      "files": ["pages/Login.tsx lines 488-618", "lib/auth.tsx lines 93-125"],
+      "bug": "The 'Sign in with Google' button does not perform OAuth. It opens a simulated account chooser in the UI; the user types ANY email address and the page calls window.postMessage({type:'OAUTH_AUTH_SUCCESS', user:{email, name, role:'ADMIN'}}, '*'). lib/auth.tsx listens for that message and mints a CLIENT-SIDE mock JWT with signature literally 'dummy_signature', then stores it in localStorage as access_token. The code comment states: 'In a real app, we would receive a real JWT token here. For this demo, we'll simulate a token.'",
+      "impact": "Anyone can authenticate as any email with ADMIN role. Entering 'accts.pak@gmail.com' grants SUPER_ADMIN (hardcoded comparison in lib/auth.tsx). No password, no OAuth, no server verification. The token is unsigned, so any role can also be forged by editing localStorage directly.",
+      "additional": "window.postMessage uses target origin '*'. The real OAuth implementation exists in server.js (/api/auth/google/url, /auth/google/callback) but Login.tsx never calls it, and /auth/google/callback returns HTTP 404 on the live site.",
+      "status": "OPEN — not fixed"
+    },
+    {
+      "id": "suspended-account-message-leaks-personal-email",
+      "severity": "MEDIUM — privacy / professionalism",
+      "found": "21 Oct 2026",
+      "file": "lib/auth.tsx lines 99-102",
+      "bug": "Signing in with support@taleem360.online triggers an alert telling the visitor that account is suspended and to contact accts.pak@gmail.com. This exposes the owner's personal Gmail address to any visitor and reads as an internal note left in production.",
+      "status": "OPEN — not fixed"
+    },
+    {
+      "id": "fabricated-institution-claims-on-city-pages",
+      "severity": "HIGH — compliance (mandate section 6)",
+      "found": "21 Oct 2026",
+      "file": "pages/CitySEO.tsx",
+      "bug": "City pages rendered real school brands (Beaconhouse, Army Public School, Allied School, The City School, Lahore Grammar School, Root Millennium, Fazaia Inter College, Edwardes College, St. Francis Grammar School, Pinnacle STEM Academy, Al-Murtaza, Siddique Public, LaSalle High, Muslim College) under the heading 'Trusted by Premier <city> Campuses', footnoted 'Local references are verified partner institutions using the Taleem360 cloud database system.' Taleem360 has no such partnerships.",
+      "status": "FIXED — commit fda5cd3. Replaced with a neutral capability list and an explicit no-affiliation statement across all 11 city datasets."
+    },
+    {
+      "id": "cross-project-contamination-in-footer",
+      "severity": "MEDIUM — session isolation",
+      "found": "21 Oct 2026",
+      "file": "components/Footer.tsx line 94",
+      "bug": "Sitewide footer carried 'Powered by SaaSSkul' with an outbound link to saasskul.com — a different portfolio property — on every Taleem360 page.",
+      "status": "FIXED — commit fda5cd3. Credit and link removed."
+    },
+    {
+      "id": "placeholder-disavow-file",
+      "severity": "LOW — repo hygiene",
+      "found": "21 Oct 2026",
+      "file": "disavow.txt",
+      "bug": "Tracked file contained placeholder entries 'spammydomain.com' and 'badlink.net', not real disavow records.",
+      "status": "FIXED — commit fda5cd3. File removed."
+    },
+    {
+      "id": "unreplaced-template-token-in-static-html",
+      "severity": "HIGH — SEO / content",
+      "found": "21 Oct 2026",
+      "file": "scripts/generate-static-html.ts",
+      "bug": "Generated static pages emitted a literal '{TECH_DATA_URI}' placeholder into the <head>. Also emitted empty shells with a dead <script src=\"/index.tsx\"> that 404s in production, so every marketing route served a blank page to crawlers.",
+      "status": "FIXED — commit e0299f6 (wired scripts/static-content.ts and scripts/static-route-content.ts into generatePage, derived blog routes from BLOG_POSTS_DATA, added a placeholder guard that fails the build). 87/87 pages now have real crawlable bodies."
+    },
+    {
+      "id": "fabricated-ratings-and-testimonials",
+      "severity": "HIGH — compliance (mandate section 6)",
+      "found": "21 Oct 2026",
+      "files": ["index.html", "pages/Compare.tsx", "pages/Madrasa.tsx", "pages/WhiteLabel.tsx", "components/ReviewsSection.tsx", "components/EthicalReviewCollector.tsx"],
+      "bug": "Fabricated aggregateRating 4.9/187 in Product and SoftwareApplication schema, an invented Review attributed to 'Muhammad Ali', testimonials from named people at real schools, '500+ campuses', '187+ verified reviews', '500+ schools onboarded', '100k+ students', '250k+ daily transactions'. EthicalReviewCollector gated 4-5 star ratings to Google/Trustpilot while diverting 1-3 star ratings to a private ticket, and paid for reviews with a 15-day trial extension.",
+      "status": "FIXED — commit e0299f6. Ratings, invented reviews and incentivised review flow removed."
+    },
+    {
+      "id": "unpushed-fix-commit",
+      "severity": "HIGH — deployment",
+      "found": "21 Oct 2026",
+      "bug": "Commit e0299f6 (prerender real content, remove fabricated ratings, purge AI Studio branding) existed only locally. The live site was serving a build that still contained the literal '{TECH_DATA_URI}' token and the fabricated ratings.",
+      "status": "FIXED — pushed as part of commit 082a849."
+    }
+  ],
+  "compliance": {
+    "no_fabricated_claims": "Fabricated ratings, testimonials, client counts and named-institution partnerships removed",
+    "no_false_structured_data": "aggregateRating and invented Review schema removed",
+    "zero_cost": "No paid tooling, subscriptions or paid services used or recommended",
+    "english_only": true,
+    "honest_reporting": "This file records verified observations and states open items plainly"
+  },
+  "open_blockers": [
+    "CRITICAL: client-side Google sign-in auth bypass (lib/auth.tsx mock JWT + pages/Login.tsx fake chooser) — grants ADMIN/SUPER_ADMIN to any typed email",
+    "65 of 84 submitted pages not indexed (2 reasons) — reason breakdown not yet read from GSC",
+    "PageSpeed mobile performance 57 — main chunk 1,497 kB (381 kB gzip) uncoupled from first paint",
+    "support@taleem360.online suspension alert leaks accts.pak@gmail.com to visitors",
+    "users_db.json on disk contains plaintext passwords including a real account credential (file is gitignored, not tracked)",
+    "/auth/google/callback returns HTTP 404 on the live site",
+    "No CrUX field data — too little traffic for real-user metrics"
+  ],
+  "done": [
+    "Isolated the session: removed all cross-property references from the repo",
+    "Removed fabricated named-institution partnership claims (11 city datasets)",
+    "Purged Google AI Studio / Gemini vendor branding from all visitor-facing copy",
+    "Removed Google AI Studio artifacts: metadata.json, aistudio-build user-agent, AI Studio setup instructions",
+    "Aligned brand-kit.css to Cosmic Slate + Emerald tokens (was Google Material blue #0b57d0)",
+    "Fixed vercel.json routing: handle:filesystem so robots.txt, llms.txt, ai-catalog.json and sitemap.xml serve as static files (fixed 233 GSC robots.txt errors)",
+    "Fixed static HTML prerender: 87/87 pages with real content, 0 thin pages, 0 template leaks",
+    "Added llms.txt and ai-catalog.json for AI crawler discovery",
+    "Removed fabricated ratings and incentivised review flow",
+    "Build verified clean, 25/25 tests pass"
+  ],
+  "created": "2026-10-21"
+}
