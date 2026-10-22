@@ -114,6 +114,7 @@ const SEO_MAP: Record<string, {
           '@type': 'Offer',
           price: String(PUBLISHED_PRICE_USD),
           priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
           description: `Per month for up to ${INCLUDED_PROFILES} active student profiles. ${PILOT_DAYS}-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually.`
         }
       },
@@ -130,6 +131,7 @@ const SEO_MAP: Record<string, {
           '@type': 'Offer',
           price: String(PUBLISHED_PRICE_USD),
           priceCurrency: 'USD',
+          availability: 'https://schema.org/InStock',
           description: `Per month for up to ${INCLUDED_PROFILES} active student profiles. ${PILOT_DAYS}-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually.`,
           priceSpecification: {
             '@type': 'PriceSpecification',
