@@ -115,6 +115,35 @@ const SEO_MAP: Record<string, {
           price: String(PUBLISHED_PRICE_USD),
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
+          hasMerchantReturnPolicy: {
+            '@type': 'MerchantReturnPolicy',
+            applicableCountry: 'PK',
+            returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            merchantReturnDays: 30,
+            returnMethod: 'https://schema.org/ReturnByMail',
+            returnFees: 'https://schema.org/FreeReturn'
+          },
+          shippingDetails: {
+            '@type': 'OfferShippingDetails',
+            shippingDestination: {
+              '@type': 'DefinedRegion',
+              addressCountry: 'PK'
+            },
+            shippingRate: {
+              '@type': 'MonetaryAmount',
+              value: '0',
+              currency: 'USD'
+            },
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: {
+                '@type': 'QuantitativeValue',
+                minValue: '1',
+                maxValue: '2',
+                unitCode: 'DAY'
+              }
+            }
+          },
           description: `Per month for up to ${INCLUDED_PROFILES} active student profiles. ${PILOT_DAYS}-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually.`
         }
       },
@@ -132,6 +161,35 @@ const SEO_MAP: Record<string, {
           price: String(PUBLISHED_PRICE_USD),
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
+          hasMerchantReturnPolicy: {
+            '@type': 'MerchantReturnPolicy',
+            applicableCountry: 'PK',
+            returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            merchantReturnDays: 30,
+            returnMethod: 'https://schema.org/ReturnByMail',
+            returnFees: 'https://schema.org/FreeReturn'
+          },
+          shippingDetails: {
+            '@type': 'OfferShippingDetails',
+            shippingDestination: {
+              '@type': 'DefinedRegion',
+              addressCountry: 'PK'
+            },
+            shippingRate: {
+              '@type': 'MonetaryAmount',
+              value: '0',
+              currency: 'USD'
+            },
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: {
+                '@type': 'QuantitativeValue',
+                minValue: '1',
+                maxValue: '2',
+                unitCode: 'DAY'
+              }
+            }
+          },
           description: `Per month for up to ${INCLUDED_PROFILES} active student profiles. ${PILOT_DAYS}-day free pilot, no credit card required. Larger schools, school groups and white-label deployments are quoted individually.`,
           priceSpecification: {
             '@type': 'PriceSpecification',
