@@ -37,3 +37,4 @@ users_db.json
 
 # Local audit reports
 lh-report.json
+.env*

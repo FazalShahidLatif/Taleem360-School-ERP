@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../lib/auth';
 import { Link, useLocation } from 'react-router-dom';
+import { PublicAIChatbot } from './PublicAIChatbot';
 import { 
   LayoutDashboard, 
   Users, 
@@ -291,6 +292,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               {children}
             </div>
             
+            <PublicAIChatbot />
             <Footer />
             <CTA />
             <EthicalReviewCollector />
