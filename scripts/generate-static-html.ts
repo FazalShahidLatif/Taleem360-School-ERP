@@ -229,7 +229,45 @@ const SEO_MAP: Record<string, {
             item: `${SITEMAP_URL}/`
           }
         ]
-      }
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+          {
+            '@type': 'Question',
+            'name': 'How much does Taleem360 cost?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'The pilot is free for 30 days with full module access and no credit card. Paid licence starts after the pilot, priced by the number of active student profiles. See the pricing page for the current tiers.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Can we migrate our existing data?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Yes. Student, staff and fee data can be imported from CSV. Onboarding support is included in the pilot.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Does it handle multiple branches?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Yes. Multi-campus is built in - each branch keeps its own data and branding while head office gets consolidated reporting.'
+            }
+          },
+          {
+            '@type': 'Question',
+            'name': 'Is there a mobile app for parents?',
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': 'Parents use a mobile-first web portal, so there is nothing to install. They log in from any browser to see attendance, dues, results and announcements.'
+            }
+          }
+        ]
+      },
     ]
   },
 
