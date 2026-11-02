@@ -98,8 +98,8 @@
       .t360-nav a{color:#CBD5E1;padding:9px 12px;border-radius:8px;font-size:.9rem;font-weight:500;min-height:44px;display:inline-flex;align-items:center}
       .t360-nav a:hover{background:var(--slate-800);color:#fff;text-decoration:none}
       .t360-nav a[aria-current="page"]{background:var(--emerald-600);color:#fff}
-      .t360-cta-btn{background:var(--emerald-500);color:#fff!important;font-weight:700;padding:11px 18px;border-radius:9px;display:inline-flex;align-items:center;min-height:44px}
-      .t360-cta-btn:hover{background:var(--emerald-600);text-decoration:none}
+      .t360-cta-btn{background:#047857;color:#fff!important;font-weight:700;padding:11px 18px;border-radius:9px;display:inline-flex;align-items:center;min-height:44px}
+      .t360-cta-btn:hover{background:#036986;text-decoration:none}
       .t360-crumbs{font-size:.82rem;color:var(--slate-500);padding:14px 0 0}
       .t360-crumbs ol{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0}
       .t360-crumbs li+li::before{content:"/";margin-right:6px;color:var(--line)}
@@ -370,8 +370,8 @@
           if (!el) return;
           el.innerHTML =
             '<div style="position:fixed;left:0;right:0;bottom:0;background:#0F172A;color:#E2E8F0;padding:14px 20px;font:14px/1.5 Inter,system-ui,sans-serif;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:60">' +
-            '<span>This site uses cookies to improve your experience. <a href="/cookies" style="color:#10B981">Learn more</a></span>' +
-            '<button type="button" id="t360-cookie-ok" style="background:#10B981;color:#fff;border:0;border-radius:8px;padding:11px 20px;font-weight:700;min-height:44px;cursor:pointer">Got it!</button>' +
+            '<span>This site uses cookies to improve your experience. <a href="/cookies" style="color:#10B981;text-decoration:underline;text-underline-offset:2px">Learn more</a></span>' +
+            '<button type="button" id="t360-cookie-ok" style="background:#047857;color:#fff;border:0;border-radius:8px;padding:11px 20px;font-weight:700;min-height:44px;cursor:pointer">Got it!</button>' +
             '</div>';
           var btn = document.getElementById('t360-cookie-ok');
           if (btn) btn.addEventListener('click', function () {

@@ -71,6 +71,10 @@
     { "src": "/cookies", "dest": "/static-html/cookies.html" },
     { "src": "/refund-policy", "dest": "/static-html/refund-policy.html" },
     {
+      "src": "/.well-known/ard.json",
+      "dest": "/.well-known/ard.json"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html",
       "headers": {

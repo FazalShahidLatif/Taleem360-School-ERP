@@ -1,0 +1,45 @@
+{
+  "ardManifestVersion": "1.0",
+  "siteName": "Taleem360",
+  "siteUrl": "https://taleem360.online",
+  "description": "Unified school cloud ERP and LMS suite for Pakistani schools — student profiles, attendance, grades, timetables, fees and reporting in one platform.",
+  "resources": [
+    {
+      "url": "https://taleem360.online/",
+      "title": "Taleem360 — Unified School Cloud ERP & LMS",
+      "type": "website",
+      "description": "School management platform for K-12 schools, daycares, academies and multi-campus groups in Pakistan.",
+      "robots": {
+        "crawl_delay": 1,
+        "index": true
+      }
+    },
+    {
+      "url": "https://taleem360.online/pricing",
+      "title": "Taleem360 Pricing — School ERP Plans Pakistan",
+      "type": "service",
+      "description": "Single published price: USD 49/month for up to 200 active student profiles, with free 30-day pilot and quotes for larger/multi-campus/white-label deployments.",
+      "robots": {
+        "index": true
+      }
+    },
+    {
+      "url": "https://taleem360.online/api",
+      "title": "Taleem360 API — Student, Attendance, Grade & Fee Integration",
+      "type": "api",
+      "description": "REST API for integrating student profiles, attendance, grades, timetable and fee management with school ERP systems.",
+      "robots": {
+        "index": true
+      }
+    },
+    {
+      "url": "https://taleem360.online/blog",
+      "title": "Taleem360 Blog — School Cloud ERP & LMS Guides",
+      "type": "article",
+      "description": "Educational articles on school ERP implementation, edtech policy, pedagogical practice and technology for Pakistani schools.",
+      "robots": {
+        "index": true
+      }
+    }
+  ]
+}

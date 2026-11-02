@@ -891,8 +891,8 @@ const HTML_HEAD_TEMPLATE = `<!DOCTYPE html>
           if (!el) return;
           el.innerHTML =
             '<div style="position:fixed;left:0;right:0;bottom:0;background:#0F172A;color:#E2E8F0;padding:14px 20px;font:14px/1.5 Inter,system-ui,sans-serif;display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;z-index:60">' +
-            '<span>This site uses cookies to improve your experience. <a href="/cookies" style="color:#10B981">Learn more</a></span>' +
-            '<button type="button" id="t360-cookie-ok" style="background:#10B981;color:#fff;border:0;border-radius:8px;padding:11px 20px;font-weight:700;min-height:44px;cursor:pointer">Got it!</button>' +
+            '<span>This site uses cookies to improve your experience. <a href="/cookies" style="color:#10B981;text-decoration:underline;text-underline-offset:2px">Learn more</a></span>' +
+            '<button type="button" id="t360-cookie-ok" style="background:#047857;color:#fff;border:0;border-radius:8px;padding:11px 20px;font-weight:700;min-height:44px;cursor:pointer">Got it!</button>' +
             '</div>';
           var btn = document.getElementById('t360-cookie-ok');
           if (btn) btn.addEventListener('click', function () {
