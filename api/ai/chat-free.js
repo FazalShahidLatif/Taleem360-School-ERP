@@ -122,6 +122,43 @@ function failClosed(res) {
   });
 }
 
+// Vercel serverless runtime populates req.body for JSON/form-encoded bodies
+// (as proven by the working /api/leads/quote endpoint above). For safety, fall
+// back to the raw stream only if req.body is genuinely missing. Stream reading
+// is done with events because async iteration is not supported in older Vercel.
+function parseFormEncoded(raw) {
+  const out = {};
+  for (const pair of String(raw).split('&')) {
+    if (!pair) continue;
+    const idx = pair.indexOf('=');
+    const key = idx === -1 ? pair : pair.slice(0, idx);
+    const value = idx === -1 ? '' : pair.slice(idx + 1);
+    try {
+      out[decodeURIComponent(key.replace(/\+/g, ' '))] = decodeURIComponent(value.replace(/\+/g, ' '));
+    } catch {
+      /* skip malformed pair */
+    }
+  }
+  return out;
+}
+
+function readBody(req) {
+  const body = req.body;
+  if (body) {
+    if (typeof body === 'object' && !Array.isArray(body)) return body;
+    const raw = String(body);
+    if (raw.trim().startsWith('{')) {
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return {};
+      }
+    }
+    return parseFormEncoded(raw);
+  }
+  return {};
+}
+
 export default async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -134,11 +171,20 @@ export default async function handler(req, res) {
     return res.status(405).json({ detail: 'Method Not Allowed' });
   }
 
-  let body = {};
-  try {
-    body = JSON.parse(String(req.body || '{}'));
-  } catch {
-    return res.status(400).json({ detail: 'Invalid JSON body' });
+  // Read the request body. Vercel's serverless runtime populates req.body for
+  // JSON/form-encoded bodies (as proven by the working /api/leads/quote
+  // endpoint). For edge cases where req.body is missing, fall back to the
+  // raw stream read.
+  let body = await readBody(req);
+
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      return res.status(400).json({ detail: 'Invalid JSON body' });
+    }
+  } else if (typeof body !== 'object') {
+    body = {};
   }
 
   const message = String(body.message || '').trim();
