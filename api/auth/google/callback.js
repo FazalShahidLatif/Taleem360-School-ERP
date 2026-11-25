@@ -14,9 +14,14 @@ import { OAuth2Client } from 'google-auth-library';
 import jwt from 'jsonwebtoken';
 import { getUsers, addUser } from './db_store.js';
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const JWT_SECRET = process.env.JWT_SECRET || 'taleem360-secure-serverless-jwt-secret-key-2026';
+// JWT_SECRET MUST be set in Vercel environment. No public fallback.
+// If JWT_SECRET is missing, the server will crash on startup (fail closed).
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  console.error('[Auth] FATAL: JWT_SECRET is not set. Set it in Vercel environment variables.');
+  process.exit(1);
+}
+
 const SUPER_ADMIN_EMAILS = ['accts.pak@gmail.com', 'support@taleem360.online'];
 
 const APP_URL = process.env.APP_URL || 'https://taleem360.online';

@@ -43,19 +43,19 @@ const INITIAL_SCHOOLS: School[] = [
 ];
 
 const INITIAL_USERS: User[] = [
-  // Super Admin
-  { id: 'u0', email: 'accts.pak@gmail.com', name: 'Super Admin', password: 'June@2026', role: UserRole.SUPER_ADMIN, onboarded: true },
-  { id: 'u-sa2', email: 'support@taleem360.online', name: 'Super Admin', password: 'June@2026', role: UserRole.SUPER_ADMIN, onboarded: true },
+  // Super Admin (placeholder - must be set via registration)
+  { id: 'u0', email: 'accts.pak@gmail.com', name: 'Super Admin', password: '', role: UserRole.SUPER_ADMIN, onboarded: true },
+  { id: 'u-sa2', email: 'support@taleem360.online', name: 'Super Admin', password: '', role: UserRole.SUPER_ADMIN, onboarded: true },
 
-  // School A Users
-  { id: 'u1', email: 'admin@school.com', name: 'Principal Skinner', password: 'admin', role: UserRole.ADMIN, school_id: SCHOOL_A_ID, onboarded: true },
-  { id: 'u2', email: 'teacher@school.com', name: 'Edna Krabappel', password: 'teacher', role: UserRole.TEACHER, school_id: SCHOOL_A_ID, onboarded: true },
-  { id: 'u3', email: 'teacher2@school.com', name: 'Dewey Largo', password: 'teacher', role: UserRole.TEACHER, school_id: SCHOOL_A_ID, onboarded: true },
-  { id: 'u6', email: 'parent@school.com', name: 'Marge Simpson', password: 'parent', role: UserRole.PARENT, school_id: SCHOOL_A_ID, student_id: 's1', onboarded: true }, // Parent of Bart
-  
+  // School A Users (mock - replace with real user records)
+  { id: 'u1', email: 'admin@school.com', name: 'Principal Skinner', password: '', role: UserRole.ADMIN, school_id: SCHOOL_A_ID, onboarded: true },
+  { id: 'u2', email: 'teacher@school.com', name: 'Edna Krabappel', password: '', role: UserRole.TEACHER, school_id: SCHOOL_A_ID, onboarded: true },
+  { id: 'u3', email: 'teacher2@school.com', name: 'Dewey Largo', password: '', role: UserRole.TEACHER, school_id: SCHOOL_A_ID, onboarded: true },
+  { id: 'u6', email: 'parent@school.com', name: 'Marge Simpson', password: '', role: UserRole.PARENT, school_id: SCHOOL_A_ID, student_id: 's1', onboarded: true },
+
   // School B Users (For Multi-tenant testing)
-  { id: 'u4', email: 'admin@b-school.com', name: 'Superintendent Chalmers', password: 'admin', role: UserRole.ADMIN, school_id: SCHOOL_B_ID, onboarded: true },
-  { id: 'u5', email: 'teacher@b-school.com', name: 'Elizabeth Hoover', password: 'teacher', role: UserRole.TEACHER, school_id: SCHOOL_B_ID, onboarded: true },
+  { id: 'u4', email: 'admin@b-school.com', name: 'Superintendent Chalmers', password: '', role: UserRole.ADMIN, school_id: SCHOOL_B_ID, onboarded: true },
+  { id: 'u5', email: 'teacher@b-school.com', name: 'Elizabeth Hoover', password: '', role: UserRole.TEACHER, school_id: SCHOOL_B_ID, onboarded: true },
 ];
 
 const checkTrialStatus = (school: School) => {

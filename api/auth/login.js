@@ -1,7 +1,13 @@
 import jwt from 'jsonwebtoken';
 import { getUsers } from './db_store.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'taleem360-secure-serverless-jwt-secret-key-2026';
+// JWT_SECRET MUST be set in Vercel environment. No public fallback.
+// If JWT_SECRET is missing, the server will crash on startup (fail closed).
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  console.error('[Auth] FATAL: JWT_SECRET is not set. Set it in Vercel environment variables.');
+  process.exit(1);
+}
 
 export default async function handler(req, res) {
   // CORS Headers for serverless compatibility

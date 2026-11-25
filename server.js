@@ -32,7 +32,63 @@ if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
 
 const SUPER_ADMIN_EMAILS = ['accts.pak@gmail.com', 'support@taleem360.online'];
 
-let aiClientInstance = null;
+// ============================================================
+// RATE LIMITING — Auth endpoints
+// ============================================================
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const RATE_LIMIT_MAX_REQUESTS = 10; // 10 requests per window
+
+const authRateLimitStore = new Map();
+
+function rateLimitAuth(req, res, next) {
+  const ip = req.ip || req.connection.remoteAddress || 'unknown';
+  const key = `auth:${ip}`;
+  const now = Date.now();
+
+  for (const [k, v] of authRateLimitStore.entries()) {
+    if (now - v.timestamp > RATE_LIMIT_WINDOW_MS) {
+      authRateLimitStore.delete(k);
+    }
+  }
+
+  const entry = authRateLimitStore.get(key) || { count: 0, timestamp: now };
+  entry.count++;
+  authRateLimitStore.set(key, entry);
+
+  if (entry.count > RATE_LIMIT_MAX_REQUESTS) {
+    console.warn(`[Rate Limit] ${ip} exceeded ${RATE_LIMIT_MAX_REQUESTS} requests`);
+    return res.status(429).json({ detail: 'Too many requests. Please try again later.' });
+  }
+  next();
+}
+
+// ============================================================
+// CORS CONFIGURATION
+// ============================================================
+const ALLOWED_ORIGINS = [
+  'https://taleem360.online',
+  'http://taleem360.online',
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://127.0.0.1:3000',
+];
+
+function configureCors(req, res, next) {
+  const origin = req.headers.origin || req.headers.host;
+  if (ALLOWED_ORIGINS.includes(origin || '')) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization, Origin');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+}
+
+const authLimiter = rateLimitAuth;
 function getApiKey() {
   const key = process.env.GEMINI_API_KEY || process.env.API_KEY || process.env.VITE_GEMINI_API_KEY || process.env.VITE_API_KEY;
   if (!key || key === "AIzaSyAYtZocTPfSdCQ8T3brgMwV7YVIAQd_Eck") {
@@ -83,7 +139,7 @@ async function startServer() {
   app.use(nexusRoutes);
 
   // API Routes
-  app.post('/api/auth/login', async (req, res) => {
+  app.post('/api/auth/login', authLimiter, async (req, res) => {
     try {
       const { default: handler } = await import('./api/auth/login.js');
       await handler(req, res);
@@ -93,7 +149,7 @@ async function startServer() {
     }
   });
 
-  app.post('/api/auth/password-reset', async (req, res) => {
+  app.post('/api/auth/password-reset', authLimiter, async (req, res) => {
     try {
       const { default: handler } = await import('./api/auth/password-reset.js');
       await handler(req, res);
@@ -103,7 +159,7 @@ async function startServer() {
     }
   });
 
-  app.post('/api/auth/password-update', async (req, res) => {
+  app.post('/api/auth/password-update', authLimiter, async (req, res) => {
     try {
       const { default: handler } = await import('./api/auth/password-update.js');
       await handler(req, res);
@@ -123,10 +179,10 @@ async function startServer() {
     }
   };
 
-  app.post('/api/auth/register', handleRegister);
-  app.post('/api/auth/register/', handleRegister);
+  app.post('/api/auth/register', authLimiter, handleRegister);
+  app.post('/api/auth/register/', authLimiter, handleRegister);
 
-  app.get('/api/auth/google/url', (req, res) => {
+  app.get('/api/auth/google/url', authLimiter, (req, res) => {
       if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
         console.error('[auth] /api/auth/google/url called but Google OAuth is not configured.');
         return res.status(503).json({ detail: 'Google sign-in is not configured on this server.' });
@@ -144,7 +200,7 @@ async function startServer() {
       res.json({ url });
     });
 
-  app.get('/auth/google/callback', async (req, res) => {
+  app.get('/auth/google/callback', authLimiter, async (req, res) => {
     const { code } = req.query;
     const redirectUri = getRedirectUri(req);
 
