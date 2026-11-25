@@ -412,8 +412,8 @@ export const BlogPostDetail: React.FC = () => {
                           <span className="text-slate-700 font-semibold">{section.interlinkTitle}</span>
                         </div>
                         <Link 
-                          to={`/blog/${section.interlinkSlug}`} 
-                          className="text-indigo-600 font-bold hover:underline ml-3 flex-shrink-0 flex items-center"
+                            to={`/blog/${section.interlinkSlug}.html`} 
+                            className="text-indigo-600 font-bold hover:underline ml-3 flex-shrink-0 flex items-center"
                         >
                           Access Guide
                           <ChevronRight className="w-3.5 h-3.5 ml-0.5" />

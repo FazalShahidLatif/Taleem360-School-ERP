@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { BLOG_POSTS_DATA } from '../lib/blogContent';
+import { BLOG_POSTS_DATA } from '../lib/blogContent.js';
 
 const BASE_URL = 'https://taleem360.online';
 

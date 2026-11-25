@@ -80,7 +80,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
         ],
         callout: 'Proponents of legacy workflows often fear data transition delays, but automated CSV mapping pipelines now allow schools to upload existing historical files in a single session.',
         interlinkTitle: 'Are you concerned about legacy IT limitations? Explore our analytical framework on modernizing legacy installations.',
-        interlinkSlug: 'school-it-infrastructure-modernization-cloud-erp'
+        interlinkSlug: 'school-it-infrastructure-modernization-cloud-erp.html'
       },
       {
         title: 'Eliminating Operational Waste: The Cloud ERP Automation Pipeline',
@@ -294,7 +294,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Immediate, target-grouped parent notifications for homework and announcements.'
         ],
         interlinkTitle: 'Struggling with complicated payroll calculations? View how integrated databases unify teacher salary tracking.',
-        interlinkSlug: 'school-payroll-byzantine-compliance-simplified'
+        interlinkSlug: 'school-payroll-byzantine-compliance-simplified.html'
       }
     ],
     caseStudy: {
@@ -410,7 +410,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Saves hours of tracking by using automated fee payment reminders.'
         ],
         interlinkTitle: 'Looking to optimize your student fee collection workflows? Read our definitive blueprint.',
-        interlinkSlug: 'comprehensive-guide-school-fees-automatic-collections'
+        interlinkSlug: 'comprehensive-guide-school-fees-automatic-collections.html'
       }
     ],
     caseStudy: {
@@ -528,7 +528,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Connects homework completion drop-offs across multiple courses.'
         ],
         interlinkTitle: 'Want to optimize classroom performance? Discover how student behavior tracking builds positive school culture.',
-        interlinkSlug: 'behavioral-tracking-systems-positive-classroom-psychology'
+        interlinkSlug: 'behavioral-tracking-systems-positive-classroom-psychology.html'
       }
     ],
     caseStudy: {
@@ -701,7 +701,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Syncs schedules instantly with teacher calendars and student portals.'
         ],
         interlinkTitle: 'Need help optimizing teacher workloads? Explore how automated scheduling saves teachers valuable hours.',
-        interlinkSlug: 'maximizing-teacher-time-automated-daily-reporting'
+        interlinkSlug: 'maximizing-teacher-time-automated-daily-reporting.html'
       }
     ],
     caseStudy: {
@@ -820,7 +820,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Provides staff with secure, self-service download portals for monthly tax documents.'
         ],
         interlinkTitle: 'Are your admin desks struggling with burnout? Explore how workflow triggers reduce office overload today.',
-        interlinkSlug: 'combating-staff-burnout-smart-school-erp'
+        interlinkSlug: 'combating-staff-burnout-smart-school-erp.html'
       }
     ],
     caseStudy: {
@@ -879,7 +879,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Provides departments with visual budget alerts to prevent overspending.'
         ],
         interlinkTitle: 'Chasing outstanding parent tuition accounts? View our strategic blueprint for tuition automation.',
-        interlinkSlug: 'comprehensive-guide-school-fees-automatic-collections'
+        interlinkSlug: 'comprehensive-guide-school-fees-automatic-collections.html'
       }
     ],
     caseStudy: {
@@ -995,7 +995,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Maps curriculum milestones to regional educational compliance standards.'
         ],
         interlinkTitle: 'Are your IT servers ready for state compliance audits? Review our cloud security and backup protocols today.',
-        interlinkSlug: 'school-it-infrastructure-modernization-cloud-erp'
+        interlinkSlug: 'school-it-infrastructure-modernization-cloud-erp.html'
       }
     ],
     caseStudy: {
@@ -1113,7 +1113,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Provides visual charts showing student growth across semesters.'
         ],
         interlinkTitle: 'Want to optimize classroom time? View how daily reporting automations save educators 10+ hours weekly.',
-        interlinkSlug: 'maximizing-teacher-time-automated-daily-reporting'
+        interlinkSlug: 'maximizing-teacher-time-automated-daily-reporting.html'
       }
     ],
     caseStudy: {
@@ -1286,7 +1286,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Replaces outdated disciplinary reporting with supportive counselor analytics.'
         ],
         interlinkTitle: 'Looking to keep parents fully connected? Explore our best practices for parent portals.',
-        interlinkSlug: 'parent-teacher-communication-portal-best-practices'
+        interlinkSlug: 'parent-teacher-communication-portal-best-practices.html'
       }
     ],
     caseStudy: {
@@ -1404,7 +1404,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Reduces time-consuming teacher report card phone queries.'
         ],
         interlinkTitle: 'Struggling with slow report card delivery? See how automated grading integrations save teacher hours.',
-        interlinkSlug: 'automated-grading-integrations-next-generation-lms'
+        interlinkSlug: 'automated-grading-integrations-next-generation-lms.html'
       }
     ],
     caseStudy: {
@@ -1520,7 +1520,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Reclaims school resources lost to physical printing and distribution.'
         ],
         interlinkTitle: 'Want to maximize parent portal adoption? Explore our proven training strategies.',
-        interlinkSlug: 'parent-portal-onboarding-training-adoption-strategies'
+        interlinkSlug: 'parent-portal-onboarding-training-adoption-strategies.html'
       }
     ],
     caseStudy: {
@@ -1696,7 +1696,7 @@ const ORIGINAL_BLOG_POSTS_DATA: RichBlogPost[] = [
           'Backs up school databases automatically across secure server networks.'
         ],
         interlinkTitle: 'Are your local servers vulnerable to security leaks? Contrast on-premise hardware with robust cloud ERP solutions.',
-        interlinkSlug: 'cloud-based-school-managment-cost-benefit-analysis'
+        interlinkSlug: 'cloud-based-school-managment-cost-benefit-analysis.html'
       }
     ],
     caseStudy: {

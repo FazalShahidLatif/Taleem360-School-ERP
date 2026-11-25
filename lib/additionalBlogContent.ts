@@ -1105,7 +1105,7 @@ export const ADDITIONAL_BLOG_POSTS: RichBlogPost[] = [
           'Protected grade sheets syncing directly with parent-teacher portals.'
         ],
         interlinkTitle: 'Need tips to optimize your administrative workflow? See our Ultimate Cloud ERP Guide.',
-        interlinkSlug: 'streamlining-school-operations-ultimate-erp-guide'
+        interlinkSlug: 'streamlining-school-operations-ultimate-erp-guide.html'
       }
     ],
     caseStudy: {
@@ -1173,7 +1173,7 @@ export const ADDITIONAL_BLOG_POSTS: RichBlogPost[] = [
           'Automatic ledger postings to avoid double-entry errors.'
         ],
         interlinkTitle: 'Are you transitioning away from outdated manual registers? Read our Pakistani Schools Digital Transition case study.',
-        interlinkSlug: 'pakistani-schools-digital-revolution-cloud-erp'
+        interlinkSlug: 'pakistani-schools-digital-revolution-cloud-erp.html'
       }
     ],
     caseStudy: {
@@ -1241,7 +1241,7 @@ export const ADDITIONAL_BLOG_POSTS: RichBlogPost[] = [
           'Dedicated school numbers to prevent spam and build family trust.'
         ],
         interlinkTitle: 'Want to see how PIN security streamlines daycare pickups? Read our ECE Daycare Kiosk Security guide.',
-        interlinkSlug: 'ece-daycare-early-childhood-kiosk-guardian-security'
+        interlinkSlug: 'ece-daycare-early-childhood-kiosk-guardian-security.html'
       }
     ],
     caseStudy: {
@@ -1309,7 +1309,7 @@ export const ADDITIONAL_BLOG_POSTS: RichBlogPost[] = [
           'Easy data exporting for smooth auditing and financial compliance.'
         ],
         interlinkTitle: 'Interested in custom branding your school portal? Learn about White-Labeled Educational Growth.',
-        interlinkSlug: 'white-labeled-educational-growth-vercel-subdomains-branding'
+        interlinkSlug: 'white-labeled-educational-growth-vercel-subdomains-branding.html'
       }
     ],
     caseStudy: {
@@ -1377,7 +1377,7 @@ export const ADDITIONAL_BLOG_POSTS: RichBlogPost[] = [
           'Offline capability to continue scanning even during internet drops.'
         ],
         interlinkTitle: 'Looking to upgrade other school assets? Check out our Digital Library Inventory Optimization guide.',
-        interlinkSlug: 'digital-school-libraries-optimizing-book-inventory-turnover'
+        interlinkSlug: 'digital-school-libraries-optimizing-book-inventory-turnover.html'
       }
     ],
     caseStudy: {
@@ -1445,7 +1445,7 @@ export const ADDITIONAL_BLOG_POSTS: RichBlogPost[] = [
           'Redundant backup systems to protect files against hardware failures.'
         ],
         interlinkTitle: 'How does Saudi Arabia Vision 2030 drive school modernization? Read our Vision 2030 research.',
-        interlinkSlug: 'saudi-vision-2030-school-administration-transformation'
+        interlinkSlug: 'saudi-vision-2030-school-administration-transformation.html'
       }
     ],
     caseStudy: {
