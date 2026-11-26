@@ -146,6 +146,320 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-primary-dark);
 }
 
+
+  /* ============================================
+     EDUDASH-INSPIRED THEME (Envato Elements)
+     Source: edudash-school-college-lms-admin-dashboard
+     Theme color: Teal-Green #27A798
+     ============================================ */
+
+  /* EDUDASH PALETTE */
+  --edudash-primary: #27A798;       /* Edudash teal-green — main accent */
+  --edudash-primary-dark: #1C7F73;  /* Hover state */
+  --edudash-primary-light: #E6F7F5; /* Tinted surface */
+  --edudash-primary-muted: #99DDD5; /* Soft variant */
+
+  /* Secondary colors */
+  --edudash-secondary: #25A194;
+  --edudash-success: #22C55E;
+  --edudash-warning: #FACC15;
+  --edudash-danger: #EF4444;
+  --edudash-info: #3B82F6;
+  --edudash-cyan: #2BC9F9;
+  --edudash-purple: #A12BEA;
+
+  /* Neutral tones (inspired by Edudash) */
+  --edudash-neutral-50: #F8F9FA;
+  --edudash-neutral-100: #F3F4F6;
+  --edudash-neutral-200: #EBECEF;
+  --edudash-neutral-300: #D1D5DB;
+  --edudash-neutral-400: #9CA3AF;
+  --edudash-neutral-500: #6B7280;
+  --edudash-neutral-600: #4B5563;
+  --edudash-neutral-700: #374151;
+  --edudash-neutral-800: #1F2937;
+  --edudash-neutral-900: #111827;
+
+  /* Edudash typography scale */
+  --edudash-font-2xxl: 2rem;
+  --edudash-font-2xl: 1.75rem;
+  --edudash-font-xxl: 1.5rem;
+  --edudash-font-xl: 1.25rem;
+  --edudash-font-lg: 1.125rem;
+  --edudash-font-md: 1rem;
+  --edudash-font-sm: 0.875rem;
+  --edudash-font-xs: 0.75rem;
+  --edudash-font-xxs: 0.625rem;
+
+  /* Edudash spacing scale */
+  --edudash-gap-xs: 0.25rem;
+  --edudash-gap-sm: 0.5rem;
+  --edudash-gap-md: 0.75rem;
+  --edudash-gap-lg: 1rem;
+  --edudash-gap-xl: 1.5rem;
+  --edudash-gap-2xl: 2rem;
+  --edudash-gap-3xl: 3rem;
+
+  /* Edudash border radius */
+  --edudash-radius-sm: 0.25rem;
+  --edudash-radius-md: 0.5rem;
+  --edudash-radius-lg: 0.75rem;
+  --edudash-radius-xl: 1rem;
+  --edudash-radius-full: 9999px;
+
+  /* Edudash shadows */
+  --edudash-shadow-1: 0 4px 30px 0 rgba(52, 77, 75, 0.05);
+  --edudash-shadow-2: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --edudash-shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.1);
+  --edudash-shadow-xl: 0 20px 25px rgba(15, 23, 42, 0.15);
+
+  /* Edudash card component */
+  .edudash-card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--edudash-shadow-1);
+    padding: var(--space-xl);
+    transition: box-shadow var(--transition-normal), border-color var(--transition-fast);
+  }
+
+  .edudash-card:hover {
+    box-shadow: var(--edudash-shadow-2);
+  }
+
+  /* EDUDASH-BUTTON */
+  .edudash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--touch-target);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--edudash-font-sm);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .edudash-btn-primary {
+    background-color: var(--edudash-primary);
+    color: #fff;
+    border-color: var(--edudash-primary);
+  }
+
+  .edudash-btn-primary:hover {
+    background-color: var(--edudash-primary-dark);
+    border-color: var(--edudash-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--edudash-shadow-2);
+  }
+
+  .edudash-btn-secondary {
+    background-color: var(--color-bg);
+    color: var(--edudash-primary);
+    border-color: var(--edudash-primary);
+  }
+
+  .edudash-btn-secondary:hover {
+    background-color: var(--edudash-primary-light);
+  }
+
+  .edudash-btn-success {
+    background-color: var(--edudash-success);
+    color: #fff;
+    border-color: var(--edudash-success);
+  }
+
+  .edudash-btn-success:hover {
+    background-color: var(--edudash-success);
+    opacity: 0.9;
+  }
+
+  .edudash-btn-outline {
+    background-color: transparent;
+    color: var(--edudash-primary);
+    border-color: var(--edudash-primary);
+  }
+
+  .edudash-btn-outline:hover {
+    background-color: var(--edudash-primary-light);
+  }
+
+  /* EDUDASH-INPUT */
+  .edudash-input {
+    width: 100%;
+    min-height: var(--touch-target);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--edudash-neutral-300);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--edudash-font-sm);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .edudash-input:focus {
+    outline: none;
+    border-color: var(--edudash-primary);
+    box-shadow: 0 0 0 3px var(--edudash-primary-light);
+  }
+
+  /* EDUDASH-TABLE */
+  .edudash-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--edudash-font-sm);
+  }
+
+  .edudash-table th {
+    text-align: left;
+    padding: var(--space-md);
+    font-weight: 700;
+    font-size: var(--edudash-font-sm);
+    color: var(--edudash-neutral-600);
+    border-bottom: 2px solid var(--edudash-neutral-200);
+  }
+
+  .edudash-table td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--edudash-neutral-200);
+  }
+
+  .edudash-table tr:hover td {
+    background-color: var(--edudash-neutral-50);
+  }
+
+  /* EDUDASH-BADGE */
+  .edudash-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: var(--edudash-radius-full);
+    font-size: var(--edudash-font-xs);
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .edudash-badge-primary {
+    background-color: var(--edudash-primary-light);
+    color: var(--edudash-primary);
+  }
+
+  .edudash-badge-success {
+    background-color: #DCFCE7;
+    color: #15803D;
+  }
+
+  .edudash-badge-warning {
+    background-color: #FEF08A;
+    color: #D97706;
+  }
+
+  .edudash-badge-danger {
+    background-color: #FEE2E2;
+    color: #DC2626;
+  }
+
+  .edudash-badge-info {
+    background-color: #EFF6FF;
+    color: #1D4ED8;
+  }
+
+  /* EDUDASH-STAT-CARD */
+  .edudash-stat-card {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--edudash-shadow-1);
+    transition: box-shadow var(--transition-normal);
+  }
+
+  .edudash-stat-card:hover {
+    box-shadow: var(--edudash-shadow-2);
+  }
+
+  .edudash-stat-card .value {
+    font-size: var(--edudash-font-2xl);
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  .edudash-stat-card .label {
+    font-size: var(--edudash-font-sm);
+    color: var(--edudash-neutral-500);
+    font-weight: 500;
+  }
+
+  /* EDUDASH-HEADER */
+  .edudash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .edudash-header h2 {
+    font-size: var(--edudash-font-xl);
+    font-weight: 800;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .edudash-header .actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  /* EDUDASH-LIST */
+  .edudash-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  /* EDUDASH-ROW */
+  .edudash-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--edudash-neutral-200);
+  }
+
+  .edudash-row:last-child {
+    border-bottom: none;
+  }
+
+  .edudash-row .label {
+    font-size: var(--edudash-font-sm);
+    color: var(--edudash-neutral-500);
+    font-weight: 500;
+  }
+
+  .edudash-row .value {
+    font-size: var(--edudash-font-md);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  /* Add Edudash theme reference to each page style */
+  .edudash-theme {
+    font-family: var(--font-sans) !important;
+    background-color: var(--edudash-neutral-50) !important;
+  }
+
+  .edudash-theme .edudash-card {
+    background-color: var(--color-bg) !important;
+    border-color: var(--edudash-neutral-200) !important;
+  }
+
 .brand-hover-primary-bg:hover {
   background-color: var(--color-primary-light);
 }
@@ -250,3 +564,163 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* ============================================================================
+   Hero Banner — Visual impact for CTR & User Engagement
+   ============================================================================ */
+
+/* Base Hero Section */
+.t360-hero {
+  position: relative;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-3xl);
+  overflow: hidden;
+}
+
+.t360-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(16, 185, 129, 0.3) 100%);
+  z-index: 1;
+}
+
+.t360-hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.35;
+  background-size: cover;
+  background-position: center;
+  filter: contrast(1.2) saturate(1.1);
+}
+
+.t360-hero__content {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-3xl) var(--space-4xl) var(--space-2xl);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.t360-hero__badge {
+  display: inline-block;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--color-primary-dark);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  margin-bottom: var(--space-md);
+}
+
+.t360-hero__heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 var(--space-sm) 0;
+  letter-spacing: -0.02em;
+}
+
+.t360-hero__subtitle {
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 var(--space-xl) 0;
+  max-width: 700px;
+}
+
+.t360-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.t360-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.t360-hero__cta-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border: 2px solid var(--color-primary);
+}
+
+.t360-hero__cta-primary:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.t360-hero__cta-secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.t360-hero__cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Article Pages */
+.t360-hero--article .t360-hero__image {
+  opacity: 0.25;
+}
+
+.t360-hero--article .t360-hero__badge {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.25);
+  color: var(--color-primary-dark);
+}
+
+.t360-hero--article .t360-hero__heading {
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* Category/Hub Pages */
+.t360-hero--category .t360-hero__image {
+  opacity: 0.2;
+}
+
+.t360-hero--category .t360-hero__badge {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--color-primary-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .t360-hero__content {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .t360-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .t360-hero__cta {
+    justify-content: center;
+  }
+}
+

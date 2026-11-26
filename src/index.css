@@ -1,0 +1,447 @@
+
+@import "./brand-kit.css";
+@import "./edudash-components.css";
+
+/* === EDUDASH-INSPIRED THEME APPLICATION ===
+   Apply Edudash design language to Taleem360
+   ================================================= */
+
+/* Global body styling with Edudash neutral background */
+body {
+  background-color: var(--edudash-neutral-50) !important;
+  font-family: var(--font-sans) !important;
+}
+
+/* Main container background */
+#root {
+  background-color: var(--color-bg);
+}
+
+/* === HEADER / NAVBAR === */
+.navbar {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--edudash-neutral-200);
+  box-shadow: var(--edudash-shadow-2);
+  padding: var(--space-md) var(--space-xl);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--edudash-font-lg);
+  font-weight: 800;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.navbar-brand .badge {
+  background-color: var(--edudash-primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: var(--edudash-radius-full);
+  font-size: var(--edudash-font-xs);
+  font-weight: 700;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.navbar-menu a {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--edudash-font-sm);
+  font-weight: 500;
+  color: var(--edudash-neutral-600);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.navbar-menu a:hover {
+  background-color: var(--edudash-neutral-100);
+  color: var(--color-text);
+}
+
+.navbar-menu a.active {
+  background-color: var(--edudash-primary-light);
+  color: var(--edudash-primary);
+}
+
+/* === FOOTER === */
+.footer {
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--edudash-neutral-200);
+  padding: var(--space-xl);
+  margin-top: var(--space-3xl);
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  font-size: var(--edudash-font-lg);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: var(--edudash-font-sm);
+  color: var(--edudash-neutral-500);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--edudash-primary);
+}
+
+.footer-copy {
+  font-size: var(--edudash-font-xs);
+  color: var(--edudash-neutral-400);
+  margin-top: var(--space-md);
+}
+
+/* === PAGE CONTENT WRAPPER === */
+.page-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl) var(--space-2xl);
+}
+
+/* === PAGE HEADER === */
+.page-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.page-header h1 {
+  font-size: var(--edudash-font-xl);
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.page-header .subtitle {
+  font-size: var(--edudash-font-sm);
+  color: var(--edudash-neutral-500);
+}
+
+/* === CARDS SECTION === */
+.cards-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* === TABLE SECTION === */
+.table-section {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--edudash-neutral-200);
+  background-color: var(--color-bg);
+}
+
+.table-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-section th {
+  background-color: var(--edudash-neutral-50);
+  color: var(--edudash-neutral-600);
+  font-size: var(--edudash-font-sm);
+  font-weight: 700;
+  padding: var(--space-md);
+  text-align: left;
+  border-bottom: 2px solid var(--edudash-neutral-200);
+}
+
+.table-section td {
+  padding: var(--space-md);
+  font-size: var(--edudash-font-sm);
+  border-bottom: 1px solid var(--edudash-neutral-200);
+}
+
+.table-section tr:hover td {
+  background-color: var(--edudash-neutral-50);
+}
+
+/* === PAGE-SPECIFIC STYLES === */
+/* Dashboard */
+.dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.dashboard-stats .card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--edudash-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--edudash-shadow-1);
+}
+
+.dashboard-stats .card .value {
+  font-size: var(--edudash-font-2xl);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.dashboard-stats .card .label {
+  font-size: var(--edudash-font-sm);
+  color: var(--edudash-neutral-500);
+}
+
+/* Students */
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--edudash-font-sm);
+}
+
+.students-table th {
+  background-color: var(--edudash-neutral-50);
+  color: var(--edudash-neutral-600);
+  font-weight: 700;
+  padding: var(--space-md);
+  text-align: left;
+  border-bottom: 2px solid var(--edudash-neutral-200);
+}
+
+.students-table td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--edudash-neutral-200);
+}
+
+.students-table tr:hover td {
+  background-color: var(--edudash-neutral-50);
+}
+
+/* Attendance */
+.attendance-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.attendance-badge {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--edudash-font-xs);
+  font-weight: 700;
+}
+
+.attendance-badge.present {
+  background-color: #DCFCE7;
+  color: #15803D;
+}
+
+.attendance-badge.absent {
+  background-color: #FEE2E2;
+  color: #DC2626;
+}
+
+.attendance-badge.late {
+  background-color: #FEF08A;
+  color: #D97706;
+}
+
+/* Finance */
+.finance-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.finance-stats .card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--edudash-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--edudash-shadow-1);
+}
+
+.finance-stats .card .value {
+  font-size: var(--edudash-font-2xl);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.finance-stats .card .label {
+  font-size: var(--edudash-font-sm);
+  color: var(--edudash-neutral-500);
+}
+
+/* === STUDENT CARD GRID === */
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.student-card {
+  background-color: var(--color-bg);
+  border: 1px solid var(--edudash-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--edudash-shadow-1);
+  transition: box-shadow var(--transition-normal);
+}
+
+.student-card:hover {
+  box-shadow: var(--edudash-shadow-2);
+}
+
+.student-card .avatar {
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--edudash-primary), var(--edudash-primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.student-card .name {
+  font-size: var(--edudash-font-md);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.student-card .email {
+  font-size: var(--edudash-font-xs);
+  color: var(--edudash-neutral-500);
+  margin-top: var(--space-xs);
+}
+
+/* === INTERACTIVE ELEMENTS === */
+.btn-group {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.btn-small {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--edudash-font-sm);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+}
+
+/* === FORM CONTAINER === */
+.form-section {
+  background-color: var(--color-bg);
+  border: 1px solid var(--edudash-neutral-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--edudash-shadow-1);
+}
+
+.form-section h2 {
+  font-size: var(--edudash-font-xl);
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+}
+
+/* === LOADER OVERLAY === */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader-overlay .spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--edudash-neutral-200);
+  border-top-color: var(--edudash-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader-overlay p {
+  margin-top: var(--space-md);
+  color: var(--edudash-neutral-500);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-menu {
+    margin-top: var(--space-sm);
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .navbar-menu a {
+    font-size: var(--edudash-font-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .page-content {
+    padding: 0 var(--space-md) var(--space-xl);
+  }
+
+  .cards-section,
+  .dashboard-stats,
+  .finance-stats,
+  .student-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .edudash-widget {
+    padding: var(--space-lg);
+  }
+
+  .edudash-widget .icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+  }
+}
